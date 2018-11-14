@@ -7,9 +7,29 @@ public class Resource{
 	protected Image thumbNailImage;
 	protected LinkedList<BorrowItem> whoBorrow;
 	protected LinkedList<User> resourceRequesting;
-	protected boolean canborrrow;
+	protected boolean canBorrow;
 	protected int numAvailableCopies;
 	protected LinkedList<User> reserved;
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public int getYear() {
+		return year;
+	}
+	
+	public int getnumCopies() {
+		return numAvailableCopies;
+	}
+	
+	public boolean getcanborrow() {
+		return canBorrow;
+	}
 	
 	
 }
