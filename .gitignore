@@ -1,4 +1,8 @@
 
 *.class
 /bin/
+<<<<<<< HEAD
+=======
+.project
+>>>>>>> d80ec3625049c28db7b501c1539a120047abcb5d
 .DS_Store
