@@ -11,6 +11,9 @@ public class librarian extends user {
 	
 	{
 	super(username, firstName,username, firstName,  lastName,  mobileNo, userImage);
+	
+	  this.staffNo = staffNo;
+ 	  this.employmentDate = employmentDate;
 	}
 	
 		
