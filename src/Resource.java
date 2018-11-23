@@ -1,6 +1,4 @@
 
-public class Resource {
-=======
 import java.util.LinkedList;
 
 public class Resource{
@@ -34,6 +32,7 @@ public class Resource{
 		return canBorrow;
 	}
 	
->>>>>>> d80ec3625049c28db7b501c1539a120047abcb5d
+	
+	
 	
 }
