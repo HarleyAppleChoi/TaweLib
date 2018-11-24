@@ -30,7 +30,7 @@ public class SQLHandle {
 		return result;
 	}
 	
-	public static void set(String query) {
-		
+	public static void set(String query) throws SQLException {
+		statement.executeUpdate(query);
 	}
 }
