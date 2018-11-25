@@ -4,13 +4,14 @@ import java.sql.SQLException;
 public class Test {
 
 	public static void main(String[] args) {
+		//should be in main method.
 		SQLHandle sql = new SQLHandle();
 
 		ResultSet result = null;
 		ResultSet result2 = null;
 
 		try {
-			result = sql.get("SELECT * FROM stud");
+			result = SQLHandle.get("SELECT * FROM stud");
 			while (result.next()) {
 
 				System.out.print(result.getString("sid") + " ");

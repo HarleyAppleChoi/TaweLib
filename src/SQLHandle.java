@@ -5,8 +5,12 @@ import java.sql.*;
 public class SQLHandle {
 	
 	//more than 1 database is not allowed
+	
+	//your hostname
 	final static String HOST_NAME = "jdbc:mysql://localhost:3306/cw2";
+	//your SQL username
 	final static String USERNAME = "root";
+	//your password
 	final static String PASSWORD = "123";
 	final static String GETALLRESOURCES = " ";
 	static Statement statement = null;
@@ -23,7 +27,6 @@ public class SQLHandle {
 	} 
 	System.out.println("Success!");
 }
-	
 	
 	public static ResultSet get(String query) throws SQLException {
 		ResultSet result = statement.executeQuery(query);
