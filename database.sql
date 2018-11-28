@@ -9,15 +9,21 @@ CREATE TABLE resource (
 
 );
 
+insert into resource values(
+    '1','Harry Potter','2011','hp.jpg','5','14'
+);
+
 CREATE TABLE book (
-    resourceID char(6)not null,
+    resourceID char(6) not null,
     author char(70) not null,
-    publisher char(70)not null,
+    publisher char(70) not null,
     genre char(100),
     ISBN varchar(4),
     _language varchar(4)
-    foreign key resourceID references resource(resourceID)
 );
+
+Alter table book 
+add foreign key (resourceID) references resource(resourceID);
 
 CREATE TABLE DVD (
     resourceID char(6) not null,
