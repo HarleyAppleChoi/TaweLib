@@ -5,6 +5,8 @@ public class Laptop extends Resource {
 	private String manufacturer;
 	private String model;
 	private String operatingSystem;
+	private int fineAmount;
+	private int maxFineAmount;
 	
 	
 	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String manufacturer, String model, String operatingSystem) {
@@ -38,5 +40,24 @@ public class Laptop extends Resource {
 	}
 	public void setOperatingSystem(String operatingSystem) {
 		this.operatingSystem = operatingSystem;
+	}
+	
+	public int getMaxFineAmount() {
+		return maxFineAmount;
+	}
+	
+	
+	public void setMaxFineAmount(int maxFineAmount) {
+		this.maxFineAmount = maxFineAmount;
+	}
+	
+	
+		public int getFineAmount() {
+		return fineAmount;
+	}
+	
+	
+	public void setFineAmount(int fineAmount) {
+		this.fineAmount = fineAmount;
 	}
 }

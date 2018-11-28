@@ -7,6 +7,8 @@ public class DVD extends Resource {
 	private int runtime;
 	private String language;
 	ArrayList<String> subLanguages = new ArrayList<String>();
+	private int fineAmount;
+	private int maxFineAmount;
 	
 public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String director, int runtime, String language, ArrayList<String> subLanguages) {
 		
@@ -39,5 +41,24 @@ public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, 
 	}
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+	
+	public int getMaxFineAmount() {
+		return maxFineAmount;
+	}
+	
+	
+	public void setMaxFineAmount(int maxFineAmount) {
+		this.maxFineAmount = maxFineAmount;
+	}
+	
+	
+		public int getFineAmount() {
+		return fineAmount;
+	}
+	
+	
+	public void setFineAmount(int fineAmount) {
+		this.fineAmount = fineAmount;
 	}
 }

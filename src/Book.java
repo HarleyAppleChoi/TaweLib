@@ -7,6 +7,9 @@ private String publisher;
 private String genre;
 private int isbn;
 private String language;
+private int fineAmount;
+private int maxFineAmount;
+
 
 	public Book (int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String author, String publisher, String genre, int isbn, String langauge) {
 		
@@ -63,4 +66,34 @@ private String language;
 	public void setLanguage(String language){
 		this.language = language;
 	}
+
+	public int getIsbn() {
+		return isbn;
+	}
+	
+	
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
+	}
+	
+	
+	public int getMaxFineAmount() {
+		return maxFineAmount;
+	}
+	
+	
+	public void setMaxFineAmount(int maxFineAmount) {
+		this.maxFineAmount = maxFineAmount;
+	}
+	
+	
+		public int getFineAmount() {
+		return fineAmount;
+	}
+	
+	
+	public void setFineAmount(int fineAmount) {
+		this.fineAmount = fineAmount;
+	}
+
 }
