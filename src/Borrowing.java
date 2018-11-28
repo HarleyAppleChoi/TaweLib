@@ -7,7 +7,22 @@ public class Borrowing {
 	private Date returnDate;
 	private int borrowNo;
 	private normalUser user;
-	private Resource resourceType;
+	private int ResourceID;
+	
+	Borrowing(Date initial, int ResourceID){
+		initialDate = initial;
+		this.ResourceID = ResourceID;
+	}
+	
+	public boolean isOverdue() {
+		boolean o = false;
+		//current date
+		Date d = new Date();
+		if (endDate.before(d)) {
+			o = true;
+		}
+		return o;
+	}
 	
 	
 	public Date getInitialDate() {

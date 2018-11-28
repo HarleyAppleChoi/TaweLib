@@ -1,0 +1,94 @@
+
+import java.sql.ResultSet;
+import java.util.LinkedList;
+
+import javafx.scene.image.Image;
+
+public class NormalUser extends User {
+    
+	
+	protected int balance;
+	protected int[] transaction;
+	protected ArrayList<TransactionHistory> transaction1;
+	protected LinkedList<Integer> requesting;
+	protected LinkedList<Integer> reserved;
+	protected LinkedList<Borrowing> currentBorrowHistory;
+	
+	public NormalUser(String username) {
+		super.username=username;
+		ResultSet r = SQLHandle.get("select * from normal_user where username = '" + username + "';");
+		r.getString(username);
+		balance = r.getInt("balance");
+		
+		r = SQLHandle.get("select * from current_borrowing,Borrowing "
+				+ "where Borrowing.BorrowingID = current_borrowing.BorrowingID "
+				+ "and username = '" + username + "';");
+		while(r.next()) {
+			Borrowing b = new Borrowing(r.getDate("Borrow_date"),r.getInt("resourceID"));
+			currentBorrowHistory.add(b);
+		}
+		r = SQLHandle.get("select * from resered_item where username = '" + username + "';");
+		while(r.next()) {
+			reserved.add(r.getInt("ResourceID"));
+		}
+		r=SQLHandle.get("select * from requesting  where username = '" + username + "';");
+		while(r.next()) {
+			requesting.add(r.getInt("ResourceID"));
+		}
+	}
+	
+	public boolean canBorrow() {
+		boolean b = true;
+		if (balance < 0) {
+			b = false;
+		}
+		for(int i =0; i< currentBorrowHistory.size();i++) {
+			if (currentBorrowHistory.get(i).isOverdue()) {
+			b = false;
+			break;
+		}
+		}
+		return b;
+	}
+	
+	public void getUserinfo(String username, String firstName, 
+			String lastName, int mobileNo, Image userImage) {
+		super.username = username;
+		super.firstName=firstName;
+		super.lastName=lastName;
+		super.mobileNo=mobileNo;
+		super.userImage=userImage;
+	}
+		
+	
+	
+	public void reserve(String resourse) {
+
+	}
+
+	public Book searchBook(String author) {
+		for (Book b : books) {
+			if (b.getAuthor().equals(author)) {
+				return b;
+			}
+
+			return null;
+		}
+	}
+
+	public void requestBook(Resource r, String title) {
+	    
+
+	}
+
+	public void getBook() {
+
+	}
+
+	public void returnBook(Object bookList, Object book) {
+		bookList.put(book, bookList.get(book) + 1);
+
+	}
+}
+
+}
