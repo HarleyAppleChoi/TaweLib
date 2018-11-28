@@ -14,6 +14,8 @@ public class Resource{
 	protected boolean canBorrow;
 	protected int numAvailableCopies;
 	protected LinkedList<Borrowing> currentBorrow;
+	protected LinkedList<String> request;
+	protected LinkedList<String> reserve;
 	
 	public Resource(int resourceId) throws Exception {
 		id = resourceId;
@@ -23,11 +25,28 @@ public class Resource{
 			Borrowing e = new Borrowing(r.getInt("borrowingID"));
 			currentBorrow.add(e);
 		}
-		r = SQLHandle.get("select username from requested where ;");
+		//requesting queue
+		r = SQLHandle.get("select username from requested where resourceID = '" + id + "';");
+		while (r.next()) {
+			request.add((r.getString("username")));
+		}
+		//reserved queue
+		r = SQLHandle.get("select username from reserved where resourceID = '" + id + "';");
+		while (r.next()) {
+			reserve.add((r.getString("username")));
+		}
 	}
 	
+	/**
+	 * If someone reserved resources, that is not able to borrow.
+	 * @return
+	 */
 	public boolean canBorrow() {
-		
+		boolean b = true;
+		if (currentBorrow.size()+reserve.size() >= numCopies) {
+			b = false;
+		}
+		return b;
 	}
 	
 	public int getId() {
