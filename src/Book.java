@@ -7,8 +7,8 @@ private String publisher;
 private String genre;
 private int isbn;
 private String language;
-private int fineAmount;
-private int maxFineAmount;
+private int fineAmount = 2;
+private int maxFineAmount = 25;
 
 
 	public Book (int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String author, String publisher, String genre, int isbn, String langauge) {
