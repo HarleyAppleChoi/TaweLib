@@ -27,8 +27,14 @@ CREATE TABLE DVD (
 
 CREATE TABLE DVD_subtitle(
     id char(10) not null,
-    subtitle char(30)
+    subtitle char(30) not null,
     foreign key id reference DVD(id)
 );
 
-CREATE TABLE laptop
+CREATE TABLE laptop (
+    id char(10) not null,
+    manufacturer char(30)not null,
+    model char (60) not null,
+    foreign key id reference resource(id)
+
+);
