@@ -53,9 +53,11 @@ public class NormalUser extends User {
 		Resource r = new Resource(resourceID);
 		if (!canBorrow()) {
 			throw new IllegalArgumentException("You cannot borrow either you get fine or have something overdue");
-		}else if (){
-			
+		}else {
+			if(r.isReserved(username)) {
+				borrow(username);
 		}
+		
 	}
 	
 	

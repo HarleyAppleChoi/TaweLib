@@ -23,6 +23,9 @@ public class Borrowing {
 		}
 	}
 	
+	//when the borrowing is new created
+	Borrowing()
+	
 	public boolean isOverdue() {
 		boolean o = false;
 		//current date
