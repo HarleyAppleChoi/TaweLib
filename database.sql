@@ -29,26 +29,37 @@ CREATE TABLE DVD (
     resourceID char(6) not null,
     direction char(70) not null,
     runtime char(70) not null,
-    _language char(100),
-    foreign key resourceID references resource(resourceID)
+    _language char(100)
 );
+
+Alter table DVD 
+add foreign key (resourceID) references resource(resourceID);
+
 
 CREATE TABLE DVD_subtitle (
     resourceID char(10) not null,
     subtitle char(30) not null,
-    foreign key resourceID references DVD(resourceID)
+    
 );
+
+Alter table DVD_subtitle 
+add foreign key (resourceID) references DVD(resourceID);
+
 
 CREATE TABLE laptop (
     resourceID char(10) not null,
     manufacturer char(30)not null,
     model char(60) not null,
     operatingSystem char(70) not null,
-    foreign key resourceID references resource(resourceID)
+    
 
 );
 
-CREATE TABLE user (
+Alter table laptop 
+add foreign key (resourceID) references resource(resourceID);
+
+
+CREATE TABLE _user (
     username char(40) not null,
     firstname char(50) not null,
     lastname char(50) not null,
@@ -62,9 +73,12 @@ CREATE TABLE user (
 CREATE TABLE normal_user (
     username char(40) not null,
     balance int not null,
-    foreign key username references user(username)
 
 );
+
+Alter table normal_user 
+add foreign key (username) references _user(username);
+
 
 CREATE TABLE librarian (
     username char(40) not null,
@@ -73,6 +87,10 @@ CREATE TABLE librarian (
     foreign key username references user(username)
 
 );
+
+Alter table librarian 
+add foreign key (username) references _user(username);
+
 
 CREATE TABLE borrowing (
     borrowingID char(10) not null,
