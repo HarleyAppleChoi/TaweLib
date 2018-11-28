@@ -9,7 +9,7 @@ public class NormalUser extends User {
 	
 	protected int balance;
 	protected int[] transaction;
-	protected ArrayList<TransactionHistory> transaction1;
+	protected ArrayList<TransactionHistory> transaction;
 	protected LinkedList<Integer> requesting;
 	protected LinkedList<Integer> reserved;
 	protected LinkedList<Borrowing> currentBorrowHistory;
@@ -20,11 +20,9 @@ public class NormalUser extends User {
 		r.getString(username);
 		balance = r.getInt("balance");
 		
-		r = SQLHandle.get("select * from current_borrowing,Borrowing "
-				+ "where Borrowing.BorrowingID = current_borrowing.BorrowingID "
-				+ "and username = '" + username + "';");
+		r = SQLHandle.get("select borrowingID from current_borrowing where username = '" + username + "';");
 		while(r.next()) {
-			Borrowing b = new Borrowing(r.getDate("Borrow_date"),r.getInt("resourceID"));
+			Borrowing b = new Borrowing(r.getInt("borrowingID"));
 			currentBorrowHistory.add(b);
 		}
 		r = SQLHandle.get("select * from resered_item where username = '" + username + "';");
@@ -37,7 +35,7 @@ public class NormalUser extends User {
 		}
 	}
 	
-	public boolean canBorrow() {
+	private boolean canBorrow() {
 		boolean b = true;
 		if (balance < 0) {
 			b = false;
@@ -46,10 +44,21 @@ public class NormalUser extends User {
 			if (currentBorrowHistory.get(i).isOverdue()) {
 			b = false;
 			break;
-		}
+			}
 		}
 		return b;
 	}
+	
+	public void borrow(int resourceID) throws IllegalArgumentException{
+		Resource r = new Resource(resourceID);
+		if (!canBorrow()) {
+			throw new IllegalArgumentException("You cannot borrow either you get fine or have something overdue");
+		}else if (){
+			
+		}
+	}
+	
+	
 	
 	public void getUserinfo(String username, String firstName, 
 			String lastName, int mobileNo, Image userImage) {

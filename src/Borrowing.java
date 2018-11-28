@@ -1,4 +1,6 @@
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Borrowing {
 	
@@ -6,18 +8,26 @@ public class Borrowing {
 	private Date endDate;
 	private Date returnDate;
 	private int borrowNo;
-	private normalUser user;
-	private int ResourceID;
+	private NormalUser user;
+	private int resourceID;
 	
-	Borrowing(Date initial, int ResourceID){
-		initialDate = initial;
-		this.ResourceID = ResourceID;
+	//when the borrowing is in database
+	Borrowing(int id) throws Exception{
+		ResultSet r = SQLHandle.get("select * from Borrowing where BorrowingID ='" + id +"';");
+		borrowNo = id;
+		while(r.next()) {
+			initialDate = r.getDate("initialDate");
+			endDate = r.getDate("endDate");
+			returnDate = r.getDate("returnDate");
+			resourceID = r.getInt("resourceID");
+		}
 	}
 	
 	public boolean isOverdue() {
 		boolean o = false;
 		//current date
 		Date d = new Date();
+		
 		if (endDate.before(d)) {
 			o = true;
 		}

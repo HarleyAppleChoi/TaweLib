@@ -1,4 +1,8 @@
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+
 import com.sun.prism.Image;
 
 public class Resource{
@@ -9,7 +13,22 @@ public class Resource{
 	protected int numCopies;
 	protected boolean canBorrow;
 	protected int numAvailableCopies;
+	protected LinkedList<Borrowing> currentBorrow;
 	
+	public Resource(int resourceId) throws Exception {
+		id = resourceId;
+		ResultSet r = SQLHandle.get("select borrowingID from currentBorrowHis where resourceID = '" 
+		+ resourceId + "';");
+		while (r.next()) {
+			Borrowing e = new Borrowing(r.getInt("borrowingID"));
+			currentBorrow.add(e);
+		}
+		r = SQLHandle.get("select username from requested where ;");
+	}
+	
+	public boolean canBorrow() {
+		
+	}
 	
 	public int getId() {
 		return id;
