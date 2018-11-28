@@ -3,5 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/cs230tawelib/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="src/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="/Users/emily/git/cs230tawelib/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="/Users/emily/Downloads/mysql-connector-java-8.0.13/mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

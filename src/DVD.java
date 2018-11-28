@@ -1,4 +1,6 @@
+
 import java.util.ArrayList;
+import com.sun.prism.Image;
 
 public class DVD extends Resource {
 	private String director;
@@ -6,7 +8,19 @@ public class DVD extends Resource {
 	private String language;
 	ArrayList<String> subLanguages = new ArrayList<String>();
 	
-	
+public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String director, int runtime, String language, ArrayList<String> subLanguages) {
+		
+		super.id = id;
+		super.title = title;
+		super.year = year;
+		super.thumbNailImage = thumbNailImage;
+		super.numCopies = numCopies;
+		super.numAvailableCopies =  numAvailableCopies;
+		this.director = director;
+		this.runtime = runtime;
+		this.language = language;
+		this.subLanguages = subLanguages;
+	}
 	
 	public String getDirector() {
 		return director;
@@ -26,15 +40,4 @@ public class DVD extends Resource {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	public DVD(String director, int runtime, String language, ArrayList<String> subLanguages) {
-		super();
-		this.director = director;
-		this.runtime = runtime;
-		this.language = language;
-		this.subLanguages = subLanguages;
-	}
-	
-	
-	
-	
 }

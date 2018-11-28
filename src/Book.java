@@ -1,4 +1,4 @@
-
+import com.sun.prism.Image;
 
 class Book extends Resource {
 
@@ -8,12 +8,12 @@ private String genre;
 private int isbn;
 private String language;
 
-	public Book (String id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String author, String publisher, String genre, int isbn, String langauge) {
+	public Book (int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String author, String publisher, String genre, int isbn, String langauge) {
 		
 		super.id = id;
 		super.title = title;
 		super.year = year;
-		super.thumnNailImage = thumbNailImage;
+		super.thumbNailImage = thumbNailImage;
 		super.numCopies = numCopies;
 		super.numAvailableCopies =  numAvailableCopies;
 		this.author = author;
@@ -48,12 +48,12 @@ private String language;
 		this.genre= genre;
 	}
 
-	public int getISBM(){
+	public int getISBN(){
 		return isbn;
 	}
 
-	public void setISBN(int isbm){
-		this.isbn=isbm;
+	public void setISBN(int isbn){
+		this.isbn = isbn;
 	}
 
 	public String getLanguage(){
@@ -63,5 +63,4 @@ private String language;
 	public void setLanguage(String language){
 		this.language = language;
 	}
-
 }

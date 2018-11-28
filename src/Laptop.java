@@ -1,9 +1,24 @@
+import com.sun.prism.Image;
 
 public class Laptop extends Resource {
 	
 	private String manufacturer;
 	private String model;
 	private String operatingSystem;
+	
+	
+	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String manufacturer, String model, String operatingSystem) {
+		
+		super.id = id;
+		super.title = title;
+		super.year = year;
+		super.thumbNailImage = thumbNailImage;
+		super.numCopies = numCopies;
+		super.numAvailableCopies =  numAvailableCopies;
+		this.manufacturer = manufacturer;
+		this.model = model;
+		this.operatingSystem = operatingSystem;
+	}
 	
 	
 	public String getManufacturer() {
@@ -24,16 +39,4 @@ public class Laptop extends Resource {
 	public void setOperatingSystem(String operatingSystem) {
 		this.operatingSystem = operatingSystem;
 	}
-	
-	
-	public Laptop(String manufacturer, String model, String operatingSystem) {
-		super();
-		this.manufacturer = manufacturer;
-		this.model = model;
-		this.operatingSystem = operatingSystem;
-	}
-	
-	
-	
-	
 }
