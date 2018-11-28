@@ -29,7 +29,8 @@ public class normalUser extend user {
 		}
 	}
 
-	public void requestBook(Resource r) {
+	public void requestBook(Resource r, String title) {
+	    
 
 	}
 
