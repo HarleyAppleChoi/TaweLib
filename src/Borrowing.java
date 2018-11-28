@@ -1,30 +1,31 @@
+import java.sql.Date;
 
 public class Borrowing {
 	
-	private int initialDate;
-	private int endDate;
-	private int returnDate;
+	private Date initialDate;
+	private Date endDate;
+	private Date returnDate;
 	private int borrowNo;
 	private normalUser user;
 	private Resource resourceType;
 	
 	
-	public int getInitialDate() {
+	public Date getInitialDate() {
 		return initialDate;
 	}
-	public void setInitialDate(int initialDate) {
+	public void setInitialDate(Date initialDate) {
 		this.initialDate = initialDate;
 	}
-	public int getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(int endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public int getReturnDate() {
+	public Date getReturnDate() {
 		return returnDate;
 	}
-	public void setReturnDate(int returnDate) {
+	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
 	public int getBorrowNo() {
@@ -45,8 +46,24 @@ public class Borrowing {
 	public void setResourceType(Resource resourceType) {
 		this.resourceType = resourceType;
 	}
+	//check if resource available.
+	//if true, add borrowid and resourceid to users currently borrowing table.
+	//         -1 from numAvCopies, 
 	
 	
+	public void borrowResource(Resource resourceType, normalUser user) {
+		int resourceID = resourceType.getId();
+		
+		String query = "select numAvCopies from resource where id = '" + resourceID + "';";
+		
+		if (query == "0") {
+			
+			
+		 } else {
+			
+			 
+		 }
+	}
 	
 	
 	
