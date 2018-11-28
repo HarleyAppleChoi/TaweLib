@@ -55,7 +55,29 @@ public class librarian extends User {
 		
 	}
 
-	public void addLaptop() {
+	public void addLaptop((String title, String year, String image, int numAvailableCopies, int duration,
+			String manufacturer, String model, String operationSystem) throws SQLException {
+		int id = addResource(title, year, image, numAvailableCopies, duration);
+
+		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + model
+				+ "','" + manufacturer;
+
+		if (model != null) {
+
+		}
+
+	}
+	
+	public void addDvd(String title, String year, String image, int numCopies, int duration,
+			int numAvaliableCopies, String director, int runTime) throws SQLException {
+		int id = addResource(title, year, image, numCopies, duration);
+
+		String query = "insert into dvd (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
+				+ "','" + director;
+
+		if (director != null) {
+
+		} 
 		
 	}
 }
