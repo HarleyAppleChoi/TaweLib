@@ -7,8 +7,8 @@ public class DVD extends Resource {
 	private int runtime;
 	private String language;
 	ArrayList<String> subLanguages = new ArrayList<String>();
-	private int fineAmount;
-	private int maxFineAmount;
+	private int fineAmount = 2;
+	private int maxFineAmount = 25;
 	
 public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String director, int runtime, String language, ArrayList<String> subLanguages) {
 		

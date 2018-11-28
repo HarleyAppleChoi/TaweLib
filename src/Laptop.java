@@ -5,8 +5,8 @@ public class Laptop extends Resource {
 	private String manufacturer;
 	private String model;
 	private String operatingSystem;
-	private int fineAmount;
-	private int maxFineAmount;
+	private int fineAmount = 10;
+	private int maxFineAmount = 100;
 	
 	
 	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String manufacturer, String model, String operatingSystem) {
