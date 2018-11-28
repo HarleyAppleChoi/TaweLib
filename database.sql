@@ -3,9 +3,8 @@ CREATE TABLE resource (
     title char(70)not null,
     _year char(30)not null,
     image char(100)not null,
-    numAvCopies varchar(4)not null,
-    duration varchar(4)not null,
-    primary key(resourceID)
+    numAvCopies char(4)not null,
+    duration char(4)not null
 
 );
 
@@ -15,7 +14,7 @@ CREATE TABLE book (
     publisher char(70)not null,
     genre char(100),
     ISBN varchar(4),
-    _language varchar(4)
+    _language varchar(4),
     foreign key resourceID references resource(resourceID)
 );
 
