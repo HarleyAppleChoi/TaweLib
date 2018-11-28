@@ -54,16 +54,15 @@ public class NormalUser extends User {
 		if (!canBorrow()) {
 			throw new IllegalArgumentException("You cannot borrow either you get fine or have something overdue");
 		}else {
-			if(r.isReserved(username)) {
-				borrow(username);
+			Borrowing b = r.borrow(super.username);
+			currentBorrowHistory.add(b);
 		}
-		
 	}
 	
 	
 	
 	public void getUserinfo(String username, String firstName, 
-			String lastName, int mobileNo, Image userImage) {
+		String lastName, int mobileNo, Image userImage) {
 		super.username = username;
 		super.firstName=firstName;
 		super.lastName=lastName;

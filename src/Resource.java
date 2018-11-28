@@ -50,15 +50,22 @@ public class Resource {
 		return b;
 	}
 
-	public void borrow(String userName) throws IllegalArgumentException {
+	/**
+	 * 
+	 * @param userName
+	 * @return the Borrowing object of that specific borrow.
+	 * @throws IllegalArgumentException
+	 * @throws SQLException
+	 */
+	public Borrowing borrow(String userName) throws IllegalArgumentException, SQLException {
 		if (!canBorrow()) {
 			throw new IllegalArgumentException("You cannot borrow. Try request it.");
 		} else if (isReserved(userName) != -1) {
 			reserve.remove(isReserved(userName));
 		}
-		Borrowing b = new Borrowing();
-		currentBorrow.add(e);
-
+		Borrowing b = new Borrowing(userName,this);
+		currentBorrow.add(b);
+		return b;
 	}
 
 	/**
