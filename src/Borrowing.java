@@ -1,23 +1,43 @@
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Borrowing {
 	
 	private Date initialDate;
 	private Date endDate;
 	private Date returnDate;
-	private int borrowNo;
-	private normalUser user;
-	private int ResourceID;
+	private int borrowID;
+	private String userName;
+	private int resourceID;
 	
-	Borrowing(Date initial, int ResourceID){
-		initialDate = initial;
-		this.ResourceID = ResourceID;
+	//when the borrowing is in database
+	Borrowing(int id) throws Exception{
+		ResultSet r = SQLHandle.get("select * from Borrowing where BorrowingID ='" + id +"';");
+		borrowNo = id;
+		while(r.next()) {
+			initialDate = r.getDate("initialDate");
+			endDate = r.getDate("endDate");
+			returnDate = r.getDate("returnDate");
+			resourceID = r.getInt("resourceID");
+		}
+	}
+	
+	//when the borrowing is new created
+	Borrowing(String userName, Resource resource) throws SQLException{
+		ResultSet r = SQLHandle.get("select max(BorrowID) from Borrowing;");
+		borrowID = r.getInt("max(BorrowID)")+1;
+		
+		resourceID=resource.getId();
+		initialDate = new Date();
+		
 	}
 	
 	public boolean isOverdue() {
 		boolean o = false;
 		//current date
 		Date d = new Date();
+		
 		if (endDate.before(d)) {
 			o = true;
 		}
