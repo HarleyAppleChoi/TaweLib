@@ -141,7 +141,7 @@ public class Librarian extends User  {
 	public void borrow(int resourceId, String userName) throws Exception {
 		NormalUser user = new NormalUser(userName);
 		user.borrow(resourceId);
-		
+		System.out.println("Borrow Success!!!");
 	}
 
 	@Override

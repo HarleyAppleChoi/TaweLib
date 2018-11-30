@@ -84,8 +84,8 @@ public class NormalUser extends User implements Storable {
 		}
 
 		// storing
-		statement = "insert into current_borrowing values (" + this.username + ","
-				+ currentBorrowHistory.getLast().getBorrowNo() + ");";
+		statement = "insert into current_borrowing values ('" + this.username + "','"
+				+ currentBorrowHistory.getLast().getBorrowNo() + "');";
 		SQLHandle.set(statement);
 
 	}

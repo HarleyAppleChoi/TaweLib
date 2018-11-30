@@ -98,7 +98,7 @@ public class Resource implements Storable{
 		}
 		Borrowing b = new Borrowing(String.valueOf(ID));
 		currentBorrow.add(b);
-		statement="insert into current_borrow_history values (" 
+		statement="insert into current_borrow_his values (" 
 				+ this.ID + ","+b.getBorrowNo() +");";
 		SQLHandle.set(statement);
 		System.out.println("Borrowing added");
