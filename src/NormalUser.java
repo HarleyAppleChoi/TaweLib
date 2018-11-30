@@ -1,10 +1,11 @@
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javafx.scene.image.Image;
 
-public class NormalUser extends User {
+public class NormalUser extends User implements Storable{
     
 	
 	protected int balance;
@@ -57,6 +58,12 @@ public class NormalUser extends User {
 			Borrowing b = r.borrow(super.username);
 			currentBorrowHistory.add(b);
 		}
+		
+		//storing
+		SQLHandle.set("insert into current_borrowing values (" 
+		+ this.username + ","+currentBorrowHistory.getLast().getBorrowNo() +");");
+		SQLHandle.set("insert into ");
+		
 	}
 	
 	
@@ -99,6 +106,13 @@ public class NormalUser extends User {
 		bookList.put(book, bookList.get(book) + 1);
 
 	}
+	private void storeBorrow() throws SQLException {
+		//when borrowing something	
+		//only one item can be borrow each time borrow method is called
+		
+
+	}
+	
 }
 
 }

@@ -1,6 +1,6 @@
 import javafx.scene.image.Image;
 
-public class User {
+public abstract class User implements Storable {
 	protected String username;
 	protected String firstName;
 	protected String lastName;

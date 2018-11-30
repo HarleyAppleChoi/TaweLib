@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 import com.mysql.cj.protocol.Resultset;
 
-public class Librarian extends User {
+public class Librarian extends User  {
    /**
     * Librarian class contain the methods and attributes used by library staff
     * Also permit them mange the user,resourse and borrowing of books

@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 import com.sun.prism.Image;
 
-public class Resource {
-	protected int id;
+public class Resource implements Storable{
+	private final int ID;
 	protected String title;
 	protected int year;
 	protected Image thumbNailImage;
@@ -18,7 +18,7 @@ public class Resource {
 	protected LinkedList<String> reserve;
 
 	public Resource(int resourceId) throws Exception {
-		id = resourceId;
+		ID = resourceId;
 		ResultSet r = SQLHandle
 				.get("select borrowingID from currentBorrowHis where resourceID = '" + resourceId + "';");
 		while (r.next()) {
@@ -26,12 +26,12 @@ public class Resource {
 			currentBorrow.add(e);
 		}
 		// requesting queue
-		r = SQLHandle.get("select username from requested where resourceID = '" + id + "';");
+		r = SQLHandle.get("select username from requested where resourceID = '" + ID + "';");
 		while (r.next()) {
 			request.add((r.getString("username")));
 		}
 		// reserved queue
-		r = SQLHandle.get("select username from reserved where resourceID = '" + id + "';");
+		r = SQLHandle.get("select username from reserved where resourceID = '" + ID + "';");
 		while (r.next()) {
 			reserve.add((r.getString("username")));
 		}
@@ -63,8 +63,10 @@ public class Resource {
 		} else if (isReserved(userName) != -1) {
 			reserve.remove(isReserved(userName));
 		}
-		Borrowing b = new Borrowing(userName,this);
+		Borrowing b = new Borrowing(userName,this.ID);
 		currentBorrow.add(b);
+		SQLHandle.set("insert  into current_borrow_history values (" 
+		+ this.ID + ","+b.getBorrowNo() +");");
 		return b;
 	}
 
@@ -87,11 +89,11 @@ public class Resource {
 	}
 
 	public int getId() {
-		return id;
+		return ID;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.ID = id;
 	}
 
 	public String getTitle() {
@@ -143,5 +145,10 @@ public class Resource {
 			canBorrow = true;
 		}
 		return canBorrow;
+	}
+
+	@Override
+	public void store() throws SQLException {
+			
 	}
 }

@@ -1,4 +1,5 @@
+import java.sql.SQLException;
 
 public interface Storable {
-	void store();
+	void store() throws SQLException;
 }

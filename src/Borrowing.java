@@ -8,7 +8,7 @@ public class Borrowing implements Storable {
 	private Date endDate;
 	private Date returnDate;
 	private final int BORROW_NO;
-	private final NormalUser USER;
+	private final String USER;
 	private final int RESOURCE_ID;
 	
 	//when the borrowing is in database
@@ -25,10 +25,11 @@ public class Borrowing implements Storable {
 	
 	
 	//when the borrowing is new created
-	public Borrowing(int rID){
+	public Borrowing(int rID,String uID){
 		BORROWING_NO = SQLHandle.get("select max(borrowingID) from Borrowing").getInt("max(borrowingID)") +1;
 		INITIAL_DATE = new Date();
 		RESOURCE_ID = rID;
+		USER = uID;
 		SQLHandle.set("insert into borrowing values(" +this.BORROW_NO+","+ this.INITIAL_DATE.toString()+","
 				+"null,"+this.RESOURCE_ID+",null,y");
 	}
@@ -69,9 +70,7 @@ public class Borrowing implements Storable {
 	public int getBorrowNo() {
 		return BORROW_NO;
 	}
-	public void setBorrowNo(int borrowNo) {
-		this.BORROW_NO = borrowNo;
-	}
+	
 	public normalUser getUser() {
 		return USER;
 	}
