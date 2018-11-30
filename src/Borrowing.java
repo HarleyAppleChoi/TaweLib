@@ -1,4 +1,7 @@
 import java.util.Date;
+
+import com.mysql.cj.protocol.Resultset;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -12,6 +15,7 @@ public class Borrowing implements Storable {
 	private final int BORROW_NO;
 	// private final String USER;
 	private String RESOURCE_ID;
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
 	// when the borrowing is in database
 	public Borrowing(int id) throws Exception {
@@ -61,6 +65,36 @@ public class Borrowing implements Storable {
 		}
 		return o;
 	}
+	
+	public void setReturnDate() {
+		returnDate = new Date();
+	}
+	
+	public String getReturnDate() {
+		return dateFormat.format(returnDate);
+
+	}
+	
+	public int fine() throws SQLException {
+		int fine = 0;
+		if (isOverdue()) {
+			//find fine per day
+			//String statement = "select distinct resourceID from current_borrow_his outer join book where borrowingID = '"+BORROW_NO+"';";
+			//ResultSet R = SQLHandle.get(statement);
+			
+			int finePerDay = 2;
+			
+			if(endDate!=null) {
+				if(returnDate.compareTo(endDate)>0){
+					long diff = returnDate.getTime() - endDate.getTime();
+					long days = diff / (1000 * 60 * 60 * 24);
+					
+					fine = (int) (days * 2);
+				}
+			}
+		}
+		return fine;
+	}
 
 	public Date getInitialDate() {
 		return INITIAL_DATE;
@@ -74,9 +108,7 @@ public class Borrowing implements Storable {
 		this.endDate = endDate;
 	}
 
-	public Date getReturnDate() {
-		return returnDate;
-	}
+
 
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;

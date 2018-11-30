@@ -101,6 +101,15 @@ public class NormalUser extends User implements Storable {
 		super.mobileNo = mobileNo;
 		super.userImage = userImage;
 	}
+	
+	public void reduceBalance(int fine) {
+		balance -= fine;
+	}
+	
+	public int getBalance() {
+		return balance;
+	}
+	
 
 	public void reserve(String resourse) {
 

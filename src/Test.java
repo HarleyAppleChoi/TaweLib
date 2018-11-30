@@ -11,12 +11,16 @@ public class Test {
 		ResultSet result2 = null;
 
 		try {
+			Librarian l = new Librarian();
+			/*
 			result = SQLHandle.get("select * from resource");
 			while(result.next()) {
 				System.out.println(result.getString("title"));
 			}
-			Librarian l = new Librarian();
+			
 			l.borrow(1, "apple");
+			*/
+			l.returnResource(1, "apple");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -24,5 +28,7 @@ public class Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 }

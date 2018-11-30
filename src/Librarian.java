@@ -145,17 +145,25 @@ public class Librarian extends User  {
 	}
 	
 	public void returnResource(int borrowNo, String userName ) throws Exception{
+		String statement = "";
+		NormalUser u = new NormalUser(userName);
 		Borrowing b = new Borrowing(borrowNo);
 		if(b.isOverdue()) {
-			
+			u.reduceBalance(b.fine());
+			statement = "update from userName set balance = '" + u.getBalance() + "' where username = '" 
+					+ userName +"';";
+			SQLHandle.set(statement);
+			System.out.println("Fine is reduced from balance which is" + b.fine());
 		}
-		String statement = "delete from current_borrow_his where borrowingID = '" 
+		statement = "delete from current_borrow_his where borrowingID = '" 
 							+ borrowNo +"';";
 		SQLHandle.set(statement);
-		statement = "delete from current_borrowing where borrowing ID = '" + borrowNo
+		statement = "delete from current_borrowing where borrowingID = '" + borrowNo
 				+"' and userName = '" + userName + "';";
 		SQLHandle.set(statement);
-		
+		statement = "insert into returned_his values('"+ u.getUsename()+"','"+ b.getBorrowNo() +"');";
+		SQLHandle.set(statement);
+		System.out.println("return Success!!");
 	}
 
 	@Override
