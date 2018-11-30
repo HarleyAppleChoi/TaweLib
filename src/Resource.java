@@ -14,9 +14,9 @@ public class Resource implements Storable{
 	protected int numCopies;
 	protected boolean canBorrow;
 	protected int numAvailableCopies;
-	protected LinkedList<Borrowing> currentBorrow;
-	protected LinkedList<String> request;
-	protected LinkedList<String> reserve;
+	protected LinkedList<Borrowing> currentBorrow =  new LinkedList<>();
+	protected LinkedList<String> request =  new LinkedList<>();
+	protected LinkedList<String> reserve =  new LinkedList<>();
 	//sql statement
 	private String statement;
 	
@@ -27,15 +27,26 @@ public class Resource implements Storable{
 		this.year=year;
 		this.thumbNailImage=thumbNailImage;
 		this.numCopies=numCopies;
-		this.numAvailableCopies=numAvailableCopies;
+		//this.numAvailableCopies=numAvailableCopies;
 	}
 
 
 	public Resource(int resourceId) throws Exception {
 		ID = resourceId;
+		statement = "select * from resource where resourceID = '" +ID+ "';";
+		ResultSet r = SQLHandle.get(statement);
+		while (r.next()) {
+			title=r.getString("title");
+			year=r.getInt("_year");
+			//please do a method to change string into image.
+			//this.thumbNailImage=thumbNailImage = r.getString("thumbNailImage");
+			this.numCopies=numCopies=r.getInt("numAvCopies");
+			//this.numAvailableCopies=numAvailableCopies=;
+		}
+		
 		try {
 		statement = "select borrowingID from currentBorrowHis where resourceID = '" + resourceId + "';";
-		ResultSet r = SQLHandle
+		r = SQLHandle
 				.get(statement);
 		while (r.next()) {
 			Borrowing e = new Borrowing(r.getInt("borrowingID"));
@@ -66,7 +77,7 @@ public class Resource implements Storable{
 	 */
 	private boolean canBorrow() {
 		boolean b = true;
-		if (currentBorrow.size() + reserve.size() >= numCopies) {
+		if ((currentBorrow.size() + reserve.size()+request.size()) > numCopies) {
 			b = false;
 		}
 		return b;
@@ -87,9 +98,10 @@ public class Resource implements Storable{
 		}
 		Borrowing b = new Borrowing(String.valueOf(ID));
 		currentBorrow.add(b);
-		statement="insert  into current_borrow_history values (" 
+		statement="insert into current_borrow_history values (" 
 				+ this.ID + ","+b.getBorrowNo() +");";
 		SQLHandle.set(statement);
+		System.out.println("Borrowing added");
 		return b;
 	}
 
@@ -104,6 +116,7 @@ public class Resource implements Storable{
 		for (i = 0; i <= reserve.size(); i++) {
 			if (i==reserve.size()) {
 				i=-1;
+				break;
 			}else if (reserve.get(i) == user) {
 				break;
 			}

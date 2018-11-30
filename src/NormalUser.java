@@ -10,9 +10,9 @@ public class NormalUser extends User implements Storable {
 
 	protected int balance;
 	protected int[] transaction;
-	protected LinkedList<Integer> requesting;
-	protected LinkedList<Integer> reserved;
-	private LinkedList<Borrowing> currentBorrowHistory;
+	protected LinkedList<Integer> requesting= new LinkedList<>();
+	protected LinkedList<Integer> reserved =new LinkedList<>();
+	private LinkedList<Borrowing> currentBorrowHistory = new LinkedList<>();
 
 	// sql statement
 	private String statement;
@@ -63,7 +63,7 @@ public class NormalUser extends User implements Storable {
 		boolean b = true;
 		if (balance < 0) {
 			b = false;
-		} else if (currentBorrowHistory.isEmpty()) {
+		} else if (!currentBorrowHistory.isEmpty()) {
 			for (int i = 0; i < currentBorrowHistory.size(); i++) {
 				if (currentBorrowHistory.get(i).isOverdue()) {
 					b = false;

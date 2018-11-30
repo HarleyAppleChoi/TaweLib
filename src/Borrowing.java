@@ -27,13 +27,21 @@ public class Borrowing implements Storable {
 	
 	//when the borrowing is new created
 	public Borrowing(String rID){
-		BORROW_NO = SQLHandle.get("select max(borrowingID) from Borrowing").getInt("max(borrowingID)") +1;
+		String statement = "select max(borrowingID) from Borrowing";
+		ResultSet r = SQLHandle.get(statement);
+		int i;
+		while(r.next()) {
+			 i = r.getInt("max(borrowingID)");
+		}
+		BORROW_NO = i+1;
 		INITIAL_DATE = new Date();
 		RESOURCE_ID = rID;
 		//USER = uID;
-		String statement = "insert into borrowing values(" +this.BORROW_NO+","+ this.INITIAL_DATE.toString()+","
+		System.out.println("Borrowing adding...");
+		statement = "insert into borrowing values(" +this.BORROW_NO+","+ this.INITIAL_DATE.toString()+","
 				+"null,"+this.RESOURCE_ID+",null,y);";
 		SQLHandle.set(statement);
+		System.out.println("Borrowing added");
 	}
 	
 	public void setendDate() {
