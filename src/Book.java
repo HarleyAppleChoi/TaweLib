@@ -10,19 +10,13 @@ private String language;
 private int fineAmount = 2;
 private int maxFineAmount = 25;
 
-public Book(int resourceId) {
-	
-}
-	public Book (int id, String title, int year, Image thumbNailImage
+
+	public Book (int ID, String title, int year, Image thumbNailImage
 			, int numCopies, int numAvailableCopies, String author, String publisher
 			, String genre, int isbn, String langauge) {
 		
-		super.ID = id;
-		super.title = title;
-		super.year = year;
-		super.thumbNailImage = thumbNailImage;
-		super.numCopies = numCopies;
-		super.numAvailableCopies =  numAvailableCopies;
+		super(ID,title,year,thumbNailImage,numCopies,numAvailableCopies);
+
 		this.author = author;
 		this.publisher = publisher;
 		this.genre = genre;

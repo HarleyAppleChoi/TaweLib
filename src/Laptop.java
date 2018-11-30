@@ -9,14 +9,8 @@ public class Laptop extends Resource {
 	private int maxFineAmount = 100;
 	
 	
-	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String manufacturer, String model, String operatingSystem) {
-		
-		super.ID = id;
-		super.title = title;
-		super.year = year;
-		super.thumbNailImage = thumbNailImage;
-		super.numCopies = numCopies;
-		super.numAvailableCopies =  numAvailableCopies;
+	public Laptop(int ID, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String manufacturer, String model, String operatingSystem) {
+		super(ID,title,year,thumbNailImage,numCopies,numAvailableCopies);
 		this.manufacturer = manufacturer;
 		this.model = model;
 		this.operatingSystem = operatingSystem;

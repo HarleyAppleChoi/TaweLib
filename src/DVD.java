@@ -10,14 +10,8 @@ public class DVD extends Resource {
 	private int fineAmount = 2;
 	private int maxFineAmount = 25;
 	
-public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String director, int runtime, String language, ArrayList<String> subLanguages) {
-		
-		super.ID = id;
-		super.title = title;
-		super.year = year;
-		super.thumbNailImage = thumbNailImage;
-		super.numCopies = numCopies;
-		super.numAvailableCopies =  numAvailableCopies;
+public DVD(int ID, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String director, int runtime, String language, ArrayList<String> subLanguages) {
+	super(ID,title,year,thumbNailImage,numCopies,numAvailableCopies);
 		this.director = director;
 		this.runtime = runtime;
 		this.language = language;

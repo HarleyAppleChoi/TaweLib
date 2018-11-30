@@ -54,9 +54,7 @@ public class Borrowing implements Storable {
 	public Date getInitialDate() {
 		return INITIAL_DATE;
 	}
-	public void setInitialDate(Date initialDate) {
-		this.INITIAL_DATE = initialDate;
-	}
+
 	public Date getEndDate() {
 		return endDate;
 	}

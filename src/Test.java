@@ -15,7 +15,12 @@ public class Test {
 			while(result.next()) {
 				System.out.println(result.getString("title"));
 			}
+			Librarian l = new Librarian();
+			l.borrow(1, "apple");
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -1,6 +1,7 @@
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.LinkedList;
 
 import com.sun.prism.Image;
@@ -18,9 +19,21 @@ public class Resource implements Storable{
 	protected LinkedList<String> reserve;
 	//sql statement
 	private String statement;
+	
+	protected Resource(int ID, String title, int year, Image thumbNailImage
+			, int numCopies, int numAvailableCopies) {
+		this.ID = ID;
+		this.title=title;
+		this.year=year;
+		this.thumbNailImage=thumbNailImage;
+		this.numCopies=numCopies;
+		this.numAvailableCopies=numAvailableCopies;
+	}
+
 
 	public Resource(int resourceId) throws Exception {
 		ID = resourceId;
+		try {
 		statement = "select borrowingID from currentBorrowHis where resourceID = '" + resourceId + "';";
 		ResultSet r = SQLHandle
 				.get(statement);
@@ -39,6 +52,10 @@ public class Resource implements Storable{
 		r = SQLHandle.get(statement);
 		while (r.next()) {
 			reserve.add((r.getString("username")));
+		}
+		}catch(SQLSyntaxErrorException e) {
+			//it can be do nothing when Table 'cw230.resered_item' doesn't exist because sometime 
+			//the user dont have any requesting or current borrow or request
 		}
 	}
 
