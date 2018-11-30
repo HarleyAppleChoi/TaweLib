@@ -36,5 +36,9 @@ public class Test {
 			e.printStackTrace();
 		} finally {
 		}
+		
+		Librarian b = new Librarian();
+		b.borrow(1, "apple");
+		
 	}
 }

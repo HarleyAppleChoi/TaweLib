@@ -2,35 +2,45 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Borrowing {
+public class Borrowing implements Storable {
 	
-	private Date initialDate;
+	private final Date INITIAL_DATE;
 	private Date endDate;
 	private Date returnDate;
-	private int borrowNo;
-	private NormalUser user;
-	private int resourceID;
+	private final int BORROW_NO;
+	private final NormalUser USER;
+	private final int RESOURCE_ID;
 	
 	//when the borrowing is in database
-	Borrowing(int id) throws Exception{
+	public Borrowing(int id) throws Exception{
 		ResultSet r = SQLHandle.get("select * from Borrowing where BorrowingID ='" + id +"';");
-		borrowNo = id;
-		while(r.next()) {
-			initialDate = r.getDate("initialDate");
+		BORROW_NO = id;
+		
+			INITIAL_DATE = r.getDate("initialDate");
 			endDate = r.getDate("endDate");
 			returnDate = r.getDate("returnDate");
-			resourceID = r.getInt("resourceID");
-		}
+			RESOURCE_ID = r.getInt("resourceID");
+		
 	}
 	
+	
 	//when the borrowing is new created
-	Borrowing()
+	public Borrowing(int rID){
+		BORROWING_NO = SQLHandle.get("select max(borrowingID) from Borrowing").getInt("max(borrowingID)") +1;
+		INITIAL_DATE = new Date();
+		RESOURCE_ID = rID;
+		SQLHandle.set("insert into borrowing values(" +this.BORROW_NO+","+ this.INITIAL_DATE.toString()+","
+				+"null,"+this.RESOURCE_ID+",null,y");
+	}
+	
+	public void setendDate() {
+		
+	}
 	
 	public boolean isOverdue() {
 		boolean o = false;
 		//current date
 		Date d = new Date();
-		
 		if (endDate.before(d)) {
 			o = true;
 		}
@@ -39,10 +49,10 @@ public class Borrowing {
 	
 	
 	public Date getInitialDate() {
-		return initialDate;
+		return INITIAL_DATE;
 	}
 	public void setInitialDate(Date initialDate) {
-		this.initialDate = initialDate;
+		this.INITIAL_DATE = initialDate;
 	}
 	public Date getEndDate() {
 		return endDate;
@@ -57,16 +67,16 @@ public class Borrowing {
 		this.returnDate = returnDate;
 	}
 	public int getBorrowNo() {
-		return borrowNo;
+		return BORROW_NO;
 	}
 	public void setBorrowNo(int borrowNo) {
-		this.borrowNo = borrowNo;
+		this.BORROW_NO = borrowNo;
 	}
 	public normalUser getUser() {
-		return user;
+		return USER;
 	}
 	public void setUser(normalUser user) {
-		this.user = user;
+		this.USER = user;
 	}
 	public Resource getResourceType() {
 		return resourceType;
@@ -91,6 +101,16 @@ public class Borrowing {
 			
 			 
 		 }
+	}
+
+	/**
+	 * when that is only a update.
+	 * @throws SQLException
+	 */
+	@Override
+	public void store() throws SQLException {
+		SQLHandle.set("insert into borrowing values(" +this.BORROW_NO+","+ this.INITIAL_DATE.toString()+","
+				+"null,"+this.RESOURCE_ID+","+this.returnDate.toString()+"y");
 	}
 	
 	
