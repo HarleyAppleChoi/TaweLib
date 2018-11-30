@@ -2,7 +2,7 @@ import com.sun.prism.Image;
 /**
  * This class is a subclass of resource thta creat all instance of a book 
  * @author Emily Studly
- * @ verstion
+ * @ version
  * 
  */
 
