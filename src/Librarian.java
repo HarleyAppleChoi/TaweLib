@@ -143,6 +143,20 @@ public class Librarian extends User  {
 		user.borrow(resourceId);
 		System.out.println("Borrow Success!!!");
 	}
+	
+	public void returnResource(int borrowNo, String userName ) throws Exception{
+		Borrowing b = new Borrowing(borrowNo);
+		if(b.isOverdue()) {
+			
+		}
+		String statement = "delete from current_borrow_his where borrowingID = '" 
+							+ borrowNo +"';";
+		SQLHandle.set(statement);
+		statement = "delete from current_borrowing where borrowing ID = '" + borrowNo
+				+"' and userName = '" + userName + "';";
+		SQLHandle.set(statement);
+		
+	}
 
 	@Override
 	public void store() throws SQLException {
