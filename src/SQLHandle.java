@@ -7,7 +7,7 @@ public class SQLHandle {
 	//more than 1 database is not allowed
 	
 	//your hostname
-	final static String HOST_NAME = "jdbc:mysql://localhost:3306/cw2";
+	final static String HOST_NAME = "jdbc:mysql://localhost:3306/cw230";
 	//your SQL username
 	final static String USERNAME = "root";
 	//your password

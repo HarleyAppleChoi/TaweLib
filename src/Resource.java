@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import com.sun.prism.Image;
 
 public class Resource implements Storable{
-	private final int ID;
+	protected final int ID;
 	protected String title;
 	protected int year;
 	protected Image thumbNailImage;
@@ -16,22 +16,27 @@ public class Resource implements Storable{
 	protected LinkedList<Borrowing> currentBorrow;
 	protected LinkedList<String> request;
 	protected LinkedList<String> reserve;
+	//sql statement
+	private String statement;
 
 	public Resource(int resourceId) throws Exception {
 		ID = resourceId;
+		statement = "select borrowingID from currentBorrowHis where resourceID = '" + resourceId + "';";
 		ResultSet r = SQLHandle
-				.get("select borrowingID from currentBorrowHis where resourceID = '" + resourceId + "';");
+				.get(statement);
 		while (r.next()) {
 			Borrowing e = new Borrowing(r.getInt("borrowingID"));
 			currentBorrow.add(e);
 		}
 		// requesting queue
-		r = SQLHandle.get("select username from requested where resourceID = '" + ID + "';");
+		statement="select username from requested where resourceID = '" + ID + "';";
+		r = SQLHandle.get(statement);
 		while (r.next()) {
 			request.add((r.getString("username")));
 		}
 		// reserved queue
-		r = SQLHandle.get("select username from reserved where resourceID = '" + ID + "';");
+		statement="select username from reserved where resourceID = '" + ID + "';";
+		r = SQLHandle.get(statement);
 		while (r.next()) {
 			reserve.add((r.getString("username")));
 		}
@@ -63,10 +68,11 @@ public class Resource implements Storable{
 		} else if (isReserved(userName) != -1) {
 			reserve.remove(isReserved(userName));
 		}
-		Borrowing b = new Borrowing(userName,this.ID);
+		Borrowing b = new Borrowing(String.valueOf(ID));
 		currentBorrow.add(b);
-		SQLHandle.set("insert  into current_borrow_history values (" 
-		+ this.ID + ","+b.getBorrowNo() +");");
+		statement="insert  into current_borrow_history values (" 
+				+ this.ID + ","+b.getBorrowNo() +");";
+		SQLHandle.set(statement);
 		return b;
 	}
 
@@ -92,9 +98,6 @@ public class Resource implements Storable{
 		return ID;
 	}
 
-	public void setId(int id) {
-		this.ID = id;
-	}
 
 	public String getTitle() {
 		return title;

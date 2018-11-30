@@ -125,7 +125,7 @@ public class Librarian extends User  {
 	 * @param operationSystem
 	 * @throws SQLException
 	 */
-	public void addLaptop((String title, String year, String image, int numAvailableCopies, int duration,
+	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
 			String manufacturer, String model, String operationSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
@@ -138,9 +138,15 @@ public class Librarian extends User  {
 
 	}
 	
-	public void borrow(int resourceId, String userName) {
+	public void borrow(int resourceId, String userName) throws Exception {
 		NormalUser user = new NormalUser(userName);
+		user.borrow(resourceId);
 		
+	}
+
+	@Override
+	public void store() throws SQLException {
+		// TODO Auto-generated method stub
 		
 	}
 }

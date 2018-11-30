@@ -8,30 +8,32 @@ public class Borrowing implements Storable {
 	private Date endDate;
 	private Date returnDate;
 	private final int BORROW_NO;
-	private final String USER;
-	private final int RESOURCE_ID;
+	//private final String USER;
+	private final String RESOURCE_ID;
 	
 	//when the borrowing is in database
 	public Borrowing(int id) throws Exception{
-		ResultSet r = SQLHandle.get("select * from Borrowing where BorrowingID ='" + id +"';");
+		String statement = "select * from Borrowing where BorrowingID ='" + id +"';";
+		ResultSet r = SQLHandle.get(statement);
 		BORROW_NO = id;
 		
 			INITIAL_DATE = r.getDate("initialDate");
 			endDate = r.getDate("endDate");
 			returnDate = r.getDate("returnDate");
-			RESOURCE_ID = r.getInt("resourceID");
+			RESOURCE_ID = Integer.toString(r.getInt("resourceID"));
 		
 	}
 	
 	
 	//when the borrowing is new created
-	public Borrowing(int rID,String uID){
-		BORROWING_NO = SQLHandle.get("select max(borrowingID) from Borrowing").getInt("max(borrowingID)") +1;
+	public Borrowing(String rID){
+		BORROW_NO = SQLHandle.get("select max(borrowingID) from Borrowing").getInt("max(borrowingID)") +1;
 		INITIAL_DATE = new Date();
 		RESOURCE_ID = rID;
-		USER = uID;
-		SQLHandle.set("insert into borrowing values(" +this.BORROW_NO+","+ this.INITIAL_DATE.toString()+","
-				+"null,"+this.RESOURCE_ID+",null,y");
+		//USER = uID;
+		String statement = "insert into borrowing values(" +this.BORROW_NO+","+ this.INITIAL_DATE.toString()+","
+				+"null,"+this.RESOURCE_ID+",null,y);";
+		SQLHandle.set(statement);
 	}
 	
 	public void setendDate() {
@@ -70,37 +72,30 @@ public class Borrowing implements Storable {
 	public int getBorrowNo() {
 		return BORROW_NO;
 	}
-	
+	/*
 	public normalUser getUser() {
 		return USER;
 	}
 	public void setUser(normalUser user) {
 		this.USER = user;
 	}
+	*/
+	/*
 	public Resource getResourceType() {
 		return resourceType;
 	}
+	*/
+	/*
 	public void setResourceType(Resource resourceType) {
 		this.resourceType = resourceType;
 	}
+	*/
 	//check if resource available.
 	//if true, add borrowid and resourceid to users currently borrowing table.
 	//         -1 from numAvCopies, 
 	
 	
-	public void borrowResource(Resource resourceType, normalUser user) {
-		int resourceID = resourceType.getId();
-		
-		String query = "select numAvCopies from resource where id = '" + resourceID + "';";
-		
-		if (query == "0") {
-			
-			
-		 } else {
-			
-			 
-		 }
-	}
+	
 
 	/**
 	 * when that is only a update.

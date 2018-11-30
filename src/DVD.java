@@ -12,7 +12,7 @@ public class DVD extends Resource {
 	
 public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String director, int runtime, String language, ArrayList<String> subLanguages) {
 		
-		super.id = id;
+		super.ID = id;
 		super.title = title;
 		super.year = year;
 		super.thumbNailImage = thumbNailImage;

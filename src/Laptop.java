@@ -11,7 +11,7 @@ public class Laptop extends Resource {
 	
 	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String manufacturer, String model, String operatingSystem) {
 		
-		super.id = id;
+		super.ID = id;
 		super.title = title;
 		super.year = year;
 		super.thumbNailImage = thumbNailImage;
