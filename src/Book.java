@@ -3,7 +3,8 @@ import com.sun.prism.Image;
 /**
  * This class creates an instance of a Book.
  * 
- * @author Emily Studley @ version 2.1
+ * @author Emily Studley
+ * @version 2.1
  * 
  */
 class Book extends Resource {
@@ -13,8 +14,7 @@ class Book extends Resource {
 	private String genre;
 	private int isbn;
 	private String language;
-	private int fineAmount = 2;
-	private int maxFineAmount = 25;
+
 
 	/**
 	 * Constructor to construct a Book using the parameters from this class and the
@@ -138,41 +138,4 @@ class Book extends Resource {
 		this.language = language;
 
 	}
-
-	/**
-	 * Get method to get the maximum fine amount.
-	 * 
-	 * @return maxFineAmount
-	 */
-	public int getMaxFineAmount() {
-		return maxFineAmount;
-	}
-
-	/**
-	 * Set method to set the maximum fine amount.
-	 * 
-	 * @param maxFineAmount
-	 */
-	public void setMaxFineAmount(int maxFineAmount) {
-		this.maxFineAmount = maxFineAmount;
-	}
-
-	/**
-	 * Get method to get the fine amount per day.
-	 * 
-	 * @return
-	 */
-	public int getFineAmount() {
-		return fineAmount;
-	}
-
-	/**
-	 * Set method to set the fine amount.
-	 * 
-	 * @param fineAmount
-	 */
-	public void setFineAmount(int fineAmount) {
-		this.fineAmount = fineAmount;
-	}
-
 }
