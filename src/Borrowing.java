@@ -16,10 +16,11 @@ public class Borrowing implements Storable {
 	// private final String USER;
 	private String RESOURCE_ID;
 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	String statement = "";
 
 	// when the borrowing is in database
 	public Borrowing(int id) throws Exception {
-		String statement = "select * from Borrowing where BorrowingID ='" + id + "';";
+		statement = "select * from Borrowing where BorrowingID ='" + id + "';";
 		ResultSet r = SQLHandle.get(statement);
 		BORROW_NO = id;
 		while (r.next()) {
@@ -65,31 +66,46 @@ public class Borrowing implements Storable {
 		}
 		return o;
 	}
-	
+
 	public void setReturnDate() {
 		returnDate = new Date();
 	}
-	
+
 	public String getReturnDate() {
 		return dateFormat.format(returnDate);
 
 	}
-	
+
 	public int fine() throws SQLException {
 		int fine = 0;
 		if (isOverdue()) {
-			//find fine per day
-			//String statement = "select distinct resourceID from current_borrow_his outer join book where borrowingID = '"+BORROW_NO+"';";
-			//ResultSet R = SQLHandle.get(statement);
+			// find fine per day
+			// see what is the type of the resource. If the SQL return an empty set on the
+			// table, that is not that kind of resource.
+			int finePerDay = 0;
+			int maxFine =0 ;
+			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID =" 
+					+this.RESOURCE_ID;
+			ResultSet r = SQLHandle.get(statement);
+			if (r.next()) {
+				finePerDay = 2;
+				maxFine = 25;
+			} else {
+				//not laptop/dvd than that must be a laptop
+				finePerDay = 10;
+				maxFine = 100;
+			}
 			
-			int finePerDay = 2;
-			
-			if(endDate!=null) {
-				if(returnDate.compareTo(endDate)>0){
+
+			if (endDate != null) {
+				if (returnDate.compareTo(endDate) > 0) {
 					long diff = returnDate.getTime() - endDate.getTime();
 					long days = diff / (1000 * 60 * 60 * 24);
-					
-					fine = (int) (days * 2);
+
+					fine = (int) (days * finePerDay);
+					if (fine>maxFine) {
+						fine =maxFine;
+					}
 				}
 			}
 		}
@@ -107,8 +123,6 @@ public class Borrowing implements Storable {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
-
 
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
