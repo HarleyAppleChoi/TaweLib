@@ -20,10 +20,8 @@ public class Test {
 			
 			l.borrow(1, "apple");
 			*/
-			l.returnResource(1, "apple");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			l.borrow(1, "overdueGuy");
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

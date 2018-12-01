@@ -76,6 +76,11 @@ public class Borrowing implements Storable {
 
 	}
 
+	/**
+	 * It calculate the fine
+	 * @return amount of fine
+	 * @throws SQLException
+	 */
 	public int fine() throws SQLException {
 		int fine = 0;
 		if (isOverdue()) {
