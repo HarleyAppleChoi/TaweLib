@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * 
- * @author Huau Yi Choi
+ * @author Hau Yi Choi
  * @version 3.0
  *
  */
@@ -180,7 +180,7 @@ public class Borrowing implements Storable {
 	}
 
 	/**
-	 * Get method to get the return date/
+	 * Get method to get the return date
 	 * @return
 	 */
 	public String getReturnDateString() {
