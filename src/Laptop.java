@@ -11,8 +11,6 @@ public class Laptop extends Resource {
 	private String manufacturer;
 	private String model;
 	private String operatingSystem;
-	private int fineAmount = 10;
-	private int maxFineAmount = 100;
 
 	/**
 	 * Constructor to construct a Laptop using the paramaters from this class and
@@ -94,41 +92,5 @@ public class Laptop extends Resource {
 	 */
 	public void setOperatingSystem(String operatingSystem) {
 		this.operatingSystem = operatingSystem;
-	}
-
-	/**
-	 * Get method to get the maximum fine amount.
-	 * 
-	 * @return maxFineAmount
-	 */
-	public int getMaxFineAmount() {
-		return maxFineAmount;
-	}
-
-	/**
-	 * Set method to set the maximum fine amount.
-	 * 
-	 * @param maxFineAmount
-	 */
-	public void setMaxFineAmount(int maxFineAmount) {
-		this.maxFineAmount = maxFineAmount;
-	}
-
-	/**
-	 * Get method to get the fine amount per day.
-	 * 
-	 * @return fineAmount
-	 */
-	public int getFineAmount() {
-		return fineAmount;
-	}
-
-	/**
-	 * Set method to set the fine amount per day.
-	 * 
-	 * @param fineAmount
-	 */
-	public void setFineAmount(int fineAmount) {
-		this.fineAmount = fineAmount;
 	}
 }

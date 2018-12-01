@@ -14,8 +14,6 @@ public class DVD extends Resource {
 	private int runtime;
 	private String language;
 	ArrayList<String> subLanguages = new ArrayList<String>();
-	private int fineAmount = 2;
-	private int maxFineAmount = 25;
 
 	/**
 	 * Constructor to construct a DVD using the parameters from this class and the
@@ -99,41 +97,5 @@ public class DVD extends Resource {
 	 */
 	public void setLanguage(String language) {
 		this.language = language;
-	}
-
-	/**
-	 * Get method to get the maximum fine amount.
-	 * 
-	 * @return maxFineAmount
-	 */
-	public int getMaxFineAmount() {
-		return maxFineAmount;
-	}
-
-	/**
-	 * Set method to set the maximum fine amount.
-	 * 
-	 * @param maxFineAmount
-	 */
-	public void setMaxFineAmount(int maxFineAmount) {
-		this.maxFineAmount = maxFineAmount;
-	}
-
-	/**
-	 * Get method to get the fine amount per day.
-	 * 
-	 * @return fineAmount
-	 */
-	public int getFineAmount() {
-		return fineAmount;
-	}
-
-	/**
-	 * Set method to set the fine amount.
-	 * 
-	 * @param fineAmount
-	 */
-	public void setFineAmount(int fineAmount) {
-		this.fineAmount = fineAmount;
 	}
 }
