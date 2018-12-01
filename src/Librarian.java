@@ -34,7 +34,9 @@ public class Librarian extends User {
 	
 	public Librarian(int staffNo, int employmentDaye, String username, String firstName,  String lastName,  int mobileNo, Image userImage) 
 	{
+	  super(String username, String firstName,  String lastName,  int mobileNo, Image userImage)
 	}
+	
 	
 	/** 
 	 * @return staffNo
@@ -135,6 +137,30 @@ public class Librarian extends User {
 				+ "','" + manufacturer;
 
 		if (model != null) {
+
+		}
+		
+		/**
+      * method adds Dvd to resource 
+      * consttuctor
+	  * @param title
+	  * @param year
+	  * @param image
+	  * @param numAvailableCopies
+	  * @param duration
+	  * @param director
+	  * @param runtime
+	  * @param language
+	  * @throws SQLException
+	  */
+	public  void addDvd((String title, String year, String image, int numAvailableCopies, int duration,
+			String director, String language, String runtime) throws SQLException {
+		int id = addResource(title, year, image, numAvailableCopies, duration);
+
+		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
+				+ "','" + runtime;
+
+		if (director != null) {
 
 		}
 
