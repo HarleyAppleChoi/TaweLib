@@ -26,7 +26,7 @@ public class Borrowing implements Storable {
 		while (r.next()) {
 			INITIAL_DATE = r.getDate("borrowDate");
 			endDate = r.getDate("dueDate");
-			returnDate = r.getDate("return_date");
+			returnDate = r.getDate("returnDate");
 			RESOURCE_ID = Integer.toString(r.getInt("resourceID"));
 		}
 	}

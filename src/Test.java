@@ -21,6 +21,7 @@ public class Test {
 			l.borrow(1, "apple");
 			*/
 			l.borrow(1, "apple");
+			l.returnResource(5);
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

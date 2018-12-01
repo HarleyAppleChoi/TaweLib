@@ -8,6 +8,9 @@
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.mysql.cj.protocol.Resultset;
 
@@ -174,9 +177,9 @@ public class Librarian extends User  {
 		SQLHandle.set(statement);
 		statement = "insert into returned_his values('"+ u.getUsename()+"','"+ b.getBorrowNo() +"');";
 		SQLHandle.set(statement);
-		statement = "UPDATE borrowing " + 
-				"SET onLoan = 'n' , return_date = '"+ b.getReturnDate() + 
-				"' WHERE borrowingID ='" + b.getBorrowNo()+"';";
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+dateFormat.format(new Date())+"' WHERE borrowingID =" + borrowNo+";";
+		SQLHandle.set(statement);
 		System.out.println("return Success!!");
 	}
 
