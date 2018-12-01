@@ -13,8 +13,8 @@ import com.mysql.cj.protocol.Resultset;
 
 public class Librarian extends User {
    /**
-    * Librarian class contain the methods and attributes used by library staff
-    * Also permit them mange the user,resourse and borrowing of books
+    * Librarian is a class contains the methods and attributes used by library staff
+    * Also permit them manage the user,resource and borrowing of books
     * 
     */
 	
@@ -22,7 +22,7 @@ public class Librarian extends User {
 	protected int employmentDate;
 	
 	/**
-	 * 
+	 * constructor 
 	 * @param staffNo stores the staffNo.
 	 * @param employmentDate stores the employmentDate.
 	 * @param username stores the username 
@@ -67,6 +67,8 @@ public class Librarian extends User {
 	}
 	
    	/**
+   	 * method to add resource 
+   	 * constructor
 	 * @param title
 	 * @param year
 	 * @param image
@@ -86,6 +88,8 @@ public class Librarian extends User {
 		return id;
 	}
 	/**
+	 * method adds book to resourse 
+	 * constructor 
 	 * @param title
 	 * @param year
 	 * @param image
@@ -111,16 +115,18 @@ public class Librarian extends User {
 		
 	}
      /**
-	 * @param title
-	 * @param year
-	 * @param image
-	 * @param numAvailableCopies
-	 * @param duration
-	 * @param manufacturer
-	 * @param model
-	 * @param operationSystem
-	 * @throws SQLException
-	 */
+      * method adds book to resource 
+      * consttuctor
+	  * @param title
+	  * @param year
+	  * @param image
+	  * @param numAvailableCopies
+	  * @param duration
+	  * @param manufacturer
+	  * @param model
+	  * @param operationSystem
+	  * @throws SQLException
+	  */
 	public void addLaptop((String title, String year, String image, int numAvailableCopies, int duration,
 			String manufacturer, String model, String operationSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
@@ -134,6 +140,11 @@ public class Librarian extends User {
 
 	}
 	
+	/**
+	 * function for normalUser to borrow any resource
+	 * @param resourceId
+	 * @param userName
+	 */
 	public void borrow(int resourceId, String userName) {
 		NormalUser user = new NormalUser(userName);
 		
