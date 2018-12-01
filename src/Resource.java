@@ -82,6 +82,19 @@ public class Resource implements Storable{
 		}
 		return b;
 	}
+	
+	
+	public void reserve() throws SQLException {
+		if (request.isEmpty()) {
+			System.out.println("the resource is available now");
+		}else {
+			reserve.add(request.getFirst());
+			statement = "delete from request_item where resourceID = '"+ getId()+"'and username='"+request.removeFirst()+"';"
+					+"insert into reserved_item values('"+ reserve.getLast()+"','"+ getId()+"';";
+			SQLHandle.set(statement);
+		}
+		System.out.println("reserved for " + reserve.getLast());
+	}
 
 	/**
 	 * 
@@ -178,6 +191,11 @@ public class Resource implements Storable{
 			canBorrow = true;
 		}
 		return canBorrow;
+		
+	}
+	
+	public void isAvailable() {
+		
 	}
 
 	@Override

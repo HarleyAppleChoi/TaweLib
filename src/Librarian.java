@@ -157,6 +157,15 @@ public class Librarian extends User  {
 		while(r.next()) {
 			userName = r.getString("username");
 		}
+		
+		String resourceID ="";
+		statement = "Select  resouceID from current_borrow_history where borrowingID = '" 
+				+ borrowNo + "';";
+		 r =SQLHandle.get(statement);
+		while(r.next()) {
+			resourceID = r.getString("resourceID");
+		}
+		Resource resource = new Resource(Integer.parseInt(resourceID));
 		NormalUser u = new NormalUser(userName);
 		Borrowing b = new Borrowing(borrowNo);
 		b.setReturnDate();
@@ -187,8 +196,8 @@ public class Librarian extends User  {
 			System.out.println("Fine is reduced from balance which is " + b.fine());
 		}
 		
-		
-		
+		//reserve to the next person in the queue
+		resource.reserve();
 		
 		//writing into database(compulsory)
 		statement = "delete from current_borrow_his where borrowingID = '" 
@@ -203,6 +212,8 @@ public class Librarian extends User  {
 		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+dateFormat.format(new Date())+"' WHERE borrowingID =" + borrowNo+";";
 		SQLHandle.set(statement);
 		System.out.println("return Success!!");
+		
+		
 	}
 
 	@Override
