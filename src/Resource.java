@@ -234,14 +234,6 @@ public class Resource implements Storable {
 
 	}
 
-	/**
-	 * Get method to get the Id.
-	 * 
-	 * @return Id
-	 */
-	public int getId() {
-		return ID;
-	}
 
 	/**
 	 * Get method to get the title.
@@ -337,5 +329,6 @@ public class Resource implements Storable {
 	public void isAvailable() {
 		
 	}
+}
 
 

@@ -30,6 +30,9 @@ public abstract class User implements Storable {
 		this.userImage = userImage;
 	}
 	
+	protected User() {
+		
+	}
 
 	/**
 	 * Get method to get the username.

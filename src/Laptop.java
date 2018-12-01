@@ -14,11 +14,6 @@ public class Laptop extends Resource {
 
 	private int fineAmount = 10;
 	private int maxFineAmount = 100;
-	
-	
-	public Laptop(int ID, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies, String manufacturer, String model, String operatingSystem) {
-		super(ID,title,year,thumbNailImage,numCopies,numAvailableCopies);
-}
 
 	/**
 	 * Constructor to construct a Laptop using the paramaters from this class and
@@ -37,15 +32,10 @@ public class Laptop extends Resource {
 	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String manufacturer, String model, String operatingSystem) {
 
-		super.id = id;
-		super.title = title;
-		super.year = year;
-		super.thumbNailImage = thumbNailImage;
-		super.numCopies = numCopies;
-		super.numAvailableCopies = numAvailableCopies;
+		super(id, title, year, thumbNailImage, numCopies, numAvailableCopies);
 		this.manufacturer = manufacturer;
 		this.model = model;
-		this.operatingSystem = operatingSystem;
+		this.operatingSystem=operatingSystem;
 	}
 
 	/**

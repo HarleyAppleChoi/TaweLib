@@ -5,14 +5,13 @@
  */
 
 
-import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.mysql.cj.protocol.Resultset;
+import javafx.scene.image.Image;
 
 public class Librarian extends User  {
    /**
@@ -37,7 +36,7 @@ public class Librarian extends User  {
 	
 	public Librarian(int staffNo, int employmentDaye, String username, String firstName,  String lastName,  int mobileNo, Image userImage) 
 	{
-	  super(String username, String firstName,  String lastName,  int mobileNo, Image userImage)
+	  super(username, firstName, lastName, mobileNo, userImage);
 	}
 	
 	public Librarian() {
@@ -137,7 +136,7 @@ public class Librarian extends User  {
 	  * @param operationSystem
 	  * @throws SQLException
 	  */
-	public void addLaptop((String title, String year, String image, int numAvailableCopies, int duration,
+	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
 			String manufacturer, String model, String operationSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
@@ -147,7 +146,7 @@ public class Librarian extends User  {
 		if (model != null) {
 
 		}
-		
+	}
 		/**
       * method adds Dvd to resource 
       * consttuctor
@@ -161,7 +160,7 @@ public class Librarian extends User  {
 	  * @param language
 	  * @throws SQLException
 	  */
-	public  void addDvd((String title, String year, String image, int numAvailableCopies, int duration,
+	public  void addDvd(String title, String year, String image, int numAvailableCopies, int duration,
 			String director, String language, String runtime) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
@@ -179,8 +178,9 @@ public class Librarian extends User  {
 	 * function for normalUser to borrow any resource
 	 * @param resourceId
 	 * @param userName
+	 * @throws Exception 
 	 */
-	public void borrow(int resourceId, String userName) {
+	public void borrow(int resourceId, String userName) throws Exception {
 		NormalUser user = new NormalUser(userName);
 		user.borrow(resourceId);
 		System.out.println("Borrow Success!!!");

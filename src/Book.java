@@ -35,17 +35,13 @@ class Book extends Resource {
 	public Book(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String author, String publisher, String genre, int isbn, String langauge) {
 
-		super.id = id;
-		super.title = title;
-		super.year = year;
-		super.thumbNailImage = thumbNailImage;
-		super.numCopies = numCopies;
-		super.numAvailableCopies = numAvailableCopies;
+		super(id, title, year, thumbNailImage, numCopies, numAvailableCopies);
 		this.author = author;
 		this.publisher = publisher;
 		this.genre = genre;
 		this.isbn = isbn;
 		this.language = langauge;
+		
 	}
 
 	/**
