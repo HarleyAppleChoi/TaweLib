@@ -49,6 +49,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Get method to get the director.
+	 * 
 	 * @return
 	 */
 	public String getDirector() {
@@ -57,6 +58,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Set method to set the director.
+	 * 
 	 * @param director
 	 */
 	public void setDirector(String director) {
@@ -65,6 +67,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Get method to get the runtime.
+	 * 
 	 * @return runtime
 	 */
 	public int getRuntime() {
@@ -73,6 +76,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Set method to set the runtime.
+	 * 
 	 * @param runtime
 	 */
 	public void setRuntime(int runtime) {
@@ -81,6 +85,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Get method to get the language.
+	 * 
 	 * @return language
 	 */
 	public String getLanguage() {
@@ -89,6 +94,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Set method to set the language.
+	 * 
 	 * @param language
 	 */
 	public void setLanguage(String language) {
@@ -97,6 +103,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Get method to get the maximum fine amount.
+	 * 
 	 * @return maxFineAmount
 	 */
 	public int getMaxFineAmount() {
@@ -105,6 +112,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Set method to set the maximum fine amount.
+	 * 
 	 * @param maxFineAmount
 	 */
 	public void setMaxFineAmount(int maxFineAmount) {
@@ -113,6 +121,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Get method to get the fine amount per day.
+	 * 
 	 * @return fineAmount
 	 */
 	public int getFineAmount() {
@@ -121,6 +130,7 @@ public class DVD extends Resource {
 
 	/**
 	 * Set method to set the fine amount.
+	 * 
 	 * @param fineAmount
 	 */
 	public void setFineAmount(int fineAmount) {
