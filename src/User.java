@@ -2,6 +2,8 @@ import javafx.scene.image.Image;
 
 /**
  * user.java
+ * user class contain all set and get method to get all the user's attributes 
+ * and it collabrate with most of classes to log in the system and search for the resources 
  * @author Jwana Abdalah
  *
  */
