@@ -7,6 +7,12 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+/**
+ * 
+ * @author Hau Yi Choi
+ * @version 3.0
+ *
+ */
 public class Borrowing implements Storable {
 
 	private Date INITIAL_DATE;
@@ -15,10 +21,14 @@ public class Borrowing implements Storable {
 	private final int BORROW_NO;
 	// private final String USER;
 	private String RESOURCE_ID;
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
 	String statement = "";
 
-	// when the borrowing is in database
+	/**
+	 * Selects all the information about a specific borrowing from the database. 
+	 * @param id
+	 * @throws Exception
+	 */
 	public Borrowing(int id) throws Exception {
 		statement = "select * from Borrowing where BorrowingID ='" + id + "';";
 		ResultSet r = SQLHandle.get(statement);
@@ -31,6 +41,13 @@ public class Borrowing implements Storable {
 		}
 	}
 
+	/**
+	 * Creates a new borrowing.
+	 * Finds the maximum BorrowingID from the borrowing table, and adds 1 to it.
+	 * sets the initial date to the date it is created, and adds the information to the borrowing table.
+	 * @param rID
+	 * @throws SQLException
+	 */
 	// when the borrowing is new created
 	public Borrowing(String rID) throws SQLException {
 		String statement = "select max(borrowingID) from Borrowing";
@@ -50,6 +67,11 @@ public class Borrowing implements Storable {
 		System.out.println("Borrowing added");
 	}
 
+	/**
+	 * Checks if the resource is overdue.
+	 * 
+	 * @return If the end date is not null and is before the current date, return true, otherwise false.
+	 */
 	public boolean isOverdue() {
 		boolean o = false;
 		// current date
@@ -62,18 +84,32 @@ public class Borrowing implements Storable {
 		return o;
 	}
 
+	/**
+	 * Set method to set the date.
+	 * @return current date
+	 */
 	public void setReturnDate() {
 		returnDate = new Date();
 	}
 
+	/**
+	 * Get method to get the date.
+	 * @return returnDate
+	 */
 	public String getReturnDate() {
 		return dateFormat.format(returnDate);
 
 	}
 
 	/**
-	 * It calculate the fine
-	 * @return amount of fine
+	 * This method calculates the fine amount.
+	 * If the fine is overdue, it find the type of resource that has been borrowed,
+	 * If the finePerDay = 2 and the maxFine = 25, the resource is a Book or DVD, otherwise it is a Laptop.
+	 * Calculates the fine amount by finding the difference between the end date and the returned date and
+	 * converts it into days.
+	 * The fine is the number of days * fine per day.
+	 * 
+	 * @return fine and if the fine amount is greater than the maxFine for that resource, returns the max fine.
 	 * @throws SQLException
 	 */
 	public int fine() throws SQLException {
@@ -83,19 +119,18 @@ public class Borrowing implements Storable {
 			// see what is the type of the resource. If the SQL return an empty set on the
 			// table, that is not that kind of resource.
 			int finePerDay = 0;
-			int maxFine =0 ;
-			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID =" 
-					+this.RESOURCE_ID;
+			int maxFine = 0;
+			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID ="
+					+ this.RESOURCE_ID;
 			ResultSet r = SQLHandle.get(statement);
 			if (r.next()) {
 				finePerDay = 2;
 				maxFine = 25;
 			} else {
-				//not laptop/dvd than that must be a laptop
+				//if not Book/DVD then must be a Laptop
 				finePerDay = 10;
 				maxFine = 100;
 			}
-			
 
 			if (endDate != null) {
 				if (returnDate.compareTo(endDate) > 0) {
@@ -103,8 +138,8 @@ public class Borrowing implements Storable {
 					long days = diff / (1000 * 60 * 60 * 24);
 
 					fine = (int) (days * finePerDay);
-					if (fine>maxFine) {
-						fine =maxFine;
+					if (fine > maxFine) {
+						fine = maxFine;
 					}
 				}
 			}
@@ -112,31 +147,51 @@ public class Borrowing implements Storable {
 		return fine;
 	}
 
+	/**
+	 * Get method to get the initial date.
+	 * @return INITIAL_DATE
+	 */
 	public Date getInitialDate() {
 		return INITIAL_DATE;
 	}
 
+	/**
+	 * Get method to get the end date.
+	 * @return endDate
+	 */
 	public Date getEndDate() {
 		return endDate;
 	}
 
+	/**
+	 * Set method to set the end date.
+	 * @param endDate
+	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
 	/**
-	 * Set the return date is the date which call the method.
+	 * Set method to set the returnDate to the day when the method was called.
 	 * @param returnDate
 	 */
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = new Date();
 	}
-	
+
+	/**
+	 * Get method to get the return date
+	 * @return
+	 */
 	public String getReturnDateString() {
 		return dateFormat.format(returnDate);
-		
+
 	}
 
+	/**
+	 * Get method to get the borrow number.
+	 * @return BORROW_NO
+	 */
 	public int getBorrowNo() {
 		return BORROW_NO;
 	}
@@ -156,7 +211,7 @@ public class Borrowing implements Storable {
 	// -1 from numAvCopies,
 
 	/**
-	 * when that is only a update.
+	 * when that is only an update.
 	 * 
 	 * @throws SQLException
 	 */

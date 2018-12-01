@@ -295,6 +295,7 @@ public class Resource implements Storable {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public static boolean resourceAvailable(boolean canBorrow, int id) {
 
 		String query = "select numAvCopies from resource where id = '" + id + "';";
@@ -315,6 +316,5 @@ public class Resource implements Storable {
 	public void store() throws SQLException {
 			
 	}
-=======
->>>>>>> 4f71c0f16ac4b68971ab172b21ddcccebcb4f4e6
+
 }
