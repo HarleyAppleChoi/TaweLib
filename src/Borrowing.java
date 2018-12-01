@@ -40,19 +40,14 @@ public class Borrowing implements Storable {
 			i = r.getInt("max(borrowingID)");
 		}
 		BORROW_NO = i + 1;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		INITIAL_DATE = new Date();
 		RESOURCE_ID = rID;
 		// USER = uID;
 		System.out.println("Borrowing adding...");
 		statement = "insert into borrowing values('" + this.BORROW_NO + "','" + dateFormat.format(INITIAL_DATE) + "',"
-				+ "null," + this.RESOURCE_ID + ",null,'y');";
+				+ "null,null,'" + this.RESOURCE_ID + "','y');";
 		SQLHandle.set(statement);
 		System.out.println("Borrowing added");
-	}
-
-	public void setendDate() {
-
 	}
 
 	public boolean isOverdue() {
@@ -129,8 +124,17 @@ public class Borrowing implements Storable {
 		this.endDate = endDate;
 	}
 
+	/**
+	 * Set the return date is the date which call the method.
+	 * @param returnDate
+	 */
 	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
+		this.returnDate = new Date();
+	}
+	
+	public String getReturnDateString() {
+		return dateFormat.format(returnDate);
+		
 	}
 
 	public int getBorrowNo() {

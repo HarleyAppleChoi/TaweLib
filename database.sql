@@ -1,144 +1,71 @@
-CREATE TABLE resource (
-    resourceID char(6) not null,
-    title char(70)not null,
-    _year char(30)not null,
-    image char(100)not null,
-    numAvCopies varchar(4)not null,
-    duration varchar(4)not null,
-    primary key(resourceID)
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- 主機: localhost
+-- 產生時間： 2018 年 12 月 01 日 02:44
+-- 伺服器版本: 10.1.36-MariaDB
+-- PHP 版本： 7.2.10
 
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-CREATE TABLE book (
-    resourceID char(6)not null,
-    author char(70) not null,
-    publisher char(70)not null,
-    genre char(100),
-    ISBN varchar(4),
-    _language varchar(4)
-    foreign key resourceID references resource(resourceID)
-);
 
-CREATE TABLE DVD (
-    resourceID char(6) not null,
-    direction char(70) not null,
-    runtime char(70) not null,
-    _language char(100),
-    foreign key resourceID references resource(resourceID)
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE DVD_subtitle (
-    resourceID char(10) not null,
-    subtitle char(30) not null,
-    foreign key resourceID references DVD(resourceID)
-);
+--
+-- 資料庫： `cw230`
+--
 
-CREATE TABLE laptop (
-    resourceID char(10) not null,
-    manufacturer char(30)not null,
-    model char(60) not null,
-    operatingSystem char(70) not null,
-    foreign key resourceID references resource(resourceID)
+-- --------------------------------------------------------
 
-);
+--
+-- 資料表結構 `borrowing`
+--
 
-CREATE TABLE user (
-    username char(40) not null,
-    firstname char(50) not null,
-    lastname char(50) not null,
-    mobileNo int not null,
-    address char(100) not null,
-    image char(100) not null,
-    primary key(username)
+CREATE TABLE `borrowing` (
+  `borrowingID` char(10) NOT NULL,
+  `borrowDate` date NOT NULL,
+  `dueDate` date DEFAULT NULL,
+  `returnDate` date DEFAULT NULL,
+  `resourceID` char(10) NOT NULL,
+  `onLoan` char(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-);
+--
+-- 資料表的匯出資料 `borrowing`
+--
 
-CREATE TABLE normal_user (
-    username char(40) not null,
-    balance int not null,
-    foreign key username references user(username)
+INSERT INTO `borrowing` (`borrowingID`, `borrowDate`, `dueDate`, `returnDate`, `resourceID`, `onLoan`) VALUES
+('1', '2018-12-01', NULL, NULL, '1', 'y');
 
-);
+--
+-- 已匯出資料表的索引
+--
 
-CREATE TABLE librarian (
-    username char(40) not null,
-    employmentDate char(30) not null,
-    staffNo int not null,
-    foreign key username references user(username)
+--
+-- 資料表索引 `borrowing`
+--
+ALTER TABLE `borrowing`
+  ADD PRIMARY KEY (`borrowingID`),
+  ADD KEY `resourceID` (`resourceID`);
 
-);
+--
+-- 已匯出資料表的限制(Constraint)
+--
 
-CREATE TABLE borrowing (
-    borrowingID char(10) not null,
-    borrowDate char(10) not null,
-    dueDate char(10) not null,
-    resourceID char(10) not null,
-    onLoan char(30) not null,
-    primary key(borrowingID),
-    foreign key resourceID references resource(resourceID)
+--
+-- 資料表的 Constraints `borrowing`
+--
+ALTER TABLE `borrowing`
+  ADD CONSTRAINT `borrowing_ibfk_1` FOREIGN KEY (`resourceID`) REFERENCES `resource` (`resourceID`);
+COMMIT;
 
-);
-
-CREATE TABLE current_borrow_his (
-    resourceID char(10) not null,
-    borrowingID not null,
-    foreign key resourceID references resource(resourceID),
-    foreign key borrowingID references borrowing(borrowingID)
-
-);
-
-CREATE TABLE current_borrowing (
-    username char(30) not null,
-    borrowingID char(10) not null,
-    foreign key username references user(username),
-    foreign key borrowingID references borrowing(borrowingID)
-    
-);
-
-CREATE TABLE returned_his (
-    username char(30) not null,
-    borrowingID char(10) not null,
-    foreign key username references borrowing(borrowingID),
-    foreign key borrowingID references user(username)
-
-);
-
-CREATE TABLE transaction (
-    transID char(10) not null,
-    debit/credit char(20) not null,
-    amount char(10) not null,
-    primary key(transID)
-
-);
-
-CREATE TABLE transaction_his (
-    username char(30) not null,
-    transID char(10) not null,
-    foreign key username references user(username),
-    foreign key transID references transaction(transID) 
-
-);
-
-CREATE TABLE overdue_transaction (
-    transID char(10) not null,
-    borrowingID char(10) not null,
-    foreign key transID references transaction(transID),
-    foreign key borrowingID references borrowing(borrowingID)
-
-);
-
-CREATE TABLE reserved_item (
-    username char(30) not null,
-    resourceID char(10) not null,
-    foreign key username references user(username),
-    foreign key resourceID references resource(resourceID)
-
-);
-
-CREATE TABLE request_item (
-    username char(30) not null,
-    resourceID char(10) not null,
-    foreign key username references user(username),
-    foreign key resourceID references resource(resourceID)
-
-);
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

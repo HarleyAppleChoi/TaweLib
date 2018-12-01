@@ -144,15 +144,23 @@ public class Librarian extends User  {
 		System.out.println("Borrow Success!!!");
 	}
 	
-	public void returnResource(int borrowNo, String userName ) throws Exception{
+	public void returnResource(int borrowNo) throws Exception{
+		//find the user who borrow the item
 		String statement = "";
-		
+		statement = "Select distinct username from current_borrowing where borrowingID = '" 
+		+ borrowNo + "';";
+		ResultSet r =SQLHandle.get(statement);
+		String userName = "";
+		while(r.next()) {
+			userName = r.getString("username");
+		}
 		NormalUser u = new NormalUser(userName);
 		Borrowing b = new Borrowing(borrowNo);
+		b.setReturnDate();
 		
 		if(b.isOverdue()) {
 			u.reduceBalance(b.fine());
-			statement = "update from userName set balance = '" + u.getBalance() + "' where username = '" 
+			statement = "update normal_user set balance = '" + u.getBalance() + "' where username = '" 
 					+ userName +"';";
 			SQLHandle.set(statement);
 			System.out.println("Fine is reduced from balance which is " + b.fine());
@@ -166,9 +174,9 @@ public class Librarian extends User  {
 		SQLHandle.set(statement);
 		statement = "insert into returned_his values('"+ u.getUsename()+"','"+ b.getBorrowNo() +"');";
 		SQLHandle.set(statement);
-		statement = "UPDATE borrowing" + 
-				"SET onLoan = 'n' "+ 
-				"WHERE borrowingID ='" + b.getBorrowNo()+"';";
+		statement = "UPDATE borrowing " + 
+				"SET onLoan = 'n' , return_date = '"+ b.getReturnDate() + 
+				"' WHERE borrowingID ='" + b.getBorrowNo()+"';";
 		System.out.println("return Success!!");
 	}
 

@@ -20,7 +20,7 @@ public class Test {
 			
 			l.borrow(1, "apple");
 			*/
-			l.borrow(1, "overdueGuy");
+			l.borrow(1, "apple");
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
