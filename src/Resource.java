@@ -295,24 +295,10 @@ public class Resource implements Storable {
 	}
 
 
-	public static boolean resourceAvailable(boolean canBorrow, int id) {
-
-		String query = "select numAvCopies from resource where id = '" + id + "';";
-		if (query == "0") {
-			canBorrow = false;
-		} else {
-			canBorrow = true;
-		}
-		return canBorrow;
-		
-	}
 	
 	public void isAvailable() {
 		
 	}
+}
 
-	@Override
-	public void store() throws SQLException {
-			
-	}
 
