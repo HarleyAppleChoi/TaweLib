@@ -92,7 +92,6 @@ public class Resource implements Storable {
 			// it can be do nothing when Table 'cw230.reserved_item' doesn't exist because
 			// sometime
 			// the user doesn't have any requesting or current borrow or request
-			// This method can do nothing when the table cw
 		}
 	}
 
