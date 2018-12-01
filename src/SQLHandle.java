@@ -40,7 +40,9 @@ public class SQLHandle {
 	}
 
 	/**
-	 * This method allows us to create an SQL query in java that will link back to the database.
+	 * This method allows us to create an SQL query in java that will link back to
+	 * the database.
+	 * 
 	 * @param query
 	 * @return the result of the query
 	 * @throws SQLException
@@ -51,7 +53,8 @@ public class SQLHandle {
 	}
 
 	/**
-	 * This method allows use to edit the database from a query. 
+	 * This method allows us to edit the database from a query.
+	 * 
 	 * @param query
 	 * @throws SQLException
 	 */
