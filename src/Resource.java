@@ -92,8 +92,9 @@ public class Resource implements Storable{
 			statement = "delete from request_item where resourceID = '"+ getId()+"'and username='"+request.removeFirst()+"';"
 					+"insert into reserved_item values('"+ reserve.getLast()+"','"+ getId()+"';";
 			SQLHandle.set(statement);
+			System.out.println("reserved for " + reserve.getLast());
 		}
-		System.out.println("reserved for " + reserve.getLast());
+		
 	}
 
 	/**

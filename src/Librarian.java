@@ -159,7 +159,7 @@ public class Librarian extends User  {
 		}
 		
 		String resourceID ="";
-		statement = "Select  resouceID from current_borrow_history where borrowingID = '" 
+		statement = "Select resourceID from current_borrow_his where borrowingID = '" 
 				+ borrowNo + "';";
 		 r =SQLHandle.get(statement);
 		while(r.next()) {
@@ -184,13 +184,13 @@ public class Librarian extends User  {
 			 r = SQLHandle.get(statement);
 			int i = 0;
 			while (r.next()) {
-				i = r.getInt("max(borrowingID)")+1;
+				i = r.getInt("max(transID)")+1;
 			}
-			statement = "insert into transaction values('"+ i+"','credit','"+b.fine()+"';";
+			statement = "insert into transaction values('"+ i+"','"+b.fine()+"');";
 			SQLHandle.set(statement);
-			statement = "insert into overdue_transaction values('"+ i + "','"+b.getBorrowNo()+"';";
+			statement = "insert into overdue_transaction values('"+ i + "','"+b.getBorrowNo()+"');";
 			SQLHandle.set(statement);
-			statement = "insert into transaction_his values('"+ u.getUsename()+"','"+i+"';";
+			statement = "insert into transaction_his values('"+ u.getUsename()+"','"+i+"');";
 			SQLHandle.set(statement);
 			
 			System.out.println("Fine is reduced from balance which is " + b.fine());
