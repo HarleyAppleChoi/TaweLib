@@ -16,8 +16,8 @@ import com.mysql.cj.protocol.Resultset;
 
 public class Librarian extends User  {
    /**
-    * Librarian class contain the methods and attributes used by library staff
-    * Also permit them mange the user,resourse and borrowing of books
+    * Librarian is a class contains the methods and attributes used by library staff
+    * Also permit them manage the user,resource and borrowing of books
     * 
     */
 	
@@ -25,7 +25,7 @@ public class Librarian extends User  {
 	protected int employmentDate;
 	
 	/**
-	 * 
+	 * constructor 
 	 * @param staffNo stores the staffNo.
 	 * @param employmentDate stores the employmentDate.
 	 * @param username stores the username 
@@ -37,11 +37,13 @@ public class Librarian extends User  {
 	
 	public Librarian(int staffNo, int employmentDaye, String username, String firstName,  String lastName,  int mobileNo, Image userImage) 
 	{
+	  super(String username, String firstName,  String lastName,  int mobileNo, Image userImage)
 	}
 	
 	public Librarian() {
 		
 	}
+
 	
 	/** 
 	 * @return staffNo
@@ -74,6 +76,8 @@ public class Librarian extends User  {
 	}
 	
    	/**
+   	 * method to add resource 
+   	 * constructor
 	 * @param title
 	 * @param year
 	 * @param image
@@ -93,6 +97,8 @@ public class Librarian extends User  {
 		return id;
 	}
 	/**
+	 * method adds book to resourse 
+	 * constructor 
 	 * @param title
 	 * @param year
 	 * @param image
@@ -118,17 +124,20 @@ public class Librarian extends User  {
 		
 	}
      /**
-	 * @param title
-	 * @param year
-	 * @param image
-	 * @param numAvailableCopies
-	 * @param duration
-	 * @param manufacturer
-	 * @param model
-	 * @param operationSystem
-	 * @throws SQLException
-	 */
-	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
+
+      * method adds book to resource 
+      * consttuctor
+	  * @param title
+	  * @param year
+	  * @param image
+	  * @param numAvailableCopies
+	  * @param duration
+	  * @param manufacturer
+	  * @param model
+	  * @param operationSystem
+	  * @throws SQLException
+	  */
+	public void addLaptop((String title, String year, String image, int numAvailableCopies, int duration,
 			String manufacturer, String model, String operationSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
@@ -138,10 +147,40 @@ public class Librarian extends User  {
 		if (model != null) {
 
 		}
+		
+		/**
+      * method adds Dvd to resource 
+      * consttuctor
+	  * @param title
+	  * @param year
+	  * @param image
+	  * @param numAvailableCopies
+	  * @param duration
+	  * @param director
+	  * @param runtime
+	  * @param language
+	  * @throws SQLException
+	  */
+	public  void addDvd((String title, String year, String image, int numAvailableCopies, int duration,
+			String director, String language, String runtime) throws SQLException {
+		int id = addResource(title, year, image, numAvailableCopies, duration);
+
+		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
+				+ "','" + runtime;
+
+		if (director != null) {
+
+		}
 
 	}
 	
-	public void borrow(int resourceId, String userName) throws Exception {
+
+	/**
+	 * function for normalUser to borrow any resource
+	 * @param resourceId
+	 * @param userName
+	 */
+	public void borrow(int resourceId, String userName) {
 		NormalUser user = new NormalUser(userName);
 		user.borrow(resourceId);
 		System.out.println("Borrow Success!!!");

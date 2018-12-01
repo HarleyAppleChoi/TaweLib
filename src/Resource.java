@@ -46,7 +46,7 @@ public class Resource implements Storable {
 		this.year = year;
 		this.thumbNailImage = thumbNailImage;
 		this.numCopies = numCopies;
-		// this.numAvailableCopies=numAvailableCopies;
+
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class Resource implements Storable {
 			// it can be do nothing when Table 'cw230.reserved_item' doesn't exist because
 			// sometime
 			// the user doesn't have any requesting or current borrow or request
-			// This method can do nothing when the table cw
+
 		}
 	}
 
@@ -110,7 +110,6 @@ public class Resource implements Storable {
 		return b;
 	}
 	
-	
 	public void reserve() throws SQLException {
 		if (request.isEmpty()) {
 			System.out.println("the resource is available now");
@@ -123,6 +122,7 @@ public class Resource implements Storable {
 		}
 		
 	}
+
 
 	/**
 	 * Method to allow a user to borrow a Resource. if the user cannot borrow the
@@ -166,6 +166,42 @@ public class Resource implements Storable {
 			}
 		}
 		return i;
+	}
+
+	/**
+	 * This method checks if a resource is available to borrow.
+	 * 
+	 * @param canBorrow
+	 * @param id
+	 * @return If the number of available copies is 0, then return false, true
+	 *         otherwise.
+	 */
+	public static boolean resourceAvailable(boolean canBorrow, int id) {
+
+		String query = "select numAvCopies from resource where id = '" + id + "';";
+		if (query == "0") {
+			canBorrow = false;
+		} else {
+			canBorrow = true;
+		}
+		return canBorrow;
+	}
+
+	/**
+	 * @Override
+	 */
+
+	public void store() throws SQLException {
+
+	}
+
+	/**
+	 * Get method to get the Id.
+	 * 
+	 * @return Id
+	 */
+	public int getId() {
+		return ID;
 	}
 
 	/**
@@ -295,10 +331,8 @@ public class Resource implements Storable {
 	}
 
 
-	
 	public void isAvailable() {
 		
 	}
-}
 
 

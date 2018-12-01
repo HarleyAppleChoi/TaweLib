@@ -58,9 +58,10 @@ public class NormalUser extends User implements Storable {
 				requesting.add(r.getInt("ResourceID"));
 			}
 		} catch (SQLSyntaxErrorException e) {
-			/** it can be do nothing when Table 'cw230.resered_item' doesn't exist because
+			/* it can be do nothing when Table 'cw230.resered_item' doesn't exist because
 			 * sometime
-			 */ the user dont have any requesting or current borrow or request
+			 * the user dont have any requesting or current borrow or request
+			 */
 		}catch(SQLException ex) {
 			// it can be do nothing when Table 'cw230.resered_item' doesn't exist because
 						// sometime
@@ -120,12 +121,7 @@ public class NormalUser extends User implements Storable {
 
 	}
 
-	/*
-	 * public Book searchBook(String author) { for (Book b : books) { if
-	 * (b.getAuthor().equals(author)) { return b; }
-	 * 
-	 * return null; } }
-	 */
+	
 	public void requestBook(Resource r, String title) {
 
 	}
@@ -147,7 +143,6 @@ public class NormalUser extends User implements Storable {
 	@Override
 	public void store() throws SQLException {
 		// TODO Auto-generated method stub
-
 	}
 
 }
