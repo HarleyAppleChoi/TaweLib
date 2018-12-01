@@ -20,9 +20,7 @@ public class Test {
 			
 			l.borrow(1, "apple");
 			*/
-			//l.borrow(1, "overdue");
-			l.returnResource(8);
-			
+			l.borrow(1, "overdue");			
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -149,12 +149,14 @@ public class Resource implements Storable {
 		return b;
 	}
 
+	
 	/**
 	 * This method finds if the user has already reserved this resource.
 	 * 
 	 * @param user
 	 * @return Index of the reserve. -1 if the user do not reserve the item.
 	 */
+	
 	private int isReserved(String user) {
 		int i = 0;
 		for (i = 0; i <= reserve.size(); i++) {
@@ -167,6 +169,7 @@ public class Resource implements Storable {
 		}
 		return i;
 	}
+	
 
 	/**
 	 * This method checks if a resource is available to borrow.
@@ -191,7 +194,7 @@ public class Resource implements Storable {
 	 * @Override
 	 */
 
-	public void store() throws SQLException {
+	public void store1() throws SQLException {
 
 	}
 
@@ -212,7 +215,7 @@ public class Resource implements Storable {
 	 * @return If the number of available copies is 0, then return false, true
 	 *         otherwise.
 	 */
-	public static boolean resourceAvailable(boolean canBorrow, int id) {
+	public static boolean resourceAvailable1(boolean canBorrow, int id) {
 
 		String query = "select numAvCopies from resource where id = '" + id + "';";
 		if (query == "0") {
