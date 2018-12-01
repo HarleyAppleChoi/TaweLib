@@ -46,7 +46,6 @@ public class Resource implements Storable {
 		this.year = year;
 		this.thumbNailImage = thumbNailImage;
 		this.numCopies = numCopies;
-		// this.numAvailableCopies=numAvailableCopies;
 	}
 
 	/**

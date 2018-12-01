@@ -1,160 +1,224 @@
-/**
- * The porpose of Borrowing class is to check if the user can boroow any resource ,if ot added to request queue in resource.
- * @author Harley
- *@ vresion
- */
+import java.util.Date;
 
-import java.sql.Date;
+import com.mysql.cj.protocol.Resultset;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
-public class Borrowing {
-	
-	private Date initialDate;
+/**
+ * 
+ * @author Hau Yi Choi
+ * @version 3.0
+ *
+ */
+public class Borrowing implements Storable {
+
+	private Date INITIAL_DATE;
 	private Date endDate;
 	private Date returnDate;
-	private int borrowID;
-	private String userName;
-	private int resourceID;
-	
+	private final int BORROW_NO;
+	// private final String USER;
+	private String RESOURCE_ID;
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
+	String statement = "";
+
 	/**
-	 * when the borrowing is in database
-     * @param id
+	 * Selects all the information about a specific borrowing from the database. 
+	 * @param id
 	 * @throws Exception
 	 */
-	Borrowing(int id) throws Exception{
-		ResultSet r = SQLHandle.get("select * from Borrowing where BorrowingID ='" + id +"';");
-		borrowNo = id;
-		while(r.next()) {
-			initialDate = r.getDate("initialDate");
-			endDate = r.getDate("endDate");
+	public Borrowing(int id) throws Exception {
+		statement = "select * from Borrowing where BorrowingID ='" + id + "';";
+		ResultSet r = SQLHandle.get(statement);
+		BORROW_NO = id;
+		while (r.next()) {
+			INITIAL_DATE = r.getDate("borrowDate");
+			endDate = r.getDate("dueDate");
 			returnDate = r.getDate("returnDate");
-			resourceID = r.getInt("resourceID");
+			RESOURCE_ID = Integer.toString(r.getInt("resourceID"));
 		}
 	}
-	
-	//when the borrowing is new created
+
 	/**
-	 * @param userName
-	 * @param resource
+	 * Creates a new borrowing.
+	 * Finds the maximum BorrowingID from the borrowing table, and adds 1 to it.
+	 * sets the initial date to the date it is created, and adds the information to the borrowing table.
+	 * @param rID
 	 * @throws SQLException
 	 */
-	Borrowing(String userName, Resource resource) throws SQLException{
-		ResultSet r = SQLHandle.get("select max(BorrowID) from Borrowing;");
-		borrowID = r.getInt("max(BorrowID)")+1;
-		
-		resourceID=resource.getId();
-		initialDate = new Date();
-		
+	// when the borrowing is new created
+	public Borrowing(String rID) throws SQLException {
+		String statement = "select max(borrowingID) from Borrowing";
+		ResultSet r = SQLHandle.get(statement);
+		int i = 0;
+		while (r.next()) {
+			i = r.getInt("max(borrowingID)");
+		}
+		BORROW_NO = i + 1;
+		INITIAL_DATE = new Date();
+		RESOURCE_ID = rID;
+		// USER = uID;
+		System.out.println("Borrowing adding...");
+		statement = "insert into borrowing values('" + this.BORROW_NO + "','" + dateFormat.format(INITIAL_DATE) + "',"
+				+ "null,null,'" + this.RESOURCE_ID + "','y');";
+		SQLHandle.set(statement);
+		System.out.println("Borrowing added");
 	}
-	
-	  //This method is to check if the resource is overdue
-	 
+
+	/**
+	 * Checks if the resource is overdue.
+	 * 
+	 * @return If the end date is not null and is before the current date, return true, otherwise false.
+	 */
 	public boolean isOverdue() {
 		boolean o = false;
-		//current date
+		// current date
 		Date d = new Date();
-		
-		if (endDate.before(d)) {
-			o = true;
+		if (endDate != null) {
+			if (endDate.before(d)) {
+				o = true;
+			}
 		}
 		return o;
 	}
-	
+
 	/**
-	 * This method is to get initialDate
-	 * @return initialDate
+	 * Set method to set the date.
+	 * @return current date
+	 */
+	public void setReturnDate() {
+		returnDate = new Date();
+	}
+
+	/**
+	 * Get method to get the date.
+	 * @return returnDate
+	 */
+	public String getReturnDate() {
+		return dateFormat.format(returnDate);
+
+	}
+
+	/**
+	 * This method calculates the fine amount.
+	 * If the fine is overdue, it find the type of resource that has been borrowed,
+	 * If the finePerDay = 2 and the maxFine = 25, the resource is a Book or DVD, otherwise it is a Laptop.
+	 * Calculates the fine amount by finding the difference between the end date and the returned date and
+	 * converts it into days.
+	 * The fine is the number of days * fine per day.
+	 * 
+	 * @return fine and if the fine amount is greater than the maxFine for that resource, returns the max fine.
+	 * @throws SQLException
+	 */
+	public int fine() throws SQLException {
+		int fine = 0;
+		if (isOverdue()) {
+			// find fine per day
+			// see what is the type of the resource. If the SQL return an empty set on the
+			// table, that is not that kind of resource.
+			int finePerDay = 0;
+			int maxFine = 0;
+			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID ="
+					+ this.RESOURCE_ID;
+			ResultSet r = SQLHandle.get(statement);
+			if (r.next()) {
+				finePerDay = 2;
+				maxFine = 25;
+			} else {
+				//if not Book/DVD then must be a Laptop
+				finePerDay = 10;
+				maxFine = 100;
+			}
+
+			if (endDate != null) {
+				if (returnDate.compareTo(endDate) > 0) {
+					long diff = returnDate.getTime() - endDate.getTime();
+					long days = diff / (1000 * 60 * 60 * 24);
+
+					fine = (int) (days * finePerDay);
+					if (fine > maxFine) {
+						fine = maxFine;
+					}
+				}
+			}
+		}
+		return fine;
+	}
+
+	/**
+	 * Get method to get the initial date.
+	 * @return INITIAL_DATE
 	 */
 	public Date getInitialDate() {
-		return initialDate;
+		return INITIAL_DATE;
 	}
-	
+
 	/**
-	 * this method sets initialDate
-	 * @param initialDate
-	 */
-	public void setInitialDate(Date initialDate) {
-		this.initialDate = initialDate;
-	}
-	
-	/**
-	 * method to get endDate
+	 * Get method to get the end date.
 	 * @return endDate
 	 */
 	public Date getEndDate() {
 		return endDate;
 	}
-	
+
 	/**
-	 * method to set endDate
+	 * Set method to set the end date.
 	 * @param endDate
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
+
 	/**
-	 * method to get returnDate
-	 * @reurn returnDate
+	 * Set method to set the returnDate to the day when the method was called.
+	 * @param returnDate
 	 */
-	public Date getReturnDate() {
-		return returnDate;
-	}
 	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
+		this.returnDate = new Date();
 	}
-	
+
 	/**
-	 * method to get borrowNo
-	 * @return borrrowNo
+	 * Get method to get the return date
+	 * @return
+	 */
+	public String getReturnDateString() {
+		return dateFormat.format(returnDate);
+
+	}
+
+	/**
+	 * Get method to get the borrow number.
+	 * @return BORROW_NO
 	 */
 	public int getBorrowNo() {
-		return borrowNo;
+		return BORROW_NO;
 	}
-	public void setBorrowNo(int borrowNo) {
-		this.borrowNo = borrowNo;
-	}
-	/**
-	 * method to get user
-	 * @return user
+	/*
+	 * public normalUser getUser() { return USER; } public void setUser(normalUser
+	 * user) { this.USER = user; }
 	 */
-	public normalUser getUser() {
-		return user;
-	}
-	public void setUser(normalUser user) {
-		this.user = user;
-	}
-	
-	/**
-	 * method to get resourceType
-	 * @return resourceType
+	/*
+	 * public Resource getResourceType() { return resourceType; }
 	 */
-	public Resource getResourceType() {
-		return resourceType;
+	/*
+	 * public void setResourceType(Resource resourceType) { this.resourceType =
+	 * resourceType; }
+	 */
+	// check if resource available.
+	// if true, add borrowid and resourceid to users currently borrowing table.
+	// -1 from numAvCopies,
+
+	/**
+	 * when that is only an update.
+	 * 
+	 * @throws SQLException
+	 */
+	@Override
+	public void store() throws SQLException {
+		SQLHandle.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + ","
+				+ "null," + this.RESOURCE_ID + "," + this.returnDate.toString() + "y");
 	}
-	public void setResourceType(Resource resourceType) {
-		this.resourceType = resourceType;
-	}
-	//check if resource available.
-	//if true, add borrowid and resourceid to users currently borrowing table.
-	//         -1 from numAvCopies, 
-	
-	
-	public void borrowResource(Resource resourceType, normalUser user) {
-		int resourceID = resourceType.getId();
-		
-		String query = "select numAvCopies from resource where id = '" + resourceID + "';";
-		
-		if (query == "0") {
-			
-			
-		 } else {
-			
-			 
-		 }
-	}
-	
-	
-	
-	
+
 }
