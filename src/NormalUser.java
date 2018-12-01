@@ -1,10 +1,15 @@
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
 import java.util.LinkedList;
 
 import javafx.scene.image.Image;
+
+/**
+ * NormalUser.java
+ * @author Hau Yi Choi
+ * @version 2.1
+ */
 
 public class NormalUser extends User implements Storable {
 
@@ -53,9 +58,9 @@ public class NormalUser extends User implements Storable {
 				requesting.add(r.getInt("ResourceID"));
 			}
 		} catch (SQLSyntaxErrorException e) {
-			// it can be do nothing when Table 'cw230.resered_item' doesn't exist because
-			// sometime
-			// the user dont have any requesting or current borrow or request
+			/** it can be do nothing when Table 'cw230.resered_item' doesn't exist because
+			 * sometime
+			 */ the user dont have any requesting or current borrow or request
 		}catch(SQLException ex) {
 			// it can be do nothing when Table 'cw230.resered_item' doesn't exist because
 						// sometime
