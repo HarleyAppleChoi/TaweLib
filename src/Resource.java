@@ -294,8 +294,7 @@ public class Resource implements Storable {
 		this.numAvailableCopies = numAvailableCopies;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	public static boolean resourceAvailable(boolean canBorrow, int id) {
 
 		String query = "select numAvCopies from resource where id = '" + id + "';";
@@ -317,4 +316,3 @@ public class Resource implements Storable {
 			
 	}
 
-}
