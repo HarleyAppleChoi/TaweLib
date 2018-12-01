@@ -21,7 +21,7 @@ public class Borrowing implements Storable {
 	private final int BORROW_NO;
 	// private final String USER;
 	private String RESOURCE_ID;
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
+	DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 	String statement = "";
 
 	/**
