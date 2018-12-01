@@ -161,14 +161,36 @@ public class Librarian extends User  {
 		Borrowing b = new Borrowing(borrowNo);
 		b.setReturnDate();
 		
+		//if that is overdue, it reduce the balance and do the transaction history
 		if(b.isOverdue()) {
 			u.reduceBalance(b.fine());
 			statement = "update normal_user set balance = '" + u.getBalance() + "' where username = '" 
 					+ userName +"';";
 			SQLHandle.set(statement);
+			
+			
+			//insert the fine into transaction related
+			//find maximum id
+			statement = "select max(transID) from transaction;";
+			 r = SQLHandle.get(statement);
+			int i = 0;
+			while (r.next()) {
+				i = r.getInt("max(borrowingID)")+1;
+			}
+			statement = "insert into transaction values('"+ i+"','credit','"+b.fine()+"';";
+			SQLHandle.set(statement);
+			statement = "insert into overdue_transaction values('"+ i + "','"+b.getBorrowNo()+"';";
+			SQLHandle.set(statement);
+			statement = "insert into transaction_his values('"+ u.getUsename()+"','"+i+"';";
+			SQLHandle.set(statement);
+			
 			System.out.println("Fine is reduced from balance which is " + b.fine());
 		}
 		
+		
+		
+		
+		//writing into database(compulsory)
 		statement = "delete from current_borrow_his where borrowingID = '" 
 							+ borrowNo +"';";
 		SQLHandle.set(statement);
