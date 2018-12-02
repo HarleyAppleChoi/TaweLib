@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 
 /**
  * NormalUser.java
+ * This class contain all the methods that allowing normalUser tp borrow resource,
+ *  also check thier balance to know if they can bprrow resource.
  * @author Hau Yi Choi
  * @version 2.1
  */
@@ -63,12 +65,19 @@ public class NormalUser extends User implements Storable {
 			 * the user dont have any requesting or current borrow or request
 			 */
 		}catch(SQLException ex) {
-			// it can be do nothing when Table 'cw230.resered_item' doesn't exist because
-						// sometime
-						// the user dont have any requesting or current borrow or request
+			/* it can be do nothing when Table 'cw230.resered_item' doesn't exist because
+			 * sometime
+			 * the user dont have any requesting or current borrow or request
+			 */
 		}
 	}
-
+    
+    
+	/**
+	 * function to check if the user can borrow resource
+	 * @return b
+	 */
+	
 	private boolean canBorrow() {
 		boolean b = true;
 		if (balance < 0) {
@@ -83,7 +92,13 @@ public class NormalUser extends User implements Storable {
 		}
 		return b;
 	}
-
+  
+    
+	/**
+	 * function to borrow resource and add it to curentBorrowHistory
+	 * @param resourceID
+	 * @throws Exception if the normalUser either get fine or overdue item in thier balance
+	 */
 	public void borrow(int resourceID) throws Exception {
 		Resource r = new Resource(resourceID);
 		if (!canBorrow()) {
@@ -99,7 +114,16 @@ public class NormalUser extends User implements Storable {
 		SQLHandle.set(statement);
 
 	}
-
+    /**
+     * method to get all user's information.
+     * constructor
+	 * @param username
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNo
+	 * @param userImage
+	 */
+    
 	public void getUserinfo(String username, String firstName, String lastName, int mobileNo, Image userImage) {
 		super.username = username;
 		super.firstName = firstName;
@@ -107,33 +131,31 @@ public class NormalUser extends User implements Storable {
 		super.mobileNo = mobileNo;
 		super.userImage = userImage;
 	}
-	
+	 
+	/**
+	 * method to reduce balance
+	 * @param fine
+	 */
 	public void reduceBalance(int fine) {
 		balance -= fine;
 	}
 	
+	/**
+	 * method to get balance
+	 * @return balance
+	 */
 	public int getBalance() {
 		return balance;
 	}
 	
-
-	public void reserve(String resourse) {
+  public void reserve(String resourse) {
 
 	}
 
-	
 	public void requestBook(Resource r, String title) {
 
 	}
 
-	public void getBook() {
-
-	}
-
-	/*
-	 * public void returnBook(Object bookList, Object book) { bookList.put(book,
-	 * bookList.get(book) + 1); }
-	 */
 	private void storeBorrow() throws SQLException {
 		// when borrowing something
 		// only one item can be borrow each time borrow method is called
