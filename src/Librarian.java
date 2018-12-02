@@ -254,6 +254,11 @@ public class Librarian extends User  {
 		
 		
 	}
+	
+	public void request(int resourceID, String username) throws Exception {
+		NormalUser u = new NormalUser(username);
+		u.request(resourceID);
+	}
 
 	@Override
 	public void store() throws SQLException {

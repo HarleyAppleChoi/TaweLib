@@ -2,6 +2,10 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import com.sun.prism.Image;
 
@@ -29,6 +33,7 @@ public class Resource implements Storable {
 	protected LinkedList<String> reserve = new LinkedList<>();
 	// sql statement
 	private String statement;
+	private int duration;
 
 	/**
 	 * Constructor to construct a Resource using these parameters.
@@ -68,6 +73,7 @@ public class Resource implements Storable {
 			// this.thumbNailImage=thumbNailImage = r.getString("thumbNailImage");
 			this.numCopies = numCopies = r.getInt("numAvCopies");
 			// this.numAvailableCopies=numAvailableCopies;
+			this.duration = r.getInt("duration");
 		}
 
 		try {
@@ -89,6 +95,14 @@ public class Resource implements Storable {
 			while (r.next()) {
 				reserve.add((r.getString("username")));
 			}
+			
+			//current borrowing 
+			statement = "select borrowingID from current_borrow_his where resourceID = '" + ID + "';";
+			r = SQLHandle.get(statement);
+			while (r.next()) {
+				currentBorrow.add(new Borrowing(r.getInt("borrowingID")));
+			}
+			
 		} catch (SQLSyntaxErrorException e) {
 			// it can be do nothing when Table 'cw230.reserved_item' doesn't exist because
 			// sometime
@@ -115,6 +129,7 @@ public class Resource implements Storable {
 			System.out.println("the resource is available now");
 		}else {
 			reserve.add(request.getFirst());
+			
 			statement = "delete from request_item where resourceID = '"+ getId()+"'and username='"+request.removeFirst()+"';"
 					+"insert into reserved_item values('"+ reserve.getLast()+"','"+ getId()+"';";
 			SQLHandle.set(statement);
@@ -170,6 +185,28 @@ public class Resource implements Storable {
 		return i;
 	}
 	
+	/**
+	 * Set due date for someone who is the first to borrow the item.
+	 * @param username
+	 * @throws SQLException
+	 */
+	public void request(String username) throws SQLException {
+		request.add(username);
+		statement = "select min(borrowingID) from borrowing where dueDate is null "
+				+ "and onLoan = 'y' and resourceID = '" + this.ID+"';";
+		ResultSet r = SQLHandle.get(statement);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		while (r.next()) {
+			Date d = new Date();
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(d); 
+			c.add(Calendar.DATE, duration);
+			d = c.getTime();
+
+			statement = "update borrowing set returnDate = '"+dateFormat.format(d)+"';";
+		}
+		System.out.println("Requested!");
+	}
 
 	/**
 	 * This method checks if a resource is available to borrow.
@@ -188,6 +225,10 @@ public class Resource implements Storable {
 			canBorrow = true;
 		}
 		return canBorrow;
+	}
+	
+	public LinkedList<Borrowing> getBorrrowingList(){
+		return currentBorrow;
 	}
 
 	/**

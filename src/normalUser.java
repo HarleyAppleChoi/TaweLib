@@ -139,6 +139,17 @@ public class NormalUser extends User implements Storable {
 		// only one item can be borrow each time borrow method is called
 
 	}
+	/**
+	 * 
+	 * @param resourceID
+	 * @throws Exception
+	 */
+	public void request(int resourceID) throws Exception {
+		Resource r = new Resource(resourceID);
+		statement = "insert into request_item value('"+this.username + "','"+ r.getId()+"');";
+		SQLHandle.set(statement);
+		r.request(this.username);
+	}
 
 	@Override
 	public void store() throws SQLException {
