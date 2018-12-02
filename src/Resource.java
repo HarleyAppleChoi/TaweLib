@@ -31,7 +31,6 @@ public class Resource implements Storable {
 	protected LinkedList<Borrowing> currentBorrow = new LinkedList<>();
 	protected LinkedList<String> request = new LinkedList<>();
 	protected LinkedList<String> reserve = new LinkedList<>();
-	// sql statement
 	private String statement;
 	private int duration;
 
@@ -95,14 +94,14 @@ public class Resource implements Storable {
 			while (r.next()) {
 				reserve.add((r.getString("username")));
 			}
-			
-			//current borrowing 
+
+			// current borrowing
 			statement = "select borrowingID from current_borrow_his where resourceID = '" + ID + "';";
 			r = SQLHandle.get(statement);
 			while (r.next()) {
 				currentBorrow.add(new Borrowing(r.getInt("borrowingID")));
 			}
-			
+
 		} catch (SQLSyntaxErrorException e) {
 			// it can be do nothing when Table 'cw230.reserved_item' doesn't exist because
 			// sometime
@@ -123,21 +122,23 @@ public class Resource implements Storable {
 		}
 		return b;
 	}
-	
+
 	public void reserve() throws SQLException {
 		if (request.isEmpty()) {
 			System.out.println("the resource is available now");
-		}else {
+		} else {
 			reserve.add(request.getFirst());
-			
-			statement = "delete from request_item where resourceID = '"+ getId()+"'and username='"+request.removeFirst()+"';"
-					+"insert into reserved_item values('"+ reserve.getLast()+"','"+ getId()+"';";
+
+			statement = "delete from request_item where resourceID = '" + getId() + "'and username='"
+					+ request.removeFirst() + "';\n";
+			SQLHandle.set(statement);
+			statement = "insert into reserved_item values('" + reserve.getLast() + "','"
+			+ getId() + "');";
 			SQLHandle.set(statement);
 			System.out.println("reserved for " + reserve.getLast());
 		}
-		
-	}
 
+	}
 
 	/**
 	 * Method to allow a user to borrow a Resource. if the user cannot borrow the
@@ -164,14 +165,13 @@ public class Resource implements Storable {
 		return b;
 	}
 
-	
 	/**
 	 * This method finds if the user has already reserved this resource.
 	 * 
 	 * @param user
 	 * @return Index of the reserve. -1 if the user do not reserve the item.
 	 */
-	
+
 	private int isReserved(String user) {
 		int i = 0;
 		for (i = 0; i <= reserve.size(); i++) {
@@ -184,26 +184,52 @@ public class Resource implements Storable {
 		}
 		return i;
 	}
-	
+
 	/**
-	 * Set due date for someone who is the first to borrow the item.
+	 * Set due date for someone who is the first to borrow the item. if there is no other resource is added
+	 * 
 	 * @param username
 	 * @throws SQLException
 	 */
 	public void request(String username) throws SQLException {
 		request.add(username);
-		statement = "select min(borrowingID) from borrowing where dueDate is null "
-				+ "and onLoan = 'y' and resourceID = '" + this.ID+"';";
-		ResultSet r = SQLHandle.get(statement);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		while (r.next()) {
-			Date d = new Date();
-			Calendar c = Calendar.getInstance(); 
-			c.setTime(d); 
-			c.add(Calendar.DATE, duration);
-			d = c.getTime();
+		if (!canBorrow()) {
+			// if there is copy left,dont need to ask people to return
+			statement = "select min(borrowingID),borrowDate from borrowing where dueDate is null and onLoan = 'y' and resourceID = '"
+					+ this.ID + "';";
 
-			statement = "update borrowing set returnDate = '"+dateFormat.format(d)+"';";
+			ResultSet r = SQLHandle.get(statement);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+			
+			while (r.next()) {
+				// set duration date
+				Date borrowDate = r.getDate("borrowDate");
+				Calendar c = Calendar.getInstance();
+				c.setTime(borrowDate);
+				c.add(Calendar.DATE, duration);
+				borrowDate = c.getTime();
+				
+				Date nextday = new Date();
+				c.setTime(nextday);
+				c.add(Calendar.DATE, 1);
+				nextday = c.getTime();
+				
+				Date d;
+				
+				if(nextday.compareTo(borrowDate) > 0) {
+					d = nextday;
+				}else {
+					d = borrowDate;
+				}
+
+				statement = "update borrowing set dueDate = '" + dateFormat.format(d) + "' where borrowingID = '"
+						+ r.getInt("min(borrowingID)") + "';";
+				SQLHandle.set(statement);
+				break;
+			}
+		}else {
+			reserve();
+			System.out.println("Requested and reserved for you!");
 		}
 		System.out.println("Requested!");
 	}
@@ -226,8 +252,8 @@ public class Resource implements Storable {
 		}
 		return canBorrow;
 	}
-	
-	public LinkedList<Borrowing> getBorrrowingList(){
+
+	public LinkedList<Borrowing> getBorrrowingList() {
 		return currentBorrow;
 	}
 
@@ -274,7 +300,6 @@ public class Resource implements Storable {
 	public void store() throws SQLException {
 
 	}
-
 
 	/**
 	 * Get method to get the title.
@@ -366,10 +391,7 @@ public class Resource implements Storable {
 		this.numAvailableCopies = numAvailableCopies;
 	}
 
-
 	public void isAvailable() {
-		
+
 	}
 }
-
-
