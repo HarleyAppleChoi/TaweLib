@@ -140,28 +140,6 @@ public class Librarian extends User  {
 		SQLHandle.set(query);
 	}
 	
-     /**
-      * This method allows a Librarian to add a laptop to Database.
-	  * @param title
-	  * @param year
-	  * @param image
-	  * @param numAvailableCopies
-	  * @param duration
-	  * @param manufacturer
-	  * @param model
-	  * @param operationSystem
-	  * @throws SQLException
-	  */
-	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
-			String manufacturer, String model, String operatingSystem) throws SQLException {
-		int id = addResource(title, year, image, numAvailableCopies, duration);
-
-//SQL query to add a new laptop and its values to the database.
-		String query = "insert into laptop (id, manufacturer, model, operatingSystem)" + "values('" + id + "','" + model
-				+ "','" + manufacturer + "','" + operatingSystem + "');";
-		SQLHandle.set(query);
-	}
-	
 	
      /**
       * This method allow a Librarian to add a new DVD to the database.
@@ -202,6 +180,30 @@ public class Librarian extends User  {
             }
 		}
 	}
+	
+     /**
+      * This method allows a Librarian to add a laptop to Database.
+	  * @param title
+	  * @param year
+	  * @param image
+	  * @param numAvailableCopies
+	  * @param duration
+	  * @param manufacturer
+	  * @param model
+	  * @param operationSystem
+	  * @throws SQLException
+	  */
+	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
+			String manufacturer, String model, String operatingSystem) throws SQLException {
+		int id = addResource(title, year, image, numAvailableCopies, duration);
+
+//SQL query to add a new laptop and its values to the database.
+		String query = "insert into laptop (id, manufacturer, model, operatingSystem)" + "values('" + id + "','" + model
+				+ "','" + manufacturer + "','" + operatingSystem + "');";
+		SQLHandle.set(query);
+	}
+	
+	
 	
 
 	/**
@@ -253,8 +255,7 @@ public class Librarian extends User  {
 					+ userName +"';";
 			SQLHandle.set(statement);
 			
-			
-			//insert the fine into transaction related
+
 			statement = "select max(transID) from transaction;";
 			 r = SQLHandle.get(statement);
 			int i = 0;
@@ -277,22 +278,25 @@ public class Librarian extends User  {
 		//reserve the resource for the next User in it's requesting queue
 		resource.reserve();
 		
-		//writing into database(compulsory)
+		//Updating the database
+		//removing the user from the current_borrow_his table
 		statement = "delete from current_borrow_his where borrowingID = '" 
 							+ borrowNo +"';";
 		SQLHandle.set(statement);
+		//removing the user from the current_borrowing table
 		statement = "delete from current_borrowing where borrowingID = '" + borrowNo
 				+"' and userName = '" + userName + "';";
 		SQLHandle.set(statement);
-		statement = "insert into returned_his values('"+ u.getUsename()+"','"+ b.getBorrowNo() +"');";
+		//adding the user to the returned_his table
+		statement = "insert into returned_his values('"+ u.getUsername()+"','"+ b.getBorrowNo() +"');";
 		SQLHandle.set(statement);
+		//updating the borrowing table by adding the returnDate
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+dateFormat.format(new Date())+"' WHERE borrowingID =" + borrowNo+";";
 		SQLHandle.set(statement);
 		System.out.println("Successfully returned Resource.");
-		
-		
 	}
+	
 	
 	public void payFine(int amount, String username) throws Exception {
 		NormalUser u= new NormalUser(username);
