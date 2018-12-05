@@ -39,6 +39,44 @@ public class Librarian extends User  {
 		
 	}
 
+		
+		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+getCurrentDate()+"' WHERE borrowingID =" + borrowNo+";";
+		SQLHandle.set(statement);
+		System.out.println("return Success!!");
+		
+		
+	}
+	
+	private String getCurrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		return dateFormat.format(new Date());
+	}
+	
+	private String getCurrentTime() {
+		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		return dateFormat.format(new Date());
+	}
+	
+	public void payFine(int amount, String username) throws Exception {
+		NormalUser u= new NormalUser(username);
+		
+		int newBalance = u.getBalance()+amount;
+		String statement = "Update normal_user set balance = "+ newBalance+";";
+		SQLHandle.set(statement);
+		
+		statement = "select count(*) from transaction;";
+		ResultSet r = SQLHandle.get(statement);
+		r.next();
+		int sNo = r.getInt("count(*)") +1;
+		statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES "
+				+ "('"+sNo+"','"+amount+"','"+getCurrentTime()+"'); ";
+		SQLHandle.set(statement);
+		
+		statement = "INSERT INTO `transaction_his`(`username`, `transID`) VALUES ('"+username+"','"+sNo+"')";
+		SQLHandle.set(statement);
+		System.out.println("fine paid");
+	}
+
 	
 	/** 
 	 * @return staffNo
