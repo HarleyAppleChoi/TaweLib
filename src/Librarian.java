@@ -356,9 +356,10 @@ public class Librarian extends User  {
 	*/
 	public void newNormalUser(String username, String password, String firstname, String lastname,
 			int mobileNo, String address, String image) throws SQLException {
-			    
+		
+		//SQL query to add the NormalUser to the database	    
 		newUser(username,password,firstname,lastname,mobileNo,address,image);
-		String statement = "INSERT INTO `normal_user`(`username`, `balance`) VALUES ('"+username+"','"+0+"');";
+		String statement = "INSERT INTO normal_user(username, balance) VALUES ('" + username + "','" + 0 + "');";
 		SQLHandle.set(statement);
 	}
 
@@ -383,18 +384,23 @@ public class Librarian extends User  {
 		ResultSet r = SQLHandle.get(statement);
 		r.next();
 		int sNo = r.getInt("max(staffNo)") +1;
-	
-		statement = "INSERT INTO `librarian`(`username`, `employmentDate`, `staffNo`) "
-				+ "VALUES ('"+username+"','"+employmentDate+"',"+sNo+")";
+	       
+	    //SQL query to add the new Librarian to the database
+		statement = "INSERT INTO librarian(username, employmentDate, staffNo) "
+				+ "VALUES ('" + username + "','" + employmentDate + "'," + sNo + ")";
 		SQLHandle.set(statement);
 	}
 	
+	/**
+	 * This method checks if the entered username is unique and has not been used before.
+	 * @param username
+	*/
 	private void checkName(String username) throws SQLException,IllegalArgumentException {
 		String statement = "select username from user_ where username = '"+username+"';";
 		ResultSet r = SQLHandle.get(statement);
-		//if the set is not empty, means that is already userd
+		//if the set is not empty, means that is already in use
 		if (r.next()==true) { 
-			throw new IllegalArgumentException("Name already used");
+			throw new IllegalArgumentException("Name already being used");
 		}
 	}
 
