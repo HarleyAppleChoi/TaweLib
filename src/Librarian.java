@@ -40,42 +40,8 @@ public class Librarian extends User  {
 	}
 
 		
-		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+getCurrentDate()+"' WHERE borrowingID =" + borrowNo+";";
-		SQLHandle.set(statement);
-		System.out.println("return Success!!");
-		
-		
-	}
 	
-	private String getCurrentDate() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		return dateFormat.format(new Date());
-	}
 	
-	private String getCurrentTime() {
-		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-		return dateFormat.format(new Date());
-	}
-	
-	public void payFine(int amount, String username) throws Exception {
-		NormalUser u= new NormalUser(username);
-		
-		int newBalance = u.getBalance()+amount;
-		String statement = "Update normal_user set balance = "+ newBalance+";";
-		SQLHandle.set(statement);
-		
-		statement = "select count(*) from transaction;";
-		ResultSet r = SQLHandle.get(statement);
-		r.next();
-		int sNo = r.getInt("count(*)") +1;
-		statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES "
-				+ "('"+sNo+"','"+amount+"','"+getCurrentTime()+"'); ";
-		SQLHandle.set(statement);
-		
-		statement = "INSERT INTO `transaction_his`(`username`, `transID`) VALUES ('"+username+"','"+sNo+"')";
-		SQLHandle.set(statement);
-		System.out.println("fine paid");
-	}
 
 	
 	/** 
@@ -114,12 +80,15 @@ public class Librarian extends User  {
 	 * @throws SQLException
 	 */
 	private int addResource(String title,String year, String image, int numCopies, int duration) throws SQLException {
-		int id = SQLHandle.get("select max(id) from resource;").getInt(0);
+		ResultSet get = SQLHandle.get("select max(resourceID) from resource;");
+		get.next();
+		int id = get.getInt("max(resourceID)")+1;
+		
 		System.out.println(id);
 		
-		String query = "insert into resource (id,title,year_,image,numcopies, duration)"
-				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +")"  ;		
-
+		String query = "insert into resource (resourceID,title,year,image,numAvCopies, duration)"
+				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +"')"  ;		
+		
 		SQLHandle.set(query);
 		return id;
 	}
@@ -199,10 +168,6 @@ public class Librarian extends User  {
 		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
 				+ "','" + runtime;
 
-		if (director != null) {
-
-		}
-
 	}
 	
 
@@ -279,12 +244,21 @@ public class Librarian extends User  {
 		SQLHandle.set(statement);
 		statement = "insert into returned_his values('"+ u.getUsename()+"','"+ b.getBorrowNo() +"');";
 		SQLHandle.set(statement);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+dateFormat.format(new Date())+"' WHERE borrowingID =" + borrowNo+";";
+		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+getCurrentDate()+"' WHERE borrowingID =" + borrowNo+";";
 		SQLHandle.set(statement);
 		System.out.println("return Success!!");
 		
 		
+	}
+	
+	private String getCurrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		return dateFormat.format(new Date());
+	}
+	
+	private String getCurrentTime() {
+		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		return dateFormat.format(new Date());
 	}
 	
 	public void payFine(int amount, String username) throws Exception {
@@ -293,6 +267,18 @@ public class Librarian extends User  {
 		int newBalance = u.getBalance()+amount;
 		String statement = "Update normal_user set balance = "+ newBalance+";";
 		SQLHandle.set(statement);
+		
+		statement = "select count(*) from transaction;";
+		ResultSet r = SQLHandle.get(statement);
+		r.next();
+		int sNo = r.getInt("count(*)") +1;
+		statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES "
+				+ "('"+sNo+"','"+amount+"','"+getCurrentTime()+"'); ";
+		SQLHandle.set(statement);
+		
+		statement = "INSERT INTO `transaction_his`(`username`, `transID`) VALUES ('"+username+"','"+sNo+"')";
+		SQLHandle.set(statement);
+		System.out.println("fine paid");
 	}
 	
 	public void request(int resourceID, String username) throws Exception {
