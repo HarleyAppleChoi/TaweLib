@@ -21,9 +21,8 @@ public class Test {
 			l.borrow(1, "apple");
 			*/
 			//l.borrow(1, "apple");
-			l.payFine(10, "apple");
-			String[] sub = new String[10]; 
-			l.addDvd("Lord of ring", "afda", "asdfa", 123, 0, "adsf", "asdf", "asdf",sub);
+			NormalUser u = new NormalUser("overdue");
+			System.out.println(u.transactionHistory());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -234,24 +234,7 @@ public class Resource implements Storable {
 		System.out.println("Requested!");
 	}
 
-	/**
-	 * This method checks if a resource is available to borrow.
-	 * 
-	 * @param canBorrow
-	 * @param id
-	 * @return If the number of available copies is 0, then return false, true
-	 *         otherwise.
-	 */
-	public static boolean resourceAvailable(boolean canBorrow, int id) {
 
-		String query = "select numAvCopies from resource where id = '" + id + "';";
-		if (query == "0") {
-			canBorrow = false;
-		} else {
-			canBorrow = true;
-		}
-		return canBorrow;
-	}
 
 	public LinkedList<Borrowing> getBorrrowingList() {
 		return currentBorrow;
@@ -272,25 +255,6 @@ public class Resource implements Storable {
 	 */
 	public int getId() {
 		return ID;
-	}
-
-	/**
-	 * This method checks if a resource is available to borrow.
-	 * 
-	 * @param canBorrow
-	 * @param id
-	 * @return If the number of available copies is 0, then return false, true
-	 *         otherwise.
-	 */
-	public static boolean resourceAvailable1(boolean canBorrow, int id) {
-
-		String query = "select numAvCopies from resource where id = '" + id + "';";
-		if (query == "0") {
-			canBorrow = false;
-		} else {
-			canBorrow = true;
-		}
-		return canBorrow;
 	}
 
 	/**
