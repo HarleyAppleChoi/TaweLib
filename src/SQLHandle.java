@@ -36,7 +36,7 @@ public class SQLHandle {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Success!");
+		System.out.println("Success! Connected to the database");
 	}
 
 	/**
