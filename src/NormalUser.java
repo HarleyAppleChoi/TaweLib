@@ -48,7 +48,7 @@ public class NormalUser extends User implements Storable {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				currentBorrowHistory.add(b);
 			}
-			statement = "select * from resered_item where username = '" + username + "';";
+			statement = "select * from reserved_item where username = '" + username + "';";
 
 			r = SQLHandle.get(statement);
 			while (r.next()) {
@@ -74,8 +74,8 @@ public class NormalUser extends User implements Storable {
 	}
 
 	/**
-	 * function to check if the user can borrow resource
-	 * 
+	 * this is boolean function to checke if the user can borrorow any resource. 
+	 * if their balabce < 0 they can borrow 
 	 * @return b
 	 */
 
@@ -153,17 +153,11 @@ public class NormalUser extends User implements Storable {
 	public int getBalance() {
 		return balance;
 	}
-
-	public void reserve(String resourse) {
-
-	}
-
-	public void requestBook(Resource r, String title) {
-
-	}
+	
 
 	/**
-	 * 
+	 * this method allowes normalUser to request for resource
+	 * and add it ti database table
 	 * @param resourceID
 	 * @throws Exception
 	 */

@@ -1,6 +1,3 @@
-
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -9,32 +6,39 @@ import java.util.Date;
 
 import javafx.scene.image.Image;
 
-public class Librarian extends User  {
-   /**
+ /**
     * Librarian is a class contains the methods and attributes used by library staff
     * Also permit them manage the user,resource and borrowing of books
-    * 
+    * @author Jwana Abdalah
+    * @modified by Hau Yi Choi
     */
+public class Librarian extends User  {
+  
 	
 	protected int staffNo;
 	protected int employmentDate;
 	
 	/**
-	 * constructor 
+	 * constructor to construct a Librarian.
 	 * @param staffNo stores the staffNo.
 	 * @param employmentDate stores the employmentDate.
 	 * @param username stores the username 
 	 * @param firstName stores first name
 	 * @param lastName stores last name
 	  *@param mobileNo stores mobile number 
-	 * @patram userImage stores the user image
+	 * @param userImage stores the user image
 	 */
 	
 	public Librarian(int staffNo, int employmentDaye, String username, String firstName,  String lastName,  int mobileNo, Image userImage) 
 	{
 	  super(username, firstName, lastName, mobileNo, userImage);
+	  this.staffNo = staffNo;
+	  this.employmentDate = employmentDate;
 	}
 	
+	/**
+	 * Empty constructor.
+	*/
 	public Librarian() {
 		
 	}
@@ -45,14 +49,23 @@ public class Librarian extends User  {
 
 	
 	/** 
+	 * Get method to get the staffNo.
 	 * @return staffNo
 	 */
 	
 	private int getStaffNo() {
 		return staffNo;
 	}
+	/**
+	 * Set method to set the staffNo.
+	 * @pram staffNo
+	*/
+	private int setStaffNo(int staffNo) {
+	    this.staffNo = staffNo;
+	}
 	
 	/** 
+	 * Get method to get the employmentDate.
 	 * @return employmentDate
      */
 	private int getEmploymentDate() {
@@ -61,40 +74,40 @@ public class Librarian extends User  {
 	
 	
 	 /**
+	  * Set method to set the employmentDate.
 	  * @param l sets employment date
 	  * 
 	  */
-	public void setEmploymentDat(int l) {
-		employmentDate = l;
+	public void setEmploymentDate(int employmentDate) {
+		this.employmentDate = employmentDate;
 	}
 	
    	/**
-   	 * method to add resource 
-   	 * constructor
+   	 * This method allows a Librarian to add a new resource to the database.
 	 * @param title
 	 * @param year
 	 * @param image
 	 * @param numCopies
 	 * @param duration
-	 * @return
+	 * @return unique id of new resource
 	 * @throws SQLException
 	 */
-	private int addResource(String title,String year, String image, int numCopies, int duration) throws SQLException {
-		ResultSet get = SQLHandle.get("select max(resourceID) from resource;");
-		get.next();
-		int id = get.getInt("max(resourceID)")+1;
-		
+	private int addResource(String title, String year, String image, int numCopies, int duration) throws SQLException {
+	    //selects max id from resource
+		int id = SQLHandle.get("select max(resourceID) from resource;").getInt(0);
 		System.out.println(id);
 		
-		String query = "insert into resource (resourceID,title,year,image,numAvCopies, duration)"
+		//SQL query to add a new resource with the inputed values.
+		String query = "insert into resource (resourceID,title,year_,image,numcopies, duration)"
 				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +"')"  ;		
-		
+
+
 		SQLHandle.set(query);
 		return id;
 	}
+	
 	/**
-	 * method adds book to resourse 
-	 * constructor 
+	 * This method allows a Librarian to add a Book to the database.
 	 * @param title
 	 * @param year
 	 * @param image
@@ -109,48 +122,32 @@ public class Librarian extends User  {
 	
 	public void addBook(String title,String year, String image, int numCopies, int duration
 			,String author, String publisher, String genre, String ISBN ) throws SQLException {
-		int id = addResource(title,year, image, numCopies, duration);
+		int id = addResource(title, year, image, numCopies, duration);
 		
 		String gen = "null";
 		if(!genre.isEmpty()) {
 			gen = genre;
 		}
 		
-		
-		
-		String query = "insert into book (id, author,publisher,genre,ISBN.language_)" 
-				+ "values(" + id +"','" + author+"','" +publisher;
-		
-		
-	}
-     /**
-
-      * method adds book to resource 
-      * consttuctor
-	  * @param title
-	  * @param year
-	  * @param image
-	  * @param numAvailableCopies
-	  * @param duration
-	  * @param manufacturer
-	  * @param model
-	  * @param operationSystem
-	  * @throws SQLException
-	  */
-	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
-			String manufacturer, String model, String operationSystem) throws SQLException {
-		int id = addResource(title, year, image, numAvailableCopies, duration);
-
-		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + model
-				+ "','" + manufacturer;
-
-		if (model != null) {
-
+		String isbn = "null";
+		if(!ISBN.isEmpty()) {
+			isbn = ISBN;
 		}
+		
+		String lang = "null";
+		if(!language.isEmpty()) {
+			lan = langauge;
+		}
+		
+		//SQL query to add a Book to the Database with the entered values.
+		String query = "insert into book (resourceID, author, publisher, genre, ISBN, language)" 
+				+ "values('" + id +"','" + author + "','" + publisher + genre +"','"  + ISBN +"','"  + language +"');";
+		SQLHandle.set(query);
 	}
-		/**
-      * method adds Dvd to resource 
-      * consttuctor
+	
+	
+     /**
+      * This method allow a Librarian to add a new DVD to the database.
 	  * @param title
 	  * @param year
 	  * @param image
@@ -164,27 +161,78 @@ public class Librarian extends User  {
 	public  void addDvd(String title, String year, String image, int numAvailableCopies, int duration,
 			String director, String language, String runtime, String[] subtitle) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
+		
+		String lang = "null";
+		if(!language.isEmpty()) {
+			lang = language;
+		}
 
-		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
-				+ "','" + runtime;
+        //SQL statement to add the DVD and it's values to te database.
+		String query = "insert into DVD (resourceID, director, runtime, language)" + "values('" + id + "','" + director
+				+ "','" + runtime +  "','" + language +  "');";
+		SQLHandle.set(query);
+        
+        // If there are subtitle languages, adds each of them to the
+        // DVD_subtitle table along with the corresponding resourceID.
+        String subt = "null";
+		if(!subtitle.isEmpty()) {
+		    
+			while(subLanguages.hasNext()) {
+	            sublang = sublanguages.readNext();
+	            //SQl query to add the subtitle language to the database.
+                String query = "insert into DVD_subtitle (resourceID, subtitle)" + "values('" + id + "','" + sublang + "');";
+		        SQLHandle.set(query);
+            }
+		}
+	}
+	
+     /**
+      * This method allows a Librarian to add a laptop to Database.
+	  * @param title
+	  * @param year
+	  * @param image
+	  * @param numAvailableCopies
+	  * @param duration
+	  * @param manufacturer
+	  * @param model
+	  * @param operationSystem
+	  * @throws SQLException
+	  */
+	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
+			String manufacturer, String model, String operatingSystem) throws SQLException {
+		int id = addResource(title, year, image, numAvailableCopies, duration);
+
+//SQL query to add a new laptop and its values to the database.
+		String query = "insert into laptop (resourceID, manufacturer, model, operatingSystem)" + "values('" + id + "','" + model
+				+ "','" + manufacturer + "','" + operatingSystem + "');";
+		SQLHandle.set(query);
 
 	}
 	
+	
+	
 
 	/**
-	 * function for normalUser to borrow any resource
+	 * This method allows the NormalUser to borrow a resource through the Librarian.
 	 * @param resourceId
 	 * @param userName
 	 * @throws Exception 
 	 */
-	public void borrow(int resourceId, String userName) throws Exception {
+	public void borrow(int resourceId, String username) throws Exception {
 		NormalUser user = new NormalUser(userName);
 		user.borrow(resourceId);
-		System.out.println("Borrow Success!!!");
+		System.out.println("Successfully Borrowed Resource.");
 	}
 	
-	public void returnResource(int borrowNo) throws Exception{
-		//find the user who borrow the item
+	/**
+	 * This method allows a NormalUser to return a Resource through the librarian.
+	 * Removes the user from the current_borrowing table and move them to the current_borrowing_his table.
+	 * If the resource is overdue, it calculates the fine for that user.
+	 * @param borrowNo
+	*/
+	public void returnResource(int borrowNo) throws Exception {
+	    
+		//SQL statement to find the username who borrowed the resource
 		String statement = "";
 		statement = "Select distinct username from current_borrowing where borrowingID = '" 
 		+ borrowNo + "';";
@@ -194,6 +242,7 @@ public class Librarian extends User  {
 			userName = r.getString("username");
 		}
 		
+		//SQL statement to find the resourceID of the borrowed resource
 		String resourceID ="";
 		statement = "Select resourceID from current_borrow_his where borrowingID = '" 
 				+ borrowNo + "';";
@@ -206,22 +255,23 @@ public class Librarian extends User  {
 		Borrowing b = new Borrowing(borrowNo);
 		b.setReturnDate();
 		
-		//if that is overdue, it reduce the balance and do the transaction history
+		//If the resource is overdue, it reduced the balance of the User by the amount calculated
 		if(b.isOverdue()) {
 			u.reduceBalance(b.fine());
 			statement = "update normal_user set balance = '" + u.getBalance() + "' where username = '" 
 					+ userName +"';";
 			SQLHandle.set(statement);
 			
-			
-			//insert the fine into transaction related
-			//find maximum id
+
 			statement = "select max(transID) from transaction;";
 			 r = SQLHandle.get(statement);
 			int i = 0;
+			//finds the max transID
 			while (r.next()) {
 				i = r.getInt("max(transID)")+1;
 			}
+			//adds the fine information into the transaction table, the overdue_transaction
+			//table and the transaction_his table
 			statement = "insert into transaction values('"+ i+"','"+b.fine()+"');";
 			SQLHandle.set(statement);
 			statement = "insert into overdue_transaction values('"+ i + "','"+b.getBorrowNo()+"');";
@@ -232,25 +282,33 @@ public class Librarian extends User  {
 			System.out.println("Fine is reduced from balance which is " + b.fine());
 		}
 		
-		//reserve to the next person in the queue
+		//reserve the resource for the next User in it's requesting queue
 		resource.reserve();
 		
-		//writing into database(compulsory)
+		//Updating the database
+		//removing the user from the current_borrow_his table
 		statement = "delete from current_borrow_his where borrowingID = '" 
 							+ borrowNo +"';";
 		SQLHandle.set(statement);
+		//removing the user from the current_borrowing table
 		statement = "delete from current_borrowing where borrowingID = '" + borrowNo
 				+"' and userName = '" + userName + "';";
 		SQLHandle.set(statement);
-		statement = "insert into returned_his values('"+ u.getUsename()+"','"+ b.getBorrowNo() +"');";
+		//adding the user to the returned_his table
+		statement = "insert into returned_his values('"+ u.getUsername()+"','"+ b.getBorrowNo() +"');";
 		SQLHandle.set(statement);
+
 		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+getCurrentDate()+"' WHERE borrowingID =" + borrowNo+";";
 		SQLHandle.set(statement);
-		System.out.println("return Success!!");
-		
-		
+		System.out.println("Successfully returned Resource.");
 	}
 	
+
+	/**
+	 * This method allows a User to pay off their fine by interacting with a librarian.
+	 * @param amount
+	 * @param username
+	*/
 	private String getCurrentDate() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		return dateFormat.format(new Date());
@@ -261,11 +319,13 @@ public class Librarian extends User  {
 		return dateFormat.format(new Date());
 	}
 	
+
 	public void payFine(int amount, String username) throws Exception {
 		NormalUser u= new NormalUser(username);
 		
-		int newBalance = u.getBalance()+amount;
-		String statement = "Update normal_user set balance = "+ newBalance+";";
+		int newBalance = u.getBalance() + amount;
+		//SQL query to update the normal_user table with the new balance amount
+		String statement = "Update normal_user set balance = " + newBalance + ";";
 		SQLHandle.set(statement);
 		
 		statement = "select count(*) from transaction;";
@@ -281,68 +341,95 @@ public class Librarian extends User  {
 		System.out.println("fine paid");
 	}
 	
+	/**
+	 * This method allows a user to request a resource. 
+	 * @param resourceID
+	 * @param username
+	*/ 
 	public void request(int resourceID, String username) throws Exception {
 		NormalUser u = new NormalUser(username);
 		u.request(resourceID);
 	}
 	
-	
-	private void newUser(String username,
-			String password,
-			String firstname,
-			String lastname,
-			int mobileNo,
-			String address,
-			String image) throws SQLException {
+	/**
+	 * This method allows a librarian to create a new User.
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNo
+	 * @param address
+	 * @param image
+	*/
+	private void newUser(String username, String password, String firstName, String lastName,
+			int mobileNo, String address, String image) throws SQLException {
+			    
 		checkName(username);
-		String statement = "INSERT INTO `user_`(`username`, `Password`, `firstname`, `lastname`, `mobileNo`, `address`, `image`)"
-				+ " VALUES ('"+username+"','"+ password.hashCode() +"','"+firstname+"','"+lastname+"','"+mobileNo +"','"+address+"','"+image+"');";
+		String statement = "INSERT INTO user_(username, Password, firstname, lastname, mobileNo, address, image)"
+				+ " VALUES ('" + username + "','" + password.hashCode() + "','" + firstname + "','"
+				+ lastname + "','" + mobileNo + "','" + address + "','" + image + "');";
 		SQLHandle.set(statement);
 		
 	}
 	
-	public void newNormalUser(
-			String username,
-			String password,
-			String firstname,
-			String lastname,
-			int mobileNo,
-			String address,
-			String image) throws SQLException {
+	/**
+	 * This method allows a librarian to create a new NormalUser.
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNo
+	 * @param address
+	 * @param image
+	 * 
+	*/
+	public void newNormalUser(String username, String password, String firstname, String lastname,
+			int mobileNo, String address, String image) throws SQLException {
+		
+		//SQL query to add the NormalUser to the database	    
 		newUser(username,password,firstname,lastname,mobileNo,address,image);
-		String statement = "INSERT INTO `normal_user`(`username`, `balance`) VALUES ('"+username+"','"+0+"');";
+		String statement = "INSERT INTO normal_user(username, balance) VALUES ('" + username + "','" + 0 + "');";
 		SQLHandle.set(statement);
 	}
 
-	
-	public void newLibrarian(
-			String username,
-			String password,
-			String firstname,
-			String lastname,
-			int mobileNo,
-			String address,
-			String image,
-			String employmentDate) throws SQLException {
+	/**
+	 * This method allows a librarian to create a new Librarian.
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNo
+	 * @param address
+	 * @param image
+	 * @param employmentDate
+	*/
+	public void newLibrarian(String username, String password, String firstname, String lastname,
+			int mobileNo, String address, String image, String employmentDate) throws SQLException {
+			    
 		newUser(username,password,firstname,lastname,mobileNo,address,image);
 		
-		//get new StaffNo
+		//get new unique StaffNo
 		String statement = "select max(staffNo) from librarian;";
 		ResultSet r = SQLHandle.get(statement);
 		r.next();
 		int sNo = r.getInt("max(staffNo)") +1;
-	
-		statement = "INSERT INTO `librarian`(`username`, `employmentDate`, `staffNo`) "
-				+ "VALUES ('"+username+"','"+employmentDate+"',"+sNo+")";
+	       
+	    //SQL query to add the new Librarian to the database
+		statement = "INSERT INTO librarian(username, employmentDate, staffNo) "
+				+ "VALUES ('" + username + "','" + employmentDate + "'," + sNo + ")";
 		SQLHandle.set(statement);
 	}
 	
+	/**
+	 * This method checks if the entered username is unique and has not been used before.
+	 * @param username
+	*/
 	private void checkName(String username) throws SQLException,IllegalArgumentException {
 		String statement = "select username from user_ where username = '"+username+"';";
 		ResultSet r = SQLHandle.get(statement);
-		//if the set is not empty, means that is already userd
+		//if the set is not empty, means that is already in use
 		if (r.next()==true) { 
-			throw new IllegalArgumentException("Name already used");
+			throw new IllegalArgumentException("Name already being used");
 		}
 	}
 
