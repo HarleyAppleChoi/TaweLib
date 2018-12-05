@@ -6,46 +6,62 @@ import java.util.Date;
 
 import javafx.scene.image.Image;
 
-public class Librarian extends User  {
-   /**
+ /**
     * Librarian is a class contains the methods and attributes used by library staff
     * Also permit them manage the user,resource and borrowing of books
-    * 
+    * @author Jwana Abdalah
+    * @modified by Hau Yi Choi
     */
+public class Librarian extends User  {
+  
 	
 	protected int staffNo;
 	protected int employmentDate;
 	
 	/**
-	 * constructor 
+	 * constructor to construct a Librarian.
 	 * @param staffNo stores the staffNo.
 	 * @param employmentDate stores the employmentDate.
 	 * @param username stores the username 
 	 * @param firstName stores first name
 	 * @param lastName stores last name
 	  *@param mobileNo stores mobile number 
-	 * @patram userImage stores the user image
+	 * @param userImage stores the user image
 	 */
 	
 	public Librarian(int staffNo, int employmentDaye, String username, String firstName,  String lastName,  int mobileNo, Image userImage) 
 	{
 	  super(username, firstName, lastName, mobileNo, userImage);
+	  this.staffNo = staffNo;
+	  this.employmentDate = employmentDate;
 	}
 	
+	/**
+	 * Empty constructor.
+	*/
 	public Librarian() {
 		
 	}
 
 	
 	/** 
+	 * Get method to get the staffNo.
 	 * @return staffNo
 	 */
 	
 	private int getStaffNo() {
 		return staffNo;
 	}
+	/**
+	 * Set method to set the staffNo.
+	 * @pram staffNo
+	*/
+	private int setStaffNo(int staffNo) {
+	    this.staffNo = staffNo;
+	}
 	
 	/** 
+	 * Get method to get the employmentDate.
 	 * @return employmentDate
      */
 	private int getEmploymentDate() {
@@ -54,37 +70,39 @@ public class Librarian extends User  {
 	
 	
 	 /**
+	  * Set method to set the employmentDate.
 	  * @param l sets employment date
 	  * 
 	  */
-	public void setEmploymentDat(int l) {
-		employmentDate = l;
+	public void setEmploymentDate(int employmentDate) {
+		this.employmentDate = employmentDate;
 	}
 	
    	/**
-   	 * method to add resource 
-   	 * constructor
+   	 * This method allows a Librarian to add a new resource to the database.
 	 * @param title
 	 * @param year
 	 * @param image
 	 * @param numCopies
 	 * @param duration
-	 * @return
+	 * @return unique id of new resource
 	 * @throws SQLException
 	 */
-	private int addResource(String title,String year, String image, int numCopies, int duration) throws SQLException {
+	private int addResource(String title, String year, String image, int numCopies, int duration) throws SQLException {
+	    //selects max id from resource
 		int id = SQLHandle.get("select max(id) from resource;").getInt(0);
 		System.out.println(id);
 		
+		//SQL query to add a new resource with the inputed values.
 		String query = "insert into resource (id,title,year_,image,numcopies, duration)"
 				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +"')"  ;		
 
 		SQLHandle.set(query);
 		return id;
 	}
+	
 	/**
-	 * method adds book to resourse 
-	 * constructor 
+	 * This method allows a Librarian to add a Book to the database.
 	 * @param title
 	 * @param year
 	 * @param image
@@ -99,7 +117,7 @@ public class Librarian extends User  {
 	
 	public void addBook(String title,String year, String image, int numCopies, int duration
 			,String author, String publisher, String genre, String ISBN ) throws SQLException {
-		int id = addResource(title,year, image, numCopies, duration);
+		int id = addResource(title, year, image, numCopies, duration);
 		
 		String gen = "null";
 		if(!genre.isEmpty()) {
@@ -116,14 +134,14 @@ public class Librarian extends User  {
 			lan = langauge;
 		}
 		
+		//SQL query to add a Book to the Database with the entered values.
 		String query = "insert into book (id, author, publisher, genre, ISBN, language)" 
 				+ "values('" + id +"','" + author + "','" + publisher + genre +"','"  + ISBN +"','"  + language +"');";
 		SQLHandle.set(query);
 	}
 	
      /**
-      * method adds book to resource 
-      * consttuctor
+      * This method allows a Librarian to add a laptop to Database.
 	  * @param title
 	  * @param year
 	  * @param image
@@ -138,6 +156,7 @@ public class Librarian extends User  {
 			String manufacturer, String model, String operatingSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
+//SQL query to add a new laptop and its values to the database.
 		String query = "insert into laptop (id, manufacturer, model, operatingSystem)" + "values('" + id + "','" + model
 				+ "','" + manufacturer + "','" + operatingSystem + "');";
 		SQLHandle.set(query);
@@ -145,8 +164,7 @@ public class Librarian extends User  {
 	
 	
      /**
-      * method adds Dvd to resource 
-      * consttuctor
+      * This method allow a Librarian to add a new DVD to the database.
 	  * @param title
 	  * @param year
 	  * @param image
@@ -166,16 +184,19 @@ public class Librarian extends User  {
 			lang = language;
 		}
 
+        //SQL statement to add the DVD and it's values to te database.
 		String query = "insert into DVD (id, director, runtime, language)" + "values('" + id + "','" + director
 				+ "','" + runtime +  "','" + language +  "');";
 		SQLHandle.set(query);
         
-        
+        // If there are subtitle languages, adds each of them to the
+        // DVD_subtitle table along with the corresponding resourceID.
         String subt = "null";
 		if(!subtitle.isEmpty()) {
 		    
 			while(subLanguages.hasNext()) {
 	            sublang = sublanguages.readNext();
+	            //SQl query to add the subtitle language to the database.
                 String query = "insert into DVD_subtitle (id, subtitle)" + "values('" + id + "','" + sublang + "');";
 		        SQLHandle.set(query);
             }
@@ -184,7 +205,7 @@ public class Librarian extends User  {
 	
 
 	/**
-	 * function for normalUser to borrow any resource
+	 * This method allows the NormalUser to borrow a resource through the Librarian.
 	 * @param resourceId
 	 * @param userName
 	 * @throws Exception 
@@ -192,11 +213,17 @@ public class Librarian extends User  {
 	public void borrow(int resourceId, String userName) throws Exception {
 		NormalUser user = new NormalUser(userName);
 		user.borrow(resourceId);
-		System.out.println("Borrow Success!!!");
+		System.out.println("Successfully Borrowed Resource.");
 	}
 	
-	public void returnResource(int borrowNo) throws Exception{
-		//find the user who borrow the item
+	/**
+	 * This method allows a NormalUser to return a Resource through the librarian.
+	 * Removes the user from the current_borrowing table and move them to the current_borrowing_his table.
+	 * If the resource is overdue, it calculates the fine for that user.
+	*/
+	public void returnResource(int borrowNo) throws Exception {
+	    
+		//SQL statement to find the username who borrowed the resource
 		String statement = "";
 		statement = "Select distinct username from current_borrowing where borrowingID = '" 
 		+ borrowNo + "';";
@@ -206,6 +233,7 @@ public class Librarian extends User  {
 			userName = r.getString("username");
 		}
 		
+		//SQL statement to find the resourceID of the borrowed resource
 		String resourceID ="";
 		statement = "Select resourceID from current_borrow_his where borrowingID = '" 
 				+ borrowNo + "';";
@@ -218,7 +246,7 @@ public class Librarian extends User  {
 		Borrowing b = new Borrowing(borrowNo);
 		b.setReturnDate();
 		
-		//if that is overdue, it reduce the balance and do the transaction history
+		//If the resource is overdue, it reduced the balance of the User by the amount calculated
 		if(b.isOverdue()) {
 			u.reduceBalance(b.fine());
 			statement = "update normal_user set balance = '" + u.getBalance() + "' where username = '" 
@@ -227,13 +255,15 @@ public class Librarian extends User  {
 			
 			
 			//insert the fine into transaction related
-			//find maximum id
 			statement = "select max(transID) from transaction;";
 			 r = SQLHandle.get(statement);
 			int i = 0;
+			//finds the max transID
 			while (r.next()) {
 				i = r.getInt("max(transID)")+1;
 			}
+			//adds the fine information into the transaction table, the overdue_transaction
+			//table and the transaction_his table
 			statement = "insert into transaction values('"+ i+"','"+b.fine()+"');";
 			SQLHandle.set(statement);
 			statement = "insert into overdue_transaction values('"+ i + "','"+b.getBorrowNo()+"');";
@@ -244,7 +274,7 @@ public class Librarian extends User  {
 			System.out.println("Fine is reduced from balance which is " + b.fine());
 		}
 		
-		//reserve to the next person in the queue
+		//reserve the resource for the next User in it's requesting queue
 		resource.reserve();
 		
 		//writing into database(compulsory)
@@ -259,7 +289,7 @@ public class Librarian extends User  {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+dateFormat.format(new Date())+"' WHERE borrowingID =" + borrowNo+";";
 		SQLHandle.set(statement);
-		System.out.println("return Success!!");
+		System.out.println("Successfully returned Resource.");
 		
 		
 	}
