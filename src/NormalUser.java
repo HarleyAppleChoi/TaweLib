@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
 
 /**
  * NormalUser.java
- * This class contain all the methods that allowing normalUser tp borrow resource,
- *  also check thier balance to know if they can bprrow resource.
+ * This class contain all the methods that allowing normalUser to borrow resource,
+ * also check thier balance to know if they can borrow  any resource.
  * @author Hau Yi Choi
  * @version 2.1
  */
@@ -74,7 +74,8 @@ public class NormalUser extends User implements Storable {
     
     
 	/**
-	 * function to check if the user can borrow resource
+	 * this is boolean function to checke if the user can borrorow any resource. 
+	 * if their balabce < 0 they can borrow 
 	 * @return b
 	 */
 	
@@ -148,13 +149,6 @@ public class NormalUser extends User implements Storable {
 		return balance;
 	}
 	
-  public void reserve(String resourse) {
-
-	}
-
-	public void requestBook(Resource r, String title) {
-
-	}
 
 	private void storeBorrow() throws SQLException {
 		// when borrowing something
@@ -162,7 +156,8 @@ public class NormalUser extends User implements Storable {
 
 	}
 	/**
-	 * 
+	 * this method allowes normalUser to request for resource
+	 * and add it ti database table
 	 * @param resourceID
 	 * @throws Exception
 	 */
