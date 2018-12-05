@@ -77,7 +77,7 @@ public class Librarian extends User  {
 		System.out.println(id);
 		
 		String query = "insert into resource (id,title,year_,image,numcopies, duration)"
-				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +")"  ;		
+				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +"')"  ;		
 
 		SQLHandle.set(query);
 		return id;
@@ -117,7 +117,7 @@ public class Librarian extends User  {
 		}
 		
 		String query = "insert into book (id, author, publisher, genre, ISBN, language)" 
-				+ "values(" + id +"','" + author + "','" + publisher + genre +"','"  + ISBN +"','"  + language +");";
+				+ "values('" + id +"','" + author + "','" + publisher + genre +"','"  + ISBN +"','"  + language +"');";
 		SQLHandle.set(query);
 	}
 	
@@ -138,8 +138,8 @@ public class Librarian extends User  {
 			String manufacturer, String model, String operatingSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
-		String query = "insert into laptop (id, manufacturer, model, operatingSystem)" + "values(" + id + "','" + model
-				+ "','" + manufacturer + "','" + operatingSystem + ");";
+		String query = "insert into laptop (id, manufacturer, model, operatingSystem)" + "values('" + id + "','" + model
+				+ "','" + manufacturer + "','" + operatingSystem + "');";
 		SQLHandle.set(query);
 	}
 	
@@ -166,15 +166,17 @@ public class Librarian extends User  {
 			lang = language;
 		}
 
-		String query = "insert into DVD (id, director, runtime, language)" + "values(" + id + "','" + director
-				+ "','" + runtime +  "','" + language +  ");";
+		String query = "insert into DVD (id, director, runtime, language)" + "values('" + id + "','" + director
+				+ "','" + runtime +  "','" + language +  "');";
 		SQLHandle.set(query);
+        
         
         String subt = "null";
 		if(!subtitle.isEmpty()) {
-			while(String i = subtitle.useDelimiter(",")) {
-	            
-                String query = "insert into DVD_subtitle (id, subtitle)" + "values(" + id + "','" + i + ");";
+		    
+			while(subLanguages.hasNext()) {
+	            sublang = sublanguages.readNext();
+                String query = "insert into DVD_subtitle (id, subtitle)" + "values('" + id + "','" + sublang + "');";
 		        SQLHandle.set(query);
             }
 		}
