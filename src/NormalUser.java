@@ -47,7 +47,7 @@ public class NormalUser extends User implements Storable {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				currentBorrowHistory.add(b);
 			}
-			statement = "select * from resered_item where username = '" + username + "';";
+			statement = "select * from reserved_item where username = '" + username + "';";
 
 			r = SQLHandle.get(statement);
 			while (r.next()) {
