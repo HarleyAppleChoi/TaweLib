@@ -20,7 +20,7 @@ public class Librarian extends User  {
     * 
     */
 	
-	final int staffNo;
+	protected final int staffNo;
 	protected int employmentDate;
 	
 	/**
