@@ -1,6 +1,4 @@
 
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -109,15 +107,22 @@ public class Librarian extends User  {
 			gen = genre;
 		}
 		
+		String isbn = "null";
+		if(!ISBN.isEmpty()) {
+			isbn = ISBN;
+		}
 		
+		String lang = "null";
+		if(!language.isEmpty()) {
+			lan = langauge;
+		}
 		
-		String query = "insert into book (id, author,publisher,genre,ISBN.language_)" 
-				+ "values(" + id +"','" + author+"','" +publisher;
-		
-		
+		String query = "insert into book (id, author, publisher, genre, ISBN, language)" 
+				+ "values(" + id +"','" + author + "','" + publisher + genre +"','"  + ISBN +"','"  + language +");";
+		SQLHandle.set(query);
 	}
+	
      /**
-
       * method adds book to resource 
       * consttuctor
 	  * @param title
@@ -131,17 +136,16 @@ public class Librarian extends User  {
 	  * @throws SQLException
 	  */
 	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
-			String manufacturer, String model, String operationSystem) throws SQLException {
+			String manufacturer, String model, String operatingSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
-		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + model
-				+ "','" + manufacturer;
-
-		if (model != null) {
-
-		}
+		String query = "insert into laptop (id, manufacturer, model, operatingSystem)" + "values(" + id + "','" + model
+				+ "','" + manufacturer + "','" + operatingSystem + ");";
+		SQLHandle.set(query);
 	}
-		/**
+	
+	
+     /**
       * method adds Dvd to resource 
       * consttuctor
 	  * @param title
@@ -157,14 +161,19 @@ public class Librarian extends User  {
 	public  void addDvd(String title, String year, String image, int numAvailableCopies, int duration,
 			String director, String language, String runtime, String[] subtitle) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
-
-		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
-				+ "','" + runtime;
-
-		if (director != null) {
-
+		
+		String lang = "null";
+		if(!language.isEmpty()) {
+			lang = language;
 		}
 
+		String query = "insert into DVD (id, director, runtime, language)" + "values(" + id + "','" + director
+				+ "','" + runtime +  "','" + language +  ");";
+		SQLHandle.set(query);
+        
+        //while(String[] subtitle)
+        
+        
 	}
 	
 
