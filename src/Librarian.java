@@ -114,12 +114,16 @@ public class Librarian extends User  {
 			,String author, String publisher, String genre, String ISBN ) throws SQLException {
 		int id = addResource(title,year, image, numCopies, duration);
 		
+		String gen = "null";
+		if(!genre.isEmpty()) {
+			gen = genre;
+		}
+		
+		
+		
 		String query = "insert into book (id, author,publisher,genre,ISBN.language_)" 
 				+ "values(" + id +"','" + author+"','" +publisher;
 		
-		if (genre != null) {
-			
-		}
 		
 	}
      /**
@@ -161,7 +165,7 @@ public class Librarian extends User  {
 	  * @throws SQLException
 	  */
 	public  void addDvd(String title, String year, String image, int numAvailableCopies, int duration,
-			String director, String language, String runtime) throws SQLException {
+			String director, String language, String runtime, String[] subtitle) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
 		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
@@ -253,6 +257,14 @@ public class Librarian extends User  {
 		System.out.println("return Success!!");
 		
 		
+	}
+	
+	public void payFine(int amount, String username) throws Exception {
+		NormalUser u= new NormalUser(username);
+		
+		int newBalance = u.getBalance()+amount;
+		String statement = "Update normal_user set balance = "+ newBalance+";";
+		SQLHandle.set(statement);
 	}
 	
 	public void request(int resourceID, String username) throws Exception {
