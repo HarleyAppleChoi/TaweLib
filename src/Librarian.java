@@ -111,20 +111,31 @@ public class Librarian extends User  {
 	 */
 	
 	public void addBook(String title,String year, String image, int numCopies, int duration
-			,String author, String publisher, String genre, String ISBN ) throws SQLException {
+			,String author, String publisher, String genre, String ISBN, String language ) throws SQLException {
 		int id = addResource(title,year, image, numCopies, duration);
+		
+		String gen = "null";
+		if(!genre.isEmpty()) {
+		    gen = genre;
+		}
+		String isbn = "null";
+		if(!ISBN.isEmpty()) {
+		    isbn = ISBN;
+		}
+		String lag = "null";
+		if(!language.isEmpty()) {
+		    lag = language;
+		}
 		
 		String query = "insert into book (id, author,publisher,genre,ISBN.language_)" 
 				+ "values(" + id +"','" + author+"','" +publisher;
 		
-		if (genre != null) {
-			
-		}
+	
 		
 	}
      /**
 
-      * method adds book to resource 
+      * method adds laptop to resource 
       * consttuctor
 	  * @param title
 	  * @param year
@@ -139,6 +150,13 @@ public class Librarian extends User  {
 	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
 			String manufacturer, String model, String operationSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
+		
+		String os = "null";
+		if(!operationSystem.isEmpty()) {
+		    os = operationSystem;
+		}
+	
+		
 
 		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + model
 				+ "','" + manufacturer;
@@ -161,8 +179,19 @@ public class Librarian extends User  {
 	  * @throws SQLException
 	  */
 	public  void addDvd(String title, String year, String image, int numAvailableCopies, int duration,
-			String director, String language, String runtime) throws SQLException {
+			String director, String language, String subtitleLanguge, String runtime) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
+		
+		String lag = "null";
+		if(!language.isEmpty()) {
+		    lag = language;
+		}
+		String subLag = "null";
+		if(!subtitleLanguge.isEmpty()) {
+		    subLag = subtitleLanguge;
+		
+		}
+		
 
 		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
 				+ "','" + runtime;
