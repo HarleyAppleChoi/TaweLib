@@ -1,4 +1,3 @@
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -171,9 +170,14 @@ public class Librarian extends User  {
 				+ "','" + runtime +  "','" + language +  ");";
 		SQLHandle.set(query);
         
-        //while(String[] subtitle)
-        
-        
+        String subt = "null";
+		if(!subtitle.isEmpty()) {
+			while(String i = subtitle.useDelimiter(",")) {
+	            
+                String query = "insert into DVD_subtitle (id, subtitle)" + "values(" + id + "','" + i + ");";
+		        SQLHandle.set(query);
+            }
+		}
 	}
 	
 
