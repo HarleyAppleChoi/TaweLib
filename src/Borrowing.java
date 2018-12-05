@@ -23,6 +23,7 @@ public class Borrowing implements Storable {
 	private String RESOURCE_ID;
 	DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 	String statement = "";
+	SQLHandle sql = new SQLHandle();
 
 	/**
 	 * Selects all the information about a specific borrowing from the database. 
@@ -31,7 +32,7 @@ public class Borrowing implements Storable {
 	 */
 	public Borrowing(int id) throws Exception {
 		statement = "select * from Borrowing where BorrowingID ='" + id + "';";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		BORROW_NO = id;
 		while (r.next()) {
 			INITIAL_DATE = r.getDate("borrowDate");
@@ -51,7 +52,7 @@ public class Borrowing implements Storable {
 	// when the borrowing is new created
 	public Borrowing(String rID) throws SQLException {
 		String statement = "select max(borrowingID) from Borrowing";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		int i = 0;
 		while (r.next()) {
 			i = r.getInt("max(borrowingID)");
@@ -122,7 +123,7 @@ public class Borrowing implements Storable {
 			int maxFine = 0;
 			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID ="
 					+ this.RESOURCE_ID;
-			ResultSet r = SQLHandle.get(statement);
+			ResultSet r = sql.nonStaticGet(statement);
 			if (r.next()) {
 				finePerDay = 2;
 				maxFine = 25;
@@ -134,10 +135,9 @@ public class Borrowing implements Storable {
 
 			if (endDate != null) {
 				if (returnDate.compareTo(endDate) > 0) {
-					long diff = returnDate.getTime() - endDate.getTime();
-					long days = diff / (1000 * 60 * 60 * 24);
+					
 
-					fine = (int) (days * finePerDay);
+					fine = (int) (getOverdueDay() * finePerDay);
 					if (fine > maxFine) {
 						fine = maxFine;
 					}
@@ -145,6 +145,12 @@ public class Borrowing implements Storable {
 			}
 		}
 		return fine;
+	}
+	
+	public int getOverdueDay() {
+		long diff = returnDate.getTime() - endDate.getTime();
+		long days = diff / (1000 * 60 * 60 * 24);
+		return (int)days;
 	}
 
 	/**

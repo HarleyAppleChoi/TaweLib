@@ -21,7 +21,8 @@ public class Test {
 			l.borrow(1, "apple");
 			*/
 			//l.borrow(1, "apple");
-			l.request(1,"apple");
+			NormalUser u = new NormalUser("overdue");
+			System.out.println(u.transactionHistory());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -61,4 +61,15 @@ public class SQLHandle {
 	public static void set(String query) throws SQLException {
 		statement.executeUpdate(query);
 	}
+	
+	/**
+	 * non static method of get
+	 * @param query
+	 * @return
+	 * @throws SQLException
+	 */
+	public ResultSet nonStaticGet(String query) throws SQLException {
+		ResultSet result = statement.executeQuery(query);
+		return result;
+	}
 }

@@ -43,6 +43,10 @@ public class Librarian extends User  {
 		
 	}
 
+		
+	
+	
+
 	
 	/** 
 	 * Get method to get the staffNo.
@@ -90,12 +94,13 @@ public class Librarian extends User  {
 	 */
 	private int addResource(String title, String year, String image, int numCopies, int duration) throws SQLException {
 	    //selects max id from resource
-		int id = SQLHandle.get("select max(id) from resource;").getInt(0);
+		int id = SQLHandle.get("select max(resourceID) from resource;").getInt(0);
 		System.out.println(id);
 		
 		//SQL query to add a new resource with the inputed values.
-		String query = "insert into resource (id,title,year_,image,numcopies, duration)"
+		String query = "insert into resource (resourceID,title,year_,image,numcopies, duration)"
 				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +"')"  ;		
+
 
 		SQLHandle.set(query);
 		return id;
@@ -135,7 +140,7 @@ public class Librarian extends User  {
 		}
 		
 		//SQL query to add a Book to the Database with the entered values.
-		String query = "insert into book (id, author, publisher, genre, ISBN, language)" 
+		String query = "insert into book (resourceID, author, publisher, genre, ISBN, language)" 
 				+ "values('" + id +"','" + author + "','" + publisher + genre +"','"  + ISBN +"','"  + language +"');";
 		SQLHandle.set(query);
 	}
@@ -163,7 +168,7 @@ public class Librarian extends User  {
 		}
 
         //SQL statement to add the DVD and it's values to te database.
-		String query = "insert into DVD (id, director, runtime, language)" + "values('" + id + "','" + director
+		String query = "insert into DVD (resourceID, director, runtime, language)" + "values('" + id + "','" + director
 				+ "','" + runtime +  "','" + language +  "');";
 		SQLHandle.set(query);
         
@@ -175,7 +180,7 @@ public class Librarian extends User  {
 			while(subLanguages.hasNext()) {
 	            sublang = sublanguages.readNext();
 	            //SQl query to add the subtitle language to the database.
-                String query = "insert into DVD_subtitle (id, subtitle)" + "values('" + id + "','" + sublang + "');";
+                String query = "insert into DVD_subtitle (resourceID, subtitle)" + "values('" + id + "','" + sublang + "');";
 		        SQLHandle.set(query);
             }
 		}
@@ -198,9 +203,10 @@ public class Librarian extends User  {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
 
 //SQL query to add a new laptop and its values to the database.
-		String query = "insert into laptop (id, manufacturer, model, operatingSystem)" + "values('" + id + "','" + model
+		String query = "insert into laptop (resourceID, manufacturer, model, operatingSystem)" + "values('" + id + "','" + model
 				+ "','" + manufacturer + "','" + operatingSystem + "');";
 		SQLHandle.set(query);
+
 	}
 	
 	
@@ -291,18 +297,29 @@ public class Librarian extends User  {
 		//adding the user to the returned_his table
 		statement = "insert into returned_his values('"+ u.getUsername()+"','"+ b.getBorrowNo() +"');";
 		SQLHandle.set(statement);
-		//updating the borrowing table by adding the returnDate
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+dateFormat.format(new Date())+"' WHERE borrowingID =" + borrowNo+";";
+
+		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+getCurrentDate()+"' WHERE borrowingID =" + borrowNo+";";
 		SQLHandle.set(statement);
 		System.out.println("Successfully returned Resource.");
 	}
 	
+
 	/**
 	 * This method allows a User to pay off their fine by interacting with a librarian.
 	 * @param amount
 	 * @param username
 	*/
+	private String getCurrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		return dateFormat.format(new Date());
+	}
+	
+	private String getCurrentTime() {
+		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		return dateFormat.format(new Date());
+	}
+	
+
 	public void payFine(int amount, String username) throws Exception {
 		NormalUser u= new NormalUser(username);
 		
@@ -310,6 +327,18 @@ public class Librarian extends User  {
 		//SQL query to update the normal_user table with the new balance amount
 		String statement = "Update normal_user set balance = " + newBalance + ";";
 		SQLHandle.set(statement);
+		
+		statement = "select count(*) from transaction;";
+		ResultSet r = SQLHandle.get(statement);
+		r.next();
+		int sNo = r.getInt("count(*)") +1;
+		statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES "
+				+ "('"+sNo+"','"+amount+"','"+getCurrentTime()+"'); ";
+		SQLHandle.set(statement);
+		
+		statement = "INSERT INTO `transaction_his`(`username`, `transID`) VALUES ('"+username+"','"+sNo+"')";
+		SQLHandle.set(statement);
+		System.out.println("fine paid");
 	}
 	
 	/**
