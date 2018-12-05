@@ -1,8 +1,4 @@
-/**
- * librarian.java
- * @author 901526( Jwana Abdalah), Modified by Hau Yi Choi.
- * CSC-230 Assignment 2 
- */
+
 
 
 import java.sql.ResultSet;
