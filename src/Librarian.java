@@ -212,7 +212,7 @@ public class Librarian extends User  {
 	 * @param userName
 	 * @throws Exception 
 	 */
-	public void borrow(int resourceId, String userName) throws Exception {
+	public void borrow(int resourceId, String username) throws Exception {
 		NormalUser user = new NormalUser(userName);
 		user.borrow(resourceId);
 		System.out.println("Successfully Borrowed Resource.");
@@ -222,6 +222,7 @@ public class Librarian extends User  {
 	 * This method allows a NormalUser to return a Resource through the librarian.
 	 * Removes the user from the current_borrowing table and move them to the current_borrowing_his table.
 	 * If the resource is overdue, it calculates the fine for that user.
+	 * @param borrowNo
 	*/
 	public void returnResource(int borrowNo) throws Exception {
 	    
@@ -297,61 +298,88 @@ public class Librarian extends User  {
 		System.out.println("Successfully returned Resource.");
 	}
 	
-	
+	/**
+	 * This method allows a User to pay off their fine by interacting with a librarian.
+	 * @param amount
+	 * @param username
+	*/
 	public void payFine(int amount, String username) throws Exception {
 		NormalUser u= new NormalUser(username);
 		
-		int newBalance = u.getBalance()+amount;
-		String statement = "Update normal_user set balance = "+ newBalance+";";
+		int newBalance = u.getBalance() + amount;
+		//SQL query to update the normal_user table with the new balance amount
+		String statement = "Update normal_user set balance = " + newBalance + ";";
 		SQLHandle.set(statement);
 	}
 	
+	/**
+	 * This method allows a user to request a resource. 
+	 * @param resourceID
+	 * @param username
+	*/ 
 	public void request(int resourceID, String username) throws Exception {
 		NormalUser u = new NormalUser(username);
 		u.request(resourceID);
 	}
 	
-	
-	private void newUser(String username,
-			String password,
-			String firstname,
-			String lastname,
-			int mobileNo,
-			String address,
-			String image) throws SQLException {
+	/**
+	 * This method allows a librarian to create a new User.
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNo
+	 * @param address
+	 * @param image
+	*/
+	private void newUser(String username, String password, String firstName, String lastName,
+			int mobileNo, String address, String image) throws SQLException {
+			    
 		checkName(username);
-		String statement = "INSERT INTO `user_`(`username`, `Password`, `firstname`, `lastname`, `mobileNo`, `address`, `image`)"
-				+ " VALUES ('"+username+"','"+ password.hashCode() +"','"+firstname+"','"+lastname+"','"+mobileNo +"','"+address+"','"+image+"');";
+		String statement = "INSERT INTO user_(username, Password, firstname, lastname, mobileNo, address, image)"
+				+ " VALUES ('" + username + "','" + password.hashCode() + "','" + firstname + "','"
+				+ lastname + "','" + mobileNo + "','" + address + "','" + image + "');";
 		SQLHandle.set(statement);
 		
 	}
 	
-	public void newNormalUser(
-			String username,
-			String password,
-			String firstname,
-			String lastname,
-			int mobileNo,
-			String address,
-			String image) throws SQLException {
+	/**
+	 * This method allows a librarian to create a new NormalUser.
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNo
+	 * @param address
+	 * @param image
+	 * 
+	*/
+	public void newNormalUser(String username, String password, String firstname, String lastname,
+			int mobileNo, String address, String image) throws SQLException {
+			    
 		newUser(username,password,firstname,lastname,mobileNo,address,image);
 		String statement = "INSERT INTO `normal_user`(`username`, `balance`) VALUES ('"+username+"','"+0+"');";
 		SQLHandle.set(statement);
 	}
 
-	
-	public void newLibrarian(
-			String username,
-			String password,
-			String firstname,
-			String lastname,
-			int mobileNo,
-			String address,
-			String image,
-			String employmentDate) throws SQLException {
+	/**
+	 * This method allows a librarian to create a new Librarian.
+	 * @param username
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNo
+	 * @param address
+	 * @param image
+	 * @param employmentDate
+	*/
+	public void newLibrarian(String username, String password, String firstname, String lastname,
+			int mobileNo, String address, String image, String employmentDate) throws SQLException {
+			    
 		newUser(username,password,firstname,lastname,mobileNo,address,image);
 		
-		//get new StaffNo
+		//get new unique StaffNo
+		SQL 
 		String statement = "select max(staffNo) from librarian;";
 		ResultSet r = SQLHandle.get(statement);
 		r.next();
