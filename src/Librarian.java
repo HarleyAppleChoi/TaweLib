@@ -379,7 +379,6 @@ public class Librarian extends User  {
 		newUser(username,password,firstname,lastname,mobileNo,address,image);
 		
 		//get new unique StaffNo
-		SQL 
 		String statement = "select max(staffNo) from librarian;";
 		ResultSet r = SQLHandle.get(statement);
 		r.next();
