@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
  *
  */
 public abstract class User implements Storable {
-	protected String username;
+	protected final String USERNAME;
 	protected String firstName;
 	protected String lastName;
 	protected int mobileNo;

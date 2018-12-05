@@ -20,7 +20,7 @@ public class Librarian extends User  {
     * 
     */
 	
-	protected int staffNo;
+	protected final int staffNo;
 	protected int employmentDate;
 	
 	/**
@@ -83,12 +83,13 @@ public class Librarian extends User  {
 		int id = SQLHandle.get("select max(id) from resource;").getInt(0);
 		System.out.println(id);
 		
-		String query = "insert into resource (id,title,year_,image,numcopies, duration)"
+		String query = "insert into resource (id,title,year, image,numcopies, duration)"
 				+ "values ('" + id +"','" + title +"','" + year + "','" + image + "','" + numCopies +"','" + duration +")"  ;		
 
 		SQLHandle.set(query);
 		return id;
 	}
+	
 	/**
 	 * method adds book to resourse 
 	 * constructor 
@@ -105,24 +106,31 @@ public class Librarian extends User  {
 	 */
 	
 	public void addBook(String title,String year, String image, int numCopies, int duration
-			,String author, String publisher, String genre, String ISBN ) throws SQLException {
+			,String author, String publisher, String genre, String ISBN, String language ) throws SQLException {
 		int id = addResource(title,year, image, numCopies, duration);
 		
 		String gen = "null";
 		if(!genre.isEmpty()) {
-			gen = genre;
+		    gen = genre;
+		}
+		String isbn = "null";
+		if(!ISBN.isEmpty()) {
+		    isbn = ISBN;
+		}
+		String lag = "null";
+		if(!language.isEmpty()) {
+		    lag = language;
 		}
 		
+		String query = "insert into book (id, author,publisher,genre,ISBN,language_)" 
+				+ "values(" + id +"','" + author+"','" +publisher +","+ genre +"," + isbn +","+ language + ");";
 		
-		
-		String query = "insert into book (id, author,publisher,genre,ISBN.language_)" 
-				+ "values(" + id +"','" + author+"','" +publisher;
-		
+	    SQLHandle.set(query);
 		
 	}
      /**
 
-      * method adds book to resource 
+      * method adds laptop to resource 
       * consttuctor
 	  * @param title
 	  * @param year
@@ -135,11 +143,14 @@ public class Librarian extends User  {
 	  * @throws SQLException
 	  */
 	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
-			String manufacturer, String model, String operationSystem) throws SQLException {
+			String manufacturer, String model, String operatingSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
+		
+	
+		
 
-		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + model
-				+ "','" + manufacturer;
+		String query = "insert into laptop (id, manufacturer, model, operationSystem)" + "values(" + id + "','" + model
+				+ "','" + manufacturer + "," + operatingSystem + ");";
 
 		if (model != null) {
 
@@ -161,8 +172,21 @@ public class Librarian extends User  {
 	public  void addDvd(String title, String year, String image, int numAvailableCopies, int duration,
 			String director, String language, String runtime, String[] subtitle) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
+		
+		String lag = "null";
+		if(!language.isEmpty()) {
+		    lag = language;
+		}
+		String subLag = "null";
+		if(!subtitleLanguge.isEmpty()) {
+		    subLag = subtitleLanguge;
+		
+		}
+		while (subtitleLanguage )
+		   string 
+		
 
-		String query = "insert into laptop (id, author,publisher,genre,ISBN.language_)" + "values(" + id + "','" + director
+		String query = "insert into DVD values (director, runtime,language, subtitleLanguage)" + "values(" + director+ "','" + runtime
 				+ "','" + runtime;
 
 		if (director != null) {
