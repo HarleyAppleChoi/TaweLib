@@ -407,6 +407,7 @@ public class Librarian extends User {
 		newUser(username, password, firstname, lastname, mobileNo, address, image);
 		String statement = "INSERT INTO normal_user(username, balance) VALUES ('" + username + "','" + 0 + "');";
 		SQLHandle.set(statement);
+		System.out.println("NormalUserAdded");
 	}
 
 	/**

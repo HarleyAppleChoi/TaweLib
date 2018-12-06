@@ -25,6 +25,8 @@ public class Test {
 			Librarian b = new Librarian();
 			System.out.println(b.getBorrowingHistory(1));
 			System.out.println(u.transactionHistory());
+			//b.newNormalUser("ball", "12321", "asf", "cake", 1231, "adsg", "werwe.wwwe");
+			b.newLibrarian("yuyi", "1231", "asdfafa", "asdfa", 12312, "aasdf", "10-10-10", "10-10-10");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -204,7 +204,7 @@ public class NormalUser extends User implements Storable {
 	}
 
 	public String getBorrowedList() {
-		String history = "ResourceID		Duedate\n";
+		String history = String.format("%20s %20s \n", "ResourceID","Duedate")";
 		for (int i = 0; i < currentBorrowHistory.size(); i++) {
 			history = history + currentBorrowHistory.get(i).getResourceID()
 					+ currentBorrowHistory.get(i).getOverdueDate()+"\n";
