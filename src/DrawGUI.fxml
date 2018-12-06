@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Cylinder?>
+<?import javafx.scene.shape.Line?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DrawGUIController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="365.0" prefWidth="635.0" style="-fx-background-color: #363636;" VBox.vgrow="ALWAYS">
+      <children>
+            <AnchorPane prefHeight="371.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="drawCircleButton" layoutY="20.0" mnemonicParsing="false" onAction="#handleDrawCircleEvent" prefHeight="27.0" prefWidth="139.0" text="Draw Circle" />
+                  <Button fx:id="drawStraightLineButton" layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleDrawStraightLineEvent" prefHeight="27.0" prefWidth="139.0" text="Draw Straight Line" />
+                  <Button fx:id="drawLineButton" layoutY="129.0" mnemonicParsing="false" onAction="#handleDrawLineEvent" prefHeight="27.0" prefWidth="139.0" text="Draw Line" />
+                  <Button fx:id="saveButton" layoutY="186.0" mnemonicParsing="false" onAction="#handleSaveEvent" prefHeight="27.0" prefWidth="139.0" text="Save" />
+                  <Button fx:id="clearDrawingButton" layoutY="236.0" mnemonicParsing="false" onAction="#handleClearEvent" prefHeight="27.0" prefWidth="139.0" text="Clear Drawing" />
+                  <ColorPicker fx:id="changeColorMenuButton" layoutX="2.0" layoutY="288.0" onAction="#handleChangeColorEvent" promptText="Change Colour" />
+                  <ImageView fx:id="swanLogo" fitHeight="83.0" fitWidth="181.0" layoutX="34.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@swansealogo.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Cylinder drawMode="LINE" height="100" layoutX="229.0" layoutY="50.0" radius="20" />
+            <Line endY="14.0" layoutX="249.0" layoutY="357.0" startY="-353.0" />
+            <Cylinder drawMode="LINE" height="100" layoutX="229.0" layoutY="350.0" radius="20" />
+            <Cylinder drawMode="LINE" height="100" layoutX="229.0" layoutY="250.0" radius="20" />
+            <Cylinder drawMode="LINE" height="100" layoutX="229.0" layoutY="150.0" radius="20" />
+            <Pane layoutX="249.0" prefHeight="400.0" prefWidth="390.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Canvas fx:id="drawCanvas" height="407.0" layoutY="-1.0" style="visibility: 0;" width="390.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Canvas>
+               </children>
+            </Pane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreateLaptopController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #6f7893; -fx-border-color: #000000; -fx-border-width: 5;" VBox.vgrow="ALWAYS">
+      <children>
+            <Label layoutX="52.0" layoutY="14.0" text="Laptop">
+               <font>
+                  <Font size="29.0" />
+               </font></Label>
+            <TextField fx:id="createLaptopID" editable="false" layoutX="88.0" layoutY="60.0" />
+            <TextField fx:id="createLaptopTitle" layoutX="88.0" layoutY="96.0" promptText="Brand" />
+            <TextField fx:id="createLaptopYear" layoutX="88.0" layoutY="132.0" promptText="Year made" />
+            <Label layoutX="40.0" layoutY="64.0" text="ID" />
+            <Label layoutX="38.0" layoutY="100.0" text="Title" />
+            <Label layoutX="36.0" layoutY="136.0" text="Year" />
+            <Label layoutX="34.0" layoutY="169.0" text="Image" />
+            <Button fx:id="laptopDrawImage" layoutX="88.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleDrawEvent" prefHeight="25.0" prefWidth="149.0" text="Get/Draw Image" />
+            <TextField fx:id="createLaptopManufacturer" layoutX="88.0" layoutY="204.0" promptText="Maker's specific company" />
+            <TextField fx:id="createLaptopModel" layoutX="88.0" layoutY="244.0" promptText="Specific model name" />
+            <Label layoutX="14.0" layoutY="208.0" text="Manufacturer" />
+            <Label layoutX="32.0" layoutY="248.0" text="Model" />
+            <TextField fx:id="createLaptopOS" layoutX="88.0" layoutY="278.0" promptText="Installed OS" />
+            <Label layoutX="35.0" layoutY="282.0" text="OS" />
+            <Button fx:id="laptopCancelButton" layoutX="36.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleCancelButtonEvent" text="Cancel" />
+            <Button fx:id="laptopCreateButton" layoutX="148.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleCreateButtonEvent" text="Create" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EditGuiController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="401.0" prefWidth="640.0" style="-fx-background-color: #6f7693;" VBox.vgrow="ALWAYS">
+      <children>
+            <Label layoutX="20.0" text="DVD">
+               <font>
+                  <Font name="System Font" size="64.0" />
+               </font></Label>
+            <TextField fx:id="enterID" editable="false" layoutX="88.0" layoutY="66.0" />
+            <TextField fx:id="enterTitle" layoutX="88.0" layoutY="104.0" />
+            <TextField fx:id="enterYear" layoutX="88.0" layoutY="140.0" prefHeight="27.0" prefWidth="167.0" />
+            <Label layoutX="40.0" layoutY="64.0" text="ID" />
+            <Label layoutX="38.0" layoutY="100.0" text="Title" />
+            <Label layoutX="36.0" layoutY="136.0" text="Year" />
+            <TextField fx:id="enterDirector" layoutX="88.0" layoutY="187.0" />
+            <TextField fx:id="enterRunTime" layoutX="88.0" layoutY="244.0" />
+            <Label layoutX="28.0" layoutY="192.0" text="Director" />
+            <Label layoutX="21.0" layoutY="249.0" text="Runtime" />
+            <TextField fx:id="enterLanguage" layoutX="407.0" layoutY="87.0" />
+            <Label layoutX="327.0" layoutY="92.0" text="Language" />
+            <Label layoutX="266.0" layoutY="124.0" text="Subtitle Language(s)" />
+            <Label layoutX="411.0" layoutY="40.0" text="Optional data">
+               <font>
+                  <Font size="22.0" />
+               </font></Label>
+            <Button fx:id="cancelButton" layoutX="490.0" layoutY="336.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="editDvdDetails" layoutX="568.0" layoutY="336.0" mnemonicParsing="false" text="Edit" />
+            <CheckBox fx:id="selectEnglish" layoutX="397.0" layoutY="124.0" mnemonicParsing="false" text="English" />
+            <CheckBox fx:id="selectSpanish" layoutX="397.0" layoutY="145.0" mnemonicParsing="false" text="Spanish" />
+            <CheckBox fx:id="selectGerman" layoutX="397.0" layoutY="169.0" mnemonicParsing="false" text="German" />
+            <CheckBox fx:id="selectFrench" layoutX="398.0" layoutY="196.0" mnemonicParsing="false" text="French" />
+            <CheckBox fx:id="selectJapanese" layoutX="398.0" layoutY="221.0" mnemonicParsing="false" text="Japanese" />
+            <CheckBox fx:id="selectOther" layoutX="401.0" layoutY="248.0" mnemonicParsing="false" text="Other" />
+            <ImageView fx:id="dvdImage" fitHeight="121.0" fitWidth="200.0" layoutX="230.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
