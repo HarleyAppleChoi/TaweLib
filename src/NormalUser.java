@@ -200,6 +200,10 @@ public class NormalUser extends User implements Storable {
 		return history;
 
 	}
+	
+	public String getUserName() {
+		return username;
+	}
 
 	@Override
 	public void store() throws SQLException {

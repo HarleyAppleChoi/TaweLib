@@ -43,26 +43,6 @@ public class Librarian extends User  {
 		
 	}
 
-		
-	
-	
-
-	
-	/** 
-	 * Get method to get the staffNo.
-	 * @return staffNo
-	 */
-	
-	private int getStaffNo() {
-		return staffNo;
-	}
-	/**
-	 * Set method to set the staffNo.
-	 * @pram staffNo
-	*/
-	private int setStaffNo(int staffNo) {
-	    this.staffNo = staffNo;
-	}
 	
 	/** 
 	 * Get method to get the employmentDate.
@@ -121,27 +101,27 @@ public class Librarian extends User  {
 	 */
 	
 	public void addBook(String title,String year, String image, int numCopies, int duration
-			,String author, String publisher, String genre, String ISBN ) throws SQLException {
+			,String author, String publisher, String genre, String ISBN ,String language) throws SQLException {
 		int id = addResource(title, year, image, numCopies, duration);
 		
 		String gen = "null";
 		if(!genre.isEmpty()) {
-			gen = genre;
+			gen = "'"+genre+"'";
 		}
 		
 		String isbn = "null";
 		if(!ISBN.isEmpty()) {
-			isbn = ISBN;
+			isbn = "'"+ISBN+"'";;
 		}
 		
 		String lang = "null";
 		if(!language.isEmpty()) {
-			lan = langauge;
+			lang = "'"+language+"'";
 		}
 		
 		//SQL query to add a Book to the Database with the entered values.
 		String query = "insert into book (resourceID, author, publisher, genre, ISBN, language)" 
-				+ "values('" + id +"','" + author + "','" + publisher + genre +"','"  + ISBN +"','"  + language +"');";
+				+ "values('" + id +"','" + author + "','" + publisher+ "',"+ gen +","  + isbn +","  + lang +");";
 		SQLHandle.set(query);
 	}
 	
@@ -219,7 +199,7 @@ public class Librarian extends User  {
 	 * @throws Exception 
 	 */
 	public void borrow(int resourceId, String username) throws Exception {
-		NormalUser user = new NormalUser(userName);
+		NormalUser user = new NormalUser(username);
 		user.borrow(resourceId);
 		System.out.println("Successfully Borrowed Resource.");
 	}
@@ -295,7 +275,7 @@ public class Librarian extends User  {
 				+"' and userName = '" + userName + "';";
 		SQLHandle.set(statement);
 		//adding the user to the returned_his table
-		statement = "insert into returned_his values('"+ u.getUsername()+"','"+ b.getBorrowNo() +"');";
+		statement = "insert into returned_his values('"+ u.getUserName()+"','"+ b.getBorrowNo() +"');";
 		SQLHandle.set(statement);
 
 		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '"+getCurrentDate()+"' WHERE borrowingID =" + borrowNo+";";
@@ -366,8 +346,8 @@ public class Librarian extends User  {
 			    
 		checkName(username);
 		String statement = "INSERT INTO user_(username, Password, firstname, lastname, mobileNo, address, image)"
-				+ " VALUES ('" + username + "','" + password.hashCode() + "','" + firstname + "','"
-				+ lastname + "','" + mobileNo + "','" + address + "','" + image + "');";
+				+ " VALUES ('" + username + "','" + password.hashCode() + "','" + firstName + "','"
+				+ lastName + "','" + mobileNo + "','" + address + "','" + image + "');";
 		SQLHandle.set(statement);
 		
 	}
