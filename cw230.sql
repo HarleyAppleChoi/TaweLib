@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: localhost
--- 產生時間： 2018 年 12 月 06 日 21:10
+-- 產生時間： 2018 年 12 月 06 日 23:42
 -- 伺服器版本: 10.1.36-MariaDB
 -- PHP 版本： 7.2.10
 
@@ -336,6 +336,30 @@ INSERT INTO `transaction_his` (`username`, `transID`) VALUES
 ('apple', '12'),
 ('apple', '13');
 
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `user_`
+--
+
+CREATE TABLE `user_` (
+  `username` char(40) NOT NULL,
+  `Password` varchar(50) NOT NULL,
+  `firstname` char(50) NOT NULL,
+  `lastname` char(50) NOT NULL,
+  `mobileNo` int(11) NOT NULL,
+  `address` char(100) NOT NULL,
+  `image` char(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `user_`
+--
+
+INSERT INTO `user_` (`username`, `Password`, `firstname`, `lastname`, `mobileNo`, `address`, `image`) VALUES
+('apple', '', 'apple', 'asdf', 234234, 'asdfasd', 'asd.sds'),
+('overdue', '', 'overdue', 'guy', 1323132, 'building', 'asdfa.sd');
+
 --
 -- 已匯出資料表的索引
 --
@@ -426,6 +450,12 @@ ALTER TABLE `transaction`
 --
 ALTER TABLE `transaction_his`
   ADD KEY `transID` (`transID`);
+
+--
+-- 資料表索引 `user_`
+--
+ALTER TABLE `user_`
+  ADD PRIMARY KEY (`username`);
 
 --
 -- 已匯出資料表的限制(Constraint)
