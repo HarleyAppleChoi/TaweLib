@@ -155,12 +155,12 @@ public class Librarian extends User  {
         // If there are subtitle languages, adds each of them to the
         // DVD_subtitle table along with the corresponding resourceID.
         String subt = "null";
-		if(!subtitle.isEmpty()) {
+		if(subtitle.length!=0) {
 		    
 			while(subLanguages.hasNext()) {
-	            sublang = sublanguages.readNext();
+	            subt = subtitle.readNext();
 	            //SQl query to add the subtitle language to the database.
-                String query = "insert into DVD_subtitle (resourceID, subtitle)" + "values('" + id + "','" + sublang + "');";
+                String query = "insert into DVD_subtitle (resourceID, subtitle)" + "values('" + id + "','" + subt + "');";
 		        SQLHandle.set(query);
             }
 		}
