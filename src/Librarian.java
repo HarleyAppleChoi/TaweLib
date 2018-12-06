@@ -202,20 +202,20 @@ public class Librarian extends User {
 		}
 		return result;
 	}
+		
+     /**
+      * This method allows a Librarian to add a laptop to Database.
+	  * @param title
+	  * @param year
+	  * @param image
+	  * @param numAvailableCopies
+	  * @param duration
+	  * @param manufacturer
+	  * @param model
+	  * @param operationSystem
+	  * @throws SQLException
+	  */
 
-	/**
-	 * This method allows a Librarian to add a laptop to Database.
-	 * 
-	 * @param title
-	 * @param year
-	 * @param image
-	 * @param numAvailableCopies
-	 * @param duration
-	 * @param manufacturer
-	 * @param model
-	 * @param operationSystem
-	 * @throws SQLException
-	 */
 	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
 			String manufacturer, String model, String operatingSystem) throws SQLException {
 		int id = addResource(title, year, image, numAvailableCopies, duration);
@@ -369,8 +369,7 @@ public class Librarian extends User {
 	}
 
 	/**
-	 * This method allows a librarian to create a new User.
-	 * 
+	 * This method allows a librarian to create a new User. Hashcode is stored in the password field.
 	 * @param username
 	 * @param password
 	 * @param firstName
