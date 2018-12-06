@@ -186,7 +186,7 @@ public class Librarian extends User  {
 		}
 		return result;
 	}
-	
+		
      /**
       * This method allows a Librarian to add a laptop to Database.
 	  * @param title
@@ -353,7 +353,7 @@ public class Librarian extends User  {
 	}
 	
 	/**
-	 * This method allows a librarian to create a new User.
+	 * This method allows a librarian to create a new User. Hashcode is stored in the password field.
 	 * @param username
 	 * @param password
 	 * @param firstName
