@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
  * 
  * @author Jwana Abdalah
  * @modified by James Hogg
- * @version 1
+ * @version 1.1
  *
  */
 public abstract class User implements Storable {
