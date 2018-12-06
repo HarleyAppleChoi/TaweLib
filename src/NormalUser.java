@@ -74,8 +74,9 @@ public class NormalUser extends User implements Storable {
 	}
 
 	/**
-	 * this is boolean function to checke if the user can borrorow any resource. 
-	 * if their balabce < 0 they can borrow 
+	 * this is boolean function to checke if the user can borrorow any resource. if
+	 * their balabce < 0 they can borrow
+	 * 
 	 * @return b
 	 */
 
@@ -153,11 +154,11 @@ public class NormalUser extends User implements Storable {
 	public int getBalance() {
 		return balance;
 	}
-	
 
 	/**
-	 * this method allowes normalUser to request for resource
-	 * and add it ti database table
+	 * this method allowes normalUser to request for resource and add it ti database
+	 * table
+	 * 
 	 * @param resourceID
 	 * @throws Exception
 	 */
@@ -183,15 +184,16 @@ public class NormalUser extends User implements Storable {
 		// generate string
 		while (r.next()) {
 			// if a transaction is a fine
-			if (r.getString("borrowingID")!=null) {
+			if (r.getString("borrowingID") != null) {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				int days = b.getOverdueDay();
-				history = history +"Overdue transaction:"+ String.format("%s , %o, %s, %o\n", r.getDate("date").toString(), r.getInt("amount"),
-						r.getString("resourceID"), days);
-				
+				history = history + "Overdue transaction:" + String.format("%s , %o, %s, %o\n",
+						r.getDate("date").toString(), r.getInt("amount"), r.getString("resourceID"), days);
+
 			} else {
-				//transaction is not a fine
-				history = history + "Normal transaction:"+String.format("%s , %o\n", r.getDate("date"), r.getInt("amount"));
+				// transaction is not a fine
+				history = history + "Normal transaction:"
+						+ String.format("%s , %o\n", r.getDate("date"), r.getInt("amount"));
 			}
 
 		}
@@ -200,7 +202,32 @@ public class NormalUser extends User implements Storable {
 		return history;
 
 	}
+
+	public String getBorrowedList() {
+		String history = "ResourceID		Duedate\n";
+		for (int i = 0; i < currentBorrowHistory.size(); i++) {
+			history = history + currentBorrowHistory.get(i).getResourceID()
+					+ currentBorrowHistory.get(i).getOverdueDate()+"\n";
+		}
+		return history;
+	}
 	
+	public String getRequestedItem() {
+		String history = "ResourceID	\n";
+		for (int i = 0; i < requesting.size(); i++) {
+			history = history + requesting.get(i)+"\n";
+		}
+		return history;
+	}
+	
+	public String getReservedItem() {
+		String history = "ResourceID	\n";
+		for (int i = 0; i < requesting.size(); i++) {
+			history = history + reserved.get(i)+"\n";
+		}
+		return history;
+	}
+
 	public String getUserName() {
 		return username;
 	}

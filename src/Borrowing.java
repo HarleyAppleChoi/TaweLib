@@ -98,8 +98,20 @@ public class Borrowing implements Storable {
 	 * @return returnDate
 	 */
 	public String getReturnDate() {
-		return dateFormat.format(returnDate);
+		String value = "No return Date";
+		if(returnDate!=null) {
+			value = dateFormat.format(returnDate);
+		}
+		return value;
 
+	}
+	
+	public String getOverdueDate() {
+		String value = "No due Date";
+		if(returnDate!=null) {
+			value = dateFormat.format(endDate);
+		}
+		return value;
 	}
 
 	/**
@@ -146,6 +158,7 @@ public class Borrowing implements Storable {
 		}
 		return fine;
 	}
+	
 	
 	public int getOverdueDay() {
 		long diff = returnDate.getTime() - endDate.getTime();
@@ -225,6 +238,10 @@ public class Borrowing implements Storable {
 	public void store() throws SQLException {
 		SQLHandle.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + ","
 				+ "null," + this.RESOURCE_ID + "," + this.returnDate.toString() + "y");
+	}
+	
+	public String getResourceID() {
+		return RESOURCE_ID;
 	}
 
 }
