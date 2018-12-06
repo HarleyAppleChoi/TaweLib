@@ -171,14 +171,14 @@ public class NormalUser extends User implements Storable {
 
 	public String transactionHistory() throws Exception {
 		SQLHandle a = new SQLHandle();
-		String history = "Date&Time	Amount	ResourceID		numOfOverdueDays\n";
+		String history = String.format("%20s %20s %20s %20s \n", "Date" , "Amount", "resourceID(ifOverdue)", "days(if Overdue)");
 		String statement = "select T.transID, T.amount, T.date,W.resourceID, W.borrowingID  from \n"
 				+ "(select transaction.transID,amount,date,username from transaction,transaction_his \n"
 				+ " where transaction.transID=transaction_his.transID) as T \n" + "left outer join \n"
 				+ "(select transID,borrowing.borrowingID, borrowDate, dueDate, returnDate, resourceID "
 				+ "from overdue_transaction,borrowing \n"
 				+ " where overdue_transaction.borrowingID = borrowing.borrowingID) as W\n" + "on T.transID=W.transID \n"
-				+ "where T.username = '" + this.username + "';";
+				+ "where T.username = '" + this.username + "' order by date;";
 		ResultSet r = a.nonStaticGet(statement);
 
 		// generate string
@@ -187,13 +187,13 @@ public class NormalUser extends User implements Storable {
 			if (r.getString("borrowingID") != null) {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				int days = b.getOverdueDay();
-				history = history + "Overdue transaction:" + String.format("%s , %o, %s, %o\n",
+				history = history + String.format("%20s %20o %20s %20o\n",
 						r.getDate("date").toString(), r.getInt("amount"), r.getString("resourceID"), days);
 
 			} else {
 				// transaction is not a fine
-				history = history + "Normal transaction:"
-						+ String.format("%s , %o\n", r.getDate("date"), r.getInt("amount"));
+				history = history 
+						+ String.format("%20s %20o\n", r.getDate("date"), r.getInt("amount"));
 			}
 
 		}

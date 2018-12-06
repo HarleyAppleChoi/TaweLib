@@ -21,10 +21,10 @@ public class Test {
 			l.borrow(1, "apple");
 			*/
 			//l.borrow(1, "apple");
-			NormalUser u = new NormalUser("apple");
+			NormalUser u = new NormalUser("overdue");
 			Librarian b = new Librarian();
 			System.out.println(b.getBorrowingHistory(1));
-			
+			System.out.println(u.transactionHistory());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
