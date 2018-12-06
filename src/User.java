@@ -2,7 +2,7 @@ import javafx.scene.image.Image;
 
 /**
  * User.java
- * this class creats all the instance of the user class .
+ * this class creates all the instance of the user class .
  * 
  * @author Jwana Abdalah
  * @version 1
@@ -10,21 +10,25 @@ import javafx.scene.image.Image;
  */
 public abstract class User implements Storable {
 	protected String username;
+	protected String password;
 	protected String firstName;
 	protected String lastName;
 	protected int mobileNo;
 	protected Image userImage;
 	
 	/**
-	 * Constructor to construct a User's anstance.
+	 * Constructor to construct a User's instance.
 	 * @param username
+	 * @param password
 	 * @param firstName
 	 * @param lastName
 	 * @param mobileNo
 	 * @param userImage
+	 
 	 */
-	protected User(String username, String firstName, String lastName, int mobileNo, Image userImage) {
+	protected User(String username, String password, String firstName, String lastName, int mobileNo, Image userImage) {
 		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobileNo = mobileNo;
@@ -51,6 +55,23 @@ public abstract class User implements Storable {
 	 */
 	protected void setUsername(String userame) {
 		this.username = username;
+	}
+	
+	
+	/**
+	 * Get method to get the password.
+	 * @return password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 *  Set method to set the password.
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -83,7 +104,7 @@ public abstract class User implements Storable {
 	/**
 	 * Set method to set the lastName.
 	 * 
-	 * @param u
+	 * @param lastName
 	 */
 	protected void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -119,7 +140,7 @@ public abstract class User implements Storable {
 	/**
 	 * Set method to set the users image.
 	 * 
-	 * @param u
+	 * @param userImage
 	 */
 	protected void setImage(Image userImage) {
 		this.userImage = userImage;
