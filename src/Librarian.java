@@ -166,6 +166,27 @@ public class Librarian extends User  {
 		}
 	}
 	
+	/**
+	 * Show each borrowtime , returntime, user involved on spacticular resources.
+	 * @param resourceID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public String  getBorrowingHistory(int resourceID) throws SQLException {
+		String query = "select borrowing.borrowDate, borrowing.returnDate, T.username \n" + 
+				"from borrowing,\n" + 
+				"((select * from returned_his) union all (select * from current_borrowing)) as T\n" + 
+				"where borrowing.borrowingID = T.borrowingID "
+				+ "and resourceID = '"+resourceID+"' order by borrowDate";
+		
+		ResultSet r = SQLHandle.get(query);
+		String result = "borrowtime , returntime, user\n";
+		while(r.next()) {
+			result += r.getString("borrowDate")+"	"+r.getString("returnDate")+" "+r.getString("username")+"\n";
+		}
+		return result;
+	}
+	
      /**
       * This method allows a Librarian to add a laptop to Database.
 	  * @param title

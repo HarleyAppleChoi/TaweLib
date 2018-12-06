@@ -22,9 +22,9 @@ public class Test {
 			*/
 			//l.borrow(1, "apple");
 			NormalUser u = new NormalUser("apple");
-			System.out.println(u.getRequestedItem());
-			System.out.println(u.getReservedItem());
-			System.out.println(u.getBorrowedList());
+			Librarian b = new Librarian();
+			System.out.println(b.getBorrowingHistory(1));
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
