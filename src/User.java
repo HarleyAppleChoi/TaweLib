@@ -2,9 +2,10 @@ import javafx.scene.image.Image;
 
 /**
  * User.java
- * this class creats all the instance of the user class .
+ * this class creates all the instance of the user class .
  * 
  * @author Jwana Abdalah
+ * @modified by James Hogg
  * @version 1
  *
  */
@@ -16,7 +17,7 @@ public abstract class User implements Storable {
 	protected Image userImage;
 	
 	/**
-	 * Constructor to construct a User's anstance.
+	 * Constructor to construct a User's instance.
 	 * @param username
 	 * @param firstName
 	 * @param lastName
@@ -49,7 +50,7 @@ public abstract class User implements Storable {
 	 * 
 	 * @param username
 	 */
-	protected void setUsername(String userame) {
+	protected void setUsername(String username) {
 		this.username = username;
 	}
 
@@ -119,7 +120,7 @@ public abstract class User implements Storable {
 	/**
 	 * Set method to set the users image.
 	 * 
-	 * @param u
+	 * @param userImage
 	 */
 	protected void setImage(Image userImage) {
 		this.userImage = userImage;
