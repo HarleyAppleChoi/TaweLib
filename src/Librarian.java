@@ -234,15 +234,37 @@ public class Librarian extends User {
 	
 	
 	
-	public void editResource(int resourceId, String title, String year, String image, int numCopies, int duration) throws SQLException {
+	public void editResource(int resourceId, String title, String year, String image, int numAvCopies, int duration) throws SQLException {
 		
 		String newTitle = "null";
 		if (!title.isEmpty()) {
 			newTitle = "UPDATE resource SET title = '" + newTitle + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newTitle);
-
 		}
 		
+		String newYear = "null";
+		if (!year.isEmpty()) {
+			newYear = "UPDATE resource SET year = '" + newYear + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newYear);
+		}
+		
+		String newImage = "null";
+		if (!image.isEmpty()) {
+			newImage = "UPDATE resource SET image = '" + newImage + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newImage);
+		}
+		
+		String newNumAvCopies = "null";
+		if (numAvCopies != 0) {
+			newNumAvCopies = "UPDATE resource SET numAvCopies = '" + newNumAvCopies + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newNumAvCopies);
+		}
+		
+		String newDuration = "null";
+		if (duration != 0) {
+			newDuration = "UPDATE resource SET duration = '" + newDuration + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newDuration);
+		}	
 	}
 	
 	
