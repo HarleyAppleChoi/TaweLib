@@ -167,7 +167,7 @@ public class Librarian extends User {
 		}
 
 		// SQL statement to add the DVD and it's values to the database.
-		String query = "insert into DVD (resourceID, director, runtime, language)" + "values('" + id + "','" + director
+		String query = "insert into DVD (resourceID, director, runtime, _language)" + "values('" + id + "','" + director
 				+ "','" + runtime + "','" + language + "');";
 		SQLHandle.set(query);
 
