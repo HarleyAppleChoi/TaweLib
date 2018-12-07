@@ -164,7 +164,7 @@ public class Librarian extends User {
 
 		// SQL statement to add the DVD and it's values to the database.
 		String query = "insert into DVD (resourceID, director, runtime, language)" + "values('" + id + "','" + director
-				+ "','" + runtime + "','" + language + "');";
+				+ "','" + runtime + "','" + lang + "');";
 		SQLHandle.set(query);
 
 		// If there are subtitle languages, adds each of them to the
@@ -310,7 +310,7 @@ public class Librarian extends User {
 				+ "';";
 		SQLHandle.set(statement);
 		// adding the user to the returned_his table
-		statement = "insert into returned_his values('" + u.getUserName() + "','" + b.getBorrowNo() + "');";
+		statement = "insert into returned_his values('" + u.getUsername() + "','" + b.getBorrowNo() + "');";
 		SQLHandle.set(statement);
 
 		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '" + getCurrentDate() + "' WHERE borrowingID ="

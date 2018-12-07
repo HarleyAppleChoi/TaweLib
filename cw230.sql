@@ -10,7 +10,7 @@ CREATE TABLE `book` (
   `publisher` char(70) NOT NULL,
   `genre` char(100) DEFAULT NULL,
   `ISBN` text,
-  `language` varchar(4) DEFAULT NULL
+  `language` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
