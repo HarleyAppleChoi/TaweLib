@@ -122,6 +122,14 @@ public class Resource implements Storable {
 		}
 		return b;
 	}
+	
+	public int getAvCopies() {
+		int b=numCopies-(currentBorrow.size() + reserve.size() + request.size()); 
+		if (b<0) {
+			b=0;
+		}
+		return b;
+	}
 
 	public void reserve() throws SQLException {
 		if (request.isEmpty()) {
