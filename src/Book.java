@@ -12,7 +12,7 @@ class Book extends Resource {
 	private String author;
 	private String publisher;
 	private String genre;
-	private int isbn;
+	private String isbn;
 	private String language;
 
 
@@ -33,7 +33,7 @@ class Book extends Resource {
 	 * @param langauge
 	 */
 	public Book(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
-			String author, String publisher, String genre, int isbn, String langauge) {
+			String author, String publisher, String genre, String isbn, String langauge) {
 
 		super(id, title, year, thumbNailImage, numCopies, numAvailableCopies);
 		this.author = author;
@@ -103,7 +103,7 @@ class Book extends Resource {
 	 * 
 	 * @return isbn
 	 */
-	public int getISBN() {
+	public String getISBN() {
 		return isbn;
 	}
 
@@ -112,7 +112,7 @@ class Book extends Resource {
 	 * 
 	 * @param isbn
 	 */
-	public void setISBN(int isbn) {
+	public void setISBN(String isbn) {
 		this.isbn = isbn;
 	}
 
