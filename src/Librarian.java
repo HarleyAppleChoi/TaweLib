@@ -36,13 +36,14 @@ public class Librarian extends User {
 	 *            stores last name
 	 * @param mobileNo
 	 *            stores mobile number
+	 * @param address
 	 * @param userImage
 	 *            stores the user image
 	 */
 
-	public Librarian(int staffNo,String password ,int employmentDaye, String username, String firstName, String lastName, int mobileNo,
-			Image userImage) {
-		super(username, password, lastName, lastName, mobileNo, userImage);
+	public Librarian(int staffNo, int employmentDate, String username, String password, String firstName, String lastName, int mobileNo,
+			String address, Image userImage) {
+		super(username, password, firstName, lastName, mobileNo, address, userImage);
 		this.staffNo = staffNo;
 		this.employmentDate = employmentDate;
 	}

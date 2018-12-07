@@ -14,6 +14,7 @@ public abstract class User implements Storable {
 	protected String firstName;
 	protected String lastName;
 	protected int mobileNo;
+	protected String address;
 	protected Image userImage;
 	
 	/**
@@ -23,15 +24,17 @@ public abstract class User implements Storable {
 	 * @param firstName
 	 * @param lastName
 	 * @param mobileNo
+	 * @param address
 	 * @param userImage
 	 
 	 */
-	protected User(String username, String password, String firstName, String lastName, int mobileNo, Image userImage) {
+	protected User(String username, String password, String firstName, String lastName, int mobileNo, String address, Image userImage) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobileNo = mobileNo;
+		this.address = address;
 		this.userImage = userImage;
 	}
 	
@@ -126,6 +129,23 @@ public abstract class User implements Storable {
 	 */
 	protected void setMobileNo(int mobileNo) {
 		this.mobileNo = mobileNo;
+	}
+	
+	
+	/**
+	 * Set method to set the address.
+	 * @return address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * Get method to get the address.
+	 * @param address
+	 */
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	/**

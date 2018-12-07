@@ -74,8 +74,8 @@ public class NormalUser extends User implements Storable {
 	}
 
 	/**
-	 * this is boolean function to checke if the user can borrorow any resource. if
-	 * their balabce < 0 they can borrow
+	 * this is boolean function to check if the user can borrow any resource. if
+	 * their balance < 0 they can borrow
 	 * 
 	 * @return b
 	 */
@@ -100,7 +100,7 @@ public class NormalUser extends User implements Storable {
 	 * 
 	 * @param resourceID
 	 * @throws Exception
-	 *             if the normalUser either get fine or overdue item in thier
+	 *             if the normalUser either get fine or overdue item in their
 	 *             balance
 	 */
 	public void borrow(int resourceID) throws Exception {
@@ -129,11 +129,12 @@ public class NormalUser extends User implements Storable {
 	 * @param userImage
 	 */
 
-	public void getUserinfo(String username, String firstName, String lastName, int mobileNo, Image userImage) {
+	public void getUserinfo(String username, String firstName, String lastName, int mobileNo, String address, Image userImage) {
 		super.username = username;
 		super.firstName = firstName;
 		super.lastName = lastName;
 		super.mobileNo = mobileNo;
+		super.address = address;
 		super.userImage = userImage;
 	}
 
@@ -156,7 +157,7 @@ public class NormalUser extends User implements Storable {
 	}
 
 	/**
-	 * this method allowes normalUser to request for resource and add it ti database
+	 * this method allows normalUser to request for resource and add it ti database
 	 * table
 	 * 
 	 * @param resourceID
@@ -204,7 +205,7 @@ public class NormalUser extends User implements Storable {
 	}
 
 	public String getBorrowedList() {
-		String history = String.format("%20s %20s \n", "ResourceID","Duedate")";
+		String history = String.format("%20s %20s \n", "ResourceID","Duedate");
 		for (int i = 0; i < currentBorrowHistory.size(); i++) {
 			history = history + currentBorrowHistory.get(i).getResourceID()
 					+ currentBorrowHistory.get(i).getOverdueDate()+"\n";
@@ -228,7 +229,7 @@ public class NormalUser extends User implements Storable {
 		return history;
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
 
