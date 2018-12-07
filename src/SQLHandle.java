@@ -19,7 +19,7 @@ public class SQLHandle {
 	// your SQL username
 	final static String USERNAME = "root";
 	// your password
-	final static String PASSWORD = "123";
+	final static String PASSWORD = "";
 	final static String GETALLRESOURCES = " ";
 	static Statement statement = null;
 	static Connection conn = null;
