@@ -201,5 +201,15 @@ public class ControllerLibGui {
 	
 	@FXML
 	public void handleResourceIDInput(ActionEvent e) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createlibrarian.fxml"));
+			 Parent root = (Parent)fxmlLoader.load();
+			 Scene scene= new Scene(root); 
+			 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			 window.setScene(scene);
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 	}
 }
