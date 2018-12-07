@@ -24,8 +24,8 @@ public class Test {
 			NormalUser u = new NormalUser("overdue");
 			Librarian b = new Librarian();
 			b.addBook("aaa", "123", "adfsa", 1, 8, "asdf", "asdfa", "asdf", "12341", "asdf");
-			//b.newNormalUser("ball", "12321", "asf", "cake", 1231, "adsg", "werwe.wwwe");
-			b.newLibrarian("yuyi", "1231", "asdfafa", "asdfa", 12312, "aasdf", "10-10-10", "10-10-10");
+			b.addDvd("wra", "12ss3", "aaaasdfasf", 2, 0, "sssf", "ssasdfa","sssasdf" ,"sssssssadas,sfddf");
+			b.addLaptop("asdfa", "1002", "jpeg", 42, 34, "apple", "macbook", "high sherra");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
