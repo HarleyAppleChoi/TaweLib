@@ -231,6 +231,22 @@ public class Librarian extends User {
 		SQLHandle.set(query);
 
 	}
+	
+	
+	
+	public void editResource(int resourceId, String title, String year, String image, int numCopies, int duration) throws SQLException {
+		
+		String newTitle = "null";
+		if (!title.isEmpty()) {
+			newTitle = "UPDATE resource SET title = '" + newTitle + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newTitle);
+
+		}
+		
+	}
+	
+	
+	
 
 	/**
 	 * This method allows the NormalUser to borrow a resource through the Librarian.
