@@ -23,7 +23,7 @@ public class Search {
          
         //results into string
         while(r.next()) {
-        	result = result + String.format("%s , %s, %s, %s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%20s , %20s, %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
 					r.getInt("_year"), r.getInt("numAvCopies"));
         }
         return result;
@@ -43,7 +43,7 @@ public class Search {
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%s , %s, %s, %s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%20s , %20s, %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
 					r.getInt("_year"), r.getInt("numAvCopies"));
         }
         return result;
