@@ -119,7 +119,7 @@ public class Librarian extends User {
 	 * @throws SQLException
 	 */
 
-	public void addBook(String title, String year, String image, int numCopies, int duration, String author,
+	public void addBook(String title, String year, String image, int numAvCopies, int duration, String author,
 			String publisher, String genre, String ISBN, String language) throws SQLException {
 		int id = addResource(title, year, image, numCopies, duration);
 
@@ -158,9 +158,9 @@ public class Librarian extends User {
 	 * @param language
 	 * @throws SQLException
 	 */
-	public void addDvd(String title, String year, String image, int numAvailableCopies, int duration, String director,
+	public void addDvd(String title, String year, String image, int numAvCopies, int duration, String director,
 			String language, String runtime, String subtitle) throws SQLException {
-		int id = addResource(title, year, image, numAvailableCopies, duration);
+		int id = addResource(title, year, image, numAvCopies, duration);
 
 		String lang = "null";
 		if (!language.isEmpty()) {
@@ -221,9 +221,9 @@ public class Librarian extends User {
 	  * @throws SQLException
 	  */
 
-	public void addLaptop(String title, String year, String image, int numAvailableCopies, int duration,
+	public void addLaptop(String title, String year, String image, int numAvCopies, int duration,
 			String manufacturer, String model, String operatingSystem) throws SQLException {
-		int id = addResource(title, year, image, numAvailableCopies, duration);
+		int id = addResource(title, year, image, numAvCopies, duration);
 
 		// SQL query to add a new laptop and its values to the database.
 		String query = "insert into laptop (resourceID, manufacturer, model, operatingSystem)" + "values('" + id + "','"
@@ -238,36 +238,127 @@ public class Librarian extends User {
 		
 		String newTitle = "null";
 		if (!title.isEmpty()) {
-			newTitle = "UPDATE resource SET title = '" + newTitle + "' WHERE resourceID = '" + resourceId + "';";
+			newTitle = "UPDATE resource SET title = '" + title + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newTitle);
 		}
 		
 		String newYear = "null";
 		if (!year.isEmpty()) {
-			newYear = "UPDATE resource SET year = '" + newYear + "' WHERE resourceID = '" + resourceId + "';";
+			newYear = "UPDATE resource SET year = '" + year + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newYear);
 		}
 		
 		String newImage = "null";
 		if (!image.isEmpty()) {
-			newImage = "UPDATE resource SET image = '" + newImage + "' WHERE resourceID = '" + resourceId + "';";
+			newImage = "UPDATE resource SET image = '" + image + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newImage);
 		}
 		
 		String newNumAvCopies = "null";
 		if (numAvCopies != 0) {
-			newNumAvCopies = "UPDATE resource SET numAvCopies = '" + newNumAvCopies + "' WHERE resourceID = '" + resourceId + "';";
+			newNumAvCopies = "UPDATE resource SET numAvCopies = '" + numAvCopies + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newNumAvCopies);
 		}
 		
 		String newDuration = "null";
 		if (duration != 0) {
-			newDuration = "UPDATE resource SET duration = '" + newDuration + "' WHERE resourceID = '" + resourceId + "';";
+			newDuration = "UPDATE resource SET duration = '" + duration + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newDuration);
 		}	
 	}
 	
+	public void editBook(int resourceId, String title, String year, String image, int numAvCopies, int duration, String author,
+			String publisher, String genre, String ISBN, String language) throws SQLException {
+		
+		editResource(resourceId, title, year, image, numAvCopies, duration);
+		
+		String newAuthor = "null";
+		if (!author.isEmpty()) {
+			newAuthor = "UPDATE book SET author = '" + author + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newAuthor);
+		}
+		
+		String newPublisher = "null";
+		if (!publisher.isEmpty()) {
+			newPublisher = "UPDATE book SET publisher = '" + publisher + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newPublisher);
+		}
+		
+		String newGenre = "null";
+		if (!publisher.isEmpty()) {
+			newGenre = "UPDATE book SET publisher = '" + genre + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newGenre);
+		}
+		
+		String newISBN = "null";
+		if (!ISBN.isEmpty()) {
+			newISBN = "UPDATE book SET ISBN = '" + ISBN + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newISBN);
+		}
+		
+		String newLanguage = "null";
+		if (!language.isEmpty()) {
+			newLanguage = "UPDATE book SET language = '" + language + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newLanguage);
+		}
+	}
 	
+	
+	
+	public void editDVD(int resourceId, String title, String year, String image, int numAvCopies, int duration, String director,
+			String language, String runtime, String subtitle) throws SQLException {
+		
+		editResource(resourceId, title, year, image, numAvCopies, duration);
+		
+		String newDirector = "null";
+		if (!director.isEmpty()) {
+			newDirector = "UPDATE DVD SET director = '" + director + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newDirector);
+		}
+		
+		String newLanguage = "null";
+		if (!language.isEmpty()) {
+			newLanguage = "UPDATE DVD SET language = '" + language + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newLanguage);
+		}
+		
+		
+		String newRuntime = "null";
+		if (!runtime.isEmpty()) {
+			newRuntime = "UPDATE DVD SET runtime = '" + runtime + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newRuntime);
+		}
+		
+		String newSubtitle = "null";
+		if (!runtime.isEmpty()) {
+			newSubtitle = "UPDATE DVD SET subtitle = '" + subtitle + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newSubtitle);
+		}
+	}
+	
+	public void editLaptop (int resourceId, String title, String year, String image, int numAvCopies, int duration,
+			String manufacturer, String model, String operatingSystem) throws SQLException {
+		
+		editResource(resourceId, title, year, image, numAvCopies, duration);
+		
+		String newManufacturer = "null";
+		if (!manufacturer.isEmpty()) {
+			newManufacturer = "UPDATE DVD SET manufacturer = '" + manufacturer + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newManufacturer);
+		}
+		
+		String newModel = "null";
+		if (!model.isEmpty()) {
+			newModel = "UPDATE DVD SET model = '" + model + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newModel);
+		}
+		
+		String newOperatingSystem = "null";
+		if (!operatingSystem.isEmpty()) {
+			newOperatingSystem = "UPDATE DVD SET model = '" + operatingSystem + "' WHERE resourceID = '" + resourceId + "';";
+			SQLHandle.set(newOperatingSystem);
+		}
+	}
 	
 
 	/**
