@@ -23,8 +23,7 @@ public class Test {
 			//l.borrow(1, "apple");
 			NormalUser u = new NormalUser("overdue");
 			Librarian b = new Librarian();
-			System.out.println(b.getBorrowingHistory(1));
-			System.out.println(u.transactionHistory());
+			b.addBook("aaa", "123", "adfsa", 1, 8, "asdf", "asdfa", "asdf", "12341", "asdf");
 			//b.newNormalUser("ball", "12321", "asf", "cake", 1231, "adsg", "werwe.wwwe");
 			b.newLibrarian("yuyi", "1231", "asdfafa", "asdfa", 12312, "aasdf", "10-10-10", "10-10-10");
 		} catch (Exception e) {

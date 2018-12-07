@@ -88,11 +88,16 @@ public class Librarian extends User {
 	 */
 	private int addResource(String title, String year, String image, int numCopies, int duration) throws SQLException {
 		// selects max id from resource
-		int id = SQLHandle.get("select max(resourceID) from resource;").getInt(0);
+		
+		
+		ResultSet r = SQLHandle.get("select max(resourceID) from resource;");
+		r.next();
+		int id = r.getInt("max(resourceID)")+1;
+		
 		System.out.println(id);
 
 		// SQL query to add a new resource with the inputed values.
-		String query = "insert into resource (resourceID,title,year_,image,numcopies, duration)" + "values ('" + id
+		String query = "insert into resource (resourceID,title,year,image,numAvcopies, duration)" + "values ('" + id
 				+ "','" + title + "','" + year + "','" + image + "','" + numCopies + "','" + duration + "')";
 
 		SQLHandle.set(query);
