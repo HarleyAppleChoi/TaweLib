@@ -330,10 +330,10 @@ public class Librarian extends User {
 		}
 		
 		String newSubtitle = "null";
-		if (!runtime.isEmpty()) {
-			newSubtitle = "UPDATE DVD SET subtitle = '" + subtitle + "' WHERE resourceID = '" + resourceId + "';";
+		if (!subtitle.isEmpty()) {
+			newSubtitle = "UPDATE DVD_subtitle SET subtitle = '" + subtitle + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newSubtitle);
-		}
+		}	
 	}
 	
 	public void editLaptop (int resourceId, String title, String year, String image, int numAvCopies, int duration,
