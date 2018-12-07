@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
  */
 public abstract class User implements Storable {
 	protected String username;
+	protected String password;
 	protected String firstName;
 	protected String lastName;
 	protected int mobileNo;
@@ -19,13 +20,16 @@ public abstract class User implements Storable {
 	/**
 	 * Constructor to construct a User's instance.
 	 * @param username
+	 * @param password
 	 * @param firstName
 	 * @param lastName
 	 * @param mobileNo
 	 * @param userImage
+	 
 	 */
-	protected User(String username, String firstName, String lastName, int mobileNo, Image userImage) {
+	protected User(String username, String password, String firstName, String lastName, int mobileNo, Image userImage) {
 		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobileNo = mobileNo;
@@ -52,6 +56,23 @@ public abstract class User implements Storable {
 	 */
 	protected void setUsername(String username) {
 		this.username = username;
+	}
+	
+	
+	/**
+	 * Get method to get the password.
+	 * @return password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 *  Set method to set the password.
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -84,7 +105,7 @@ public abstract class User implements Storable {
 	/**
 	 * Set method to set the lastName.
 	 * 
-	 * @param u
+	 * @param lastName
 	 */
 	protected void setLastName(String lastName) {
 		this.lastName = lastName;

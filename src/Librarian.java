@@ -195,10 +195,9 @@ public class Librarian extends User {
 				+ "' order by borrowDate";
 
 		ResultSet r = SQLHandle.get(query);
-		String result = "borrowtime , returntime, user\n";
+		String result = String.format("%20s %20s %20s \n", "borrowtime" , "returntime", "user");
 		while (r.next()) {
-			result += r.getString("borrowDate") + "	" + r.getString("returnDate") + " " + r.getString("username")
-					+ "\n";
+			result += String.format("%20s %20s %20s \n", r.getString("borrowDate") , r.getString("returnDate"), r.getString("username"));
 		}
 		return result;
 	}
@@ -408,6 +407,7 @@ public class Librarian extends User {
 		newUser(username, password, firstname, lastname, mobileNo, address, image);
 		String statement = "INSERT INTO normal_user(username, balance) VALUES ('" + username + "','" + 0 + "');";
 		SQLHandle.set(statement);
+		System.out.println("NormalUserAdded");
 	}
 
 	/**
