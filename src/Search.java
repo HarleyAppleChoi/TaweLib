@@ -25,8 +25,8 @@ public class Search {
         //results into string
         while(r.next()) {
         	Resource resource = new Resource(r.getInt("resourceID"));
-        	result = result + String.format("%20s , %20s, %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
-					r.getInt("_year"), resource.getAvCopies());
+        	result = result + String.format("%20s , %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
+					r.getInt("_year"));
         }
         return result;
     }

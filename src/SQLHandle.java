@@ -19,7 +19,7 @@ public class SQLHandle {
 	// your SQL username
 	final static String USERNAME = "root";
 	// your password
-	final static String PASSWORD = "123";
+	final static String PASSWORD = "";
 	final static String GETALLRESOURCES = " ";
 	static Statement statement = null;
 	static Connection conn = null;
@@ -32,11 +32,12 @@ public class SQLHandle {
 		try {
 			conn = DriverManager.getConnection(HOST_NAME, USERNAME, PASSWORD);
 			statement = conn.createStatement();
+			System.out.println("Success! Connected to the database");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Success! Connected to the database");
+		
 	}
 
 	/**
