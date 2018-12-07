@@ -40,9 +40,9 @@ public class Librarian extends User {
 	 *            stores the user image
 	 */
 
-	public Librarian(int staffNo, int employmentDaye, String username, String firstName, String lastName, int mobileNo,
+	public Librarian(int staffNo, int employmentDate, String username, String password, String firstName, String lastName, int mobileNo,
 			Image userImage) {
-		super(username, firstName, lastName, mobileNo, userImage);
+		super(username, password, firstName, lastName, mobileNo, userImage);
 		this.staffNo = staffNo;
 		this.employmentDate = employmentDate;
 	}
