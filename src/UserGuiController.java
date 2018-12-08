@@ -87,9 +87,12 @@ public class UserGuiController {
 	
 	@FXML
 	private void buttonSearchDvd(ActionEvent e) {
+		System.out.println(bookButton);
+		System.out.println(dvdButton);
+		System.out.println(laptopButton);
 		dvdButton = !dvdButton;
 		laptopButton = false;
-		dvdButton = false;
+		bookButton = false;
 		try {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
@@ -100,6 +103,9 @@ public class UserGuiController {
 	}
 	@FXML
 	private void buttonSearchLaptop(ActionEvent e) {
+		System.out.println(bookButton);
+		System.out.println(dvdButton);
+		System.out.println(laptopButton);
 		laptopButton = !laptopButton;
 		dvdButton = false;
 		bookButton = false;
@@ -115,6 +121,9 @@ public class UserGuiController {
 
 	@FXML
 	private void buttonSearchBook(ActionEvent e) {
+		System.out.println(bookButton);
+		System.out.println(dvdButton);
+		System.out.println(laptopButton);
 		bookButton = !bookButton;
 		dvdButton = false;
 		laptopButton = false;
@@ -133,6 +142,8 @@ public class UserGuiController {
 	
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
+
+
 		if (bookButton == true) {
 			try {
 				SQLHandle c = new SQLHandle();
@@ -141,31 +152,35 @@ public class UserGuiController {
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
+		//	bookButton = false;
 		} else if (dvdButton == true) {
 			try {
 				SQLHandle c = new SQLHandle();
-				Search s = new Search();
-				userSearch.setText(s.searchDvd(searchQuery.getText()));
+				Search r = new Search();
+				userSearch.setText(r.searchDvd(searchQuery.getText()));
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
+		//	dvdButton = false;
+
 		} else if (laptopButton == true) {
 			try {
 				SQLHandle c = new SQLHandle();
-				Search s = new Search();
-				userSearch.setText(s.searchLaptop(searchQuery.getText()));
+				Search t = new Search();
+				userSearch.setText(t.searchLaptop(searchQuery.getText()));
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-		} else if (bookButton == false && dvdButton == false && laptopButton == false) {
+		//	laptopButton = false;
+		} else if (bookButton == false || dvdButton == false || laptopButton == false) {
 		try {
 			SQLHandle c = new SQLHandle();
-			Search s = new Search();
-			userSearch.setText(s.searchResources(searchQuery.getText()));
+			Search p = new Search();
+			userSearch.setText(p.searchResources(searchQuery.getText()));
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
-		}
+	}
 	}
 	
 	@FXML
