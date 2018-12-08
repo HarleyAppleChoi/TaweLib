@@ -3,6 +3,8 @@
 */
 
 
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +43,11 @@ public class ControllerCreateBook {
 	
 	@FXML
 	TextField create_bookEnterLanguage;
+	@FXML
+	TextField numbOfCopies;
+	
+	@FXML
+	TextField loanDurationLaptop;
 	
 	@FXML
 	Button create_bookCancelCreation;
@@ -66,8 +73,13 @@ public class ControllerCreateBook {
 		
 	}
 @FXML
-private  void handleCreateEvent(ActionEvent e) {
-		
+private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQLException {
+	SQLHandle c = new SQLHandle();
+	Librarian l = new Librarian();
+	l.addBook(create_bookEnterTitle.getText(), create_bookEnterYear.getText(), "" ,Integer.parseInt(numbOfCopies.getText()), Integer.parseInt(loanDurationLaptop.getText()), create_bookEnterAuthor.getText(), create_bookEnterPublisher.getText(), create_bookEnterGenre.getText(), create_bookEnterIsbn.getText(), create_bookEnterLanguage.getText());
+			
+	
+	
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
 			 Parent root = (Parent)fxmlLoader.load();

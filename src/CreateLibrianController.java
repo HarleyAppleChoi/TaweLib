@@ -4,6 +4,8 @@
 
 
 
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +20,10 @@ import javafx.stage.Stage;
 public class CreateLibrianController {
 
 	@FXML
-	TextField UsernameTextField;
-	
+	TextField usernameTextField;
 	@FXML
-	TextField StaffNoTextField;
+	TextField usernamePassword;
+	
 	
 	@FXML
 	TextField firstNameTextField;
@@ -48,7 +50,7 @@ public class CreateLibrianController {
 	TextField staffNoTextField;
 	
 	@FXML
-	TextField employmentDateTextField;
+	TextField employDateTextField;
 	
 	@FXML
 	Button cancelLibrianianCancelButton;
@@ -77,7 +79,11 @@ public class CreateLibrianController {
 		
 	}	
 	@FXML
-	private  void handleCreateLibrianEvent(ActionEvent e) {
+	private  void handleCreateLibrianEvent(ActionEvent e) throws NumberFormatException, SQLException {
+			SQLHandle c = new SQLHandle();
+			Librarian l = new Librarian();
+			l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(),firstNameTextField.getText(), lastNameTextField.getText(), Integer.parseInt(mobileNumberTextField.getText()),line1AddressTextField.getText(), " ",  employDateTextField.getText());
+		
 		
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
@@ -89,7 +95,7 @@ public class CreateLibrianController {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-		///add code to create user
+		
 			
 		
 	}	

@@ -15,10 +15,8 @@
                <font>
                   <Font size="29.0" />
                </font></Label>
-            <TextField fx:id="dvdID" editable="false" layoutX="88.0" layoutY="60.0" />
             <TextField fx:id="dvdTitle" layoutX="88.0" layoutY="96.0" promptText="DVD Title" />
             <TextField fx:id="dvdYear" layoutX="88.0" layoutY="132.0" promptText="Year made" />
-            <Label layoutX="40.0" layoutY="64.0" text="ID" />
             <Label layoutX="38.0" layoutY="100.0" text="Title" />
             <Label layoutX="36.0" layoutY="136.0" text="Year" />
             <Label layoutX="34.0" layoutY="169.0" text="Image" />
@@ -37,6 +35,10 @@
             <Button fx:id="dvdCancel" layoutX="490.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleCancelDVDEvent" text="Cancel" />
             <Button fx:id="dvdCreate" layoutX="568.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleCreateDVDEvent" text="Create" />
             <TextField fx:id="dvdSubtitle" layoutX="416.0" layoutY="127.0" prefHeight="119.0" prefWidth="149.0" promptText="Separate with commas" />
+            <TextField fx:id="numberOfCopiesDVD" layoutX="121.0" layoutY="288.0" promptText="Number of copies" />
+            <Label layoutX="10.0" layoutY="293.0" text="Number of Copies" />
+            <TextField fx:id="durationDVD" layoutX="121.0" layoutY="329.0" promptText="Duration" />
+            <Label layoutX="10.0" layoutY="334.0" text="Duration" />
       </children>
     </AnchorPane>
   </children>
