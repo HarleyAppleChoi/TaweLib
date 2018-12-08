@@ -3,6 +3,8 @@
 */
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 
@@ -61,7 +63,7 @@ public class DrawGUIController {
 	}
 
 	@FXML
-	private void handleSaveEvent(ActionEvent e) {
+	private void handleSaveEvent(ActionEvent e) throws SQLException {
 		save();
 		
 			try {
@@ -176,11 +178,21 @@ public class DrawGUIController {
 	
 		
 	
-	public void save() {
-		String username = Storage.returnUsername();
+	public void save() throws SQLException {
+		
+		SQLHandle sql = new SQLHandle();
+		ResultSet r = sql.nonStaticGet("Select max(image) from user_;");
+		int number = 0;
+		while(r.next()) {
+			number = r.getInt("max(image)")+1;
+		}
+		
+		Storage.storeNum(number);
+		
 		drawCanvas.snapshot(null, wim);
-		String filePath = "/Users/iestynprice/Desktop/ProfileImages/image.png ";
-		File file = new File(filePath );
+		String filePath = "/Users/apple/Desktop/"+String.valueOf(number)+".png";
+		System.out.println(filePath);
+		File file = new File(filePath);
 		
 		
 		try {
