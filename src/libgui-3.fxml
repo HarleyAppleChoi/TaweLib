@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #6f7893;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLibGui">
+<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #6f7893;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLibGui">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #6f7893;" VBox.vgrow="ALWAYS">
          <children>
@@ -79,7 +79,7 @@
                                     <TableColumn fx:id="borrowingTableBasicInfoYear" prefWidth="75.0" text="Year" />
                                  </columns>
                               </TableView>
-                              <Label layoutX="415.0" layoutY="13.0" text="Search:">
+                              <Label fx:id="borrowingEnterSearchQueryborrowingEnterSearchQuery" layoutX="392.0" layoutY="13.0" text="ResourceID">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
@@ -101,7 +101,7 @@
                                     <Font size="15.0" />
                                  </font></Label>
                               <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
-                              <Button fx:id="borrowingGenerateBorrow" layoutX="388.0" layoutY="290.0" mnemonicParsing="false" text="Borrow" />
+                              <Button fx:id="borrowingGenerateBorrow" layoutX="388.0" layoutY="290.0" mnemonicParsing="false" onAction="#borrowEvent" text="Borrow" />
                            </children>
                         </AnchorPane>
                   </content>

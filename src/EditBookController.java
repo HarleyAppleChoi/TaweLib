@@ -42,8 +42,7 @@ public class EditBookController {
 	
 	@FXML 
 	TextField enterLanguage;
-	
-	
+
 	@FXML
 	TextField enterNumCopies;
 	

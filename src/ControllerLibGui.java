@@ -221,7 +221,8 @@ public class ControllerLibGui {
 				ex.printStackTrace();
 			}
 		} else {
-			statement = "select resourceID from DVD where resourceID ='" + edit_resourceEnterResourceId.getText() + "';";
+			statement = "select resourceID from DVD where resourceID ='" + edit_resourceEnterResourceId.getText()
+					+ "';";
 			r = sql.nonStaticGet(statement);
 			if (r.next()) {
 				// this is a DVD
@@ -257,4 +258,17 @@ public class ControllerLibGui {
 			}
 		}
 	}
-}
+
+	@FXML
+	public void borrowEvent() throws NumberFormatException, Exception {
+		Librarian l = new Librarian();
+		try{
+			l.borrow(Integer.parseInt(borrowingEnterSearchQuery.getText()), 
+					borrowingEnterBorrowerUsername.getText());
+		}catch(IllegalArgumentException e) {
+			System.out.println("You cannot borrow!");
+		}
+		}
+	}
+
+
