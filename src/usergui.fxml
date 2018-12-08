@@ -7,12 +7,13 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #6f7693;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserGuiController">
+<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #6f7693;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserGuiController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -22,23 +23,21 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="6.0" layoutY="36.0" prefHeight="300.0" prefWidth="266.0">
-                                <columns>
-                                  <TableColumn fx:id="idColumn" prefWidth="87.0" text="ID" />
-                                  <TableColumn fx:id="titleColumn" prefWidth="93.0" text="Title" />
-                                    <TableColumn fx:id="yearColumn" prefWidth="85.0" text="Year" />
-                                </columns>
-                              </TableView>
                               <RadioButton fx:id="searchBook" layoutX="6.0" layoutY="11.0" mnemonicParsing="false" text="Book" />
                               <RadioButton fx:id="searchDVD" layoutX="68.0" layoutY="11.0" mnemonicParsing="false" text="DVD" />
                               <RadioButton fx:id="searchLaptop" layoutX="125.0" layoutY="11.0" mnemonicParsing="false" text="Laptop" />
-                              <TextField fx:id="searchColumn" layoutX="353.0" layoutY="7.0" prefHeight="25.0" prefWidth="249.0" />
-                              <Label layoutX="307.0" layoutY="11.0" text="Search:" />
+                              <TextField fx:id="searchQuery" layoutX="308.0" layoutY="7.0" prefHeight="25.0" prefWidth="249.0" />
+                              <Label layoutX="260.0" layoutY="11.0" text="Search:" />
                               <TableView layoutX="308.0" layoutY="36.0" prefHeight="300.0" prefWidth="311.0">
                                 <columns>
                                   <TableColumn fx:id="additionalInformationColumn" prefWidth="310.0" text="Additional Information" />
                                 </columns>
                               </TableView>
+                              <Button fx:id="searchButton" layoutX="567.0" layoutY="7.0" mnemonicParsing="false" onAction="#loadDataFromDb" text="Search" />
+                              <TextArea fx:id="userSearch" layoutX="14.0" layoutY="66.0" prefHeight="266.0" prefWidth="282.0" />
+                              <Label layoutX="42.0" layoutY="37.0" text="ID" />
+                              <Label layoutX="127.0" layoutY="37.0" text="Title" />
+                              <Label layoutX="232.0" layoutY="37.0" text="Year" />
                            </children>
                         </AnchorPane>
                   </content>

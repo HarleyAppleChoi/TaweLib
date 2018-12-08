@@ -18,13 +18,13 @@ public class Search {
 	 */
     public String displayResources() throws SQLException{
     	String result = "ResourceID Title Year\n";
-        statement = "SELECT resourceID,title,_year,numAvCopies FROM resource";
+        statement = "SELECT resourceID,title,_year FROM resource;";
         ResultSet r = SQLHandle.get(statement);
          
         //results into string
         while(r.next()) {
-        	result = result + String.format("%20s , %20s, %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
-					r.getInt("_year"), r.getInt("numAvCopies"));
+        	result = result + String.format("%20s , %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
+					r.getInt("year"));
         }
         return result;
     }
@@ -37,14 +37,14 @@ public class Search {
 	 */
     public String searchResources(String searchString) throws SQLException{
     	String result = "ResourceID Title Year\n";
-    	statement = "SELECT resourceID,title,_year,numAvCopies FROM resource "
-    	+ "WHERE CONCAT(`resourceID`, `title`, `_year`) LIKE '%"+searchString+"%'";
+    	statement = "SELECT resourceID,title,year,numAvCopies FROM resource "
+    	+ "WHERE CONCAT(`resourceID`, `title`, `year`) LIKE '%"+searchString+"%'";
         ResultSet r = SQLHandle.get(statement);
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%20s , %20s, %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
-					r.getInt("_year"), r.getInt("numAvCopies"));
+        	result = result + String.format("%20s , %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
+					r.getInt("year"));
         }
         return result;
     }
@@ -79,17 +79,17 @@ public class Search {
 	 */
     public String searchDvd(String searchString) throws SQLException{
     	String result = "ResourceID Title Director Language Subtitle Runtime Year AvailableCopies\n";
-    	statement = "SELECT distinct RESOURCE.resourceID,title, direction, _language, subtitle, runtime,_year,numAvCopies "
+    	statement = "SELECT distinct RESOURCE.resourceID,title, direction, _language, subtitle, runtime,year,numAvCopies "
     			+ "FROM resource, DVD, DVD_subtitle where RESOURCE.resourceID = DVD.resourceID and"
     			+ "RESOURCE.resourceID = DVD_subtitle.resourceID and"
-    	+ "WHERE CONCAT(`resourceID`, `title`, `_year`, `subtitle`, `_language` `direction`) LIKE '%"+searchString+"%'";
+    	+ "WHERE CONCAT(`resourceID`, `title`, `year`, `subtitle`, `_language` `direction`) LIKE '%"+searchString+"%'";
         ResultSet r = SQLHandle.get(statement);
         
         //results to string
         while(r.next()) {
         	result = result + String.format("%s, %s, %s, %s, %s, %s %s, %s\n", r.getInt("resourceID"), r.getString("title"),
         			r.getString("direction"), r.getString("_language"), r.getString("subtitle"), r.getInt("runtime"), 
-        			r.getInt("_year"), r.getInt("numAvCopies"));
+        			r.getInt("year"), r.getInt("numAvCopies"));
         }
         return result;
     }

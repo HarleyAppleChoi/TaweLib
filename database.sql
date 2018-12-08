@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `book` (
-  `resourceID` char(6) NOT NULL,
+  `resourceID` int(6) NOT NULL,
   `author` char(70) NOT NULL,
   `publisher` char(70) NOT NULL,
   `genre` char(100) DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `borrowing` (
   `borrowDate` date NOT NULL,
   `dueDate` date DEFAULT NULL,
   `returnDate` date DEFAULT NULL,
-  `resourceID` char(10) NOT NULL,
+  `resourceID` int(10) NOT NULL,
   `onLoan` char(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -99,7 +99,7 @@ INSERT INTO `current_borrowing` (`username`, `borrowingID`) VALUES
 --
 
 CREATE TABLE `current_borrow_his` (
-  `resourceID` char(10) NOT NULL,
+  `resourceID` int(10) NOT NULL,
   `borrowingID` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -117,7 +117,7 @@ INSERT INTO `current_borrow_his` (`resourceID`, `borrowingID`) VALUES
 --
 
 CREATE TABLE `DVD` (
-  `resourceID` char(6) NOT NULL,
+  `resourceID` int(6) NOT NULL,
   `director` char(70) NOT NULL,
   `runtime` char(70) NOT NULL,
   `_language` char(100) DEFAULT NULL
@@ -130,7 +130,7 @@ CREATE TABLE `DVD` (
 --
 
 CREATE TABLE `DVD_subtitle` (
-  `resourceID` char(10) NOT NULL,
+  `resourceID` int(10) NOT NULL,
   `subtitle` char(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -141,7 +141,7 @@ CREATE TABLE `DVD_subtitle` (
 --
 
 CREATE TABLE `laptop` (
-  `resourceID` char(10) NOT NULL,
+  `resourceID` int(10) NOT NULL,
   `manufacturer` char(30) NOT NULL,
   `model` char(60) NOT NULL,
   `operatingSystem` char(70) NOT NULL
@@ -204,7 +204,7 @@ INSERT INTO `overdue_transaction` (`transID`, `borrowingID`) VALUES
 
 CREATE TABLE `request_item` (
   `username` char(30) NOT NULL,
-  `resourceID` char(10) NOT NULL
+  `resourceID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -215,7 +215,7 @@ CREATE TABLE `request_item` (
 
 CREATE TABLE `reserved_item` (
   `username` char(30) NOT NULL,
-  `resourceID` char(10) NOT NULL
+  `resourceID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -234,7 +234,7 @@ INSERT INTO `reserved_item` (`username`, `resourceID`) VALUES
 --
 
 CREATE TABLE `resource` (
-  `resourceID` char(6) NOT NULL,
+  `resourceID` int(6) NOT NULL,
   `title` char(70) NOT NULL,
   `year` char(30) NOT NULL,
   `image` char(100) NOT NULL,

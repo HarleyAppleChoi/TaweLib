@@ -91,7 +91,7 @@ public class Librarian extends User {
 		System.out.println(id);
 
 		// SQL query to add a new resource with the inputed values.
-		String query = "insert into resource (resourceID,title,year_,image,numcopies, duration)" + "values ('" + id
+		String query = "insert into resource (resourceID,title,year,image,numcopies, duration)" + "values ('" + id
 				+ "','" + title + "','" + year + "','" + image + "','" + numCopies + "','" + duration + "')";
 
 		SQLHandle.set(query);
