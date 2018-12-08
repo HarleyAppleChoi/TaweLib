@@ -269,6 +269,12 @@ public class ControllerLibGui {
 			System.out.println("You cannot borrow!");
 		}
 		}
+	
+		@FXML
+		public void returnEvent() throws NumberFormatException, Exception {
+			Librarian l = new Librarian();
+			l.returnResource(Integer.parseInt(returnEnterResourceId.getText()));
+		}
 	}
 
 
