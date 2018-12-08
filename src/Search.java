@@ -17,7 +17,7 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String displayResources() throws SQLException{
-    	String result = "ResourceID Title Year\n";
+    	String result = "";
         statement = "SELECT resourceID,title,_year FROM resource;";
         ResultSet r = SQLHandle.get(statement);
          
@@ -36,14 +36,14 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchResources(String searchString) throws SQLException{
-    	String result = "ResourceID Title Year\n";
+    	String result = "";
     	statement = "SELECT resourceID,title,year,numAvCopies FROM resource "
     	+ "WHERE CONCAT(`resourceID`, `title`, `year`) LIKE '%"+searchString+"%'";
         ResultSet r = SQLHandle.get(statement);
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%20s , %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%20s     %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
 					r.getInt("year"));
         }
         return result;
@@ -56,17 +56,17 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchBook(String searchString) throws SQLException{
-    	String result = "ResourceID Title Author Publisher Genre ISBN Language Year AvailableCopies\n";
-    	statement = "SELECT distinct RESOURCE.resourceID,title,author,publisher,genre,ISBN,_language,_year,numAvCopies "
-    			+ "FROM resource, book where RESOURCE.resourceID = BOOK.resourceID and"
-    	+ "WHERE CONCAT(`resourceID`, `title`, `_year`,`author`, `publisher`, `genre`, `ISBN`, `language`) LIKE '%"+searchString+"%'";
+    	String result = "ResourceID      Title              Author   Publisher  Genre   ISBN  Language Year NumAvCopies Image\n";
+    	statement = "SELECT distinct resource.resourceID,title,author,publisher,genre,ISBN,language,year,numAvCopies, image "
+    			+ "FROM resource, book WHERE resource.resourceID = book.resourceID and "
+    	+ "CONCAT( `title`, `year`,`author`, `publisher`, `genre`, `ISBN`, `language`) LIKE '%"+searchString+"%'";
         ResultSet r = SQLHandle.get(statement);
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%s, %s, %s,%s %s, %s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%s %30s %10s %15s %10s %7s %7s %10s %7s %22s\n", r.getInt("resourceID"), r.getString("title"),
         			r.getString("author"), r.getString("publisher"), r.getString("genre"), r.getString("ISBN"),
-        			r.getString("_language"),r.getInt("_year"), r.getInt("numAvCopies"));
+        			r.getString("language"), r.getInt("year"), r.getInt("numAvCopies"), r.getString("image"));
         }
         return result;
     }

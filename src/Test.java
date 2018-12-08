@@ -20,11 +20,13 @@ public class Test {
 				//System.out.println(result.getString("title"));
 			}
 			
-			l.borrow(1, "apple");
+			//l.borrow(1, "apple");
 			
-			l.borrow(1, "apple");
+			//l.borrow(1, "apple");
 			NormalUser u = new NormalUser("apple");
 			Librarian b = new Librarian();
+			
+			b.addBook("Lord of ring", "1998", "x.jpg", 2, 13, "da vinci", "me", "horror", "2001", "french");
 			//System.out.println(b.getBorrowingHistory(1));
 			
 			

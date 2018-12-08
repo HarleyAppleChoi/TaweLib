@@ -23,21 +23,13 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <RadioButton fx:id="searchBook" layoutX="6.0" layoutY="11.0" mnemonicParsing="false" text="Book" />
-                              <RadioButton fx:id="searchDVD" layoutX="68.0" layoutY="11.0" mnemonicParsing="false" text="DVD" />
-                              <RadioButton fx:id="searchLaptop" layoutX="125.0" layoutY="11.0" mnemonicParsing="false" text="Laptop" />
+                              <RadioButton fx:id="searchBook" layoutX="6.0" layoutY="11.0" mnemonicParsing="false" onAction="#radioSearchBook" text="Book" />
+                              <RadioButton fx:id="searchDVD" layoutX="68.0" layoutY="11.0" mnemonicParsing="false" onAction="#radioSearchDvd" text="DVD" />
+                              <RadioButton fx:id="searchLaptop" layoutX="125.0" layoutY="11.0" mnemonicParsing="false" onAction="#radioSearchLaptop" text="Laptop" />
                               <TextField fx:id="searchQuery" layoutX="308.0" layoutY="7.0" prefHeight="25.0" prefWidth="249.0" />
                               <Label layoutX="260.0" layoutY="11.0" text="Search:" />
-                              <TableView layoutX="308.0" layoutY="36.0" prefHeight="300.0" prefWidth="311.0">
-                                <columns>
-                                  <TableColumn fx:id="additionalInformationColumn" prefWidth="310.0" text="Additional Information" />
-                                </columns>
-                              </TableView>
                               <Button fx:id="searchButton" layoutX="567.0" layoutY="7.0" mnemonicParsing="false" onAction="#loadDataFromDb" text="Search" />
-                              <TextArea fx:id="userSearch" layoutX="14.0" layoutY="66.0" prefHeight="266.0" prefWidth="282.0" />
-                              <Label layoutX="42.0" layoutY="37.0" text="ID" />
-                              <Label layoutX="127.0" layoutY="37.0" text="Title" />
-                              <Label layoutX="232.0" layoutY="37.0" text="Year" />
+                              <TextArea fx:id="userSearch" layoutX="14.0" layoutY="66.0" prefHeight="266.0" prefWidth="612.0" />
                            </children>
                         </AnchorPane>
                   </content>
