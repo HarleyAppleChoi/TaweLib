@@ -213,7 +213,7 @@
                                     <Font size="15.0" />
                                  </font></Label>
                               <TextField fx:id="pay_fineShowFineRemaining" editable="false" layoutX="156.0" layoutY="74.0" />
-                              <Button fx:id="pay_fineGeneratePayment" layoutX="195.0" layoutY="126.0" mnemonicParsing="false" text="Pay" />
+                              <Button fx:id="pay_fineGeneratePayment" layoutX="195.0" layoutY="126.0" mnemonicParsing="false" onAction="#handlePayEvent" text="Pay" />
                            </children>
                         </AnchorPane>
                     </content>

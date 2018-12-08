@@ -277,11 +277,12 @@ public class ControllerLibGui {
 		}
 	
 	@FXML
-	public void handlePayEvent(ActionEvent e) {
+	public void handlePayEvent(ActionEvent e) throws NumberFormatException, Exception {
 		SQLHandle c = new SQLHandle();
 		Librarian l = new Librarian();
 		l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
 
+}
 }
 
 

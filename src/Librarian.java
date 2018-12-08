@@ -486,7 +486,7 @@ public class Librarian extends User {
 
 		int newBalance = u.getBalance() + amount;
 		// SQL query to update the normal_user table with the new balance amount
-		String statement = "Update normal_user set balance = " + newBalance + ";";
+		String statement = "Update normal_user set balance = " + newBalance + " where username = '"+username+"';";
 		SQLHandle.set(statement);
 
 		statement = "select count(*) from transaction;";
