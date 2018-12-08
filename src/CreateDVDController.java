@@ -3,6 +3,8 @@
 */
 
 
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,11 @@ public class CreateDVDController {
 	
 	@FXML
 	TextField dvdID;
+	@FXML
+	TextField numberOfCopiesDVD;
+	
+	@FXML
+	TextField durationDVD;
 	
 	@FXML
 	TextField dvdTitle;
@@ -52,7 +59,12 @@ public class CreateDVDController {
 	
 
 	@FXML
-	private void handleCreateDVDEvent(ActionEvent e) {
+	private void handleCreateDVDEvent(ActionEvent e) throws NumberFormatException, SQLException {
+		SQLHandle c = new SQLHandle();
+		Librarian l = new Librarian();
+		l.addDvd(dvdTitle.getText(), dvdYear.getText(), "", Integer.parseInt(numberOfCopiesDVD.getText()), Integer.parseInt(durationDVD.getText()),dvdDirector.getText(),dvdLanguage.getText(), dvdRuntime.getText(), dvdSubtitle.getText());
+		
+		
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
 			 Parent root = (Parent)fxmlLoader.load();

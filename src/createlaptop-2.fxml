@@ -15,10 +15,8 @@
                <font>
                   <Font size="29.0" />
                </font></Label>
-            <TextField fx:id="createLaptopID" editable="false" layoutX="88.0" layoutY="60.0" />
             <TextField fx:id="createLaptopTitle" layoutX="88.0" layoutY="96.0" promptText="Brand" />
             <TextField fx:id="createLaptopYear" layoutX="88.0" layoutY="132.0" promptText="Year made" />
-            <Label layoutX="40.0" layoutY="64.0" text="ID" />
             <Label layoutX="38.0" layoutY="100.0" text="Title" />
             <Label layoutX="36.0" layoutY="136.0" text="Year" />
             <Label layoutX="34.0" layoutY="169.0" text="Image" />
@@ -31,6 +29,10 @@
             <Label layoutX="35.0" layoutY="282.0" text="OS" />
             <Button fx:id="laptopCancelButton" layoutX="36.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleCancelButtonEvent" text="Cancel" />
             <Button fx:id="laptopCreateButton" layoutX="148.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleCreateButtonEvent" text="Create" />
+            <TextField fx:id="numberOfCopiesLaptop" layoutX="414.0" layoutY="59.0" promptText="Number Of Copies" />
+            <Label layoutX="298.0" layoutY="64.0" text="NumberOfCopies" />
+            <TextField fx:id="durationLaptop" layoutX="414.0" layoutY="110.0" promptText="Duration" />
+            <Label layoutX="313.0" layoutY="116.0" text="Duration" />
       </children>
     </AnchorPane>
   </children>
