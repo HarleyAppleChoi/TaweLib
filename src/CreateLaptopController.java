@@ -68,8 +68,9 @@ public class CreateLaptopController {
 	private void handleCreateButtonEvent(ActionEvent e) throws NumberFormatException, SQLException {
 		SQLHandle c = new SQLHandle();
 		Librarian l = new Librarian();
-		l.addLaptop(createLaptopTitle.getText(), createLaptopYear.getText(), " ",Integer.parseInt(numberOfCopiesLaptop.getText()), createLaptopManufacturer.getText(), createLaptopModel.getText(), createLaptopOS.getText(),Integer.parseInt(durationLaptop.getText()));
-
+		l.addLaptop(createLaptopTitle.getText(), createLaptopYear.getText(), " ",Integer.parseInt(numberOfCopiesLaptop.getText()), 
+				Integer.parseInt(durationLaptop.getText()), createLaptopModel.getText(), 
+				createLaptopManufacturer.getText(),createLaptopOS.getText());
 		
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
