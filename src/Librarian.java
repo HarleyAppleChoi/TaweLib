@@ -569,7 +569,7 @@ public class Librarian extends User {
 	 * @param employmentDate
 	 */
 	public void newLibrarian(String username, String password, String firstname, String lastname, int mobileNo,
-			String address, String image, String employmentDate) throws SQLException {
+			String address, int image, String employmentDate) throws SQLException {
 
 		newUser(username, password, firstname, lastname, mobileNo, address, image);
 
