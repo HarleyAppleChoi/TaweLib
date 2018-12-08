@@ -119,7 +119,7 @@ public class Librarian extends User {
 	 * @throws SQLException
 	 */
 
-	public void addBook(String title, String year, String image, int numAvCopies, int duration, String author,
+	public void addBook(String title, String year, String image, int numCopies, int duration, String author,
 			String publisher, String genre, String ISBN, String language) throws SQLException {
 		int id = addResource(title, year, image, numCopies, duration);
 
