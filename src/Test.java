@@ -1,3 +1,4 @@
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -10,28 +11,31 @@ public class Test {
 		ResultSet result = null;
 		ResultSet result2 = null;
 
-		try {
+		
+		 try {
 			Librarian l = new Librarian();
-			/*
+			
 			result = SQLHandle.get("select * from resource");
 			while(result.next()) {
-				System.out.println(result.getString("title"));
+				//System.out.println(result.getString("title"));
 			}
 			
-			l.borrow(1, "apple");
-			*/
+			//l.borrow(1, "apple");
+			
 			//l.borrow(1, "apple");
 			//NormalUser u = new NormalUser("overdue");
 			
 			Librarian b = new Librarian();
 			b.newNormalUser("hau", "123", "choi", "choi", 1231, "afsda", "asdfad");
 			b.newLibrarian("library", "123", "lib", "lib", 3213, "lib", "asfd", "10-10-10");
+
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			 //TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 	}
+
 }

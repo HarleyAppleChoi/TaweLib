@@ -67,7 +67,7 @@ public class Resource implements Storable {
 		ResultSet r = SQLHandle.get(statement);
 		while (r.next()) {
 			title = r.getString("title");
-			year = r.getInt("_year");
+			year = r.getInt("year");
 			// please do a method to change string into image.
 			// this.thumbNailImage=thumbNailImage = r.getString("thumbNailImage");
 			this.numCopies = numCopies = r.getInt("numAvCopies");

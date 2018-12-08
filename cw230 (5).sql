@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
@@ -29,7 +29,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `book` (
+
   `resourceID` int(10) NOT NULL,
+
   `author` char(70) NOT NULL,
   `publisher` char(70) NOT NULL,
   `genre` char(100) DEFAULT NULL,
@@ -101,6 +103,7 @@ INSERT INTO `current_borrowing` (`username`, `borrowingID`) VALUES
 CREATE TABLE `current_borrow_his` (
   `resourceID` int(10) NOT NULL,
   `borrowingID` int(10) NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -117,7 +120,9 @@ INSERT INTO `current_borrow_his` (`resourceID`, `borrowingID`) VALUES
 --
 
 CREATE TABLE `DVD` (
+
   `resourceID` int(10) NOT NULL,
+
   `director` char(70) NOT NULL,
   `runtime` char(70) NOT NULL,
   `_language` char(100) DEFAULT NULL
