@@ -38,9 +38,6 @@ public class UserGuiController {
 	Tab searchTab;
 	
 	@FXML
-	Tab dashboardTab;
-	
-	@FXML
 	Tab userDataTab;
 	
 	@FXML
@@ -83,6 +80,10 @@ public class UserGuiController {
 	Button reserveButton;
 	
 	//Transaction Tab
+	
+	@FXML
+	Tab dashboardTab;
+	
 	@FXML
 	TextArea transaction;
 	
