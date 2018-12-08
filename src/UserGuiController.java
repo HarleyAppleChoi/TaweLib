@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -28,7 +29,9 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class UserGuiController {
-	private boolean bookRadioButton = false;
+	private boolean bookButton = false;
+	private boolean dvdButton = false;
+	private boolean laptopButton= false;
 
 	@FXML
 	Tab searchTab;
@@ -54,13 +57,13 @@ public class UserGuiController {
 	Button searchButton;
 	
 	@FXML
-	RadioButton bookButton;
+	Button searchBook;
 	
 	@FXML
-	RadioButton dvdButton;
+	Button searchDvd;
 	
 	@FXML
-	RadioButton laptopButton;
+	Button searchlaptop;
 	
 	@FXML
 	TextField searchResource;
@@ -69,17 +72,38 @@ public class UserGuiController {
 	TextArea userSearch;
 	
 	@FXML
-	private void radioSearchDvd(ActionEvent e) {
-		
+	private void buttonSearchDvd(ActionEvent e) {
+		dvdButton = !dvdButton;
+		laptopButton = false;
+		dvdButton = false;
+		try {
+			SQLHandle c = new SQLHandle();
+			Search s = new Search();
+			userSearch.setText(s.searchDvd(searchQuery.getText()));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 	@FXML
-	private void radioSearchLaptop(ActionEvent e) {
-		
+	private void buttonSearchLaptop(ActionEvent e) {
+		laptopButton = !laptopButton;
+		dvdButton = false;
+		bookButton = false;
+		try {
+			SQLHandle c = new SQLHandle();
+			Search s = new Search();
+			userSearch.setText(s.searchLaptop(searchQuery.getText()));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
-	/**
+
 	@FXML
-	private void radioSearchBook(ActionEvent e) {
+	private void buttonSearchBook(ActionEvent e) {
+		bookButton = !bookButton;
+		dvdButton = false;
+		laptopButton = false;
 		try {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
@@ -88,19 +112,45 @@ public class UserGuiController {
 			ex.printStackTrace();
 		}
 	}
-	*/
-	@FXML private void radioSearchBook(ActionEvent e) {
-		
-	}
+
+	//@FXML private void radioSearchBook(ActionEvent e) {
+	//	bookRadioButton = !bookRadioButton;
+	//}
 	
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
+		if (bookButton == true) {
+			try {
+				SQLHandle c = new SQLHandle();
+				Search s = new Search();
+				userSearch.setText(s.searchBook(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} else if (dvdButton == true) {
+			try {
+				SQLHandle c = new SQLHandle();
+				Search s = new Search();
+				userSearch.setText(s.searchDvd(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} else if (laptopButton == true) {
+			try {
+				SQLHandle c = new SQLHandle();
+				Search s = new Search();
+				userSearch.setText(s.searchLaptop(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} else if (bookButton == false && dvdButton == false && laptopButton == false) {
 		try {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
 			userSearch.setText(s.searchResources(searchQuery.getText()));
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+		}
 		}
 	}
 	

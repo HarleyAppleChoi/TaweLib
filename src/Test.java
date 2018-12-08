@@ -27,6 +27,7 @@ public class Test {
 			Librarian b = new Librarian();
 			
 			b.addBook("Lord of ring", "1998", "x.jpg", 2, 13, "da vinci", "me", "horror", "2001", "french");
+			b.addDvd("lotr", "1980", "s.jpg", 60, 300000, "james", "German", "56", "english, french");
 			//System.out.println(b.getBorrowingHistory(1));
 			
 			

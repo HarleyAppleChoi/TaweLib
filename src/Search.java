@@ -79,10 +79,10 @@ public class Search {
 	 */
     public String searchDvd(String searchString) throws SQLException{
     	String result = "ResourceID Title Director Language Subtitle Runtime Year AvailableCopies\n";
-    	statement = "SELECT distinct RESOURCE.resourceID,title, direction, _language, subtitle, runtime,year,numAvCopies "
-    			+ "FROM resource, DVD, DVD_subtitle where RESOURCE.resourceID = DVD.resourceID and"
-    			+ "RESOURCE.resourceID = DVD_subtitle.resourceID and"
-    	+ "WHERE CONCAT(`resourceID`, `title`, `year`, `subtitle`, `_language` `direction`) LIKE '%"+searchString+"%'";
+    	statement = "SELECT distinct resource.resourceID,title, director, _language, subtitle, runtime,year,numAvCopies "
+    			+ "FROM resource, dvd, dvd_subtitle where resource.resourceID = dvd.resourceID and"
+    			+ " resource.resourceID = dvd_subtitle.resourceID and"
+    	+ " CONCAT(`title`, `year`, `_language`, `director`) LIKE '%"+searchString+"%'";
         ResultSet r = SQLHandle.get(statement);
         
         //results to string
@@ -102,9 +102,9 @@ public class Search {
 	 */
     public String searchLaptop(String searchString) throws SQLException{
     	String result = "ResourceID Title Manufacturer Model OPSystem Year AvailableCopies\n";
-    	statement = "SELECT distinct RESOURCE.resourceID,title,manufacturer, model, operatingSystem,_year,numAvCopies "
-    			+ "FROM resource, laptop where RESOURCE.resourceID = LAPTOP.resourceID and"
-    	+ "WHERE CONCAT(`resourceID`, `title`, `_year`,`manufacturer`,`model`,`operatingSystem`) LIKE '%"+searchString+"%'";
+    	statement = "SELECT distinct resource.resourceID,title,manufacturer, model, operatingSystem,year,numAvCopies "
+    			+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and"
+    	+ " CONCAT(`title`, `year`,`manufacturer`,`model`,`operatingSystem`) LIKE '%"+searchString+"%'";
         ResultSet r = SQLHandle.get(statement);
         
         //results to string
