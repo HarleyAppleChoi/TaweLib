@@ -29,6 +29,7 @@ public class EditDvdGuiController {
 	
 	@FXML
 	TextField enterDirector;
+
 	
 	@FXML
 	TextField enterRunTime;
@@ -83,7 +84,7 @@ public class EditDvdGuiController {
 			subtitle += "French,";
 		}
 		subtitle += otherSubtitle.getText();
-		l.editDVD(Integer.parseInt(enterID.getText()), enterTitle.getText(),"", enterYear.getText(), Integer.parseInt(enterNumCopies.getText()), 
+		l.editDVD(Integer.parseInt(enterID.getText()), enterTitle.getText(), enterYear.getText(),"", Integer.parseInt(enterNumCopies.getText()), 
 				Integer.parseInt(editDuration.getText()), enterDirector.getText(), enterLanguage.getText(), enterRunTime.getText(), subtitle);
 	}
 	@FXML

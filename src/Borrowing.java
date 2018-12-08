@@ -133,10 +133,11 @@ public class Borrowing implements Storable {
 			// table, that is not that kind of resource.
 			int finePerDay = 0;
 			int maxFine = 0;
-			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID ="
-					+ this.RESOURCE_ID;
+			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID ='"
+					+ this.RESOURCE_ID+"';";
 			ResultSet r = sql.nonStaticGet(statement);
 			if (r.next()) {
+				//this is book/DVD
 				finePerDay = 2;
 				maxFine = 25;
 			} else {

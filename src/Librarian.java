@@ -318,7 +318,7 @@ public class Librarian extends User {
 		
 		String newLanguage = "null";
 		if (!language.isEmpty()) {
-			newLanguage = "UPDATE DVD SET language = '" + language + "' WHERE resourceID = '" + resourceId + "';";
+			newLanguage = "UPDATE DVD SET _language = '" + language + "' WHERE resourceID = '" + resourceId + "';";
 			SQLHandle.set(newLanguage);
 		}
 		
