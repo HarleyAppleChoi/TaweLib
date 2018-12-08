@@ -43,9 +43,6 @@ public class EditBookController {
 	@FXML 
 	TextField enterLanguage;
 	
-
-	@FXML
-	TextField enterLanguage;
 	
 	@FXML
 	TextField enterNumCopies;
@@ -57,17 +54,18 @@ public class EditBookController {
 	Button cancelButton;
 	
 	@FXML
-	Button editBookDetails;
+	Button editDetails;
 	
 	@FXML
-	ImageView BookImage;
+	Button imageButton;
 
 	@FXML
 	public void editBookEvent(ActionEvent e) throws NumberFormatException, SQLException {
 		Librarian l = new Librarian();
 		l.editBook(Integer.parseInt(enterID.getText()), enterTitle.getText(), enterYear.getText()
-				, "image", Integer.parseInt(enterNumCopies.getText()), Integer.parseInt(s)
-				,author, publisher, genre, ISBN, language);
+				, "image", Integer.parseInt(enterNumCopies.getText()), Integer.parseInt(editDuration.getText())
+				,enterAuthor.getText(), enterPublisher.getText(), enterGenre.getText(), enterISBN.getText(), enterLanguage.getText());
+		
 	}
 	@FXML
 	private void cancelEvent(ActionEvent e) {
@@ -80,6 +78,13 @@ public class EditBookController {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
+	
+	
+	}
+	@FXML
+	private void handleImageEvent(ActionEvent e) {
+		
 	}
 
 }
