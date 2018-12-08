@@ -28,7 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class UserGuiController {
-	private boolean
+	private boolean bookRadioButton = false;
 
 	@FXML
 	Tab searchTab;
