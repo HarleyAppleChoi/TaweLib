@@ -4,8 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -35,21 +33,20 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab fx:id="dashboardTab" text="Dashboard">
+                  <Tab fx:id="dashboardTab" onSelectionChanged="#dashBoard" text="Dashboard">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="14.0" layoutY="14.0" prefHeight="294.0" prefWidth="606.0">
-                                <columns>
-                                  <TableColumn fx:id="dashBoard" prefWidth="159.0" text="Borrowing" />
-                                  <TableColumn minWidth="0.0" prefWidth="102.0" text="Returned" />
-                                    <TableColumn prefWidth="102.0" text="Requested" />
-                                    <TableColumn prefWidth="95.0" text="Reserved" />
-                                    <TableColumn prefWidth="147.0" text="Transactions" />
-                                </columns>
-                              </TableView>
                               <Label layoutX="27.0" layoutY="317.0" text="Balance:" />
-                              <TextField editable="false" layoutX="89.0" layoutY="313.0" text="£0.00" />
+                              <TextField fx:id="balance" editable="false" layoutX="89.0" layoutY="313.0" />
+                              <TextArea fx:id="transaction" layoutX="54.0" layoutY="31.0" prefHeight="107.0" prefWidth="557.0" />
+                              <Text layoutX="54.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction History" />
+                              <TextArea fx:id="borrowItem" layoutX="27.0" layoutY="172.0" prefHeight="96.0" prefWidth="200.0" />
+                              <Text layoutX="27.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Borrowed Items" />
+                              <TextArea fx:id="requested" layoutX="294.0" layoutY="198.0" prefHeight="140.0" prefWidth="149.0" />
+                              <Text layoutX="294.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requested Item" />
+                              <TextArea fx:id="reserved" layoutX="478.0" layoutY="197.0" prefHeight="158.0" prefWidth="165.0" />
+                              <Text layoutX="478.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reserved Item" />
                            </children>
                         </AnchorPane>
                     </content>

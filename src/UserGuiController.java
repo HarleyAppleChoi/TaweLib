@@ -80,10 +80,34 @@ public class UserGuiController {
 	TextField reserveField;
 	
 	@FXML
-	TextField username;
+	Button reserveButton;
+	
+	//Transaction Tab
+	@FXML
+	TextArea transaction;
 	
 	@FXML
-	Button reserveButton;
+	TextArea borrowItem;
+	
+	@FXML
+	TextArea reserved;
+	
+	@FXML
+	TextArea requested;
+	
+	@FXML
+	TextField balance;
+	
+	@FXML
+	private void dashBoard(ActionEvent e) throws Exception {
+		NormalUser u = new NormalUser(Storage.returnUsername());
+		transaction.setText(u.transactionHistory());
+		borrowItem.setText(u.getBorrowedList());
+		reserved.setText(u.getReservedItem());
+		requested.setText(u.getRequestedItem());
+		balance.setText(String.valueOf(u.getBalance()));
+	}
+	
 	
 	@FXML
 	private void buttonSearchDvd(ActionEvent e) {
@@ -168,11 +192,6 @@ public class UserGuiController {
 		}
 	}
 	
-	@FXML
-	private void clickButton(String username) {
-		
-		
-	}
 	
 	@FXML
 	private  void handleDrawImage(ActionEvent e) {

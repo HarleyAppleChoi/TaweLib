@@ -181,7 +181,7 @@ public class NormalUser extends User implements Storable {
 				+ " where overdue_transaction.borrowingID = borrowing.borrowingID) as W\n" + "on T.transID=W.transID \n"
 				+ "where T.username = '" + this.username + "' order by date;";
 		ResultSet r = a.nonStaticGet(statement);
-
+		
 		// generate string
 		while (r.next()) {
 			// if a transaction is a fine
