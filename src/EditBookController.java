@@ -29,12 +29,21 @@ public class EditBookController {
 	TextField enterYear;
 	
 	@FXML
-	TextField enterDirector;
-
+	TextField enterAuthor;
 	
 	@FXML
-	TextField enterRunTime;
+	TextField enterPublisher;
 	
+	@FXML
+	TextField enterGenre;
+	
+	@FXML
+	TextField  enterISBN;
+	
+	@FXML 
+	TextField enterLanguage;
+	
+
 	@FXML
 	TextField enterLanguage;
 	
@@ -48,45 +57,17 @@ public class EditBookController {
 	Button cancelButton;
 	
 	@FXML
-	Button editDvdDetails;
+	Button editBookDetails;
 	
 	@FXML
-	CheckBox selectEnglish;
-	
-	@FXML
-	CheckBox selectSpanish;
-	
-	@FXML
-	CheckBox selectGerman;
-	
-	@FXML
-	CheckBox selectFrench;
-	
-	@FXML
-	CheckBox selectJapanese;
-	
-	@FXML
-	TextField otherSubtitle;
-	
-	@FXML
-	ImageView dvdImage;
+	ImageView BookImage;
 
 	@FXML
-	public void editDVDEvent(ActionEvent e) throws NumberFormatException, SQLException {
-		String subtitle="";
+	public void editBookEvent(ActionEvent e) throws NumberFormatException, SQLException {
 		Librarian l = new Librarian();
-		if(selectJapanese.isSelected()) {
-			subtitle += "Japanese,";
-		}if (selectSpanish.isSelected()) {
-			subtitle += "Spanish,";
-		}if(selectGerman.isSelected()) {
-			subtitle += "German,";
-		}if(selectFrench.isSelected()){
-			subtitle += "French,";
-		}
-		subtitle += otherSubtitle.getText();
-		l.editDVD(Integer.parseInt(enterID.getText()), enterTitle.getText(), enterYear.getText(),"", Integer.parseInt(enterNumCopies.getText()), 
-				Integer.parseInt(editDuration.getText()), enterDirector.getText(), enterLanguage.getText(), enterRunTime.getText(), subtitle);
+		l.editBook(Integer.parseInt(enterID.getText()), enterTitle.getText(), enterYear.getText()
+				, "image", Integer.parseInt(enterNumCopies.getText()), Integer.parseInt(s)
+				,author, publisher, genre, ISBN, language);
 	}
 	@FXML
 	private void cancelEvent(ActionEvent e) {
