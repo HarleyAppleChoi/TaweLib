@@ -275,6 +275,13 @@ public class ControllerLibGui {
 			Librarian l = new Librarian();
 			l.returnResource(Integer.parseInt(returnEnterResourceId.getText()));
 		}
-	}
+	
+	@FXML
+	public void handlePayEvent(ActionEvent e) {
+		SQLHandle c = new SQLHandle();
+		Librarian l = new Librarian();
+		l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
+
+}
 
 
