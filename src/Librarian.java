@@ -524,7 +524,7 @@ public class Librarian extends User {
 	 * @param image
 	 */
 	private void newUser(String username, String password, String firstName, String lastName, int mobileNo,
-			String address, String image) throws SQLException {
+			String address, int image) throws SQLException {
 
 		checkName(username);
 		String statement = "INSERT INTO user_(username, Password, firstname, lastname, mobileNo, address, image)"
@@ -547,7 +547,7 @@ public class Librarian extends User {
 	 * 
 	 */
 	public void newNormalUser(String username, String password, String firstname, String lastname, int mobileNo,
-			String address, String image) throws SQLException {
+			String address, int image) throws SQLException {
 
 		// SQL query to add the NormalUser to the database
 		newUser(username, password, firstname, lastname, mobileNo, address, image);
