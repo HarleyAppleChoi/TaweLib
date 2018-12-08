@@ -28,6 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class UserGuiController {
+	private boolean
 
 	@FXML
 	Tab searchTab;
@@ -76,6 +77,7 @@ public class UserGuiController {
 		
 	}
 	
+	/**
 	@FXML
 	private void radioSearchBook(ActionEvent e) {
 		try {
@@ -85,6 +87,10 @@ public class UserGuiController {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+	}
+	*/
+	@FXML private void radioSearchBook(ActionEvent e) {
+		
 	}
 	
 	@FXML
