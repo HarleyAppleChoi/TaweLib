@@ -14,13 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
 public class LogInGuiController {
 
 	@FXML
-	PasswordField enterUserName;
+	TextField enterUserName;
 	
 	@FXML
 	PasswordField enterUserPassword;
@@ -32,8 +33,9 @@ public class LogInGuiController {
 	private  void handleLogInEvent(ActionEvent e) throws SQLException {
 		SQLHandle sql = new SQLHandle();
 		String query="Select * from user_ where username = '"+enterUserName.getText()
-		+"' and Password = '"+enterUserPassword.getText().hashCode()+"';";
+		+"' and Password = '"+ enterUserPassword.getText().hashCode()+"';";
 		ResultSet r = SQLHandle.get(query);
+		
 		
 		if(!r.next()) {
 			//password and username is not in the database
@@ -43,27 +45,40 @@ public class LogInGuiController {
 			r = SQLHandle.get(query);
 			if(r.next()) {
 				//that is a user and direct it to user dashboard
+				try {
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("usergui.fxml"));
+					 Parent root = (Parent)fxmlLoader.load();
+					 Scene scene= new Scene(root); 
+					 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+					 window.setScene(scene);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}else {
 				//that is a librarian and direct it to librarian dashboard
+				try {
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
+					 Parent root = (Parent)fxmlLoader.load();
+					 Scene scene= new Scene(root); 
+					 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+					 window.setScene(scene);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				
+	
 			}
 		}
+	}
+}
 		
-		
-			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("usergui.fxml"));
-				 Parent root = (Parent)fxmlLoader.load();
-				 Scene scene= new Scene(root); 
-				 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-				 window.setScene(scene);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+
 
 			
 		
-	}	
+
 	
 	
 	
 	
-}
+

@@ -32,11 +32,12 @@ public class SQLHandle {
 		try {
 			conn = DriverManager.getConnection(HOST_NAME, USERNAME, PASSWORD);
 			statement = conn.createStatement();
+			System.out.println("Success! Connected to the database");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Success! Connected to the database");
+		
 	}
 
 	/**
