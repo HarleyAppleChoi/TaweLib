@@ -177,8 +177,10 @@ public class DrawGUIController {
 		
 	
 	public void save() {
+		String username = Storage.returnUsername();
 		drawCanvas.snapshot(null, wim);
-		File file = new File("Canvas1.png");
+		String filePath = "/Users/iestynprice/Desktop/ProfileImages/image.png ";
+		File file = new File(filePath );
 		
 		
 		try {

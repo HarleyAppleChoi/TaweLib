@@ -42,7 +42,7 @@ public class LogInGuiController {
 			//password and username is not in the database
 			System.out.println("password and username is not in the database");
 		}else {
-			query="Select * from normal_user where username = '"+enterUserName.getText()+"';";
+			query="Select * from normal_user where username = '"+username+"';";
 			r = SQLHandle.get(query);
 			if(r.next()) {
 				/*
