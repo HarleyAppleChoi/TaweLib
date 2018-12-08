@@ -2,32 +2,40 @@ import javafx.scene.image.Image;
 
 /**
  * User.java
- * this class creats all the instance of the user class .
+ * this class creates all the instance of the user class .
  * 
  * @author Jwana Abdalah
- * @version 1
+ * @modified by James Hogg
+ * @version 1.1
  *
  */
 public abstract class User implements Storable {
 	protected String username;
+	protected String password;
 	protected String firstName;
 	protected String lastName;
 	protected int mobileNo;
+	protected String address;
 	protected Image userImage;
 	
 	/**
-	 * Constructor to construct a User's anstance.
+	 * Constructor to construct a User's instance.
 	 * @param username
+	 * @param password
 	 * @param firstName
 	 * @param lastName
 	 * @param mobileNo
+	 * @param address
 	 * @param userImage
+	 
 	 */
-	protected User(String username, String firstName, String lastName, int mobileNo, Image userImage) {
+	protected User(String username, String password, String firstName, String lastName, int mobileNo, String address, Image userImage) {
 		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobileNo = mobileNo;
+		this.address = address;
 		this.userImage = userImage;
 	}
 	
@@ -49,8 +57,25 @@ public abstract class User implements Storable {
 	 * 
 	 * @param username
 	 */
-	protected void setUsername(String userame) {
+	protected void setUsername(String username) {
 		this.username = username;
+	}
+	
+	
+	/**
+	 * Get method to get the password.
+	 * @return password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 *  Set method to set the password.
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -83,7 +108,7 @@ public abstract class User implements Storable {
 	/**
 	 * Set method to set the lastName.
 	 * 
-	 * @param u
+	 * @param lastName
 	 */
 	protected void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -106,6 +131,23 @@ public abstract class User implements Storable {
 	protected void setMobileNo(int mobileNo) {
 		this.mobileNo = mobileNo;
 	}
+	
+	
+	/**
+	 * Set method to set the address.
+	 * @return address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * Get method to get the address.
+	 * @param address
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	/**
 	 * Get method to get the users image.
@@ -119,7 +161,7 @@ public abstract class User implements Storable {
 	/**
 	 * Set method to set the users image.
 	 * 
-	 * @param u
+	 * @param userImage
 	 */
 	protected void setImage(Image userImage) {
 		this.userImage = userImage;

@@ -74,8 +74,8 @@ public class NormalUser extends User implements Storable {
 	}
 
 	/**
-	 * this is boolean function to checke if the user can borrorow any resource. if
-	 * their balabce < 0 they can borrow
+	 * this is boolean function to check if the user can borrow any resource. if
+	 * their balance < 0 they can borrow
 	 * 
 	 * @return b
 	 */
@@ -100,7 +100,7 @@ public class NormalUser extends User implements Storable {
 	 * 
 	 * @param resourceID
 	 * @throws Exception
-	 *             if the normalUser either get fine or overdue item in thier
+	 *             if the normalUser either get fine or overdue item in their
 	 *             balance
 	 */
 	public void borrow(int resourceID) throws Exception {
@@ -129,11 +129,12 @@ public class NormalUser extends User implements Storable {
 	 * @param userImage
 	 */
 
-	public void getUserinfo(String username, String firstName, String lastName, int mobileNo, Image userImage) {
+	public void getUserinfo(String username, String firstName, String lastName, int mobileNo, String address, Image userImage) {
 		super.username = username;
 		super.firstName = firstName;
 		super.lastName = lastName;
 		super.mobileNo = mobileNo;
+		super.address = address;
 		super.userImage = userImage;
 	}
 
@@ -156,7 +157,7 @@ public class NormalUser extends User implements Storable {
 	}
 
 	/**
-	 * this method allowes normalUser to request for resource and add it ti database
+	 * this method allows normalUser to request for resource and add it ti database
 	 * table
 	 * 
 	 * @param resourceID
@@ -171,14 +172,14 @@ public class NormalUser extends User implements Storable {
 
 	public String transactionHistory() throws Exception {
 		SQLHandle a = new SQLHandle();
-		String history = "Date&Time	Amount	ResourceID		numOfOverdueDays\n";
+		String history = String.format("%20s %20s %20s %20s \n", "Date" , "Amount", "resourceID(ifOverdue)", "days(if Overdue)");
 		String statement = "select T.transID, T.amount, T.date,W.resourceID, W.borrowingID  from \n"
 				+ "(select transaction.transID,amount,date,username from transaction,transaction_his \n"
 				+ " where transaction.transID=transaction_his.transID) as T \n" + "left outer join \n"
 				+ "(select transID,borrowing.borrowingID, borrowDate, dueDate, returnDate, resourceID "
 				+ "from overdue_transaction,borrowing \n"
 				+ " where overdue_transaction.borrowingID = borrowing.borrowingID) as W\n" + "on T.transID=W.transID \n"
-				+ "where T.username = '" + this.username + "';";
+				+ "where T.username = '" + this.username + "' order by date;";
 		ResultSet r = a.nonStaticGet(statement);
 
 		// generate string
@@ -187,13 +188,13 @@ public class NormalUser extends User implements Storable {
 			if (r.getString("borrowingID") != null) {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				int days = b.getOverdueDay();
-				history = history + "Overdue transaction:" + String.format("%s , %o, %s, %o\n",
+				history = history + String.format("%20s %20o %20s %20o\n",
 						r.getDate("date").toString(), r.getInt("amount"), r.getString("resourceID"), days);
 
 			} else {
 				// transaction is not a fine
-				history = history + "Normal transaction:"
-						+ String.format("%s , %o\n", r.getDate("date"), r.getInt("amount"));
+				history = history 
+						+ String.format("%20s %20o\n", r.getDate("date"), r.getInt("amount"));
 			}
 
 		}
@@ -204,7 +205,7 @@ public class NormalUser extends User implements Storable {
 	}
 
 	public String getBorrowedList() {
-		String history = "ResourceID		Duedate\n";
+		String history = String.format("%20s %20s \n", "ResourceID","Duedate");
 		for (int i = 0; i < currentBorrowHistory.size(); i++) {
 			history = history + currentBorrowHistory.get(i).getResourceID()
 					+ currentBorrowHistory.get(i).getOverdueDate()+"\n";
@@ -228,7 +229,7 @@ public class NormalUser extends User implements Storable {
 		return history;
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
 

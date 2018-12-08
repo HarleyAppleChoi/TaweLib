@@ -21,9 +21,11 @@ public class Test {
 			l.borrow(1, "apple");
 			*/
 			//l.borrow(1, "apple");
-			NormalUser u = new NormalUser("apple");
+			NormalUser u = new NormalUser("overdue");
 			Librarian b = new Librarian();
-			System.out.println(b.getBorrowingHistory(1));
+			b.addBook("aaa", "123", "adfsa", 1, 8, "asdf", "asdfa", "asdf", "12341", "asdf");
+			b.addDvd("wra", "12ss3", "aaaasdfasf", 2, 0, "sssf", "ssasdfa","sssasdf" ,"sssssssadas,sfddf");
+			b.addLaptop("asdfa", "1002", "jpeg", 42, 34, "apple", "macbook", "high sherra");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
