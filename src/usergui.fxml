@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #6f7693;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserGuiController">
   <children>
@@ -71,6 +72,17 @@
                               <ImageView fx:id="profileImageView" fitHeight="210.0" fitWidth="252.0" layoutX="364.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="drawProfileImageButton" layoutX="350.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleDrawImage" text="Draw Profile Image" />
                               <Button fx:id="changeProfileImageButton" layoutX="490.0" layoutY="299.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Change Profile Image" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="reserveTab" text="Reserve">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="reserveField" layoutX="237.0" layoutY="68.0" />
+                              <Text layoutX="154.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ResourceID" />
+                              <Button fx:id="reserveButton" layoutX="291.0" layoutY="109.0" mnemonicParsing="false" onAction="#reserveAction" text="Reserve" />
                            </children>
                         </AnchorPane>
                     </content>

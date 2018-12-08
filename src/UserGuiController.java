@@ -72,6 +72,19 @@ public class UserGuiController {
 	@FXML
 	TextArea userSearch;
 	
+	//resrve tab
+	@FXML
+	Tab reserveTab;
+	
+	@FXML
+	TextField reserveField;
+	
+	@FXML
+	TextField username;
+	
+	@FXML
+	Button reserveButton;
+	
 	@FXML
 	private void buttonSearchDvd(ActionEvent e) {
 		dvdButton = !dvdButton;
@@ -156,8 +169,14 @@ public class UserGuiController {
 	}
 	
 	@FXML
-	private  void handleDrawImage(ActionEvent e) {
+	private void clickButton(String username) {
 		
+		
+	}
+	
+	@FXML
+	private  void handleDrawImage(ActionEvent e) {
+	
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUI.fxml"));
 				 Parent root = (Parent)fxmlLoader.load();
@@ -167,6 +186,14 @@ public class UserGuiController {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
+	}
 	
+	LogInGuiController login;
+	
+	@FXML
+	public void reserveAction(ActionEvent e) throws NumberFormatException, Exception {
+		
+		Librarian l = new Librarian();
+		l.request(Integer.parseInt(reserveField.getText()), Storage.returnUsername());
 	}
 }

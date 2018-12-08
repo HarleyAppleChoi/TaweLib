@@ -180,6 +180,7 @@ public class DrawGUIController {
 		drawCanvas.snapshot(null, wim);
 		File file = new File("Canvas1.png");
 		
+		
 		try {
 			ImageIO.write(SwingFXUtils.fromFXImage(wim, null), "png", file);
 		} catch (Exception s) {

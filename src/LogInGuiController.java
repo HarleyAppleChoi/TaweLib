@@ -30,9 +30,10 @@ public class LogInGuiController {
 	Button logInButton;
 	
 	@FXML
-	private  void handleLogInEvent(ActionEvent e) throws SQLException {
+	private  void handleLogInEvent(ActionEvent e) throws NumberFormatException, Exception {
 		SQLHandle sql = new SQLHandle();
-		String query="Select * from user_ where username = '"+enterUserName.getText()
+		String username = enterUserName.getText();
+		String query="Select * from user_ where username = '"+username
 		+"' and Password = '"+ enterUserPassword.getText().hashCode()+"';";
 		ResultSet r = SQLHandle.get(query);
 		
@@ -44,6 +45,12 @@ public class LogInGuiController {
 			query="Select * from normal_user where username = '"+enterUserName.getText()+"';";
 			r = SQLHandle.get(query);
 			if(r.next()) {
+				/*
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("logingui.fxml"));
+				UserGuiController userGui = loader.getController();
+				userGui.reserveAction(username);
+				*/
+				Storage.storeUsername(username);
 				//that is a user and direct it to user dashboard
 				try {
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("usergui.fxml"));
