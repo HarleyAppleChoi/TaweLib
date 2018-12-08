@@ -329,11 +329,22 @@ public class Librarian extends User {
 			SQLHandle.set(newRuntime);
 		}
 		
-		String newSubtitle = "null";
-		if (!subtitle.isEmpty()) {
-			newSubtitle = "UPDATE DVD_subtitle SET subtitle = '" + subtitle + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newSubtitle);
-		}	
+		if (subtitle.length() != 0) {
+			String query = "delete from DVD_subtitle where resourceID = '"+ resourceId +"';";
+			SQLHandle.set(query);
+			String[] subtitles = subtitle.split("\\s*,\\s*");
+			List<String> subtitleLang = new ArrayList<String>(Arrays.asList(subtitles));
+			
+			
+			
+			for (int i = 0; i < subtitleLang.size(); i++) {
+				String subLang = subtitleLang.get(i);
+				String query2 = "insert into DVD_subtitle (resourceID, subtitle)" + "values('" + resourceId + "','" + subLang
+						+ "');";
+				SQLHandle.set(query2);
+			}
+		
+	}
 	}
 	
 	public void editLaptop (int resourceId, String title, String year, String image, int numAvCopies, int duration,
