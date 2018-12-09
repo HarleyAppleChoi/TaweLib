@@ -7,6 +7,7 @@
 public class Storage {
 	private static String usernamee = "";
 	private static int num;
+	private static int imagenum;
 
 	/**
 	 * This class store String in a memory call userName
@@ -30,6 +31,14 @@ public class Storage {
 	
 	public static int getNum() {
 		return num;
+	}
+	
+	public static void  storeImagenum(int i) {
+		imagenum = i;
+	}
+	
+	public static int returnImagenum() {
+		return imagenum;
 	}
 
 }
