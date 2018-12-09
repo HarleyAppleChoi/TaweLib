@@ -190,7 +190,7 @@ public class DrawGUIController {
 		Storage.storeNum(number);
 		
 		drawCanvas.snapshot(null, wim);
-		String filePath = "/Users/apple/Desktop/"+String.valueOf(number)+".png";
+		String filePath = "userPhoto/"+String.valueOf(number)+".png";
 		System.out.println(filePath);
 		File file = new File(filePath);
 		

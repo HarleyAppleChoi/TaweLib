@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,12 +14,14 @@ public class Test {
 
 		
 		 try {
-			Librarian l = new Librarian();
+			/*
+			 Librarian l = new Librarian();
 			
 			result = SQLHandle.get("select * from resource");
 			while(result.next()) {
 				//System.out.println(result.getString("title"));
 			}
+			*/
 			
 			//l.borrow(1, "apple");
 			
@@ -28,8 +31,8 @@ public class Test {
 			//Librarian b = new Librarian();
 			//b.newNormalUser("hau", "123", "choi", "choi", 1231, "afsda", "asdfad");
 			//b.newLibrarian("library", "123", "lib", "lib", 3213, "lib", "asfd", "10-10-10");
-			
-			
+			 String path = new File(".").getCanonicalPath();
+			System.out.println(path);
 		} catch (Exception e) {
 			 //TODO Auto-generated catch block
 			e.printStackTrace();

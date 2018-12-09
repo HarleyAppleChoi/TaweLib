@@ -4,6 +4,7 @@
 
 //import javax.swing.text.TableView;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -24,6 +25,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.TableView;
 
 import javafx.scene.control.TextArea;
@@ -115,6 +118,10 @@ public class UserGuiController {
     
     @FXML
     private TextField userDataAddress;
+    
+    @FXML ImageView profileImageView;
+    
+    
 	
     @FXML
     private void userDataAction(ActionEvent e) throws Exception {
@@ -124,6 +131,9 @@ public class UserGuiController {
     		userDataLastName.setText(u.getLastName());
     		userDataMobileNumber.setText(String.valueOf(u.getMobileNo()));
     		userDataAddress.setText(u.getAddress());
+    		
+    		//Image
+    		profileImageView.setImage(u.getUserImage());
     		
     }
     

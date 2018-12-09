@@ -1,3 +1,5 @@
+import java.io.File;
+
 import javafx.scene.image.Image;
 
 /**
@@ -155,7 +157,10 @@ public abstract class User implements Storable {
 	 * @return userImage
 	 */
 	protected Image getUserImage() {
-		return userImage;
+		String location = "userPhoto/"+String.valueOf(userImage)+".png";
+		File file = new File(location);
+        Image image = new Image(file.toURI().toString());
+		return image;
 	}
 
 	/**
