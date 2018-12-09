@@ -230,8 +230,6 @@ public class UserGuiController {
     		profileImageView.setImage(u.getUserImage());
     		
     }
-    
-
 	@FXML
 	private void dashBoard(ActionEvent e) throws Exception {
 		NormalUser u = new NormalUser(Storage.returnUsername());
@@ -258,7 +256,6 @@ public class UserGuiController {
 			ex.printStackTrace();
 		}
 	}
-
 	@FXML
 	private void buttonSearchLaptop(ActionEvent e) {
 
@@ -275,7 +272,6 @@ public class UserGuiController {
 			ex.printStackTrace();
 		}
 	}
-
 	@FXML
 	private void buttonSearchBook(ActionEvent e) {
 
@@ -292,11 +288,6 @@ public class UserGuiController {
 			ex.printStackTrace();
 		}
 	}
-
-	// @FXML private void radioSearchBook(ActionEvent e) {
-	// bookRadioButton = !bookRadioButton;
-	// }
-
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
 
