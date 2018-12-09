@@ -18,7 +18,7 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String displayResources() throws SQLException{
-    	String result = "";
+    	String result = "ID        Title         Year";
         statement = "SELECT resourceID,title,year FROM resource;";
         ResultSet r = SQLHandle.get(statement);
          
