@@ -27,20 +27,22 @@ import javafx.stage.Stage;
 public class DrawGUIController {
 
 	@FXML
-	Button drawCircleButton;
+	private Button drawCircleButton;
 	@FXML
-	Button drawStraightLineButton;
+	private Button drawStraightLineButton;
 	@FXML
-	Button drawLineButton;
+	private Button drawLineButton;
 	@FXML
-	Button saveButton;
+	private Button saveButton;
 	@FXML
-	Button clearDrawingButton;
+	private Button clearDrawingButton;
 	@FXML
-	ColorPicker changeColorMenuButton;
+	private ColorPicker changeColorMenuButton;
+	
 	@FXML
-	Canvas drawCanvas;
-	//private  Canvas = new Canvas(500,500);
+	private Canvas drawCanvas;
+
+
 	WritableImage wim = new WritableImage(500,500);
 	Color color;
 
@@ -130,7 +132,7 @@ public class DrawGUIController {
 		}
 
 
-	public  void drawParticalTrace() {
+	 private void drawParticalTrace() {
 		GraphicsContext gc = drawCanvas.getGraphicsContext2D();
 		gc.setStroke(color);
 		gc.setLineWidth(1);
@@ -152,7 +154,7 @@ public class DrawGUIController {
 	
 		});
 	}
-		public void drawCircle() {
+		private void drawCircle() {
 			GraphicsContext g = drawCanvas.getGraphicsContext2D();
 			//gc.setStroke(Color.RED);
 				g.setFill(color);
@@ -178,7 +180,7 @@ public class DrawGUIController {
 	
 		
 	
-	public void save() throws SQLException {
+	private void save() throws SQLException {
 		
 		SQLHandle sql = new SQLHandle();
 		ResultSet r = sql.nonStaticGet("Select max(image) from user_;");

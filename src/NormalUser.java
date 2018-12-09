@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 
 /**
  * NormalUser.java This class contain all the methods that allowing normalUser
- * tp borrow resource, also check thier balance to know if they can bprrow
+ * tp borrow resource, also check their balance to know if they can borrow
  * resource.
  * 
  * @author Hau Yi Choi

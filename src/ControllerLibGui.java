@@ -27,28 +27,148 @@ public class ControllerLibGui {
 	private boolean laptopButton = false;
 	
 	@FXML
-	Button searchBook;
+	private Button searchBook;
 
 	@FXML
-	Button searchDvd;
-
-	@FXML
-	Button searchLaptop;
-
-	@FXML
-	TextField searchQuery;
-
-	@FXML
-	Button buttonSearch;
+	private Button buttonOverdue;
 	
 	@FXML
-	Button buttonInfo;
+	private TextArea textOverdue;
 	
 	@FXML
-	TextArea basicInfo;
+	private Button searchDvd;
+
+	@FXML
+	private Button searchLaptop;
+
+	@FXML
+	private TextField searchQuery;
+
+	@FXML
+	private Button buttonSearch;
 	
 	@FXML
-	TextArea borrowReturn;
+	private Button buttonInfo;
+	
+	@FXML
+	private TextArea basicInfo;
+	
+	@FXML
+	private TextArea borrowReturn;
+	@FXML
+	private TextField borrowingEnterBorrowerUsername;
+
+	@FXML
+	private TextField borrowingEnterSearchQuery;
+
+	@FXML
+	private RadioButton borrowingSelectBook;
+
+	@FXML
+	private RadioButton borrowingSelectDvd;
+
+	@FXML
+	private RadioButton borrowingSelectLaptop;
+
+	@FXML
+	private Button borrowingGenerateBorrow;
+
+	// create resource tab
+
+	@FXML
+	private Button create_resourceCreateBook;
+
+	@FXML
+	private Button create_resourceCreateDvd;
+
+	@FXML
+	private Button create_resouceCreateLaptop;
+
+	// edit resource tab
+
+	@FXML
+	private TextField edit_resourceEnterResourceId;
+
+	@FXML
+	private Button edit_resourceBeginEdit;
+
+	// create user tab
+
+	@FXML
+	private Button create_userCreateNormal;
+
+	@FXML
+	private Button create_userCreateLibrarian;
+
+	// edit user tab
+
+	@FXML
+	private TextField edit_userEnterUsername;
+
+	@FXML
+	private Button edit_userBeginEdit;
+
+	// return resource tab
+
+	@FXML
+	private TextField returnEnterResourceId;
+
+	@FXML
+	private Button returnGenerateReturn;
+
+	@FXML
+	private TextField returnShowFineAdded;
+
+	@FXML
+	private Label statusReturn;
+
+	// pay fine tab
+
+	@FXML
+	private TextField pay_fineEnterUsername;
+
+	@FXML
+	private TextField pay_fineEnterPaymentAmount;
+
+	@FXML
+	private TextField pay_fineShowFineRemaining;
+
+	@FXML
+	private Button pay_fineGeneratePayment;
+	
+	@FXML
+	private Label statusPayFine;
+
+	// request tab
+
+	@FXML
+	private TextField requestEnterUsername;
+
+	@FXML
+	private TextField requestEnterResourceId;
+
+	@FXML
+	private Button requestGenerateRequest;
+	
+	//copy details tab
+	
+	@FXML
+	private Button buttonSearchCopy;
+	
+	@FXML
+	private TextField searchQueryCopy;
+	
+	@FXML
+	private TextArea textBorrow;
+	
+	@FXML
+	private TextArea textReturn;
+	
+	@FXML
+	private Label labelBorrow;
+	
+	@FXML
+	private Label labelReturn;
 	
 	//search button showing resource info
 	@FXML
@@ -141,120 +261,6 @@ public class ControllerLibGui {
 		}
 	// borrowing tab
 
-	@FXML
-	TextField borrowingEnterBorrowerUsername;
-
-	@FXML
-	TextField borrowingEnterSearchQuery;
-
-	@FXML
-	RadioButton borrowingSelectBook;
-
-	@FXML
-	RadioButton borrowingSelectDvd;
-
-	@FXML
-	RadioButton borrowingSelectLaptop;
-
-	@FXML
-	Button borrowingGenerateBorrow;
-
-	// create resource tab
-
-	@FXML
-	Button create_resourceCreateBook;
-
-	@FXML
-	Button create_resourceCreateDvd;
-
-	@FXML
-	Button create_resouceCreateLaptop;
-
-	// edit resource tab
-
-	@FXML
-	TextField edit_resourceEnterResourceId;
-
-	@FXML
-	Button edit_resourceBeginEdit;
-
-	// create user tab
-
-	@FXML
-	Button create_userCreateNormal;
-
-	@FXML
-	Button create_userCreateLibrarian;
-
-	// edit user tab
-
-	@FXML
-	TextField edit_userEnterUsername;
-
-	@FXML
-	Button edit_userBeginEdit;
-
-	// return resource tab
-
-	@FXML
-	TextField returnEnterResourceId;
-
-	@FXML
-	Button returnGenerateReturn;
-
-	@FXML
-	TextField returnShowFineAdded;
-
-	@FXML
-	private Label statusReturn;
-
-	// pay fine tab
-
-	@FXML
-	TextField pay_fineEnterUsername;
-
-	@FXML
-	TextField pay_fineEnterPaymentAmount;
-
-	@FXML
-	TextField pay_fineShowFineRemaining;
-
-	@FXML
-	Button pay_fineGeneratePayment;
-	
-	@FXML
-	Label statusPayFine;
-
-	// request tab
-
-	@FXML
-	TextField requestEnterUsername;
-
-	@FXML
-	TextField requestEnterResourceId;
-
-	@FXML
-	Button requestGenerateRequest;
-	
-	//copy details tab
-	
-	@FXML
-	Button buttonSearchCopy;
-	
-	@FXML
-	TextField searchQueryCopy;
-	
-	@FXML
-	TextArea textBorrow;
-	
-	@FXML
-	TextArea textReturn;
-	
-	@FXML
-	Label labelBorrow;
-	
-	@FXML
-	Label labelReturn;
 	
 	@FXML
 	private void searchAdd(ActionEvent e) {
@@ -269,11 +275,7 @@ public class ControllerLibGui {
 	}
 	//overdue tab
 	
-	@FXML
-	Button buttonOverdue;
 	
-	@FXML
-	TextArea textOverdue;
 	
 	@FXML
 	public void overdue(ActionEvent e) {
