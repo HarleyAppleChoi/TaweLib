@@ -126,7 +126,7 @@ public class Search {
     		return result;
     	} else {
     	
-	    	statement = "select borrowing.borrowDate, borrowing.returnDate, T.username " + "from borrowing," 
+	    	statement = "select borrowing.borrowDate, borrowing.returnDate, T.username, T.borrowingID " + "from borrowing," 
 	    					+ " ((select * from returned_his) union all (select * from current_borrowing)) as T" 
 	    					+ " where borrowing.borrowingID = T.borrowingID " + "and resourceID = '" + searchString 
 	    					+ "' order by borrowDate";
