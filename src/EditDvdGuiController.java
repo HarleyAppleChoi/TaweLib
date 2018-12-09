@@ -19,7 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class EditDvdGuiController {
-
+  //TextField tabs
 	@FXML
 	TextField enterID;
 	
@@ -45,12 +45,14 @@ public class EditDvdGuiController {
 	@FXML
 	TextField editDuration;
 	
+	// button tabs
 	@FXML
 	Button cancelButton;
 	
 	@FXML
 	Button editDvdDetails;
 	
+	//checkBox tabs
 	@FXML
 	CheckBox selectEnglish;
 	
