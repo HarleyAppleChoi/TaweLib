@@ -3,6 +3,8 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javafx.stage.FileChooser;
+
 public class Test {
 
 	public static void main(String[] args) {
@@ -31,8 +33,10 @@ public class Test {
 			//Librarian b = new Librarian();
 			//b.newNormalUser("hau", "123", "choi", "choi", 1231, "afsda", "asdfad");
 			//b.newLibrarian("library", "123", "lib", "lib", 3213, "lib", "asfd", "10-10-10");
-			 String path = new File(".").getCanonicalPath();
-			System.out.println(path);
+			 Resource r = new Resource(4);
+			 
+			 System.out.println(r.getBorrrowingList().size());
+			
 		} catch (Exception e) {
 			 //TODO Auto-generated catch block
 			e.printStackTrace();

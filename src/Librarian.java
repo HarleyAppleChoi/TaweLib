@@ -381,6 +381,7 @@ public class Librarian extends User {
 	 */
 	public void borrow(int resourceId, String username) throws Exception {
 		NormalUser user = new NormalUser(username);
+		
 		user.borrow(resourceId);
 		System.out.println("Successfully Borrowed Resource.");
 	}

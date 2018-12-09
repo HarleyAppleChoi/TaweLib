@@ -33,6 +33,7 @@ public class Resource implements Storable {
 	protected LinkedList<String> reserve = new LinkedList<>();
 	private String statement;
 	private int duration;
+	SQLHandle sql;
 
 	/**
 	 * Constructor to construct a Resource using these parameters.
@@ -62,44 +63,38 @@ public class Resource implements Storable {
 	 * @throws Exception
 	 */
 	public Resource(int resourceId) throws Exception {
+		sql = new SQLHandle();
 		ID = resourceId;
 		statement = "select * from resource where resourceID = '" + ID + "';";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		while (r.next()) {
 			title = r.getString("title");
 			year = r.getInt("year");
 			// please do a method to change string into image.
 			// this.thumbNailImage=thumbNailImage = r.getString("thumbNailImage");
-			this.numCopies = numCopies = r.getInt("numAvCopies");
+			numCopies = r.getInt("numAvCopies");
 			// this.numAvailableCopies=numAvailableCopies;
 			this.duration = r.getInt("duration");
 		}
 
 		try {
-			statement = "select borrowingID from currentBorrowHis where resourceID = '" + resourceId + "';";
-			r = SQLHandle.get(statement);
+			statement = "SELECT `borrowingID` FROM `current_borrow_his` WHERE `resourceID` = '" + resourceId + "';";
+			r = sql.nonStaticGet(statement);
 			while (r.next()) {
 				Borrowing e = new Borrowing(r.getInt("borrowingID"));
 				currentBorrow.add(e);
 			}
 			// requesting queue
-			statement = "select username from requested where resourceID = '" + ID + "';";
-			r = SQLHandle.get(statement);
+			statement = "select username from request_item where resourceID = '" + ID + "';";
+			r = sql.nonStaticGet(statement);
 			while (r.next()) {
 				request.add((r.getString("username")));
 			}
 			// reserved queue
-			statement = "select username from reserved where resourceID = '" + ID + "';";
-			r = SQLHandle.get(statement);
+			statement = "select username from reserved_item where resourceID = '" + ID + "';";
+			r = sql.nonStaticGet(statement);
 			while (r.next()) {
 				reserve.add((r.getString("username")));
-			}
-
-			// current borrowing
-			statement = "select borrowingID from current_borrow_his where resourceID = '" + ID + "';";
-			r = SQLHandle.get(statement);
-			while (r.next()) {
-				currentBorrow.add(new Borrowing(r.getInt("borrowingID")));
 			}
 
 		} catch (SQLSyntaxErrorException e) {
@@ -206,7 +201,7 @@ public class Resource implements Storable {
 			statement = "select min(borrowingID),borrowDate from borrowing where dueDate is null and onLoan = 'y' and resourceID = '"
 					+ this.ID + "';";
 
-			ResultSet r = SQLHandle.get(statement);
+			ResultSet r = sql.nonStaticGet(statement);
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 			
 			while (r.next()) {

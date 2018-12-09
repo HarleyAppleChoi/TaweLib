@@ -304,6 +304,5 @@ public class ControllerLibGui {
 		}catch(Exception r) {
 			statusPayFine.setText("Please fill in the fills!");
 		}
-
 	}
 }
