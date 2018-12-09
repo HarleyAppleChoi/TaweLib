@@ -3,6 +3,7 @@
 */
 
 
+import java.io.File;
 import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
@@ -11,8 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ControllerCreateBook {
@@ -76,7 +79,9 @@ public class ControllerCreateBook {
 private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQLException {
 	SQLHandle c = new SQLHandle();
 	Librarian l = new Librarian();
-	l.addBook(create_bookEnterTitle.getText(), create_bookEnterYear.getText(), "" ,Integer.parseInt(numbOfCopies.getText()), Integer.parseInt(loanDurationLaptop.getText()), create_bookEnterAuthor.getText(), create_bookEnterPublisher.getText(), create_bookEnterGenre.getText(), create_bookEnterIsbn.getText(), create_bookEnterLanguage.getText());
+	l.addBook(create_bookEnterTitle.getText(), create_bookEnterYear.getText(), path ,Integer.parseInt(numbOfCopies.getText())
+			, Integer.parseInt(loanDurationLaptop.getText()), create_bookEnterAuthor.getText(), create_bookEnterPublisher.getText()
+			, create_bookEnterGenre.getText(), create_bookEnterIsbn.getText(), create_bookEnterLanguage.getText());
 			
 	
 	
@@ -95,21 +100,28 @@ private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQL
 		
 	}
 	
+private String path;
 @FXML
 private  void handleDrawImage(ActionEvent e) {
+	FileChooser fileChooser = new FileChooser();
+	fileChooser.setTitle("Open Resource File");
+	File file = fileChooser.showOpenDialog(new Stage());
+	if(file != null) {
+        String imagepath = file.getPath();
+        System.out.println("file:"+imagepath);
+        //Image image = new Image(imagepath);
+        
+        path = imagepath;
 		
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUI.fxml"));
-			 Parent root = (Parent)fxmlLoader.load();
-			 Scene scene= new Scene(root); 
-			 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-			 window.setScene(scene);
-			
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-			
+    }
+    else
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("Please Select a File");
+        /*alert.setContentText("You didn't select a file!");*/
+        alert.showAndWait();
+    }
 		
 	}
 
