@@ -27,7 +27,8 @@ public class Test {
 			
 			Librarian b = new Librarian();
 			//b.newNormalUser("hau", "123", "choi", "choi", 1231, "afsda", "asdfad");
-			b.newLibrarian("library", "123", "lib", "lib", 3213, "lib", 2, "10-10-10");
+			//b.newLibrarian("library", "123", "lib", "lib", 3213, "lib", 2, "10-10-10");
+			b.newNormalUser("user", "123", "j", "h", 12, "qwe", 32);
 			
 			
 		} catch (Exception e) {
