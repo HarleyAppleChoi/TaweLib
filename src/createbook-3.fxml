@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerCreateBook">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerCreateBook">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #6f7893; -fx-border-color: #000000; -fx-border-width: 5;" VBox.vgrow="ALWAYS">
       <children>
@@ -22,7 +22,7 @@
             <Label layoutX="38.0" layoutY="100.0" text="Title" />
             <Label layoutX="36.0" layoutY="136.0" text="Year" />
             <Label layoutX="34.0" layoutY="169.0" text="Image" />
-            <Button fx:id="create_bookCreateImage" layoutX="88.0" layoutY="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Get/Draw Image" />
+            <Button fx:id="create_bookCreateImage" layoutX="88.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleDrawImage" prefHeight="25.0" prefWidth="149.0" text="Get/Draw Image" />
             <TextField fx:id="create_bookEnterAuthor" layoutX="88.0" layoutY="204.0" promptText="Book's author" />
             <TextField fx:id="create_bookEnterPublisher" layoutX="88.0" layoutY="244.0" promptText="Book's publisher" />
             <Label layoutX="38.0" layoutY="208.0" text="Author" />
