@@ -24,6 +24,7 @@ public class Borrowing implements Storable {
 	DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 	String statement = "";
 	SQLHandle sql = new SQLHandle();
+	
 
 	/**
 	 * Selects all the information about a specific borrowing from the database. 
@@ -64,7 +65,7 @@ public class Borrowing implements Storable {
 		System.out.println("Borrowing adding...");
 		statement = "insert into borrowing values('" + this.BORROW_NO + "','" + dateFormat.format(INITIAL_DATE) + "',"
 				+ "null,null,'" + this.RESOURCE_ID + "','y');";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		System.out.println("Borrowing added");
 	}
 
@@ -238,7 +239,7 @@ public class Borrowing implements Storable {
 	 */
 	@Override
 	public void store() throws SQLException {
-		SQLHandle.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + ","
+		sql.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + ","
 				+ "null," + this.RESOURCE_ID + "," + this.returnDate.toString() + "y");
 	}
 	

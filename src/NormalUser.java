@@ -24,7 +24,7 @@ public class NormalUser extends User implements Storable {
 
 	// sql statement
 	private String statement;
-
+	
 	
 	
 	/**
@@ -34,11 +34,12 @@ public class NormalUser extends User implements Storable {
 	 * @throws Exception
 	 */
 	public NormalUser(String username) throws Exception {
+		super.sql = new SQLHandle();
 		super.username = username;
 		statement = "select * from normal_user,user_ where normal_user.username =user_.username "
 				+ "and normal_user.username = '" + username + "';";
 
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		while (r.next()) {
 			super.password = r.getString("Password");
 			super.firstName=r.getString("firstname");
@@ -55,20 +56,20 @@ public class NormalUser extends User implements Storable {
 
 		try {
 			statement = "select borrowingID from current_borrowing where username = '" + username + "';";
-			r = SQLHandle.get(statement);
+			r = sql.nonStaticGet(statement);
 			while (r.next()) {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				currentBorrowHistory.add(b);
 			}
 			statement = "select * from reserved_item where username = '" + username + "';";
 
-			r = SQLHandle.get(statement);
+			r = sql.nonStaticGet(statement);
 			while (r.next()) {
 				reserved.add(r.getInt("ResourceID"));
 			}
 
 			statement = "select * from requesting  where username = '" + username + "';";
-			r = SQLHandle.get(statement);
+			r = sql.nonStaticGet(statement);
 			while (r.next()) {
 				requesting.add(r.getInt("ResourceID"));
 			}
@@ -128,7 +129,7 @@ public class NormalUser extends User implements Storable {
 		// storing
 		statement = "insert into current_borrowing values ('" + this.username + "','"
 				+ currentBorrowHistory.getLast().getBorrowNo() + "');";
-		SQLHandle.set(statement);
+		sql.set(statement);
 
 	}
 
@@ -161,7 +162,7 @@ public class NormalUser extends User implements Storable {
 	public void request(int resourceID) throws Exception {
 		Resource r = new Resource(resourceID);
 		statement = "insert into request_item value('" + this.username + "','" + r.getId() + "');";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		r.request(this.username);
 	}
 
