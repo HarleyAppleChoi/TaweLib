@@ -170,15 +170,17 @@ public class Search {
     	if (!r.next()) {
     		result = "nothing overdue";
     	} else if (r.next() && (r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
+    		if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
     		r.deleteRow();
-    	} else {
-    	while(r.next()) {
-    		result = result + String.format("%s %s %s %s %s", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
-    				r.getString("username"), (r.getDate("dueDate").getTime() - System.currentTimeMillis()));
-    	} 
+    		} else {
+    			while(r.next()) {
+    				result = result + String.format("%s %s %s %s %s", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
+    				r.getString("username"), (r.getDate("dueDate").getTime() - System.currentTimeMillis()/86400));
+    			} 
+    		}
     	}
     	return result;
-    }
+    	}
     
-
+    
 }
