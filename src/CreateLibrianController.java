@@ -25,7 +25,6 @@ public class CreateLibrianController {
 	@FXML
 	TextField usernamePassword;
 	
-	
 	@FXML
 	TextField firstNameTextField;
 	
@@ -123,6 +122,7 @@ public class CreateLibrianController {
 					}
 			} catch (SQLException e1) {
 			}
+
 		
 		
 		try {

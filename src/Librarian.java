@@ -381,9 +381,25 @@ public class Librarian extends User {
 	 */
 	public void borrow(int resourceId, String username) throws Exception {
 		NormalUser user = new NormalUser(username);
-		
+
+		/**
+		SQLHandle s = new SQLHandle();
+		String statement = "";
+		statement = "Select numAvCopies from resource where resourceID = '" + resourceId + "';";
+		ResultSet r = SQLHandle.get(statement);
+		int numAvCopies = 0;
+		while (r.next()) {
+			numAvCopies = r.getInt(numAvCopies);
+		}
+		if (numAvCopies >= 1) {
+		*/
+
 		user.borrow(resourceId);
 		System.out.println("Successfully Borrowed Resource.");
+		//} else {
+		
+			//System.out.println("No more copies, please request");
+		//}
 	}
 
 	/**
