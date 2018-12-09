@@ -72,7 +72,7 @@ public class DrawGUIContorllerUser {
 			
 		
 				try {
-					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("usergui.fxml"));
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(".fxml"));
 					 Parent root = (Parent)fxmlLoader.load();
 					 Scene scene= new Scene(root); 
 					 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();

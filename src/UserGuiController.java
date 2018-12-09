@@ -99,115 +99,61 @@ public class UserGuiController {
 	@FXML
 	TextField balance;
 
-	
+	// UserData
 	@FXML
-	Button avatar1;
+	private Tab userDataTab;
+
 	@FXML
-	Button showImage;
-	
+	private TextField userDataUsername;
+
 	@FXML
-	Button avatar2;
-	
+	private TextField userDataFirstName;
+
 	@FXML
-	Button avatar3;
-	
+	private TextField userDataLastName;
+
 	@FXML
-	Button avatar4;
-	
+	private TextField userDataMobileNumber;
+
 	@FXML
-	Button avatar5;
-	
+	private TextField userDataAddress;
+
 	@FXML
-	Button avatar6;
-	
-	
-	//UserData
+	ImageView profileImageView;
+
+	// detailscarchtab
 	@FXML
-    private Tab userDataTab;
+	private Tab resourceDetail;
 
-    @FXML
-    private TextField userDataUsername;
+	@FXML // fx:id="resultText"
+	private TextArea resultText; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField userDataFirstName;
+	@FXML // fx:id="thumbnIlImage"
+	private ImageView thumbnIlImage; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField userDataLastName;
+	@FXML // fx:id="resourceID"
+	private TextField resourceID; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField userDataMobileNumber;
-    
-    @FXML
-    private TextField userDataAddress;
-    
-    @FXML 
-    private ImageView profileImageView;
-    
-    @FXML
-    void handleAvatar1(ActionEvent event) {
-    		
-    	profileImageView.setImage(getImage(1));
-    		Storage.storeImagenum(1);
-    }
+	@FXML // fx:id="searchButton"
+	private Button searchingButton; // Value injected by FXMLLoader
 
-    @FXML
-    void handleAvatar2(ActionEvent event) {
-    	profileImageView.setImage(getImage(2));
-    		Storage.storeImagenum(2);
-    }
+	@FXML // fx:id="searchButton"
+	private Button backButton; // Value injected by FXMLLoader
 
-    @FXML
-    void handleAvatar3(ActionEvent event) {
-    	profileImageView.setImage(getImage(3));
-		Storage.storeImagenum(3);
-    }
+	@FXML
+	private void userDataAction(ActionEvent e) throws Exception {
+		NormalUser u = new NormalUser(Storage.returnUsername());
+		userDataUsername.setText(u.getUsername());
+		userDataFirstName.setText(u.getFirstName());
+		userDataLastName.setText(u.getLastName());
+		userDataMobileNumber.setText(String.valueOf(u.getMobileNo()));
+		userDataAddress.setText(u.getAddress());
 
-    @FXML
-    void handleAvatar4(ActionEvent event) {
-    	profileImageView.setImage(getImage(4));
-     	Storage.storeImagenum(4);
-    }
+		// Image
+		profileImageView.setImage(u.getUserImage());
 
-    @FXML
-    void handleAvatar5(ActionEvent event) {
-    	profileImageView.setImage(getImage(5));
-		Storage.storeImagenum(5);
-    }
+	}
 
-    @FXML
-    void handleAvatar6(ActionEvent event) {
-    	profileImageView.setImage(getImage(6));
-		Storage.storeImagenum(6);
-    }
-    
-    @FXML
-    void imageDrawnAction(ActionEvent e) {
-    	profileImageView.setImage(getImage(Storage.getNum()));
-		Storage.storeImagenum(Storage.getNum());
-    }
-   
-    
-    private Image getImage(int i) {
-    		String location = "userPhoto/"+String.valueOf(i)+".png";
-		File file = new File(location);
-        Image image = new Image(file.toURI().toString());
-        return image;
-    }
-	
-    @FXML
-    private void userDataAction(ActionEvent e) throws Exception {
-    		NormalUser u = new NormalUser(Storage.returnUsername());
-    		userDataUsername.setText(u.getUsername());
-    		userDataFirstName.setText(u.getFirstName());
-    		userDataLastName.setText(u.getLastName());
-    		userDataMobileNumber.setText(String.valueOf(u.getMobileNo()));
-    		userDataAddress.setText(u.getAddress());
-    		
-    		//Image
-    		profileImageView.setImage(u.getUserImage());
-    		
-    }
-    
 	@FXML
 	private void dashBoard(ActionEvent e) throws Exception {
 		NormalUser u = new NormalUser(Storage.returnUsername());
