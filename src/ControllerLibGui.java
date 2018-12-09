@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -242,6 +243,12 @@ public class ControllerLibGui {
 	
 	@FXML
 	TextArea textReturn;
+	
+	@FXML
+	Label labelBorrow;
+	
+	@FXML
+	Label labelReturn;
 	
 	@FXML
 	private void searchAdd(ActionEvent e) {
