@@ -125,22 +125,22 @@ public class Search {
     		result = "input ID please.";
     		return result;
     	} else {
-    	
-	    	statement = "select borrowing.borrowDate, borrowing.returnDate, T.username " + "from borrowing," 
+	    	statement = "select borrowing.borrowDate, borrowing.returnDate, borrowing.borrowingID, T.username "
+	    					+ "from borrowing," 
 	    					+ " ((select * from returned_his) union all (select * from current_borrowing)) as T" 
 	    					+ " where borrowing.borrowingID = T.borrowingID " + "and resourceID = '" + searchString 
 	    					+ "' order by borrowDate";
 	    	
 	    	 ResultSet r = SQLHandle.get(statement);
 	         while(r.next()) {
-	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
-	         			r.getString("borrowDate"));
+	         	result = result + String.format("%9s %22s %13s\n", r.getInt("borrowingID"), r.getString("username"), 
+	         			r.getString("borrowDate") );
 	         }
 	    	 return result;
     	}
     	
     }
-    //method for returning string of returned copies, with id, username and date returnes
+    //method for returning string of returned copies, with id, username and date returns
     public String returnSearch(String searchString) throws SQLException {
     	String result = "BorrowingID    Username     DateReturned\n";
     	
@@ -155,7 +155,7 @@ public class Search {
 	    	
 	    	 ResultSet r = SQLHandle.get(statement);
 	         while(r.next()) {
-	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
+	         	result = result + String.format("%9s %22s %8s\n", r.getInt("borrowingID"), r.getString("username"),
 	         			r.getString("returnDate"));
 	         }
 	    	 return result;
