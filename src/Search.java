@@ -5,6 +5,8 @@ import java.sql.SQLException;
  * This class handles search queries from the database and filtering the search results.
  * 
  * @author Eniko Debreczeny
+ * @modified James Hogg
+ * @version 3
  */
 public class Search {
 	
