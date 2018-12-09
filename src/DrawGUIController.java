@@ -61,13 +61,14 @@ public class DrawGUIController {
 	private void handleDrawLineEvent(ActionEvent e) {
 		drawParticalTrace();
 	}
-
-	@FXML
+	
+	
+		@FXML
 	private void handleSaveEvent(ActionEvent e) throws SQLException {
 		save();
 		
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createuser.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createlibrarian.fxml"));
 				 Parent root = (Parent)fxmlLoader.load();
 				 Scene scene= new Scene(root); 
 				 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -77,7 +78,6 @@ public class DrawGUIController {
 			}
 	
 	}
-	
 
 	@FXML
 	private void handleClearEvent(ActionEvent e) {

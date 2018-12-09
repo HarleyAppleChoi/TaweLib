@@ -168,7 +168,7 @@ public abstract class User implements Storable {
 	 * 
 	 * @param userImage
 	 */
-	protected void setImage(Image userImage) {
+	protected void setImage(int userImage) {
 		this.userImage = userImage;
 	}
 

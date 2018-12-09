@@ -4,6 +4,7 @@
 
 
 
+import java.io.File;
 import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import sun.security.util.Password;
@@ -54,7 +56,26 @@ public class CreateLibrianController {
 	TextField employDateTextField;
 	
 	@FXML
-	Button cancelLibrianianCancelButton;
+	Button avator1button;
+	
+	@FXML
+	Button avator2button;
+	
+	
+	@FXML
+	Button avator3button;
+	
+	@FXML
+	Button avator4button;
+	
+	@FXML
+	Button avator5button;
+	
+	@FXML
+	Button avator6button;
+	
+	@FXML
+	Button imageDrawnButton;
 	
 	@FXML
 	Button createLibrianianCancelButton;
@@ -62,6 +83,56 @@ public class CreateLibrianController {
 	@FXML
 	ImageView librianImage;
 
+
+    @FXML
+    void avator1Button(ActionEvent event) {
+    		
+    	librianImage.setImage(getImage(1));
+    		Storage.storeImagenum(1);
+    }
+
+    @FXML
+    void avator2Button(ActionEvent event) {
+    	librianImage.setImage(getImage(2));
+    		Storage.storeImagenum(2);
+    }
+
+    @FXML
+    void avator3Button(ActionEvent event) {
+    	librianImage.setImage(getImage(3));
+		Storage.storeImagenum(3);
+    }
+
+    @FXML
+    void avator4Button(ActionEvent event) {
+    	librianImage.setImage(getImage(4));
+     	Storage.storeImagenum(4);
+    }
+
+    @FXML
+    void avator5Button(ActionEvent event) {
+    	librianImage.setImage(getImage(5));
+		Storage.storeImagenum(5);
+    }
+
+    @FXML
+    void avator6Button(ActionEvent event) {
+    	librianImage.setImage(getImage(6));
+		Storage.storeImagenum(6);
+    }
+    
+    @FXML
+    void imageDrawnAction(ActionEvent e) {
+    	librianImage.setImage(getImage(Storage.getNum()));
+		Storage.storeImagenum(Storage.getNum());
+    }
+    
+    private Image getImage(int i) {
+    		String location = "userPhoto/"+String.valueOf(i)+".png";
+		File file = new File(location);
+        Image image = new Image(file.toURI().toString());
+        return image;
+    }
 	@FXML
 	private  void handleCancelLibrarianButtonEvent(ActionEvent e) {
 		Librarian l = new Librarian();

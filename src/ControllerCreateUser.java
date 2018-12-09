@@ -192,7 +192,7 @@ public class ControllerCreateUser {
 
 			
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUI.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUIUser.fxml"));
 				 Parent root = (Parent)fxmlLoader.load();
 				 Scene scene= new Scene(root); 
 				 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
