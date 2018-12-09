@@ -14,9 +14,6 @@ public class DVD extends Resource {
 	private int runtime;
 	private String language;
 	ArrayList<String> subLanguages = new ArrayList<String>();
-
-	private int fineAmount = 2;
-	private int maxFineAmount = 25;
 	
 
 	/**

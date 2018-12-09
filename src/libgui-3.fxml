@@ -7,58 +7,33 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #6f7893;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLibGui">
+<VBox prefHeight="400.0" prefWidth="799.0" style="-fx-background-color: #6f7893;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLibGui">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #6f7893;" VBox.vgrow="ALWAYS">
          <children>
-            <TabPane prefHeight="375.0" prefWidth="640.0" style="-fx-background-color: #6f7893;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="375.0" prefWidth="799.0" style="-fx-background-color: #6f7893;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab closable="false" text="Search">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #6f7893;">
                            <children>
-                              <TableView fx:id="searchTableBasicInfo" layoutX="14.0" layoutY="59.0" prefHeight="272.0" prefWidth="225.0">
-                                <columns>
-                                  <TableColumn fx:id="searchTableBasicInfoId" prefWidth="75.0" text="ID" />
-                                  <TableColumn fx:id="searchTableBasicInfoTitle" prefWidth="75.0" text="Title" />
-                                    <TableColumn fx:id="searchTableBasicInfoYear" prefWidth="75.0" text="Year" />
-                                </columns>
-                              </TableView>
-                              <RadioButton fx:id="searchSelectBook" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Book">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></RadioButton>
-                              <RadioButton fx:id="searchSelectDvd" layoutX="84.0" layoutY="14.0" mnemonicParsing="false" text="DVD">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></RadioButton>
-                              <RadioButton fx:id="searchSelectLaptop" layoutX="150.0" layoutY="14.0" mnemonicParsing="false" text="Laptop">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></RadioButton>
                               <Label layoutX="252.0" layoutY="14.0" text="Search:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="searchEnterSearchQuery" layoutX="307.0" layoutY="10.0" prefHeight="25.0" prefWidth="172.0" />
-                              <TableView fx:id="searchTableBorrowReturn" layoutX="252.0" layoutY="59.0" prefHeight="272.0" prefWidth="152.0">
-                                <columns>
-                                  <TableColumn fx:id="searchTableBorrowReturnBorrow" prefWidth="75.0" text="Borrow" />
-                                  <TableColumn fx:id="searchTableBorrowReturnReturn" prefWidth="75.0" text="Return" />
-                                </columns>
-                              </TableView>
-                              <TableView fx:id="searchTableOverdue" layoutX="415.0" layoutY="59.0" prefHeight="272.0" prefWidth="201.0">
-                                <columns>
-                                  <TableColumn fx:id="searchTableOverdueOverdue" prefWidth="199.0" text="Overdue" />
-                                </columns>
-                              </TableView>
-                              <Button fx:id="searchOpenAdditionalInfo" layoutX="491.0" layoutY="10.0" mnemonicParsing="false" text="Show additional info" />
+                              <TextField fx:id="searchQuery" layoutX="307.0" layoutY="10.0" prefHeight="25.0" prefWidth="172.0" />
+                              <Button fx:id="buttonSearch" layoutX="491.0" layoutY="10.0" mnemonicParsing="false" onAction="#search" text="Search" />
+                              <Button fx:id="buttonBook" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchBook" text="Book" />
+                              <Button fx:id="buttonDvd" layoutX="77.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchDvd" text="DVD" />
+                              <Button fx:id="buttonLaptop" layoutX="138.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchLaptop" text="Laptop" />
+                              <TextArea fx:id="basicInfo" editable="false" layoutX="18.0" layoutY="49.0" prefHeight="287.0" prefWidth="729.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -167,6 +142,7 @@
                                     <Font size="15.0" />
                                  </font></Label>
                               <TextField fx:id="returnShowFineAdded" editable="false" layoutX="272.0" layoutY="251.0" />
+                              <Label fx:id="statusReturn" layoutX="339.0" layoutY="154.0" text="Label" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -191,6 +167,7 @@
                                  </font></Label>
                               <TextField fx:id="pay_fineShowFineRemaining" editable="false" layoutX="156.0" layoutY="74.0" />
                               <Button fx:id="pay_fineGeneratePayment" layoutX="195.0" layoutY="126.0" mnemonicParsing="false" onAction="#handlePayEvent" text="Pay" />
+                              <Label fx:id="statusPayFine" layoutX="303.0" layoutY="131.0" text="Label" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -210,6 +187,31 @@
                                  </font></Label>
                               <TextField layoutX="152.0" layoutY="43.0" />
                               <Button layoutX="197.0" layoutY="81.0" mnemonicParsing="false" text="Request" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Copy Details">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextArea fx:id="textBorrow" editable="false" layoutX="25.0" layoutY="64.0" prefHeight="272.0" prefWidth="377.0" />
+                              <TextArea fx:id="textReturn" editable="false" layoutX="413.0" layoutY="64.0" prefHeight="270.0" prefWidth="372.0" />
+                              <Label layoutX="62.0" layoutY="14.0" text="Search:" />
+                              <TextField fx:id="searchQueryCopy" layoutX="109.0" layoutY="10.0" promptText="Resource ID" />
+                              <Button fx:id="buttonSearchCopy" layoutX="265.0" layoutY="10.0" mnemonicParsing="false" onAction="#searchAdd" text="Search" />
+                              <Label fx:id="labelBorrow" layoutX="156.0" layoutY="47.0" text="Borrow History" />
+                              <Label fx:id="labelReturn" layoutX="561.0" layoutY="47.0" text="Return History" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Overdue">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextArea fx:id="textOverdue" editable="false" layoutX="14.0" layoutY="45.0" prefHeight="296.0" prefWidth="773.0" />
+                              <Button fx:id="buttonOverdue" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onAction="#overdue" text="Show overdue copies" />
                            </children>
                         </AnchorPane>
                     </content>

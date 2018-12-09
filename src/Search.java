@@ -36,14 +36,14 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchResources(String searchString) throws SQLException{
-    	String result = "";
+    	String result = "ID 		   Title		      Year\n";
     	statement = "SELECT resourceID,title,year,numAvCopies FROM resource "
     	+ "WHERE CONCAT(`resourceID`, `title`, `year`) LIKE '%"+searchString+"%';";
         ResultSet r = SQLHandle.get(statement);
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%20s     %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%s %23s %20s\n", r.getInt("resourceID"), r.getString("title"),
 					r.getInt("year"));
         }
         return result;
@@ -118,5 +118,51 @@ public class Search {
         return result;
     }
 
+    public String borrowSearch(String searchString) throws SQLException {
+    	String result = "BorrowingID    Username     DateBorrowed\n";
+    	
+    	if (searchString.equals("")) {
+    		result = "input ID please.";
+    		return result;
+    	} else {
+    	
+	    	statement = "select borrowing.borrowDate, borrowing.returnDate, T.username " + "from borrowing," 
+	    					+ " ((select * from returned_his) union all (select * from current_borrowing)) as T" 
+	    					+ " where borrowing.borrowingID = T.borrowingID " + "and resourceID = '" + searchString 
+	    					+ "' order by borrowDate";
+	    	
+	    	 ResultSet r = SQLHandle.get(statement);
+	         while(r.next()) {
+	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
+	         			r.getString("borrowDate"));
+	         }
+	    	 return result;
+    	}
+    	
+    }
+    
+    public String returnSearch(String searchString) throws SQLException {
+    	String result = "BorrowingID    Username     DateReturned\n";
+    	
+    	if (searchString.equals("")) {
+    		result = "input ID please.";
+    		return result;
+    	} else {
+    	
+	    	statement = "SELECT borrowing.borrowingID, username, returnDate "
+	    			+ "FROM borrowing, returned_his "
+	    			+ "WHERE borrowing.borrowingID = returned_his.borrowingID and resourceID = " + searchString + "";
+	    	
+	    	 ResultSet r = SQLHandle.get(statement);
+	         while(r.next()) {
+	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
+	         			r.getString("returnDate"));
+	         }
+	    	 return result;
+    	}
+    	
+    }
+    
+    
 
 }

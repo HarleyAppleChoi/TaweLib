@@ -120,6 +120,7 @@ public class NormalUser extends User implements Storable {
 		if (!canBorrow()) {
 			throw new IllegalArgumentException("You cannot borrow either you get fine or have something overdue");
 		} else {
+			
 			Borrowing b = r.borrow(super.username);
 			currentBorrowHistory.add(b);
 		}
