@@ -140,4 +140,26 @@ public class CreateLibrianController {
 		
 	}	
 
+
+	@FXML
+	private void handleDrawImageEvent(ActionEvent e) {
+	
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUI.fxml"));
+			 Parent root = (Parent)fxmlLoader.load();
+			 Scene scene= new Scene(root); 
+			 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			 window.setScene(scene);
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+		
+	}
+
+
+
+
+
 }
