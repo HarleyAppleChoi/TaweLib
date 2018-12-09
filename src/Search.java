@@ -167,13 +167,15 @@ public class Search {
     			+"username, dueDate FROM borrowing, resource, current_borrowing where current_borrowing.borrowingID"
     			+ "= borrowing.resourceID = resource.resourceID";
     	ResultSet r = SQLHandle.get(statement);
+    	if (!r.next()) {
+    		result = "nothing overdue";
+    	} else if (r.next() && (r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
+    		r.deleteRow();
+    	} else {
     	while(r.next()) {
-    		if (r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0) {
     		result = result + String.format("%s %s %s %s %s", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
     				r.getString("username"), (r.getDate("dueDate").getTime() - System.currentTimeMillis()));
-    	} else {
-    		r.next();
-    	}
+    	} 
     	}
     	return result;
     }
