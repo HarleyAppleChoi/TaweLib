@@ -59,7 +59,7 @@ public class SQLHandle {
 	 * @param query
 	 * @throws SQLException
 	 */
-	public static void set(String query) throws SQLException {
+	public void set(String query) throws SQLException {
 		statement.executeUpdate(query);
 	}
 	

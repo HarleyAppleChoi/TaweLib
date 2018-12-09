@@ -24,6 +24,7 @@ public class Borrowing implements Storable {
 	DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 	String statement = "";
 	SQLHandle sql = new SQLHandle();
+	
 
 	/**
 	 * Selects all the information about a specific borrowing from the database. 
@@ -64,7 +65,7 @@ public class Borrowing implements Storable {
 		System.out.println("Borrowing adding...");
 		statement = "insert into borrowing values('" + this.BORROW_NO + "','" + dateFormat.format(INITIAL_DATE) + "',"
 				+ "null,null,'" + this.RESOURCE_ID + "','y');";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		System.out.println("Borrowing added");
 	}
 
@@ -216,20 +217,6 @@ public class Borrowing implements Storable {
 	public int getBorrowNo() {
 		return BORROW_NO;
 	}
-	/*
-	 * public normalUser getUser() { return USER; } public void setUser(normalUser
-	 * user) { this.USER = user; }
-	 */
-	/*
-	 * public Resource getResourceType() { return resourceType; }
-	 */
-	/*
-	 * public void setResourceType(Resource resourceType) { this.resourceType =
-	 * resourceType; }
-	 */
-	// check if resource available.
-	// if true, add borrowid and resourceid to users currently borrowing table.
-	// -1 from numAvCopies,
 
 	/**
 	 * when that is only an update.
@@ -238,7 +225,7 @@ public class Borrowing implements Storable {
 	 */
 	@Override
 	public void store() throws SQLException {
-		SQLHandle.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + ","
+		sql.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + ","
 				+ "null," + this.RESOURCE_ID + "," + this.returnDate.toString() + "y");
 	}
 	

@@ -19,7 +19,7 @@ public abstract class User implements Storable {
 	protected int mobileNo;
 	protected String address;
 	protected int userImage;
-	
+	protected SQLHandle sql ;
 	/**
 	 * Constructor to construct a User's instance.
 	 * @param username

@@ -20,7 +20,7 @@ public class Librarian extends User {
 
 	protected int staffNo;
 	protected int employmentDate;
-
+	
 	/**
 	 * constructor to construct a Librarian.
 	 * 
@@ -46,13 +46,14 @@ public class Librarian extends User {
 		super(username, password, firstName, lastName, mobileNo, address, userImage);
 		this.staffNo = staffNo;
 		this.employmentDate = employmentDate;
+		super.sql = new SQLHandle();
 	}
 
 	/**
 	 * Empty constructor.
 	 */
 	public Librarian() {
-
+		super.sql = new SQLHandle();
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class Librarian extends User {
 		// selects max id from resource
 		
 		
-		ResultSet r = SQLHandle.get("select max(resourceID) from resource;");
+		ResultSet r = sql.nonStaticGet("select max(resourceID) from resource;");
 		r.next();
 		int id = r.getInt("max(resourceID)")+1;
 		
@@ -100,7 +101,7 @@ public class Librarian extends User {
 		String query = "insert into resource (resourceID,title,year,image,numAvcopies, duration)" + "values ('" + id
 				+ "','" + title + "','" + year + "','" + image + "','" + numCopies + "','" + duration + "')";
 
-		SQLHandle.set(query);
+		sql.set(query);
 		return id;
 	}
 
@@ -142,7 +143,7 @@ public class Librarian extends User {
 		// SQL query to add a Book to the Database with the entered values.
 		String query = "insert into book (resourceID, author, publisher, genre, ISBN, language)" + "values('" + id
 				+ "','" + author + "','" + publisher + "'," + gen + "," + isbn + "," + lang + ");";
-		SQLHandle.set(query);
+		sql.set(query);
 	}
 
 	/**
@@ -170,7 +171,7 @@ public class Librarian extends User {
 		// SQL statement to add the DVD and it's values to the database.
 		String query = "insert into DVD (resourceID, director, runtime, _language)" + "values('" + id + "','" + director
 				+ "','" + runtime + "','" + lang + "');";
-		SQLHandle.set(query);
+		sql.set(query);
 
 		// If there are subtitle languages, adds each of them to the
 		// DVD_subtitle table along with the corresponding resourceID.
@@ -182,7 +183,7 @@ public class Librarian extends User {
 				String subLang = subtitleLang.get(i);
 				String query2 = "insert into DVD_subtitle (resourceID, subtitle)" + "values('" + id + "','" + subLang
 						+ "');";
-				SQLHandle.set(query2);
+				sql.set(query2);
 			}
 		}
 	}
@@ -200,7 +201,7 @@ public class Librarian extends User {
 				+ "where borrowing.borrowingID = T.borrowingID " + "and resourceID = '" + resourceID
 				+ "' order by borrowDate";
 
-		ResultSet r = SQLHandle.get(query);
+		ResultSet r = sql.nonStaticGet(query);
 		String result = String.format("%20s %20s %20s \n", "borrowtime" , "returntime", "user");
 		while (r.next()) {
 			result += String.format("%20s %20s %20s \n", r.getString("borrowDate") , r.getString("returnDate"), r.getString("username"));
@@ -228,7 +229,7 @@ public class Librarian extends User {
 		// SQL query to add a new laptop and its values to the database.
 		String query = "insert into laptop (resourceID, manufacturer, model, operatingSystem)" + "values('" + id + "','"
 				+ model + "','" + manufacturer + "','" + operatingSystem + "');";
-		SQLHandle.set(query);
+		sql.set(query);
 
 	}
 	
@@ -239,31 +240,31 @@ public class Librarian extends User {
 		String newTitle = "null";
 		if (!title.isEmpty()) {
 			newTitle = "UPDATE resource SET title = '" + title + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newTitle);
+			sql.set(newTitle);
 		}
 		
 		String newYear = "null";
 		if (!year.isEmpty()) {
 			newYear = "UPDATE resource SET year = '" + year + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newYear);
+			sql.set(newYear);
 		}
 		
 		String newImage = "null";
 		if (!image.isEmpty()) {
 			newImage = "UPDATE resource SET image = '" + image + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newImage);
+			sql.set(newImage);
 		}
 		
 		String newNumAvCopies = "null";
 		if (numAvCopies != 0) {
 			newNumAvCopies = "UPDATE resource SET numAvCopies = '" + numAvCopies + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newNumAvCopies);
+			sql.set(newNumAvCopies);
 		}
 		
 		String newDuration = "null";
 		if (duration != 0) {
 			newDuration = "UPDATE resource SET duration = '" + duration + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newDuration);
+			sql.set(newDuration);
 		}	
 	}
 	
@@ -275,31 +276,31 @@ public class Librarian extends User {
 		String newAuthor = "null";
 		if (!author.isEmpty()) {
 			newAuthor = "UPDATE book SET author = '" + author + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newAuthor);
+			sql.set(newAuthor);
 		}
 		
 		String newPublisher = "null";
 		if (!publisher.isEmpty()) {
 			newPublisher = "UPDATE book SET publisher = '" + publisher + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newPublisher);
+			sql.set(newPublisher);
 		}
 		
 		String newGenre = "null";
 		if (!publisher.isEmpty()) {
 			newGenre = "UPDATE book SET publisher = '" + genre + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newGenre);
+			sql.set(newGenre);
 		}
 		
 		String newISBN = "null";
 		if (!ISBN.isEmpty()) {
 			newISBN = "UPDATE book SET ISBN = '" + ISBN + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newISBN);
+			sql.set(newISBN);
 		}
 		
 		String newLanguage = "null";
 		if (!language.isEmpty()) {
 			newLanguage = "UPDATE book SET language = '" + language + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newLanguage);
+			sql.set(newLanguage);
 		}
 	}
 	
@@ -313,25 +314,25 @@ public class Librarian extends User {
 		String newDirector = "null";
 		if (!director.isEmpty()) {
 			newDirector = "UPDATE DVD SET director = '" + director + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newDirector);
+			sql.set(newDirector);
 		}
 		
 		String newLanguage = "null";
 		if (!language.isEmpty()) {
 			newLanguage = "UPDATE DVD SET _language = '" + language + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newLanguage);
+			sql.set(newLanguage);
 		}
 		
 		
 		String newRuntime = "null";
 		if (!runtime.isEmpty()) {
 			newRuntime = "UPDATE DVD SET runtime = '" + runtime + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newRuntime);
+			sql.set(newRuntime);
 		}
 		
 		if (subtitle.length() != 0) {
 			String query = "delete from DVD_subtitle where resourceID = '"+ resourceId +"';";
-			SQLHandle.set(query);
+			sql.set(query);
 			String[] subtitles = subtitle.split("\\s*,\\s*");
 			List<String> subtitleLang = new ArrayList<String>(Arrays.asList(subtitles));
 			
@@ -341,7 +342,7 @@ public class Librarian extends User {
 				String subLang = subtitleLang.get(i);
 				String query2 = "insert into DVD_subtitle (resourceID, subtitle)" + "values('" + resourceId + "','" + subLang
 						+ "');";
-				SQLHandle.set(query2);
+				sql.set(query2);
 			}
 		
 	}
@@ -355,19 +356,19 @@ public class Librarian extends User {
 		String newManufacturer = "null";
 		if (!manufacturer.isEmpty()) {
 			newManufacturer = "UPDATE DVD SET manufacturer = '" + manufacturer + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newManufacturer);
+			sql.set(newManufacturer);
 		}
 		
 		String newModel = "null";
 		if (!model.isEmpty()) {
 			newModel = "UPDATE DVD SET model = '" + model + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newModel);
+			sql.set(newModel);
 		}
 		
 		String newOperatingSystem = "null";
 		if (!operatingSystem.isEmpty()) {
 			newOperatingSystem = "UPDATE DVD SET model = '" + operatingSystem + "' WHERE resourceID = '" + resourceId + "';";
-			SQLHandle.set(newOperatingSystem);
+			sql.set(newOperatingSystem);
 		}
 	}
 	
@@ -386,7 +387,7 @@ public class Librarian extends User {
 		SQLHandle s = new SQLHandle();
 		String statement = "";
 		statement = "Select numAvCopies from resource where resourceID = '" + resourceId + "';";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		int numAvCopies = 0;
 		while (r.next()) {
 			numAvCopies = r.getInt(numAvCopies);
@@ -415,7 +416,7 @@ public class Librarian extends User {
 		// SQL statement to find the username who borrowed the resource
 		String statement = "";
 		statement = "Select distinct username from current_borrowing where borrowingID = '" + borrowNo + "';";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		String userName = "";
 		while (r.next()) {
 			userName = r.getString("username");
@@ -424,7 +425,7 @@ public class Librarian extends User {
 		// SQL statement to find the resourceID of the borrowed resource
 		String resourceID = "";
 		statement = "Select resourceID from current_borrow_his where borrowingID = '" + borrowNo + "';";
-		r = SQLHandle.get(statement);
+		r = sql.nonStaticGet(statement);
 		while (r.next()) {
 			resourceID = r.getString("resourceID");
 		}
@@ -439,10 +440,10 @@ public class Librarian extends User {
 			u.reduceBalance(b.fine());
 			statement = "update normal_user set balance = '" + u.getBalance() + "' where username = '" + userName
 					+ "';";
-			SQLHandle.set(statement);
+			sql.set(statement);
 
 			statement = "select max(transID) from transaction;";
-			r = SQLHandle.get(statement);
+			r = sql.nonStaticGet(statement);
 			int i = 0;
 			// finds the max transID
 			while (r.next()) {
@@ -451,11 +452,11 @@ public class Librarian extends User {
 			// adds the fine information into the transaction table, the overdue_transaction
 			// table and the transaction_his table
 			statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES ('"+i+"','"+b.fine()+"','"+getCurrentTime()+"')";
-			SQLHandle.set(statement);
+			sql.set(statement);
 			statement = "insert into overdue_transaction values('" + i + "','" + b.getBorrowNo() + "');";
-			SQLHandle.set(statement);
+			sql.set(statement);
 			statement = "insert into transaction_his values('" + u.getUsename() + "','" + i + "');";
-			SQLHandle.set(statement);
+			sql.set(statement);
 
 			System.out.println("Fine is reduced from balance which is " + b.fine());
 		}
@@ -466,18 +467,18 @@ public class Librarian extends User {
 		// Updating the database
 		// removing the user from the current_borrow_his table
 		statement = "delete from current_borrow_his where borrowingID = '" + borrowNo + "';";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		// removing the user from the current_borrowing table
 		statement = "delete from current_borrowing where borrowingID = '" + borrowNo + "' and userName = '" + userName
 				+ "';";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		// adding the user to the returned_his table
 		statement = "insert into returned_his values('" + u.getUsername() + "','" + b.getBorrowNo() + "');";
-		SQLHandle.set(statement);
+		sql.set(statement);
 
 		statement = "UPDATE borrowing SET onLoan = 'n' , returnDate = '" + getCurrentDate() + "' WHERE borrowingID ="
 				+ borrowNo + ";";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		System.out.println("Successfully returned Resource.");
 	}
 
@@ -509,18 +510,18 @@ public class Librarian extends User {
 		
 		// SQL query to update the normal_user table with the new balance amount
 		String statement = "Update normal_user set balance = " + newBalance + " where username = '"+username+"';";
-		SQLHandle.set(statement);
+		sql.set(statement);
 
 		statement = "select count(*) from transaction;";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		r.next();
 		int sNo = r.getInt("count(*)") + 1;
 		statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES " + "('" + sNo + "','" + amount
 				+ "','" + getCurrentTime() + "'); ";
-		SQLHandle.set(statement);
+		sql.set(statement);
 
 		statement = "INSERT INTO `transaction_his`(`username`, `transID`) VALUES ('" + username + "','" + sNo + "')";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		System.out.println("fine paid");
 	}
 
@@ -552,7 +553,7 @@ public class Librarian extends User {
 		String statement = "INSERT INTO user_(username, Password, firstname, lastname, mobileNo, address, image)"
 				+ " VALUES ('" + username + "','" + password.hashCode() + "','" + firstName + "','" + lastName + "','"
 				+ mobileNo + "','" + address + "','" + image + "');";
-		SQLHandle.set(statement);
+		sql.set(statement);
 
 	}
 
@@ -574,7 +575,7 @@ public class Librarian extends User {
 		// SQL query to add the NormalUser to the database
 		newUser(username, password, firstname, lastname, mobileNo, address, image);
 		String statement = "INSERT INTO normal_user(username, balance) VALUES ('" + username + "','" + 0 + "');";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		System.out.println("NormalUserAdded");
 	}
 
@@ -597,14 +598,14 @@ public class Librarian extends User {
 
 		// get new unique StaffNo
 		String statement = "select max(staffNo) from librarian;";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		r.next();
 		int sNo = r.getInt("max(staffNo)") + 1;
 
 		// SQL query to add the new Librarian to the database
 		statement = "INSERT INTO librarian(username, employmentDate, staffNo) " + "VALUES ('" + username + "','"
 				+ employmentDate + "'," + sNo + ")";
-		SQLHandle.set(statement);
+		sql.set(statement);
 	}
 
 	/**
@@ -615,7 +616,7 @@ public class Librarian extends User {
 	 */
 	private void checkName(String username) throws SQLException, IllegalArgumentException {
 		String statement = "select username from user_ where username = '" + username + "';";
-		ResultSet r = SQLHandle.get(statement);
+		ResultSet r = sql.nonStaticGet(statement);
 		// if the set is not empty, means that is already in use
 		if (r.next() == true) {
 			throw new IllegalArgumentException("Name already being used");
