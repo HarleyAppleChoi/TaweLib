@@ -134,10 +134,17 @@ public class CreateLibrianController {
     }
 	@FXML
 	private  void handleCancelLibrarianButtonEvent(ActionEvent e) {
-	
-			
+		Librarian l = new Librarian();
+		String address = line1AddressTextField.getText() +"," +line2AddressTextField.getText()+","+cityAdressTextField.getText()
+		+"," +cityAdressTextField.getText()+"," +postcodeAdressTextField.getText();
+		try {
+			l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(), firstNameTextField.getText(), lastNameTextField.getText()
+					, Integer.parseInt(mobileNumberTextField.getText()), address, Storage.getNum(), employDateTextField.getText());
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Mobile number should be int!");
 			try {
-				 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
+				 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createlibraruan.fxml"));
 				 Parent root = (Parent)fxmlLoader.load();
 				 Scene scene= new Scene(root); 
 				 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -146,9 +153,23 @@ public class CreateLibrianController {
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-	
+		} catch (SQLException e1) {
 		}
+		
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
+			 Parent root = (Parent)fxmlLoader.load();
+			 Scene scene= new Scene(root); 
+			 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			 window.setScene(scene);
 			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+			
+		
+	}	
 	@FXML
 	private  void handleCreateLibrianEvent(ActionEvent e) throws NumberFormatException, SQLException {
 			Librarian l = new Librarian();
@@ -161,7 +182,7 @@ public class CreateLibrianController {
 				// TODO Auto-generated catch block
 				System.out.println("Mobile number should be int!");
 				try {
-					 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
+					 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createlibraruan.fxml"));
 					 Parent root = (Parent)fxmlLoader.load();
 					 Scene scene= new Scene(root); 
 					 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -171,6 +192,19 @@ public class CreateLibrianController {
 						ex.printStackTrace();
 					}
 			} catch (SQLException e1) {
+			}
+
+		
+		
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
+			 Parent root = (Parent)fxmlLoader.load();
+			 Scene scene= new Scene(root); 
+			 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			 window.setScene(scene);
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 		
 			

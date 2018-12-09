@@ -99,6 +99,7 @@ public class UserGuiController {
 	@FXML
 	TextField balance;
 
+
 	
 	@FXML
 	Button avatar1;
@@ -120,6 +121,29 @@ public class UserGuiController {
 	@FXML
 	Button avatar6;
 	
+
+	// UserData
+	@FXML
+	private Tab userDataTab;
+
+	@FXML
+	private TextField userDataUsername;
+
+	@FXML
+	private TextField userDataFirstName;
+
+	@FXML
+	private TextField userDataLastName;
+
+	@FXML
+	private TextField userDataMobileNumber;
+
+	@FXML
+	private TextField userDataAddress;
+
+	@FXML
+	ImageView profileImageView;
+
 	// detailscarchtab
 	@FXML
 	private Tab resourceDetail;
@@ -228,6 +252,7 @@ public class UserGuiController {
     		
     }
     
+
 	@FXML
 	private void dashBoard(ActionEvent e) throws Exception {
 		NormalUser u = new NormalUser(Storage.returnUsername());
