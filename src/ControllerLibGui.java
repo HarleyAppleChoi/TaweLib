@@ -292,6 +292,22 @@ public class ControllerLibGui {
 		}
 	}
 	
+	//more info tab, used for thumbnail image
+	
+	@FXML
+	Button buttonSearchMore;
+	
+	@FXML
+	private void buttonSearchMore(ActionEvent e) {
+	
+	}
+	
+	@FXML
+	TextField searchQueryMore;
+	
+	@FXML
+	TextArea thumbnailImage;
+	
 	//unorganised methods:
 
 	@FXML
