@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
 import javafx.scene.control.TextField;
@@ -103,6 +104,9 @@ public class ControllerLibGui {
 	@FXML
 	TextField returnShowFineAdded;
 
+	@FXML
+	private Label statusReturn;
+
 	// pay fine tab
 
 	@FXML
@@ -116,6 +120,9 @@ public class ControllerLibGui {
 
 	@FXML
 	Button pay_fineGeneratePayment;
+	
+	@FXML
+	Label statusPayFine;
 
 	// request tab
 
@@ -127,6 +134,8 @@ public class ControllerLibGui {
 
 	@FXML
 	Button requestGenerateRequest;
+	
+	
 
 	@FXML
 	public void handleCreateBookEvent(ActionEvent e) {
@@ -262,32 +271,39 @@ public class ControllerLibGui {
 	@FXML
 	public void borrowEvent() throws NumberFormatException, Exception {
 		Librarian l = new Librarian();
-		try{
-			l.borrow(Integer.parseInt(borrowingEnterSearchQuery.getText()), 
-					borrowingEnterBorrowerUsername.getText());
-		}catch(IllegalArgumentException e) {
+		try {
+			l.borrow(Integer.parseInt(borrowingEnterSearchQuery.getText()), borrowingEnterBorrowerUsername.getText());
+		} catch (IllegalArgumentException e) {
 			System.out.println("You cannot borrow!");
 		}
-		}
-	
-		@FXML
-		public void returnEvent() throws NumberFormatException, Exception {
+	}
+
+	@FXML
+	public void returnEvent()  {
+		try {
 			Librarian l = new Librarian();
 			int borrowID = Integer.parseInt(returnEnterResourceId.getText());
 			l.returnResource(borrowID);
 			Borrowing b = new Borrowing(borrowID);
 			returnShowFineAdded.setText(String.valueOf(b.fine()));
+		} catch (Exception n) {
+			statusReturn.setText("Please fill in the fills!");
 		}
-	
+	}
+
 	@FXML
-	public void handlePayEvent(ActionEvent e) throws NumberFormatException, Exception {
+	public void handlePayEvent(ActionEvent e)  {
+		try {
 		SQLHandle c = new SQLHandle();
 		Librarian l = new Librarian();
 		l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
 		NormalUser u = new NormalUser(pay_fineEnterUsername.getText());
 		pay_fineShowFineRemaining.setText(String.valueOf(u.getBalance()));
+		}catch(IllegalArgumentException rt){
+			statusPayFine.setText("The fine number is not a vaild number(0.01~full fine)");
+		}catch(Exception r) {
+			statusPayFine.setText("Please fill in the fills!");
+		}
 
+	}
 }
-}
-
-

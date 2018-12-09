@@ -483,7 +483,9 @@ public class Librarian extends User {
 
 	public void payFine(int amount, String username) throws Exception {
 		NormalUser u = new NormalUser(username);
-		
+		if(amount > u.getBalance()||amount<0.01) {
+			throw new IllegalArgumentException("The fine number is not a vaild number(0.01~full fine)");
+		}
 		
 		
 		int newBalance = u.getBalance() + amount;
