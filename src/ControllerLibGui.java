@@ -2,7 +2,9 @@
 /**
 @author Iestyn Price
 @modified James Hogg
+@version 2.2
 */
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -263,6 +265,7 @@ public class ControllerLibGui {
 
 	
 	@FXML
+	//displays borrow and return histories
 	private void searchAdd(ActionEvent e) {
 		try {
 			SQLHandle c = new SQLHandle();
@@ -278,11 +281,12 @@ public class ControllerLibGui {
 	
 	
 	@FXML
+	//method for displaying overdue copies
 	public void overdue(ActionEvent e) {
 		try {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
-			//textOverdue.setText(s.overdueSearch());
+			textOverdue.setText(s.overdueSearch());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -5,7 +5,8 @@ import java.sql.SQLException;
  * This class handles search queries from the database and filtering the search results.
  * 
  * @author Eniko Debreczeny
- * @version 2.1
+ * @modified James Hogg
+ * @version 3
  */
 public class Search {
 	
@@ -18,13 +19,12 @@ public class Search {
 	 */
     public String displayResources() throws SQLException{
     	String result = "";
-        statement = "SELECT resourceID,title,year FROM resource;";
+        statement = "SELECT resourceID FROM resource;";
         ResultSet r = SQLHandle.get(statement);
          
         //results into string
         while(r.next()) {
-        	result = result + String.format("%20s , %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
-					r.getInt("year"));
+        	result = result + String.format("%s", r.getInt("resourceID"));
         }
         return result;
     }
@@ -117,7 +117,7 @@ public class Search {
         }
         return result;
     }
-
+//method for returning a string of borrowed books with the id, username and date borrowed
     public String borrowSearch(String searchString) throws SQLException {
     	String result = "BorrowingID    Username     DateBorrowed\n";
     	
@@ -125,22 +125,24 @@ public class Search {
     		result = "input ID please.";
     		return result;
     	} else {
-    	
-	    	statement = "select borrowing.borrowDate, borrowing.returnDate, T.username, T.borrowingID " + "from borrowing," 
+
+	    	statement = "select borrowing.borrowDate, borrowing.returnDate, borrowing.borrowingID, T.username "
+	    					+ "from borrowing," 
+
 	    					+ " ((select * from returned_his) union all (select * from current_borrowing)) as T" 
 	    					+ " where borrowing.borrowingID = T.borrowingID " + "and resourceID = '" + searchString 
 	    					+ "' order by borrowDate";
 	    	
 	    	 ResultSet r = SQLHandle.get(statement);
 	         while(r.next()) {
-	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
-	         			r.getString("borrowDate"));
+	         	result = result + String.format("%9s %22s %13s\n", r.getInt("borrowingID"), r.getString("username"), 
+	         			r.getString("borrowDate") );
 	         }
 	    	 return result;
     	}
     	
     }
-    
+    //method for returning string of returned copies, with id, username and date returns
     public String returnSearch(String searchString) throws SQLException {
     	String result = "BorrowingID    Username     DateReturned\n";
     	
@@ -155,14 +157,36 @@ public class Search {
 	    	
 	    	 ResultSet r = SQLHandle.get(statement);
 	         while(r.next()) {
-	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
+	         	result = result + String.format("%9s %22s %8s\n", r.getInt("borrowingID"), r.getString("username"),
 	         			r.getString("returnDate"));
 	         }
 	    	 return result;
     	}
     	
     }
+    //method for returning a string of overdue copies, with id, title, year, username, and overdue days
+    public String overdueSearch() throws SQLException {
+    	String result = "resourceID     Title           Year     Username     Days Overdue\n";
+    	statement = "SELECT distinct resource.resourceID, title, year, username, dueDate FROM borrowing, resource, "
+    			+ "current_borrowing WHERE borrowing.resourceID = resource.resourceID "
+    			+ "and borrowing.borrowingID = current_borrowing.borrowingID";
+    	ResultSet r = SQLHandle.get(statement);
+    	while(r.next() ) {
+    		System.out.println("while cycle");
+    		if (!r.getDate("dueDate").equals(null)) {
+    			System.out.println("gets to date field not null");
+    			if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
+    				System.out.println("gets to overdue add to rs");
+        			result = result + String.format("%5s %20s %10s %15s %15s\n", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
+        	    	r.getString("username"), (System.currentTimeMillis() - r.getDate("dueDate").getTime())/86400000);
+    		} else if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() >= 0)){
+    			System.out.println("gets to time is postive, no t overdue > skip");
+    			r.next();
+    		}
+    		}
+    	}
+    	return result;
+    	}
     
     
-
 }
