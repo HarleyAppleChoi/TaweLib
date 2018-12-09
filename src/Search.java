@@ -5,7 +5,8 @@ import java.sql.SQLException;
  * This class handles search queries from the database and filtering the search results.
  * 
  * @author Eniko Debreczeny
- * @version 2.1
+ * @version 3
+ * @modified James Hogg
  */
 public class Search {
 	
@@ -116,7 +117,7 @@ public class Search {
         }
         return result;
     }
-
+//method for returning a string of borrowed books with the id, username and date borrowed
     public String borrowSearch(String searchString) throws SQLException {
     	String result = "BorrowingID    Username     DateBorrowed\n";
     	
@@ -139,7 +140,7 @@ public class Search {
     	}
     	
     }
-    
+    //method for returning string of returned copies, with id, username and date returnes
     public String returnSearch(String searchString) throws SQLException {
     	String result = "BorrowingID    Username     DateReturned\n";
     	
@@ -161,22 +162,25 @@ public class Search {
     	}
     	
     }
+    //method for returning a string of overdue copies, with id, title, year, username, and overdue days
     public String overdueSearch() throws SQLException {
-    	String result = "resourceID   Title   Year     Username     Days Overdue\n";
-    	statement = "SELECT resource.resourceID, title, year, "
-    			+"username, dueDate FROM borrowing, resource, current_borrowing where current_borrowing.borrowingID"
-    			+ "= borrowing.resourceID = resource.resourceID";
+    	String result = "resourceID     Title           Year     Username     Days Overdue\n";
+    	statement = "SELECT distinct resource.resourceID, title, year, username, dueDate FROM borrowing, resource, "
+    			+ "current_borrowing WHERE borrowing.resourceID = resource.resourceID "
+    			+ "and borrowing.borrowingID = current_borrowing.borrowingID";
     	ResultSet r = SQLHandle.get(statement);
-    	if (!r.next()) {
-    		result = "nothing overdue";
-    	} else if (r.next() && !(r.getDate("dueDate").equals(null))) {
-    		if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
-    		r.deleteRow();
-    		} else {
-    			while(r.next()) {
-    				result = result + String.format("%s %s %s %s %s", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
-    				r.getString("username"), (r.getDate("dueDate").getTime() - System.currentTimeMillis()/86400));
-    			} 
+    	while(r.next() ) {
+    		System.out.println("while cycle");
+    		if (!r.getDate("dueDate").equals(null)) {
+    			System.out.println("gets to date field not null");
+    			if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
+    				System.out.println("gets to overdue add to rs");
+        			result = result + String.format("%5s %20s %10s %15s %15s\n", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
+        	    	r.getString("username"), (System.currentTimeMillis() - r.getDate("dueDate").getTime())/86400000);
+    		} else if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() >= 0)){
+    			System.out.println("gets to time is postive, no t overdue > skip");
+    			r.next();
+    		}
     		}
     	}
     	return result;
