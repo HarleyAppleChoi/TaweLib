@@ -205,8 +205,8 @@ public class UserGuiController {
     
     @FXML
     void imageDrawnAction(ActionEvent e) {
-    	profileImageView.setImage(getImage(Storage.getNum()));
-		Storage.storeImagenum(Storage.getNum());
+    	profileImageView.setImage(getImage(Storage.returntNum()));
+		Storage.storeImagenum(Storage.returntNum());
     }
    
     
@@ -474,10 +474,14 @@ public class UserGuiController {
 
 	}
 
+	SQLHandle sql = new SQLHandle();
+	
 	@FXML
 	void storeAction(ActionEvent event) throws SQLException {
-		String query = "UPDATE `user_` SET `image`='" +Storage.returnImagenum()+"';";
-		SQLHandle.set(query);
+		
+		
+		String query = "UPDATE `user_` SET `image`='" +Storage.returnImagenum()+"' where username = '"+Storage.returnUsername()+"';";
+		sql.set(query);
 	}
 
 }
