@@ -165,28 +165,6 @@ public class UserGuiController {
 	private Button backButton; // Value injected by FXMLLoader
 
 	
-	
-	//UserData
-	@FXML
-    private Tab userDataTab;
-
-    @FXML
-    private TextField userDataUsername;
-
-    @FXML
-    private TextField userDataFirstName;
-
-    @FXML
-    private TextField userDataLastName;
-
-    @FXML
-    private TextField userDataMobileNumber;
-    
-    @FXML
-    private TextField userDataAddress;
-    
-    @FXML 
-    private ImageView profileImageView;
     
     @FXML
     void handleAvatar1(ActionEvent event) {
@@ -371,10 +349,10 @@ public class UserGuiController {
 	}
 
 	@FXML
-	private void handleDrawImage(ActionEvent e) {
-
+	private void handleDrawImage(ActionEvent e) throws SQLException {
+		
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUI.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUIUser.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
 			Scene scene = new Scene(root);
 			Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -497,8 +475,9 @@ public class UserGuiController {
 	}
 
 	@FXML
-	void backAction(ActionEvent event) {
-
+	void storeAction(ActionEvent event) throws SQLException {
+		String query = "UPDATE `user_` SET `image`='" +Storage.returnImagenum()+"';";
+		SQLHandle.set(query);
 	}
 
 }

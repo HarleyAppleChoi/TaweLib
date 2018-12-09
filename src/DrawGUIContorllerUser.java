@@ -72,7 +72,7 @@ public class DrawGUIContorllerUser {
 			
 		
 				try {
-					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(".fxml"));
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("usergui.fxml"));
 					 Parent root = (Parent)fxmlLoader.load();
 					 Scene scene= new Scene(root); 
 					 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -194,6 +194,9 @@ public class DrawGUIContorllerUser {
 			}
 			
 			Storage.storeNum(number);
+			
+			String query = "UPDATE `user_` SET `image`='" +number+"';";
+			SQLHandle.set(query);
 			
 			drawCanvas.snapshot(null, wim);
 			String filePath = "userPhoto/"+String.valueOf(number)+".png";
