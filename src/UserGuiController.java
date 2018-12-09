@@ -120,6 +120,8 @@ public class UserGuiController {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
 			userSearch.setText(s.searchDvd(searchQuery.getText()));
+			dvdButton = false;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -134,6 +136,8 @@ public class UserGuiController {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
 			userSearch.setText(s.searchLaptop(searchQuery.getText()));
+			laptopButton = false;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -150,6 +154,8 @@ public class UserGuiController {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
 			userSearch.setText(s.searchBook(searchQuery.getText()));
+			bookButton = false;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -161,9 +167,12 @@ public class UserGuiController {
 	
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
-
+		
 
 		if (bookButton == true) {
+			bookButton = false;
+			dvdButton = false;
+			laptopButton = false;
 			try {
 				SQLHandle c = new SQLHandle();
 				Search s = new Search();
@@ -173,6 +182,9 @@ public class UserGuiController {
 			}
 		//	bookButton = false;
 		} else if (dvdButton == true) {
+			bookButton = false;
+			dvdButton = false;
+			laptopButton = false;
 			try {
 				SQLHandle c = new SQLHandle();
 				Search r = new Search();
@@ -183,6 +195,9 @@ public class UserGuiController {
 		//	dvdButton = false;
 
 		} else if (laptopButton == true) {
+			bookButton = false;
+			dvdButton = false;
+			laptopButton = false;
 			try {
 				SQLHandle c = new SQLHandle();
 				Search t = new Search();

@@ -96,6 +96,8 @@ public class ControllerLibGui {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
 			basicInfo.setText(s.searchBook(searchQuery.getText()));
+			bookButton = false;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -109,6 +111,8 @@ public class ControllerLibGui {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
 			basicInfo.setText(s.searchDvd(searchQuery.getText()));
+			dvdButton = false;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -122,6 +126,8 @@ public class ControllerLibGui {
 				SQLHandle c = new SQLHandle();
 				Search s = new Search();
 				basicInfo.setText(s.searchLaptop(searchQuery.getText()));
+				laptopButton = false;
+				
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
