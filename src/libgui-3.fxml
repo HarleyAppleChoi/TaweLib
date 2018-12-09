@@ -72,34 +72,11 @@
                                     <Font size="15.0" />
                                  </font></Label>
                               <TextField fx:id="borrowingEnterBorrowerUsername" layoutX="86.0" layoutY="11.0" prefHeight="25.0" prefWidth="154.0" />
-                              <TableView fx:id="borrowingTableBasicInfo" layoutX="14.0" layoutY="73.0" prefHeight="253.0" prefWidth="227.0">
-                                 <columns>
-                                    <TableColumn fx:id="borrowingTableBasicInfoId" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="borrowingTableBasicInfoTitle" prefWidth="75.0" text="Title" />
-                                    <TableColumn fx:id="borrowingTableBasicInfoYear" prefWidth="75.0" text="Year" />
-                                 </columns>
-                              </TableView>
                               <Label fx:id="borrowingEnterSearchQueryborrowingEnterSearchQuery" layoutX="392.0" layoutY="13.0" text="ResourceID">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
                               <TextField fx:id="borrowingEnterSearchQuery" layoutX="469.0" layoutY="9.0" />
-                              <RadioButton fx:id="borrowingSelectBook" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" text="Book">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></RadioButton>
-                              <RadioButton fx:id="borrowingSelectDvd" layoutX="86.0" layoutY="43.0" mnemonicParsing="false" text="DVD">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></RadioButton>
-                              <RadioButton fx:id="borrowingSelectLaptop" layoutX="163.0" layoutY="43.0" mnemonicParsing="false" text="Laptop">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></RadioButton>
-                              <Label layoutX="268.0" layoutY="73.0" text="Image:">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></Label>
                               <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="borrowingGenerateBorrow" layoutX="388.0" layoutY="290.0" mnemonicParsing="false" onAction="#borrowEvent" text="Borrow" />
                            </children>
@@ -208,7 +185,7 @@
                                     <Font size="15.0" />
                                  </font></Label>
                               <TextField fx:id="pay_fineEnterPaymentAmount" layoutX="156.0" layoutY="45.0" />
-                              <Label layoutX="27.0" layoutY="78.0" text="Fine remaining:">
+                              <Label layoutX="27.0" layoutY="78.0" text="Balance now:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>

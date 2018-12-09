@@ -284,6 +284,8 @@ public class ControllerLibGui {
 		SQLHandle c = new SQLHandle();
 		Librarian l = new Librarian();
 		l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
+		NormalUser u = new NormalUser(pay_fineEnterUsername.getText());
+		pay_fineShowFineRemaining.setText(String.valueOf(u.getBalance()));
 
 }
 }
