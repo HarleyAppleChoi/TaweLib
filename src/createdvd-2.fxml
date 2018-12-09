@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -20,25 +21,26 @@
             <Label layoutX="38.0" layoutY="100.0" text="Title" />
             <Label layoutX="36.0" layoutY="136.0" text="Year" />
             <Label layoutX="34.0" layoutY="169.0" text="Image" />
-            <Button fx:id="dvdImage" layoutX="88.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleCreateDVDImage" prefHeight="25.0" prefWidth="149.0" text="Get/Draw Image" />
+            <Button fx:id="dvdImage" layoutX="88.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleCreateDVDImage" prefHeight="25.0" prefWidth="149.0" text="select Image" />
             <TextField fx:id="dvdDirector" layoutX="88.0" layoutY="204.0" promptText="Film's director" />
             <TextField fx:id="dvdRuntime" layoutX="88.0" layoutY="244.0" promptText="Runtime in minutes" />
             <Label layoutX="38.0" layoutY="208.0" text="Director" />
             <Label layoutX="32.0" layoutY="248.0" text="Runtime" />
             <TextField fx:id="dvdLanguage" layoutX="388.0" layoutY="88.0" promptText="Primary language" />
             <Label layoutX="327.0" layoutY="92.0" text="Language" />
-            <Label layoutX="266.0" layoutY="178.0" text="Subtitle Language(s)" />
+            <Label layoutX="271.0" layoutY="137.0" text="Subtitle Language(s)" />
             <Label layoutX="399.0" layoutY="47.0" text="Optional data">
                <font>
                   <Font size="17.0" />
                </font></Label>
             <Button fx:id="dvdCancel" layoutX="490.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleCancelDVDEvent" text="Cancel" />
             <Button fx:id="dvdCreate" layoutX="568.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleCreateDVDEvent" text="Create" />
-            <TextField fx:id="dvdSubtitle" layoutX="416.0" layoutY="127.0" prefHeight="119.0" prefWidth="149.0" promptText="Separate with commas" />
-            <TextField fx:id="numberOfCopiesDVD" layoutX="121.0" layoutY="288.0" promptText="Number of copies" />
-            <Label layoutX="10.0" layoutY="293.0" text="Number of Copies" />
+            <TextField fx:id="dvdSubtitle" layoutX="406.0" layoutY="122.0" prefHeight="62.0" prefWidth="149.0" promptText="Separate with commas" />
+            <TextField fx:id="numberOfCopiesDVD" layoutX="132.0" layoutY="288.0" promptText="Number of copies" />
+            <Label layoutX="10.0" layoutY="293.0" prefHeight="17.0" prefWidth="117.0" text="Number of Copies" />
             <TextField fx:id="durationDVD" layoutX="121.0" layoutY="329.0" promptText="Duration" />
             <Label layoutX="10.0" layoutY="334.0" text="Duration" />
+            <ImageView fitHeight="141.0" fitWidth="200.0" layoutX="335.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" />
       </children>
     </AnchorPane>
   </children>
