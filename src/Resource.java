@@ -135,10 +135,10 @@ public class Resource implements Storable {
 
 			statement = "delete from request_item where resourceID = '" + getId() + "'and username='"
 					+ request.removeFirst() + "';\n";
-			SQLHandle.set(statement);
+			sql.set(statement);
 			statement = "insert into reserved_item values('" + reserve.getLast() + "','"
 			+ getId() + "');";
-			SQLHandle.set(statement);
+			sql.set(statement);
 			System.out.println("reserved for " + reserve.getLast());
 		}
 
@@ -164,7 +164,7 @@ public class Resource implements Storable {
 		Borrowing b = new Borrowing(String.valueOf(ID));
 		currentBorrow.add(b);
 		statement = "insert into current_borrow_his values (" + this.ID + "," + b.getBorrowNo() + ");";
-		SQLHandle.set(statement);
+		sql.set(statement);
 		System.out.println("Borrowing added");
 		return b;
 	}
@@ -228,7 +228,7 @@ public class Resource implements Storable {
 
 				statement = "update borrowing set dueDate = '" + dateFormat.format(d) + "' where borrowingID = '"
 						+ r.getInt("min(borrowingID)") + "';";
-				SQLHandle.set(statement);
+				sql.set(statement);
 				break;
 			}
 		}else {

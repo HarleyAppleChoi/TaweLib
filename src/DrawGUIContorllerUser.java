@@ -196,7 +196,7 @@ public class DrawGUIContorllerUser {
 			Storage.storeNum(number);
 			
 			String query = "UPDATE `user_` SET `image`='" +number+"';";
-			SQLHandle.set(query);
+			sql.set(query);
 			
 			drawCanvas.snapshot(null, wim);
 			String filePath = "userPhoto/"+String.valueOf(number)+".png";
