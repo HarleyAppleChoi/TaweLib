@@ -25,6 +25,8 @@ public class NormalUser extends User implements Storable {
 	// sql statement
 	private String statement;
 
+	
+	
 	/**
 	 * When user is already in the database.
 	 * 
@@ -129,24 +131,6 @@ public class NormalUser extends User implements Storable {
 
 	}
 
-	/**
-	 * method to get all user's information. constructor
-	 * 
-	 * @param username
-	 * @param firstName
-	 * @param lastName
-	 * @param mobileNo
-	 * @param userImage
-	 */
-
-	public void getUserinfo(String username, String firstName, String lastName, int mobileNo, String address, Image userImage) {
-		super.username = username;
-		super.firstName = firstName;
-		super.lastName = lastName;
-		super.mobileNo = mobileNo;
-		super.address = address;
-		super.userImage = userImage;
-	}
 
 	/**
 	 * method to reduce balance
