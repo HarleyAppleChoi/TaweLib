@@ -248,8 +248,8 @@ public class ControllerLibGui {
 		try {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
-			//textBorrow.setText(s.borrowSearch(searchQueryCopy.getText()));
-			//textReturn.setText(s.returnSearch(searchQueryCopy.getText()));
+			textBorrow.setText(s.borrowSearch(searchQueryCopy.getText()));
+			textReturn.setText(s.returnSearch(searchQueryCopy.getText()));
 		} catch (Exception ex) {
 			ex.printStackTrace();;
 		}
