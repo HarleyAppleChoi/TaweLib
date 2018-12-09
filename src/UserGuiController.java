@@ -1,6 +1,8 @@
 /**
-@author Iestyn Price
-*/
+ * UserGuiController.java
+ * @author Iestyn Price
+ * @version 2.1
+ */
 
 //import javax.swing.text.TableView;
 
@@ -99,6 +101,11 @@ public class UserGuiController {
 	@FXML
 	TextField balance;
 	
+     /**
+	 * initialise dashboard for normal user with information about transaction,
+	 * borrowedItem,reserved , requested  Item abd balance of normalUser
+	 *
+	 */
 	@FXML
 	private void dashBoard(ActionEvent e) throws Exception {
 		NormalUser u = new NormalUser(Storage.returnUsername());
@@ -109,9 +116,13 @@ public class UserGuiController {
 		balance.setText(String.valueOf(u.getBalance()));
 	}
 	
-	
+	/**
+	 * display box where user can enter dvd query. Query is then
+	 * sent to searchdvd method. 
+	 * 
+	 */
 	@FXML
-	private void buttonSearchDvd(ActionEvent e) {
+   private void buttonSearchDvd(ActionEvent e) {
 		dvdButton = !dvdButton;
 		laptopButton = false;
 		dvdButton = false;
@@ -123,6 +134,11 @@ public class UserGuiController {
 			ex.printStackTrace();
 		}
 	}
+	/**
+	 * display box where user can enter laptop query. Query is then
+	 * sent to searchLaptop method. 
+	 * 
+	 */
 	@FXML
 	private void buttonSearchLaptop(ActionEvent e) {
 		laptopButton = !laptopButton;
@@ -137,7 +153,11 @@ public class UserGuiController {
 		}
 	}
 	
-
+   	/**
+	 * display box where user can enter book query. Query is then
+	 * sent to searchBook method. 
+	 * 
+	 */
 	@FXML
 	private void buttonSearchBook(ActionEvent e) {
 		bookButton = !bookButton;
@@ -156,6 +176,12 @@ public class UserGuiController {
 	//	bookRadioButton = !bookRadioButton;
 	//}
 	
+	
+	/**
+	 * gwt information from database about resorces ,
+	 * and check if the resource  book , dvd ,or laptop.#
+	 * 
+	 */
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
 		if (bookButton == true) {
