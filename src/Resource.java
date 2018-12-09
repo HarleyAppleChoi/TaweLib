@@ -70,7 +70,7 @@ public class Resource implements Storable {
 			year = r.getInt("year");
 			// please do a method to change string into image.
 			// this.thumbNailImage=thumbNailImage = r.getString("thumbNailImage");
-			this.numCopies = numCopies = r.getInt("numAvCopies");
+			this.numCopies = r.getInt("numAvCopies");
 			// this.numAvailableCopies=numAvailableCopies;
 			this.duration = r.getInt("duration");
 		}

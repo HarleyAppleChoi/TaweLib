@@ -104,7 +104,7 @@ public class CreateLibrianController {
 	private  void handleCreateLibrianEvent(ActionEvent e) throws NumberFormatException, SQLException {
 			SQLHandle c = new SQLHandle();
 			Librarian l = new Librarian();
-			l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(),firstNameTextField.getText(), lastNameTextField.getText(), Integer.parseInt(mobileNumberTextField.getText()),line1AddressTextField.getText(), " ",  employDateTextField.getText());
+			l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(),firstNameTextField.getText(), lastNameTextField.getText(), Integer.parseInt(mobileNumberTextField.getText()),line1AddressTextField.getText(), 0,  employDateTextField.getText());
 		
 		
 		try {

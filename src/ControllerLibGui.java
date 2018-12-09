@@ -1,6 +1,7 @@
 
 /**
 @author Iestyn Price
+@modified James Hogg
 */
 
 import java.sql.ResultSet;
@@ -60,7 +61,7 @@ public class ControllerLibGui {
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-		//similarly
+		//similarly this detects the dvd flag
 		} else if (dvdButton == true) {
 			try {
 				SQLHandle c = new SQLHandle();
@@ -77,6 +78,8 @@ public class ControllerLibGui {
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
+			//this checks for all flags off, and searches the 
+			//linked general attributes of every resource
 		} else if (bookButton == false || dvdButton == false || laptopButton == false) {
 		try {
 			SQLHandle c = new SQLHandle();
@@ -88,6 +91,7 @@ public class ControllerLibGui {
 	}
 	}	
 	@FXML
+	//button searches book table only, for more book details
 	private void searchBook(ActionEvent e) {
 		bookButton = !bookButton;
 		dvdButton = false;
@@ -101,6 +105,7 @@ public class ControllerLibGui {
 		}
 	}
 	@FXML
+	//searches dvd table only, providing extra info
 	private void searchDvd(ActionEvent e) {
 		dvdButton = !dvdButton;
 		laptopButton = false;
@@ -114,6 +119,7 @@ public class ControllerLibGui {
 		}
 	}
 	@FXML
+	//searches laptop table only, providing extra info
 	private void searchLaptop(ActionEvent e) {
 			laptopButton = !laptopButton;
 			dvdButton = false;
