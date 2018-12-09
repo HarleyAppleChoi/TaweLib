@@ -169,7 +169,7 @@ public class Search {
     	ResultSet r = SQLHandle.get(statement);
     	if (!r.next()) {
     		result = "nothing overdue";
-    	} else if (r.next() && (!r.getDate("dueDate").equals(null) ) && (r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
+    	} else if (r.next() && !(r.getDate("dueDate").equals(null))) {
     		if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
     		r.deleteRow();
     		} else {
