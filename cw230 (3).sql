@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- 主機: localhost
--- 產生時間： 2018 年 12 月 06 日 23:42
+-- 產生時間： 2018 年 12 月 09 日 15:56
 -- 伺服器版本: 10.1.36-MariaDB
 -- PHP 版本： 7.2.10
 
@@ -29,14 +29,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `book` (
-
-  `resourceID` int(10) NOT NULL,
-
+  `resourceID` int(6) NOT NULL,
   `author` char(70) NOT NULL,
   `publisher` char(70) NOT NULL,
   `genre` char(100) DEFAULT NULL,
   `ISBN` text,
-  `language` varchar(40) DEFAULT NULL
+  `language` varchar(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -44,7 +42,12 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`resourceID`, `author`, `publisher`, `genre`, `ISBN`, `language`) VALUES
-('1', 'jk', 'asdfa', 'asdf', '2131', 'asfa');
+(1, 'qwe', 'adsfs', 'asdf', 'asdf', 'adf'),
+(4, 'asdf', 'asdfa', 'asdf', '12341', 'asdf'),
+(5, 'asdf', 'asdfa', 'asdf', '12341', 'asdf'),
+(7, 'asdf', 'asdfa', 'asdf', '12341', 'asdf'),
+(9, 'asdf', 'asdfa', 'asdf', '12341', 'asdf'),
+(12, 'asdf', 'asdfa', 'asdf', '12341', 'asdf');
 
 -- --------------------------------------------------------
 
@@ -66,15 +69,17 @@ CREATE TABLE `borrowing` (
 --
 
 INSERT INTO `borrowing` (`borrowingID`, `borrowDate`, `dueDate`, `returnDate`, `resourceID`, `onLoan`) VALUES
-('1', '2018-12-01', '2018-12-16', '2018-12-16', '1', 'y'),
-('2', '2018-12-01', '2018-12-16', NULL, '1', 'y'),
-('3', '2018-12-01', NULL, '2018-12-01', '1', 'n'),
-('4', '2018-12-01', NULL, NULL, '1', 'y'),
-('5', '2018-12-01', NULL, '2018-12-01', '1', 'n'),
-('6', '2018-11-12', '2018-12-19', '2018-12-01', '1', 'n'),
-('7', '2018-11-13', '2018-12-26', '2018-12-01', '1', 'n'),
-('8', '2018-11-05', '2018-11-13', '2018-12-01', '1', 'n'),
-('9', '2018-12-01', NULL, NULL, '1', 'y');
+(1, '2018-12-01', '2018-12-16', '2018-12-16', 1, 'y'),
+(2, '2018-12-01', '2018-12-16', NULL, 1, 'y'),
+(3, '2018-12-01', NULL, '2018-12-01', 1, 'n'),
+(4, '2018-12-01', NULL, NULL, 1, 'y'),
+(5, '2018-12-01', NULL, '2018-12-01', 1, 'n'),
+(6, '2018-11-12', '2018-12-19', '2018-12-01', 1, 'n'),
+(7, '2018-11-13', '2018-12-26', '2018-12-01', 1, 'n'),
+(8, '2018-11-05', '2018-11-13', '2018-12-01', 1, 'n'),
+(9, '2018-12-01', NULL, NULL, 1, 'y'),
+(10, '2018-12-08', NULL, '2018-12-08', 16, 'n'),
+(11, '2018-11-14', '2018-12-02', NULL, 10, 'y');
 
 -- --------------------------------------------------------
 
@@ -92,7 +97,8 @@ CREATE TABLE `current_borrowing` (
 --
 
 INSERT INTO `current_borrowing` (`username`, `borrowingID`) VALUES
-('apple', '9');
+('apple', 9),
+('batman', 11);
 
 -- --------------------------------------------------------
 
@@ -103,7 +109,6 @@ INSERT INTO `current_borrowing` (`username`, `borrowingID`) VALUES
 CREATE TABLE `current_borrow_his` (
   `resourceID` int(10) NOT NULL,
   `borrowingID` int(10) NOT NULL
-
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -111,7 +116,8 @@ CREATE TABLE `current_borrow_his` (
 --
 
 INSERT INTO `current_borrow_his` (`resourceID`, `borrowingID`) VALUES
-('1', '9');
+(1, 9),
+(10, 11);
 
 -- --------------------------------------------------------
 
@@ -120,13 +126,22 @@ INSERT INTO `current_borrow_his` (`resourceID`, `borrowingID`) VALUES
 --
 
 CREATE TABLE `DVD` (
-
-  `resourceID` int(10) NOT NULL,
-
+  `resourceID` int(6) NOT NULL,
   `director` char(70) NOT NULL,
-  `runtime` char(70) NOT NULL,
+  `runtime` int(70) NOT NULL,
   `_language` char(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `DVD`
+--
+
+INSERT INTO `DVD` (`resourceID`, `director`, `runtime`, `_language`) VALUES
+(8, 'sssf', 0, 'ssasdfa'),
+(10, 'sssf', 0, 'ssasdfa'),
+(13, 'sssf', 0, 'ssasdfa'),
+(15, 'asfd', 13, 'Language'),
+(17, '23', 23, 'Lang');
 
 -- --------------------------------------------------------
 
@@ -138,6 +153,25 @@ CREATE TABLE `DVD_subtitle` (
   `resourceID` int(10) NOT NULL,
   `subtitle` char(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `DVD_subtitle`
+--
+
+INSERT INTO `DVD_subtitle` (`resourceID`, `subtitle`) VALUES
+(8, 'sssssssadas'),
+(8, 'sfddf'),
+(10, 'sssssssadas'),
+(10, 'sfddf'),
+(13, 'sssssssadas'),
+(13, 'sfddf'),
+(15, 'Spanish'),
+(15, 'German'),
+(15, 'French'),
+(15, 'Language'),
+(15, 'Lan'),
+(17, 'Other'),
+(17, 'Lan');
 
 -- --------------------------------------------------------
 
@@ -152,6 +186,16 @@ CREATE TABLE `laptop` (
   `operatingSystem` char(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- 資料表的匯出資料 `laptop`
+--
+
+INSERT INTO `laptop` (`resourceID`, `manufacturer`, `model`, `operatingSystem`) VALUES
+(11, 'macbook', 'apple', 'high sherra'),
+(14, 'macbook', 'apple', 'high sherra'),
+(16, '123', '123', '323'),
+(18, 'asdf', 'apple', '1231');
+
 -- --------------------------------------------------------
 
 --
@@ -163,6 +207,14 @@ CREATE TABLE `librarian` (
   `employmentDate` date NOT NULL,
   `staffNo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `librarian`
+--
+
+INSERT INTO `librarian` (`username`, `employmentDate`, `staffNo`) VALUES
+('yuyi', '2010-10-10', 1),
+('library', '2010-10-10', 2);
 
 -- --------------------------------------------------------
 
@@ -180,8 +232,14 @@ CREATE TABLE `normal_user` (
 --
 
 INSERT INTO `normal_user` (`username`, `balance`) VALUES
-('overdue', 400),
-('apple', 400);
+('overdue', 10),
+('apple', 0),
+('cake', 0),
+('ball', 0),
+('hau', 45),
+('rick', 0),
+('aaaaa', 0),
+('batman', -42);
 
 -- --------------------------------------------------------
 
@@ -190,7 +248,7 @@ INSERT INTO `normal_user` (`username`, `balance`) VALUES
 --
 
 CREATE TABLE `overdue_transaction` (
-  `transID` char(10) NOT NULL,
+  `transID` int(10) NOT NULL,
   `borrowingID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -199,7 +257,7 @@ CREATE TABLE `overdue_transaction` (
 --
 
 INSERT INTO `overdue_transaction` (`transID`, `borrowingID`) VALUES
-('2', '8');
+('2', 8);
 
 -- --------------------------------------------------------
 
@@ -228,9 +286,11 @@ CREATE TABLE `reserved_item` (
 --
 
 INSERT INTO `reserved_item` (`username`, `resourceID`) VALUES
-('apple', '1'),
-('apple', '1'),
-('apple', '1');
+('apple', 1),
+('apple', 1),
+('apple', 1),
+('hau', 1),
+('hau', 14);
 
 -- --------------------------------------------------------
 
@@ -239,12 +299,12 @@ INSERT INTO `reserved_item` (`username`, `resourceID`) VALUES
 --
 
 CREATE TABLE `resource` (
-  `resourceID` int(10) NOT NULL,
+  `resourceID` int(6) NOT NULL,
   `title` char(70) NOT NULL,
-  `year` char(30) NOT NULL,
+  `year` int(30) NOT NULL,
   `image` char(100) NOT NULL,
-  `numAvCopies` varchar(4) NOT NULL,
-  `duration` varchar(4) NOT NULL
+  `numAvCopies` int(4) NOT NULL,
+  `duration` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -252,9 +312,24 @@ CREATE TABLE `resource` (
 --
 
 INSERT INTO `resource` (`resourceID`, `title`, `year`, `image`, `numAvCopies`, `duration`) VALUES
-('1', 'Harry Potter', '2011', 'hp.jpg', '5', '14'),
-('2', 'Lord of ring', 'afda', 'asdfa', '123', '0'),
-('3', 'Lord of ring', 'afda', 'asdfa', '123', '0');
+(1, 'qfe', 0, 'image', 123, 123),
+(2, 'Lord of ring', 0, 'asdfa', 123, 0),
+(3, 'Lord of ring', 0, 'asdfa', 123, 0),
+(4, 'aaa', 123, 'adfsa', 1, 8),
+(5, 'aaa', 123, 'adfsa', 1, 8),
+(6, 'wra', 12, 'aaaasdfasf', 2, 0),
+(7, 'aaa', 123, 'adfsa', 1, 8),
+(8, 'wra', 12, 'aaaasdfasf', 2, 0),
+(9, 'aaa', 123, 'adfsa', 1, 8),
+(10, 'wra', 12, 'aaaasdfasf', 2, 0),
+(11, 'asdfa', 1002, 'jpeg', 42, 34),
+(12, 'aaa', 123, 'adfsa', 1, 8),
+(13, 'wra', 12, 'aaaasdfasf', 2, 0),
+(14, 'asdfa', 1002, 'jpeg', 42, 34),
+(15, 'I dont know', 123, '23414', 231, 23),
+(16, 'asdf', 123, '', 123, 123),
+(17, '123', 123, '', 23, 23),
+(18, 'asd', 123, '', 123, 123);
 
 -- --------------------------------------------------------
 
@@ -272,14 +347,15 @@ CREATE TABLE `returned_his` (
 --
 
 INSERT INTO `returned_his` (`username`, `borrowingID`) VALUES
-('apple', '1'),
-('apple', '2'),
-('apple', '3'),
-('apple', '4'),
-('apple', '5'),
-('overdue', '6'),
-('overdue', '7'),
-('overdue', '8');
+('apple', 1),
+('apple', 2),
+('apple', 3),
+('apple', 4),
+('apple', 5),
+('overdue', 6),
+('overdue', 7),
+('overdue', 8),
+('cake', 10);
 
 -- --------------------------------------------------------
 
@@ -288,7 +364,7 @@ INSERT INTO `returned_his` (`username`, `borrowingID`) VALUES
 --
 
 CREATE TABLE `transaction` (
-  `transID` char(10) NOT NULL,
+  `transID` int(10) NOT NULL,
   `amount` char(10) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -303,6 +379,9 @@ INSERT INTO `transaction` (`transID`, `amount`, `date`) VALUES
 ('11', '10', '2018-12-05 17:21:14'),
 ('12', '10', '2018-12-05 17:21:50'),
 ('13', '10', '2018-12-05 17:24:17'),
+('14', '45', '2018-12-08 18:01:58'),
+('15', '45', '2018-12-08 18:04:28'),
+('16', '10', '2018-12-08 18:05:06'),
 ('2', '25', '2018-12-04 00:00:00'),
 ('3', '75', '2018-12-05 16:27:40'),
 ('4', '10', '2018-12-05 16:50:48'),
@@ -320,7 +399,7 @@ INSERT INTO `transaction` (`transID`, `amount`, `date`) VALUES
 
 CREATE TABLE `transaction_his` (
   `username` char(30) NOT NULL,
-  `transID` char(10) NOT NULL
+  `transID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -339,7 +418,10 @@ INSERT INTO `transaction_his` (`username`, `transID`) VALUES
 ('apple', '10'),
 ('apple', '11'),
 ('apple', '12'),
-('apple', '13');
+('apple', '13'),
+('hau', '14'),
+('hau', '15'),
+('overdue', '16');
 
 -- --------------------------------------------------------
 
@@ -354,7 +436,7 @@ CREATE TABLE `user_` (
   `lastname` char(50) NOT NULL,
   `mobileNo` int(11) NOT NULL,
   `address` char(100) NOT NULL,
-  `image` char(100) NOT NULL
+  `image` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -362,8 +444,18 @@ CREATE TABLE `user_` (
 --
 
 INSERT INTO `user_` (`username`, `Password`, `firstname`, `lastname`, `mobileNo`, `address`, `image`) VALUES
-('apple', '', 'apple', 'asdf', 234234, 'asdfasd', 'asd.sds'),
-('overdue', '', 'overdue', 'guy', 1323132, 'building', 'asdfa.sd');
+('aaaaa', '48690', 'afsdf', 'asdfasdf', 132, 'adfa,asdf,asdf,asdf', 12),
+('apple', '', 'apple', 'asdf', 234234, 'asdfasd', 0),
+('asdf', '1509439', 'asdfafa', 'asdfa', 12312, 'aasdf', 10),
+('ball', '46792689', 'asf', 'cake', 1231, 'adsg', 0),
+('batman', '48690', 'das', 'sadf', 123, 'asfd\n,afsd\n,asdf\n,afsd', 13),
+('cake', '46792689', 'asf', 'cake', 1231, 'adsg', 0),
+('hau', '48690', 'choi', 'choi', 1231, 'afsda', 0),
+('kjk', '1509439', 'asdfafa', 'asdfa', 12312, 'aasdf', 0),
+('library', '48690', 'lib', 'lib', 3213, 'lib', 0),
+('overdue', '', 'overdue', 'guy', 1323132, 'building', 0),
+('rick', '48690', 'adf', 'adf', 1231231, 'sfda,asdf,asdf,asfd', 11),
+('yuyi', '1509439', 'asdfafa', 'asdfa', 12312, 'aasdf', 10);
 
 --
 -- 已匯出資料表的索引
