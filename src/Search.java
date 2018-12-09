@@ -168,8 +168,12 @@ public class Search {
     			+ "= borrowing.resourceID = resource.resourceID";
     	ResultSet r = SQLHandle.get(statement);
     	while(r.next()) {
+    		if (r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0) {
     		result = result + String.format("%s %s %s %s %s", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
     				r.getString("username"), (r.getDate("dueDate").getTime() - System.currentTimeMillis()));
+    	} else {
+    		r.next();
+    	}
     	}
     	return result;
     }
