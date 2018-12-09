@@ -216,11 +216,13 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea fx:id="textBorrow" editable="false" layoutX="25.0" layoutY="39.0" prefHeight="297.0" prefWidth="377.0" />
-                              <TextArea fx:id="textReturn" editable="false" layoutX="413.0" layoutY="39.0" prefHeight="295.0" prefWidth="372.0" />
+                              <TextArea fx:id="textBorrow" editable="false" layoutX="25.0" layoutY="64.0" prefHeight="272.0" prefWidth="377.0" />
+                              <TextArea fx:id="textReturn" editable="false" layoutX="413.0" layoutY="64.0" prefHeight="270.0" prefWidth="372.0" />
                               <Label layoutX="62.0" layoutY="14.0" text="Search:" />
-                              <TextField fx:id="searchQueryCopy" layoutX="109.0" layoutY="10.0" />
+                              <TextField fx:id="searchQueryCopy" layoutX="109.0" layoutY="10.0" promptText="Resource ID" />
                               <Button fx:id="buttonSearchCopy" layoutX="265.0" layoutY="10.0" mnemonicParsing="false" onAction="#searchAdd" text="Search" />
+                              <Label fx:id="labelBorrow" layoutX="156.0" layoutY="47.0" text="Borrow History" />
+                              <Label fx:id="labelReturn" layoutX="561.0" layoutY="47.0" text="Return History" />
                            </children>
                         </AnchorPane>
                     </content>
