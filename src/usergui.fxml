@@ -61,15 +61,16 @@
                               <Label layoutX="14.0" layoutY="64.0" text="Last name:" />
                               <Label layoutX="14.0" layoutY="90.0" text="Mobile number:" />
                               <Label layoutX="7.0" layoutY="148.0" text="Address:" />
-                              <TextField editable="false" layoutX="110.0" layoutY="9.0" prefHeight="25.0" prefWidth="201.0" />
-                              <TextField editable="false" layoutX="111.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" />
-                              <TextField editable="false" layoutX="111.0" layoutY="59.0" prefHeight="25.0" prefWidth="200.0" />
-                              <TextField editable="false" layoutX="113.0" layoutY="85.0" prefHeight="27.0" prefWidth="207.0" />
-                              <TextField editable="false" layoutX="74.0" layoutY="148.0" prefHeight="163.0" prefWidth="274.0" />
+                              <TextField fx:id="userDataUsername" editable="false" layoutX="110.0" layoutY="9.0" prefHeight="25.0" prefWidth="201.0" />
+                              <TextField fx:id="userDataFirstName" editable="false" layoutX="111.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" />
+                              <TextField fx:id="userDataLastName" editable="false" layoutX="111.0" layoutY="59.0" prefHeight="25.0" prefWidth="200.0" />
+                              <TextField fx:id="userDataMobileNumber" editable="false" layoutX="113.0" layoutY="85.0" prefHeight="27.0" prefWidth="207.0" />
+                              <TextField fx:id="userDataAddress" editable="false" layoutX="74.0" layoutY="148.0" prefHeight="163.0" prefWidth="274.0" />
                               <Label layoutX="440.0" layoutY="15.0" prefHeight="17.0" prefWidth="88.0" text="Profile Image" />
                               <ImageView fx:id="profileImageView" fitHeight="210.0" fitWidth="252.0" layoutX="364.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="drawProfileImageButton" layoutX="350.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleDrawImage" text="Draw Profile Image" />
                               <Button fx:id="changeProfileImageButton" layoutX="490.0" layoutY="299.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Change Profile Image" />
+                              <Button fx:id="buttonUserDate" layoutX="335.0" layoutY="10.0" mnemonicParsing="false" onAction="#userDataAction" text="Show" />
                            </children>
                         </AnchorPane>
                     </content>

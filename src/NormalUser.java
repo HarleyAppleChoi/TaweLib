@@ -33,13 +33,23 @@ public class NormalUser extends User implements Storable {
 	 */
 	public NormalUser(String username) throws Exception {
 		super.username = username;
-		statement = "select * from normal_user where username = '" + username + "';";
+		statement = "select * from normal_user,user_ where normal_user.username =user_.username "
+				+ "and normal_user.username = '" + username + "';";
 
 		ResultSet r = SQLHandle.get(statement);
 		while (r.next()) {
-			super.username = r.getString("username");
+			super.password = r.getString("Password");
+			super.firstName=r.getString("firstname");
+			super.lastName=r.getString("lastname");
+			super.mobileNo=r.getInt("mobileNo");
+			super.address=r.getString("address");
+			super.userImage=r.getInt("image");
+			super.username = r.getString("normal_user.username");
 			balance = r.getInt("balance");
+			
 		}
+		
+		
 
 		try {
 			statement = "select borrowingID from current_borrowing where username = '" + username + "';";

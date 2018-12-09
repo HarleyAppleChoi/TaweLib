@@ -16,7 +16,7 @@ public abstract class User implements Storable {
 	protected String lastName;
 	protected int mobileNo;
 	protected String address;
-	protected Image userImage;
+	protected int userImage;
 	
 	/**
 	 * Constructor to construct a User's instance.
@@ -29,7 +29,7 @@ public abstract class User implements Storable {
 	 * @param userImage
 	 
 	 */
-	protected User(String username, String password, String firstName, String lastName, int mobileNo, String address, Image userImage) {
+	protected User(String username, String password, String firstName, String lastName, int mobileNo, String address, int userImage) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;

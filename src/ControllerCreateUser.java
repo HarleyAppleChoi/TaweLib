@@ -61,9 +61,8 @@ public class ControllerCreateUser {
 	@FXML
 	private  void handleCreateButtonEvent(ActionEvent e) {
 		Librarian l = new Librarian();
-		String image;
-		String address = create_normalEnterAddLn1.getText() +"," +create_normalEnterAddLn2.getText()+","+create_normalEnterAddCity.getText()
-		+"," +create_normalEnterAddPostcode.getText();
+		String address = create_normalEnterAddLn1.getText() +"\n," +create_normalEnterAddLn2.getText()+"\n,"+create_normalEnterAddCity.getText()
+		+"\n," +create_normalEnterAddPostcode.getText();
 		try {
 			l.newNormalUser(create_normalEnterUsername.getText(), password.getText(), create_normalEnterFirstname.getText()
 					, create_normalEnterLastname.getText(), Integer.parseInt(create_normalEnterMobile.getText()), address, Storage.getNum());

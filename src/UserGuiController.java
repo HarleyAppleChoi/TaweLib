@@ -38,9 +38,6 @@ public class UserGuiController {
 	Tab searchTab;
 	
 	@FXML
-	Tab userDataTab;
-	
-	@FXML
 	Tab editImageTab;
 	@FXML
 	Button drawProfileImage;
@@ -99,6 +96,37 @@ public class UserGuiController {
 	@FXML
 	TextField balance;
 	
+	
+	//UserData
+	@FXML
+    private Tab userDataTab;
+
+    @FXML
+    private TextField userDataUsername;
+
+    @FXML
+    private TextField userDataFirstName;
+
+    @FXML
+    private TextField userDataLastName;
+
+    @FXML
+    private TextField userDataMobileNumber;
+    
+    @FXML
+    private TextField userDataAddress;
+	
+    @FXML
+    private void userDataAction(ActionEvent e) throws Exception {
+    		NormalUser u = new NormalUser(Storage.returnUsername());
+    		userDataUsername.setText(u.getUsername());
+    		userDataFirstName.setText(u.getFirstName());
+    		userDataLastName.setText(u.getLastName());
+    		userDataMobileNumber.setText(String.valueOf(u.getMobileNo()));
+    		userDataAddress.setText(u.getAddress());
+    		
+    }
+    
 	@FXML
 	private void dashBoard(ActionEvent e) throws Exception {
 		NormalUser u = new NormalUser(Storage.returnUsername());
