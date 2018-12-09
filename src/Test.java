@@ -25,9 +25,9 @@ public class Test {
 			//l.borrow(1, "apple");
 			//NormalUser u = new NormalUser("overdue");
 			
-			//Librarian b = new Librarian();
+			Librarian b = new Librarian();
 			//b.newNormalUser("hau", "123", "choi", "choi", 1231, "afsda", "asdfad");
-			//b.newLibrarian("library", "123", "lib", "lib", 3213, "lib", "asfd", "10-10-10");
+			b.newLibrarian("library", "123", "lib", "lib", 3213, "lib", 2, "10-10-10");
 			
 			
 		} catch (Exception e) {

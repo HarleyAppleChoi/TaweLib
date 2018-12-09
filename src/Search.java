@@ -36,14 +36,14 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchResources(String searchString) throws SQLException{
-    	String result = "";
+    	String result = "ID 		   Title		      Year\n";
     	statement = "SELECT resourceID,title,year,numAvCopies FROM resource "
     	+ "WHERE CONCAT(`resourceID`, `title`, `year`) LIKE '%"+searchString+"%';";
         ResultSet r = SQLHandle.get(statement);
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%20s     %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%s %23s %20s\n", r.getInt("resourceID"), r.getString("title"),
 					r.getInt("year"));
         }
         return result;

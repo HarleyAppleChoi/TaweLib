@@ -14,29 +14,118 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
-
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerLibGui {
-	// tables need type params but they are unknown atm
 	// search tab
+	private boolean dvdButton = false;
+	private boolean bookButton = false;
+	private boolean laptopButton = false;
+	
+	@FXML
+	Button searchBook;
 
 	@FXML
-	RadioButton searchSelectBook;
+	Button searchDvd;
 
 	@FXML
-	RadioButton searchSelectDvd;
+	Button searchLaptop;
 
 	@FXML
-	RadioButton searchSelectLaptop;
+	TextField searchQuery;
 
 	@FXML
-	TextField searchEnterSearchQuery;
-
+	Button buttonSearch;
+	
 	@FXML
-	Button searchOpenAdditionalInfo;
-
+	Button buttonInfo;
+	
+	@FXML
+	TextArea basicInfo;
+	
+	@FXML
+	TextArea borrowReturn;
+	
+	//search button showing resource info
+	@FXML
+	private void search(ActionEvent e) {
+		//if the book flag is true, search is limited to books
+		if (bookButton == true) {
+			try {
+				SQLHandle c = new SQLHandle();
+				Search s = new Search();
+				basicInfo.setText(s.searchBook(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		//similarly
+		} else if (dvdButton == true) {
+			try {
+				SQLHandle c = new SQLHandle();
+				Search r = new Search();
+				basicInfo.setText(r.searchDvd(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} else if (laptopButton == true) {
+			try {
+				SQLHandle c = new SQLHandle();
+				Search t = new Search();
+				basicInfo.setText(t.searchLaptop(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} else if (bookButton == false || dvdButton == false || laptopButton == false) {
+		try {
+			SQLHandle c = new SQLHandle();
+			Search p = new Search();
+			basicInfo.setText(p.searchResources(searchQuery.getText()));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	}	
+	@FXML
+	private void searchBook(ActionEvent e) {
+		bookButton = !bookButton;
+		dvdButton = false;
+		laptopButton = false;
+		try {
+			SQLHandle c = new SQLHandle();
+			Search s = new Search();
+			basicInfo.setText(s.searchBook(searchQuery.getText()));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	@FXML
+	private void searchDvd(ActionEvent e) {
+		dvdButton = !dvdButton;
+		laptopButton = false;
+		bookButton = false;
+		try {
+			SQLHandle c = new SQLHandle();
+			Search s = new Search();
+			basicInfo.setText(s.searchDvd(searchQuery.getText()));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	@FXML
+	private void searchLaptop(ActionEvent e) {
+			laptopButton = !laptopButton;
+			dvdButton = false;
+			bookButton = false;
+			try {
+				SQLHandle c = new SQLHandle();
+				Search s = new Search();
+				basicInfo.setText(s.searchLaptop(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 	// borrowing tab
 
 	@FXML
@@ -127,6 +216,52 @@ public class ControllerLibGui {
 
 	@FXML
 	Button requestGenerateRequest;
+	
+	//copy details tab
+	
+	@FXML
+	Button buttonSearchCopy;
+	
+	@FXML
+	TextField searchQueryCopy;
+	
+	@FXML
+	TextArea textBorrow;
+	
+	@FXML
+	TextArea textReturn;
+	
+	@FXML
+	private void searchAdd(ActionEvent e) {
+		try {
+			SQLHandle c = new SQLHandle();
+			Search s = new Search();
+			//textBorrow.setText(s.borrowSearch(searchQueryCopy.getText()));
+			//textReturn.setText(s.returnSearch(searchQueryCopy.getText()));
+		} catch (Exception ex) {
+			ex.printStackTrace();;
+		}
+	}
+	//overdue tab
+	
+	@FXML
+	Button buttonOverdue;
+	
+	@FXML
+	TextArea textOverdue;
+	
+	@FXML
+	public void overdue(ActionEvent e) {
+		try {
+			SQLHandle c = new SQLHandle();
+			Search s = new Search();
+			//textOverdue.setText(s.overdueSearch());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	//unorganised methods:
 
 	@FXML
 	public void handleCreateBookEvent(ActionEvent e) {
