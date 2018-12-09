@@ -1,6 +1,8 @@
 /**
-@author Iestyn Price
-*/
+ * ControllerCreatBook.java
+ * @author Iestyn Price
+ * @ version 2.1
+ */
 
 
 import java.sql.SQLException;
@@ -54,6 +56,10 @@ public class ControllerCreateBook {
 	
 	@FXML
 	Button  create_bookGenerateBook;
+	
+    /**
+     * councel event and return to homescreen
+     */
 
 	@FXML
 	private  void handleCancelEvent(ActionEvent e) {
@@ -72,8 +78,12 @@ public class ControllerCreateBook {
 			
 		
 	}
-@FXML
-private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQLException {
+	
+	 /**
+      * creat window for librarian to add book to nthe library.
+      */
+   @FXML
+    private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQLException {
 	SQLHandle c = new SQLHandle();
 	Librarian l = new Librarian();
 	l.addBook(create_bookEnterTitle.getText(), create_bookEnterYear.getText(), "" ,Integer.parseInt(numbOfCopies.getText()), Integer.parseInt(loanDurationLaptop.getText()), create_bookEnterAuthor.getText(), create_bookEnterPublisher.getText(), create_bookEnterGenre.getText(), create_bookEnterIsbn.getText(), create_bookEnterLanguage.getText());
@@ -94,7 +104,9 @@ private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQL
 			
 		
 	}
-	
+/**
+ * loads Gui file to drow Image
+ */	
 @FXML
 private  void handleDrawImage(ActionEvent e) {
 		
