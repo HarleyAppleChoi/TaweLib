@@ -120,6 +120,26 @@ public class UserGuiController {
 	@FXML
 	Button avatar6;
 	
+	// detailscarchtab
+	@FXML
+	private Tab resourceDetail;
+
+	@FXML // fx:id="resultText"
+	private TextArea resultText; // Value injected by FXMLLoader
+
+	@FXML // fx:id="thumbnIlImage"
+	private ImageView thumbnIlImage; // Value injected by FXMLLoader
+
+	@FXML // fx:id="resourceID"
+	private TextField resourceID; // Value injected by FXMLLoader
+
+	@FXML // fx:id="searchButton"
+	private Button searchingButton; // Value injected by FXMLLoader
+
+	@FXML // fx:id="searchButton"
+	private Button backButton; // Value injected by FXMLLoader
+
+	
 	
 	//UserData
 	@FXML
