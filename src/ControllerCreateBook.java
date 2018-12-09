@@ -59,6 +59,9 @@ public class ControllerCreateBook {
 	
     /**
      * councel event and return to homescreen
+     * @param e
+     * @throws NumberFormatException
+     * @throws SQLExceptio
      */
 
 	@FXML
@@ -80,7 +83,10 @@ public class ControllerCreateBook {
 	}
 	
 	 /**
-      * creat window for librarian to add book to nthe library.
+      * creat window for librarian to add book to the library.
+      * @param e
+      * @throws NumberFormatException
+      * @throws SQLExceptio
       */
    @FXML
     private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQLException {
