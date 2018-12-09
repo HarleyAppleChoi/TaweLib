@@ -274,7 +274,7 @@ public class ControllerLibGui {
 		try {
 			SQLHandle c = new SQLHandle();
 			Search s = new Search();
-			//textOverdue.setText(s.overdueSearch());
+			textOverdue.setText(s.overdueSearch());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

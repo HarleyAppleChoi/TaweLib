@@ -18,13 +18,12 @@ public class Search {
 	 */
     public String displayResources() throws SQLException{
     	String result = "";
-        statement = "SELECT resourceID,title,year FROM resource;";
+        statement = "SELECT resourceID FROM resource;";
         ResultSet r = SQLHandle.get(statement);
          
         //results into string
         while(r.next()) {
-        	result = result + String.format("%20s , %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
-					r.getInt("year"));
+        	result = result + String.format("%s", r.getInt("resourceID"));
         }
         return result;
     }
@@ -162,7 +161,18 @@ public class Search {
     	}
     	
     }
-    
+    public String overdueSearch() throws SQLException {
+    	String result = "resourceID   Title   Year     Username     Days Overdue\n";
+    	statement = "SELECT resource.resourceID, title, year, "
+    			+"username, dueDate FROM borrowing, resource, current_borrowing where current_borrowing.borrowingID"
+    			+ "= borrowing.resourceID = resource.resourceID";
+    	ResultSet r = SQLHandle.get(statement);
+    	while(r.next()) {
+    		result = result + String.format("%s %s %s %s %s", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
+    				r.getString("username"), (r.getDate("dueDate").getTime() - System.currentTimeMillis()));
+    	}
+    	return result;
+    }
     
 
 }
