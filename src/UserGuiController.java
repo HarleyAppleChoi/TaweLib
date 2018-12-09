@@ -87,9 +87,7 @@ public class UserGuiController {
 	
 	@FXML
 	private void buttonSearchDvd(ActionEvent e) {
-		System.out.println(bookButton);
-		System.out.println(dvdButton);
-		System.out.println(laptopButton);
+		
 		dvdButton = !dvdButton;
 		laptopButton = false;
 		bookButton = false;
@@ -103,9 +101,7 @@ public class UserGuiController {
 	}
 	@FXML
 	private void buttonSearchLaptop(ActionEvent e) {
-		System.out.println(bookButton);
-		System.out.println(dvdButton);
-		System.out.println(laptopButton);
+		
 		laptopButton = !laptopButton;
 		dvdButton = false;
 		bookButton = false;
@@ -121,9 +117,7 @@ public class UserGuiController {
 
 	@FXML
 	private void buttonSearchBook(ActionEvent e) {
-		System.out.println(bookButton);
-		System.out.println(dvdButton);
-		System.out.println(laptopButton);
+		
 		bookButton = !bookButton;
 		dvdButton = false;
 		laptopButton = false;
