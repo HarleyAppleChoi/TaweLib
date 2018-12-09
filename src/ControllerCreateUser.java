@@ -123,7 +123,7 @@ public class ControllerCreateUser {
      	normalUserImage.setImage(getImage(Storage.getNum()));
 		Storage.storeImagenum(Storage.getNum());
     }
-    
+    @FXML
     private Image getImage(int i) {
     		String location = "userPhoto/"+String.valueOf(i)+".png";
 		File file = new File(location);
@@ -143,7 +143,7 @@ public class ControllerCreateUser {
 			// TODO Auto-generated catch block
 			System.out.println("Mobile number should be int!");
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createuser.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
 				 Parent root = (Parent)fxmlLoader.load();
 				 Scene scene= new Scene(root); 
 				 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();

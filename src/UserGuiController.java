@@ -99,6 +99,26 @@ public class UserGuiController {
 	@FXML
 	TextField balance;
 	
+	@FXML
+	Button avatar1;
+	@FXML
+	Button showImage;
+	
+	@FXML
+	Button avatar2;
+	
+	@FXML
+	Button avatar3;
+	
+	@FXML
+	Button avatar4;
+	
+	@FXML
+	Button avatar5;
+	
+	@FXML
+	Button avatar6;
+	
 	
 	//UserData
 	@FXML
@@ -119,9 +139,59 @@ public class UserGuiController {
     @FXML
     private TextField userDataAddress;
     
-    @FXML ImageView profileImageView;
+    @FXML 
+    private ImageView profileImageView;
     
+    @FXML
+    void handleAvatar1(ActionEvent event) {
+    		
+    	profileImageView.setImage(getImage(1));
+    		Storage.storeImagenum(1);
+    }
+
+    @FXML
+    void handleAvatar2(ActionEvent event) {
+    	profileImageView.setImage(getImage(2));
+    		Storage.storeImagenum(2);
+    }
+
+    @FXML
+    void handleAvatar3(ActionEvent event) {
+    	profileImageView.setImage(getImage(3));
+		Storage.storeImagenum(3);
+    }
+
+    @FXML
+    void handleAvatar4(ActionEvent event) {
+    	profileImageView.setImage(getImage(4));
+     	Storage.storeImagenum(4);
+    }
+
+    @FXML
+    void handleAvatar5(ActionEvent event) {
+    	profileImageView.setImage(getImage(5));
+		Storage.storeImagenum(5);
+    }
+
+    @FXML
+    void handleAvatar6(ActionEvent event) {
+    	profileImageView.setImage(getImage(6));
+		Storage.storeImagenum(6);
+    }
     
+    @FXML
+    void imageDrawnAction(ActionEvent e) {
+    	profileImageView.setImage(getImage(Storage.getNum()));
+		Storage.storeImagenum(Storage.getNum());
+    }
+   
+    
+    private Image getImage(int i) {
+    		String location = "userPhoto/"+String.valueOf(i)+".png";
+		File file = new File(location);
+        Image image = new Image(file.toURI().toString());
+        return image;
+    }
 	
     @FXML
     private void userDataAction(ActionEvent e) throws Exception {
@@ -260,7 +330,7 @@ public class UserGuiController {
 	private  void handleDrawImage(ActionEvent e) {
 	
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUI.fxml"));
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUIUser.fxml"));
 				 Parent root = (Parent)fxmlLoader.load();
 				 Scene scene= new Scene(root); 
 				 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerCreateUser">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerCreateUser">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #6f7893;" VBox.vgrow="ALWAYS">
       <children>
@@ -30,8 +30,6 @@
             <TextField fx:id="create_normalEnterAddLn2" layoutX="80.0" layoutY="217.0" />
             <TextField fx:id="create_normalEnterAddCity" layoutX="87.0" layoutY="260.0" />
             <TextField fx:id="create_normalEnterAddPostcode" layoutX="80.0" layoutY="317.0" />
-            <Label layoutX="18.0" layoutY="357.0" text="Image" />
-            <Button fx:id="create_normalCreateImage" layoutX="80.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleImageEvent" prefHeight="25.0" prefWidth="162.0" text="Choose/Create image" />
             <Label layoutX="8.0" layoutY="14.0" text="Normal User">
                <font>
                   <Font name="Heiti TC Light" size="36.0" />
@@ -41,7 +39,6 @@
             <ImageView fx:id="normalUserImage" fitHeight="166.0" fitWidth="242.0" layoutX="377.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="291.0" layoutY="126.0" text="Password" />
             <PasswordField fx:id="password" layoutX="362.0" layoutY="121.0" />
-            <Button fx:id="imageDrawnButton" layoutX="270.0" layoutY="326.0" mnemonicParsing="false" onAction="#imageDrawnAction" text="Image Drawn" />
             <Button fx:id="avator1button" layoutX="289.0" layoutY="155.0" mnemonicParsing="false" onAction="#avator1Button" text="Avator1" />
             <Button fx:id="avator2button" layoutX="287.0" layoutY="179.0" mnemonicParsing="false" onAction="#avator2Button" text="Avator2" />
             <Button fx:id="avator3button" layoutX="287.0" layoutY="204.0" mnemonicParsing="false" onAction="#avator3Button" text="Avator3" />
