@@ -253,6 +253,7 @@ public class ControllerLibGui {
 	Label labelReturn;
 	
 	@FXML
+	//displays borrow and return histories
 	private void searchAdd(ActionEvent e) {
 		try {
 			SQLHandle c = new SQLHandle();
@@ -272,6 +273,7 @@ public class ControllerLibGui {
 	TextArea textOverdue;
 	
 	@FXML
+	//method for displaying overdue copies
 	public void overdue(ActionEvent e) {
 		try {
 			SQLHandle c = new SQLHandle();
