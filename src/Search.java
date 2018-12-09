@@ -174,4 +174,30 @@ public class Search {
 	    	 return result;
     	}	
     }
+    public String overdueSearch() throws SQLException {
+    	String result = "resourceID     Title           Year     Username     Days Overdue\n";
+    	statement = "SELECT distinct resource.resourceID, title, year, username, dueDate FROM borrowing, resource, "
+    			+ "current_borrowing WHERE borrowing.resourceID = resource.resourceID "
+    			+ "and borrowing.borrowingID = current_borrowing.borrowingID";
+    	ResultSet r = SQLHandle.get(statement);
+    	while(r.next() ) {
+    		System.out.println("while cycle");
+    		if (!r.getDate("dueDate").equals(null)) {
+    			System.out.println("gets to date field not null");
+    			if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
+    				System.out.println("gets to overdue add to rs");
+        			result = result + String.format("%5s %20s %10s %15s %15s\n", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
+        	    	r.getString("username"), (System.currentTimeMillis() - r.getDate("dueDate").getTime())/86400000);
+    		} else if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() >= 0)){
+    			System.out.println("gets to time is postive, no t overdue > skip");
+    			r.next();
+    		}
+    		}
+    	}
+    	return result;
+    	}
+    
+    
 }
+
+
