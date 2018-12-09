@@ -179,8 +179,8 @@ public class UserGuiController {
 	
 	/**
 	 * gwt information from database about resorces ,
-	 * and check if the resource  book , dvd ,or laptop.#
-	 * 
+	 * and check if the resource  book , dvd ,or laptop.
+	 * if the resources none  of the above retuen to search box.
 	 */
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
@@ -219,7 +219,10 @@ public class UserGuiController {
 		}
 	}
 	
-	
+	/**
+	 *  loads window for user to drow an image.
+	 * 
+	 */
 	@FXML
 	private  void handleDrawImage(ActionEvent e) {
 	
@@ -235,7 +238,10 @@ public class UserGuiController {
 	}
 	
 	LogInGuiController login;
-	
+	/**
+	 *  
+	 * 
+	 */
 	@FXML
 	public void reserveAction(ActionEvent e) throws NumberFormatException, Exception {
 		
