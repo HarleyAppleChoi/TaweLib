@@ -273,7 +273,10 @@ public class ControllerLibGui {
 		@FXML
 		public void returnEvent() throws NumberFormatException, Exception {
 			Librarian l = new Librarian();
-			l.returnResource(Integer.parseInt(returnEnterResourceId.getText()));
+			int borrowID = Integer.parseInt(returnEnterResourceId.getText());
+			l.returnResource(borrowID);
+			Borrowing b = new Borrowing(borrowID);
+			returnShowFineAdded.setText(String.valueOf(b.fine()));
 		}
 	
 	@FXML

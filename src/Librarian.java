@@ -433,7 +433,7 @@ public class Librarian extends User {
 			}
 			// adds the fine information into the transaction table, the overdue_transaction
 			// table and the transaction_his table
-			statement = "insert into transaction values('" + i + "','" + b.fine() + "');";
+			statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES ('"+i+"','"+b.fine()+"','"+getCurrentTime()+"')";
 			SQLHandle.set(statement);
 			statement = "insert into overdue_transaction values('" + i + "','" + b.getBorrowNo() + "');";
 			SQLHandle.set(statement);
@@ -483,8 +483,11 @@ public class Librarian extends User {
 
 	public void payFine(int amount, String username) throws Exception {
 		NormalUser u = new NormalUser(username);
-
+		
+		
+		
 		int newBalance = u.getBalance() + amount;
+		
 		// SQL query to update the normal_user table with the new balance amount
 		String statement = "Update normal_user set balance = " + newBalance + " where username = '"+username+"';";
 		SQLHandle.set(statement);
