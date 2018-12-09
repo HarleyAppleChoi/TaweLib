@@ -1,8 +1,8 @@
-
 /**
-@author Iestyn Price
-@modified James Hogg
-*/
+ * ControllerLibGui.java
+ * @author Iestyn Price modified  by James Hogg
+ * @version 2.1
+ */
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,11 +21,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControllerLibGui {
-	// search tab
+	
 	private boolean dvdButton = false;
 	private boolean bookButton = false;
 	private boolean laptopButton = false;
-	
+
+    // creat search tab
 	@FXML
 	private Button searchBook;
 
@@ -273,10 +274,9 @@ public class ControllerLibGui {
 			ex.printStackTrace();;
 		}
 	}
+	
+	
 	//overdue tab
-	
-	
-	
 	@FXML
 	public void overdue(ActionEvent e) {
 		try {
@@ -289,7 +289,6 @@ public class ControllerLibGui {
 	}
 	
 	//unorganised methods:
-
 	@FXML
 	public void handleCreateBookEvent(ActionEvent e) {
 		try {
