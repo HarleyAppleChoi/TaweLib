@@ -5,9 +5,9 @@ import java.sql.SQLException;
  * This class handles search queries from the database and filtering the search results.
  * 
  * @author Eniko Debreczeny
- * @modified James Hogg
- * @version 3
+ * @version 2.1
  */
+
 public class Search {
 	
 	private String statement;
@@ -18,13 +18,14 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String displayResources() throws SQLException{
-    	String result = "";
-        statement = "SELECT resourceID FROM resource;";
+    	String result = "ID        Title         Year";
+        statement = "SELECT resourceID,title,year FROM resource;";
         ResultSet r = SQLHandle.get(statement);
          
         //results into string
         while(r.next()) {
-        	result = result + String.format("%s", r.getInt("resourceID"));
+        	result = result + String.format("%20s , %20s, %20s\n", r.getInt("resourceID"), r.getString("title"),
+					r.getInt("year"));
         }
         return result;
     }
@@ -56,7 +57,7 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchBook(String searchString) throws SQLException{
-    	String result = "ID      Title              Author   Publisher  Genre   ISBN  Language Year NumAvCopies Image\n";
+    	String result = "ID               Title               Author              Publisher                Genre                ISBN               Language               Year               NumAvCopies\n";
     	statement = "SELECT distinct resource.resourceID,title,author,publisher,genre,ISBN,language,year,numAvCopies, image "
     			+ "FROM resource, book WHERE resource.resourceID = book.resourceID and "
     	+ "CONCAT( `title`, `year`,`author`, `publisher`, `genre`, `ISBN`, `language`) LIKE '%"+searchString+"%';";
@@ -64,7 +65,7 @@ public class Search {
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%s %30s %10s %15s %10s %7s %7s %10s %7s %22s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%s %20s  %20s %20s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
         			r.getString("author"), r.getString("publisher"), r.getString("genre"), r.getString("ISBN"),
         			r.getString("language"), r.getInt("year"), r.getInt("numAvCopies"), r.getString("image"));
         }
@@ -78,7 +79,8 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchDvd(String searchString) throws SQLException{
-    	String result = "ResourceID      Title       Director       Language          Subtitle      Runtime    Year    AvailableCopies\n";
+    	String result = "ID               Title               Director               Language               "
+    			+ "Subtitle               Runtime               Year               AvailableCopies\n";
     	statement = "SELECT distinct resource.resourceID,title, director, _language, "
     			+ "GROUP_CONCAT(distinct subtitle SEPARATOR ',') as subs, "
     			+ "runtime,year,numAvCopies "
@@ -90,7 +92,8 @@ public class Search {
  
         //results to string
         while(r.next()) {
-        	result = result + String.format("%s %20s %10s %18s (%20s) %16s %18s %s20\n",r.getInt("resourceID"), r.getString("title"), r.getString("director"), r.getString("_language"), r.getString("subs"),
+        	result = result + String.format("%s %20s %20s %20s %30s %20s %20s %20s\n",r.getInt("resourceID"), 
+        			r.getString("title"), r.getString("director"), r.getString("_language"), r.getString("subs"),
         			r.getInt("runtime"), r.getInt("year"), r.getInt("numAvCopies"));
         	}
         return result;
@@ -103,7 +106,7 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchLaptop(String searchString) throws SQLException{
-    	String result = "ResourceID            Title              Manufacturer              Model             OPSystem             Year              AvailableCopies\n";
+    	String result = "ID               Title               Manufacturer              Model               OPSystem               Year               AvailableCopies\n";
     	statement = "SELECT distinct resource.resourceID,title,manufacturer, model, operatingSystem,year,numAvCopies "
     			+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and"
     	+ " CONCAT(`title`, `year`,`manufacturer`,`model`,`operatingSystem`) LIKE '%"+searchString+"%'";
@@ -111,13 +114,18 @@ public class Search {
         
         //results to string
         while(r.next()) {
-        	result = result + String.format("%9s %22s %19s %20s %21s %22s %26s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
         			r.getString("manufacturer"), r.getString("model"), r.getString("operatingSystem"), r.getInt("year"),
         			r.getInt("numAvCopies"));
         }
         return result;
     }
-//method for returning a string of borrowed books with the id, username and date borrowed
+
+    /**
+     * @param searchString
+     * @return
+     * @throws SQLException
+     */
     public String borrowSearch(String searchString) throws SQLException {
     	String result = "BorrowingID    Username     DateBorrowed\n";
     	
@@ -125,24 +133,27 @@ public class Search {
     		result = "input ID please.";
     		return result;
     	} else {
-
-	    	statement = "select borrowing.borrowDate, borrowing.returnDate, borrowing.borrowingID, T.username "
-	    					+ "from borrowing," 
-
+    	
+	    	statement = "select borrowing.borrowDate, borrowing.returnDate, T.username, T.borrowingID " + "from borrowing," 
 	    					+ " ((select * from returned_his) union all (select * from current_borrowing)) as T" 
 	    					+ " where borrowing.borrowingID = T.borrowingID " + "and resourceID = '" + searchString 
 	    					+ "' order by borrowDate";
 	    	
 	    	 ResultSet r = SQLHandle.get(statement);
 	         while(r.next()) {
-	         	result = result + String.format("%9s %22s %13s\n", r.getInt("borrowingID"), r.getString("username"), 
-	         			r.getString("borrowDate") );
+	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
+	         			r.getString("borrowDate"));
 	         }
 	    	 return result;
     	}
     	
     }
-    //method for returning string of returned copies, with id, username and date returns
+    
+    /**
+     * @param searchString
+     * @return
+     * @throws SQLException
+     */
     public String returnSearch(String searchString) throws SQLException {
     	String result = "BorrowingID    Username     DateReturned\n";
     	
@@ -157,36 +168,10 @@ public class Search {
 	    	
 	    	 ResultSet r = SQLHandle.get(statement);
 	         while(r.next()) {
-	         	result = result + String.format("%9s %22s %8s\n", r.getInt("borrowingID"), r.getString("username"),
+	         	result = result + String.format("%9s %22s %19s\n", r.getInt("borrowingID"), r.getString("username"),
 	         			r.getString("returnDate"));
 	         }
 	    	 return result;
-    	}
-    	
+    	}	
     }
-    //method for returning a string of overdue copies, with id, title, year, username, and overdue days
-    public String overdueSearch() throws SQLException {
-    	String result = "resourceID     Title           Year     Username     Days Overdue\n";
-    	statement = "SELECT distinct resource.resourceID, title, year, username, dueDate FROM borrowing, resource, "
-    			+ "current_borrowing WHERE borrowing.resourceID = resource.resourceID "
-    			+ "and borrowing.borrowingID = current_borrowing.borrowingID";
-    	ResultSet r = SQLHandle.get(statement);
-    	while(r.next() ) {
-    		System.out.println("while cycle");
-    		if (!r.getDate("dueDate").equals(null)) {
-    			System.out.println("gets to date field not null");
-    			if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
-    				System.out.println("gets to overdue add to rs");
-        			result = result + String.format("%5s %20s %10s %15s %15s\n", r.getString("resourceID"), r.getString("title"), r.getInt("year"), 
-        	    	r.getString("username"), (System.currentTimeMillis() - r.getDate("dueDate").getTime())/86400000);
-    		} else if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() >= 0)){
-    			System.out.println("gets to time is postive, no t overdue > skip");
-    			r.next();
-    		}
-    		}
-    	}
-    	return result;
-    	}
-    
-    
 }

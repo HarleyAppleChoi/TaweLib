@@ -6,6 +6,7 @@
 */
 
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -20,6 +21,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ControllerLibGui {
@@ -27,6 +30,13 @@ public class ControllerLibGui {
 	private boolean dvdButton = false;
 	private boolean bookButton = false;
 	private boolean laptopButton = false;
+    
+	private Image getImage(String s) {
+		String location = s;
+		File file = new File(location);
+		Image image = new Image(file.toURI().toString());
+		return image;
+	}
 	
 	@FXML
 	private Button searchBook;
@@ -291,6 +301,108 @@ public class ControllerLibGui {
 			ex.printStackTrace();
 		}
 	}
+	
+	//more info tab, used for thumbnail image
+	
+	@FXML
+	Button buttonSearchMore;
+	
+	@FXML
+	private void buttonSearchMore(ActionEvent e) throws Exception {
+		SQLHandle sql = new SQLHandle();
+		String statement = "select resourceID from book where resourceID ='" + searchQueryMore.getText() + "';";
+
+		try {
+			ResultSet r = sql.nonStaticGet(statement);
+			if (r.next()) {
+				// this is a book
+
+				Resource re = new Resource(r.getInt("book.resourceID"));
+
+				String s = "ID   Title  Author   Publisher  Genre   ISBN  Language Year NumAvCopies\n";
+
+				statement = "select * from book,resource where book.resourceID = resource.resourceID and book.resourceID ='"
+						+ searchQueryMore.getText() + "';";
+
+				r = sql.nonStaticGet(statement);
+				r.next();
+				s += String.format("%s %10s %10s %10s %10s %7s %7s %10s %7s\n", r.getInt("book.resourceID"),
+						r.getString("resource.title"), r.getString("author"), r.getString("publisher"),
+						r.getString("genre"), r.getString("ISBN"), r.getString("language"), r.getInt("year"),
+						re.getAvCopies());
+
+				resultText.setText(s);
+
+				thumbnailImage.setImage(getImage(r.getString("image")));
+
+			} else {
+				statement = "select resourceID from DVD where resourceID ='" + searchQueryMore.getText() + "';";
+				
+				r = sql.nonStaticGet(statement);
+				
+				if (r.next()) {
+					// this is a DVD
+					
+
+					statement = "SELECT distinct resource.resourceID,title, director, _language,image," + 
+							"    GROUP_CONCAT(distinct subtitle SEPARATOR ',') as subs, " + 
+							"    		runtime,year,numAvCopies" + 
+							"    		FROM resource, dvd, dvd_subtitle where resource.resourceID = dvd.resourceID and" + 
+							"    		dvd.resourceID = dvd_subtitle.resourceID and " + 
+							"    	 DVD.resourceID ='" +  searchQueryMore.getText() + "';";
+					
+					r = sql.nonStaticGet(statement);
+					r.next();
+					Resource re = new Resource(r.getInt("resource.resourceID"));
+					
+					String s = "ResourceID    Title    Director    Language   Subtitle      Runtime    Year    AvailableCopies\n";
+
+					s += String.format("%s %20s %10s %18s (%20s) %16s %18s %s20\n", r.getInt("resource.resourceID"),
+							r.getString("title"), r.getString("director"), r.getString("_language"),
+							r.getString("subs"), r.getInt("runtime"), r.getInt("year"), re.getAvCopies());
+
+					resultText.setText(s);
+
+					thumbnailImage.setImage(getImage(r.getString("image")));
+
+				} else {
+					statement = "select resourceID from laptop where resourceID ='" + searchQueryMore.getText() + "';";
+					r = sql.nonStaticGet(statement);
+					if (r.next()) {
+						// this is a laptop
+						
+					 	String s = "ResourceID            Title              Manufacturer              Model             OPSystem             Year              AvailableCopies\n";
+					 	
+					 	statement = "SELECT distinct resource.resourceID,image,title,manufacturer, model, operatingSystem,year,numAvCopies "
+				    			+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and laptop.resourceID='" +searchQueryMore.getText() + "';";
+					 	r = sql.nonStaticGet(statement);
+					 	
+					 	while(r.next()) {
+					 		Resource re = new Resource(r.getInt("resource.resourceID"));
+					        	s +=String.format("%9s %22s %19s %20s %21s %22s %26s\n", r.getInt("resource.resourceID"), r.getString("title"),
+					        			r.getString("manufacturer"), r.getString("model"), r.getString("operatingSystem"), r.getInt("year"),
+					        			re.getAvCopies());
+					 	resultText.setText(s);				        
+					 	thumbnailImage.setImage(getImage(r.getString("image")));
+					 	}
+					} else {
+						System.out.println("This resourceID is not in the database");
+					}
+				}
+			}
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+	}	
+	@FXML
+	TextField searchQueryMore;
+	
+	@FXML
+	TextArea resultText;
+	
+	@FXML
+	ImageView thumbnailImage;
 	
 	//unorganised methods:
 
