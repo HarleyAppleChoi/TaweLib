@@ -1,5 +1,6 @@
 /**
- * ControllerLibGui.java
+ * Class to control the functioning of the librarian gui
+ * and all the functions they can perform.
  * @author Iestyn Price modified  by James Hogg
  * @version 2.1
  */
@@ -37,9 +38,16 @@ public class ControllerLibGui {
 		return image;
 	}
 	
+	@FXML
+	private TextField searchQueryMore;
+	
+	@FXML
+	private TextArea resultText;
+	
+	@FXML
+	private ImageView thumbnailImage;
 
-
-    // creat search tab
+    // buttons to search resources 
 	@FXML
 	private Button searchBook;
 
@@ -87,7 +95,6 @@ public class ControllerLibGui {
 	@FXML
 	private Button borrowingGenerateBorrow;
 
-	// create resource tab
 
 	@FXML
 	private Button create_resourceCreateBook;
@@ -114,8 +121,10 @@ public class ControllerLibGui {
 	@FXML
 	private Button create_userCreateLibrarian;
 
-	// edit user tab
 
+	@FXML
+	private Button buttonSearchMore;
+	
 	@FXML
 	private TextField edit_userEnterUsername;
 
@@ -184,7 +193,11 @@ public class ControllerLibGui {
 	@FXML
 	private Label labelReturn;
 	
-	//search button showing resource info
+	/**
+	 * Method to handle a search event and search each resources
+	 * depending on what button is selected 
+	 * @param e
+	 */
 	@FXML
 	private void search(ActionEvent e) {
 		//if the book flag is true, search is limited to books
@@ -192,7 +205,7 @@ public class ControllerLibGui {
 			try {
 				SQLHandle c = new SQLHandle();
 				Search s = new Search();
-				basicInfo.setText(s.searchBook(searchQuery.getText()));
+				basicInfo.setText(s.searchBook(searchQuery.getText()));//searchers books 
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
@@ -201,7 +214,7 @@ public class ControllerLibGui {
 			try {
 				SQLHandle c = new SQLHandle();
 				Search r = new Search();
-				basicInfo.setText(r.searchDvd(searchQuery.getText()));
+				basicInfo.setText(r.searchDvd(searchQuery.getText())); // seaches dvds
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
@@ -209,14 +222,14 @@ public class ControllerLibGui {
 			try {
 				SQLHandle c = new SQLHandle();
 				Search t = new Search();
-				basicInfo.setText(t.searchLaptop(searchQuery.getText()));
+				basicInfo.setText(t.searchLaptop(searchQuery.getText()));// searches laptops
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
 			//this checks for all flags off, and searches the 
 			//linked general attributes of every resource
 		} else if (bookButton == false || dvdButton == false || laptopButton == false) {
-		try {
+		try { // search everything 
 			SQLHandle c = new SQLHandle();
 			Search p = new Search();
 			basicInfo.setText(p.searchResources(searchQuery.getText()));
@@ -225,8 +238,13 @@ public class ControllerLibGui {
 		}
 	}
 	}	
+	
+	/**
+	 * Method to handle a search book event to search books and
+	 * provide extra information.
+	 * @param e
+	 */
 	@FXML
-	//button searches book table only, for more book details
 	private void searchBook(ActionEvent e) {
 		bookButton = !bookButton;
 		dvdButton = false;
@@ -241,8 +259,13 @@ public class ControllerLibGui {
 			ex.printStackTrace();
 		}
 	}
+	/**
+	 * Method to handle a search dvd event to search dvd's and
+	 * provide extra information.
+	 * @param e
+	 */
+	
 	@FXML
-	//searches dvd table only, providing extra info
 	private void searchDvd(ActionEvent e) {
 		dvdButton = !dvdButton;
 		laptopButton = false;
@@ -257,8 +280,14 @@ public class ControllerLibGui {
 			ex.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Method to handle a search laptop event to search books and
+	 * provide extra information.
+	 * @param e
+	 */
+	
 	@FXML
-	//searches laptop table only, providing extra info
 	private void searchLaptop(ActionEvent e) {
 			laptopButton = !laptopButton;
 			dvdButton = false;
@@ -273,11 +302,15 @@ public class ControllerLibGui {
 				ex.printStackTrace();
 			}
 		}
-	// borrowing tab
 
 	
+	/**
+	 * Method to handle a search event to display 
+	 * borrow and return history.
+	 * @param e
+	 */
+	
 	@FXML
-	//displays borrow and return histories
 	private void searchAdd(ActionEvent e) {
 		try {
 			SQLHandle c = new SQLHandle();
@@ -290,9 +323,11 @@ public class ControllerLibGui {
 	}
 	
 	
-	//overdue tab
+	/**
+	 * Method to display overdue history based on action event.
+	 * @param e
+	 */
 	@FXML
-	//method for displaying overdue copies
 	public void overdue(ActionEvent e) {
 		try {
 			SQLHandle c = new SQLHandle();
@@ -303,11 +338,11 @@ public class ControllerLibGui {
 		}
 	}
 	
-	//more info tab, used for thumbnail image
-	
-	@FXML
-	Button buttonSearchMore;
-	
+	/**
+	 * Method to display information about a particular resource.
+	 * @param e
+	 * @throws Exception
+	 */
 	@FXML
 	private void buttonSearchMore(ActionEvent e) throws Exception {
 		SQLHandle sql = new SQLHandle();
@@ -396,16 +431,12 @@ public class ControllerLibGui {
 			ex.printStackTrace();
 		}
 	}	
-	@FXML
-	TextField searchQueryMore;
+
 	
-	@FXML
-	TextArea resultText;
-	
-	@FXML
-	ImageView thumbnailImage;
-	
-	//unorganised methods:
+	/**
+	 * Method to create a book based on action event.
+	 * @param e
+	 */
 	@FXML
 	public void handleCreateBookEvent(ActionEvent e) {
 		try {
@@ -420,7 +451,11 @@ public class ControllerLibGui {
 		}
 
 	}
-
+	/**
+	 * Method to create a dvd based on action event.
+	 * @param e
+	 */
+	
 	@FXML
 	public void handleCreateDVDResourceEvent(ActionEvent e) {
 		try {
@@ -435,7 +470,10 @@ public class ControllerLibGui {
 		}
 
 	}
-
+	/**
+	 * Method to create a laptop based on action event.
+	 * @param e
+	 */
 	@FXML
 	public void handleCreateLaptopEvent(ActionEvent e) {
 		try {
@@ -450,7 +488,10 @@ public class ControllerLibGui {
 		}
 
 	}
-
+	/**
+	 * Method to create a normal user based on action event.
+	 * @param e
+	 */
 	@FXML
 	public void createNormalUserEvent(ActionEvent e) {
 		try {
@@ -465,7 +506,10 @@ public class ControllerLibGui {
 		}
 
 	}
-
+	/**
+	 * Method to create a librarian user based on action event.
+	 * @param e
+	 */
 	@FXML
 	public void createLibrianUserEvent(ActionEvent e) {
 		try {
@@ -480,7 +524,11 @@ public class ControllerLibGui {
 		}
 
 	}
-
+	/**
+	 * Method to select resource based on its ID.
+	 * @param e
+	 * @throws SQLException
+	 */
 	public void handleResourceIDInput(ActionEvent e) throws SQLException {
 		SQLHandle sql = new SQLHandle();
 		String statement = "select resourceID from book where resourceID ='" + edit_resourceEnterResourceId.getText()
@@ -536,7 +584,11 @@ public class ControllerLibGui {
 			}
 		}
 	}
-
+	/**
+	 * Method to allow the user to borrow a resource
+	 * @throws NumberFormatException
+	 * @throws Exception
+	 */
 	@FXML
 	public void borrowEvent() throws NumberFormatException, Exception {
 		Librarian l = new Librarian();
@@ -546,7 +598,11 @@ public class ControllerLibGui {
 			System.out.println("You cannot borrow!");
 		}
 	}
-
+	/**
+	 * Method to allow the user to return a resource and 
+	 * show a fine if present 
+	 
+	 */
 	@FXML
 	public void returnEvent()  {
 		try {
@@ -559,6 +615,11 @@ public class ControllerLibGui {
 			statusReturn.setText("Please fill in the fills!");
 		}
 	}
+	/**
+	 * Method to allow the user to pay fine  
+	 * and show balance based on event.
+	 * @param e
+	 */
 
 	@FXML
 	public void handlePayEvent(ActionEvent e)  {

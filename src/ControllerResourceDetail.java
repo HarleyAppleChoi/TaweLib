@@ -1,5 +1,8 @@
-
 /**
+ * Class to control the functioning of the resource details gui
+ * and all the functions they can perform.
+ * @author Iestyn Price modified  by James Hogg
+ * @version 2.1
  */
 
 import java.io.File;
@@ -20,31 +23,41 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ControllerResourceDetail {
+	//input resource details 
+	@FXML 
+	private TextArea resultText; 
 
-	@FXML // fx:id="resultText"
-	private TextArea resultText; // Value injected by FXMLLoader
+	@FXML 
+	private ImageView thumbnIlImage; 
 
-	@FXML // fx:id="thumbnIlImage"
-	private ImageView thumbnIlImage; // Value injected by FXMLLoader
+	@FXML 
+	private TextField resourceID; 
 
-	@FXML // fx:id="resourceID"
-	private TextField resourceID; // Value injected by FXMLLoader
+	@FXML 
+	private Button searchButton; 
 
-	@FXML // fx:id="searchButton"
-	private Button searchButton; // Value injected by FXMLLoader
+	@FXML 
+	private Button backButton; 
 
-	@FXML // fx:id="searchButton"
-	private Button backButton; // Value injected by FXMLLoader
-
+	/**
+	 * Method to locate image in path and return the image
+	 * @param s
+	 * @return image 
+	 */
+	
 	private Image getImage(String s) {
 		String location = s;
 		File file = new File(location);
 		Image image = new Image(file.toURI().toString());
 		return image;
 	}
-
+	/**
+	 * Method to search through all resources and particular resources
+	 * @param e
+	 * 
+	 */
 	@FXML
-	void search(ActionEvent event) throws Exception {
+	private void search(ActionEvent e) throws Exception {
 		SQLHandle sql = new SQLHandle();
 		String statement = "select resourceID from book where resourceID ='" + resourceID.getText() + "';";
 
@@ -124,17 +137,13 @@ public class ControllerResourceDetail {
 					}
 
 				}
+
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
 
 	}
 
-	@FXML
-	void backAction(ActionEvent event) {
-
-	}
-
+	
 }
