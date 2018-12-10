@@ -566,12 +566,13 @@ public class ControllerLibGui {
 		SQLHandle c = new SQLHandle();
 		Librarian l = new Librarian();
 		l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
+		
 		NormalUser u = new NormalUser(pay_fineEnterUsername.getText());
 		pay_fineShowFineRemaining.setText(String.valueOf(u.getBalance()));
 		}catch(IllegalArgumentException rt){
-			statusPayFine.setText("The fine number is not a vaild number(0.01~full fine)");
+			//statusPayFine.setText("The fine number is not a vaild number(0.01~full fine)");
 		}catch(Exception r) {
-			statusPayFine.setText("Please fill in the fills!");
+			//statusPayFine.setText("Please fill in the fills!");
 		}
 	}
 }
