@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 public class ControllerCreateBook {
 
+	//Input data
 	@FXML
 	TextField createBookShowId;
 	
@@ -54,6 +55,8 @@ public class ControllerCreateBook {
 	@FXML
 	TextField loanDurationLaptop;
 	
+	
+	//Button
 	@FXML
 	Button createBookCancelCreation;
 	
