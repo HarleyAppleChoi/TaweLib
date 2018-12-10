@@ -40,7 +40,7 @@ public class CreateLibrianController {
 	TextField line1AddressTextField;
 	
 	@FXML
-	TextField line2AddressTextField;
+	TextField line2AdressTextField;
 	
 	@FXML
 	TextField cityAdressTextField;
@@ -154,31 +154,12 @@ public class CreateLibrianController {
 	@FXML
 	private  void handleCreateLibrianEvent(ActionEvent e) throws NumberFormatException, SQLException {
 			Librarian l = new Librarian();
-			String address = line1AddressTextField.getText() +" \n," +line2AddressTextField.getText()+ "\n," + cityAdressTextField.getText()
-			+ "\n," + postcodeAdressTextField.getText();
+			String address = line1AddressTextField.getText()+line2AdressTextField.getText()+cityAdressTextField.getText()+postcodeAdressTextField.getText();
 			
-			try {
-				l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(), firstNameTextField.getText(), lastNameTextField.getText()
-						, Integer.parseInt(mobileNumberTextField.getText()), address, Storage.returnImagenum(), employDateTextField.getText());
-			} catch (NumberFormatException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("Mobile number should be int!");
-				try {
-					 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createlibraruan.fxml"));
-					 Parent root = (Parent)fxmlLoader.load();
-					 Scene scene= new Scene(root); 
-					 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-					 window.setScene(scene);
-					
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-			} catch (SQLException e1) {
-			}
-
-		
-		
 		try {
+			l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(), firstNameTextField.getText(), lastNameTextField.getText()
+					, Integer.parseInt(mobileNumberTextField.getText()), address, Storage.returnImagenum(), employDateTextField.getText());
+		
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
 			 Parent root = (Parent)fxmlLoader.load();
 			 Scene scene= new Scene(root); 
