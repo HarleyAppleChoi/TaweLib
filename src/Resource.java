@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
-import com.sun.prism.Image;
+import javafx.scene.image.Image;
 
 /**
  * This class creates a Resource, checks if a resource is available to borrow,

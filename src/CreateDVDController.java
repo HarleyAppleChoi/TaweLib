@@ -114,7 +114,9 @@ public class CreateDVDController {
 		}
 	}
 
-	
+	/**
+	 * Storing path
+	 */
 	private String path;
     
     /**

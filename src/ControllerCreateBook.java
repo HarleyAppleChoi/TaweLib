@@ -23,31 +23,31 @@ import javafx.stage.Stage;
 public class ControllerCreateBook {
 
 	@FXML
-	TextField create_bookShowId;
+	TextField createBookShowId;
 	
 	@FXML
-	TextField create_bookEnterTitle;
+	TextField createBookEnterTitle;
 	
 	@FXML
-	TextField create_bookEnterYear;
+	TextField createBookEnterYear;
 	
 	@FXML
-	Button create_bookCreateImage;
+	Button createBookCreateImage;
 	
 	@FXML
-	TextField create_bookEnterAuthor;
+	TextField createBookEnterAuthor;
 	
 	@FXML
-	TextField create_bookEnterPublisher;
+	TextField createBookEnterPublisher;
 	
 	@FXML
-	TextField create_bookEnterGenre;
+	TextField createBookEnterGenre;
 	
 	@FXML
-	TextField create_bookEnterIsbn;
+	TextField createBookEnterIsbn;
 	
 	@FXML
-	TextField create_bookEnterLanguage;
+	TextField createBookEnterLanguage;
 	@FXML
 	TextField numbOfCopies;
 	
@@ -55,10 +55,10 @@ public class ControllerCreateBook {
 	TextField loanDurationLaptop;
 	
 	@FXML
-	Button create_bookCancelCreation;
+	Button createBookCancelCreation;
 	
 	@FXML
-	Button  create_bookGenerateBook;
+	Button  createBookGenerateBook;
 	
 
 	/**
@@ -95,9 +95,9 @@ private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQL
 
 	SQLHandle c = new SQLHandle();
 	Librarian l = new Librarian();
-	l.addBook(create_bookEnterTitle.getText(), create_bookEnterYear.getText(), path ,Integer.parseInt(numbOfCopies.getText())
-			, Integer.parseInt(loanDurationLaptop.getText()), create_bookEnterAuthor.getText(), create_bookEnterPublisher.getText()
-			, create_bookEnterGenre.getText(), create_bookEnterIsbn.getText(), create_bookEnterLanguage.getText());
+	l.addBook(createBookEnterTitle.getText(), createBookEnterYear.getText(), path ,Integer.parseInt(numbOfCopies.getText())
+			, Integer.parseInt(loanDurationLaptop.getText()), createBookEnterAuthor.getText(), createBookEnterPublisher.getText()
+			, createBookEnterGenre.getText(), createBookEnterIsbn.getText(), createBookEnterLanguage.getText());
 			
 	
 	

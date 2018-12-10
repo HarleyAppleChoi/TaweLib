@@ -1,6 +1,6 @@
 
 import java.util.ArrayList;
-import com.sun.prism.Image;
+import javafx.scene.image.Image;
 
 /**
  * This class creates an instance of a DVD.
