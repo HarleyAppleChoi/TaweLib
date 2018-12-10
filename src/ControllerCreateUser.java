@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class ControllerCreateUser {
 
-	
+	//info field
 	@FXML
 	PasswordField password;
 	
@@ -51,15 +51,15 @@ public class ControllerCreateUser {
 	@FXML
 	TextField create_normalEnterAddPostcode;
 	
+	//functional button
 	@FXML
 	Button cancelButton;
 	
 	@FXML
 	Button createButton;
 	
-	@FXML
-	ImageView normalUserImage;
 	
+	//user avator buttons
 	@FXML
     private Button imageDrawnButton;
 
@@ -81,6 +81,10 @@ public class ControllerCreateUser {
     @FXML
     private Button avator6button;
 
+    @FXML
+	ImageView normalUserImage;
+	
+    
     @FXML
     void avator1Button(ActionEvent event) {
     		
@@ -186,7 +190,14 @@ public class ControllerCreateUser {
 			
 		
 	}
-
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleImageEvent(ActionEvent e) {
 
 

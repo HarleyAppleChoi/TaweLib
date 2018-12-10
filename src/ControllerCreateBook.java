@@ -19,13 +19,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * This class controls the create book gui and provides and provides methods
+ * for shapes to be draw and saved and to navigate between the libgui and 
+ * 
+ * @author Emily Studley
+ * @modified by Hau Yi Choi
+ * @modified by Eniko Debreczeny
+ * @version 2.1
+ */
 public class ControllerCreateBook {
 
 	//Input data
 	@FXML
 	TextField createBookShowId;
-	
+	//Text field to enter book title
 	@FXML
 	TextField createBookEnterTitle;
 	
