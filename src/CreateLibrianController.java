@@ -122,8 +122,8 @@ public class CreateLibrianController {
     
     @FXML
     void imageDrawnAction(ActionEvent e) {
-    	librianImage.setImage(getImage(Storage.getNum()));
-		Storage.storeImagenum(Storage.getNum());
+    	librianImage.setImage(getImage(Storage.returntNum()));
+		Storage.storeImagenum(Storage.returntNum());
     }
     
     private Image getImage(int i) {
@@ -139,7 +139,7 @@ public class CreateLibrianController {
 		+"," +cityAdressTextField.getText()+"," +postcodeAdressTextField.getText();
 		try {
 			l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(), firstNameTextField.getText(), lastNameTextField.getText()
-					, Integer.parseInt(mobileNumberTextField.getText()), address, Storage.getNum(), employDateTextField.getText());
+					, Integer.parseInt(mobileNumberTextField.getText()), address, Storage.returntNum(), employDateTextField.getText());
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			System.out.println("Mobile number should be int!");
@@ -177,7 +177,7 @@ public class CreateLibrianController {
 			+"\n," +cityAdressTextField.getText()+"\n," +postcodeAdressTextField.getText();
 			try {
 				l.newLibrarian(usernameTextField.getText(), usernamePassword.getText(), firstNameTextField.getText(), lastNameTextField.getText()
-						, Integer.parseInt(mobileNumberTextField.getText()), address, Storage.getNum(), employDateTextField.getText());
+						, Integer.parseInt(mobileNumberTextField.getText()), address, Storage.returntNum(), employDateTextField.getText());
 			} catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
 				System.out.println("Mobile number should be int!");

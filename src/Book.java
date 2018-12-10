@@ -1,4 +1,4 @@
-import com.sun.prism.Image;
+import javafx.scene.image.Image;
 
 /**
  * This class creates an instance of a Book.
@@ -7,7 +7,7 @@ import com.sun.prism.Image;
  * @version 2.1
  * 
  */
-class Book extends Resource {
+public class Book extends Resource {
 
 	private String author;
 	private String publisher;
@@ -20,22 +20,21 @@ class Book extends Resource {
 	 * Constructor to construct a Book using the parameters from this class and the
 	 * parameter from the superclass Resource.
 	 * 
-	 * @param id
-	 * @param title
-	 * @param year
-	 * @param thumbNailImage
-	 * @param numCopies
-	 * @param numAvailableCopies
-	 * @param author
-	 * @param publisher
-	 * @param genre
-	 * @param isbn
-	 * @param langauge
+	 * @param id The unique identifier of the book.
+	 * @param title The title of the book.
+	 * @param year The year the book was published.
+	 * @param thumbNailImage Image of the book cover.
+	 * @param numCopies Number of copies owned by the library.
+	 * @param numAvailableCopies Number of copies available to borrow in the library.
+	 * @param author The author of the book.
+	 * @param publisher The publisher of the book.
+	 * @param genre The genre of the book.
+	 * @param isbn the ISBN number of the book.
+	 * @param langauge The language of the book.
 	 */
 	public Book(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String author, String publisher, String genre, String isbn, String langauge) {
-
-		super(id, title, year, thumbNailImage, numCopies, numAvailableCopies);
+		super(id, title, year, thumbNailImage, numCopies);
 		this.author = author;
 		this.publisher = publisher;
 		this.genre = genre;
@@ -47,7 +46,7 @@ class Book extends Resource {
 	/**
 	 * Get method to get the author.
 	 * 
-	 * @return author
+	 * @return author The author of the book.
 	 */
 	public String getAuthor() {
 		return author;
@@ -56,7 +55,7 @@ class Book extends Resource {
 	/**
 	 * Set method to set the author.
 	 * 
-	 * @param author
+	 * @param author The author of the book.
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
@@ -65,7 +64,7 @@ class Book extends Resource {
 	/**
 	 * Get method to get the publisher.
 	 * 
-	 * @return publisher
+	 * @return publisher The publisher of the book.
 	 */
 	public String getPublisher() {
 		return publisher;
@@ -74,7 +73,7 @@ class Book extends Resource {
 	/**
 	 * Set method to set the publisher.
 	 * 
-	 * @param publisher
+	 * @param publisher The publisher of the book.
 	 */
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
@@ -83,7 +82,7 @@ class Book extends Resource {
 	/**
 	 * Get method to get the genre.
 	 * 
-	 * @return genre
+	 * @return genre The genre of the book.
 	 */
 	public String getGenre() {
 		return genre;
@@ -92,25 +91,25 @@ class Book extends Resource {
 	/**
 	 * Set method to set the genre.
 	 * 
-	 * @param genre
+	 * @param genre The genre of the book.
 	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 
 	/**
-	 * Get method to get the isbn.
+	 * Get method to get the ISBN.
 	 * 
-	 * @return isbn
+	 * @return isbn The ISBN number of the book.
 	 */
 	public String getISBN() {
 		return isbn;
 	}
 
 	/**
-	 * Set method to set the isbn.
+	 * Set method to set the ISBN.
 	 * 
-	 * @param isbn
+	 * @param isbn The ISBN number of the book.
 	 */
 	public void setISBN(String isbn) {
 		this.isbn = isbn;
@@ -119,7 +118,7 @@ class Book extends Resource {
 	/**
 	 * Get method to get the language.
 	 * 
-	 * @return language
+	 * @return language The language of the book.
 	 */
 	public String getLanguage() {
 		return language;
@@ -128,7 +127,7 @@ class Book extends Resource {
 	/**
 	 * Set method to set the language.
 	 * 
-	 * @param language
+	 * @param language The language of the book.
 	 */
 	public void setLanguage(String language) {
 		this.language = language;

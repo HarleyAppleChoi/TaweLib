@@ -260,6 +260,19 @@
                         </AnchorPane>
                     </content>
                   </Tab>
+                  <Tab text="More Info">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextArea fx:id="resultText" layoutX="101.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0" />
+                              <TextField fx:id="searchQueryMore" layoutX="101.0" layoutY="46.0" />
+                              <ImageView fx:id="thumbnailImage" fitHeight="150.0" fitWidth="200.0" layoutX="444.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="buttonSearchMore" layoutX="571.0" layoutY="34.0" mnemonicParsing="false" onAction="#buttonSearchMore" text="Search" />
+                              <Label layoutX="14.0" layoutY="51.0" text="Resource ID:" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </children>

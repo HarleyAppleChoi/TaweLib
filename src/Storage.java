@@ -29,7 +29,7 @@ public class Storage {
 		num = number;
 	}
 	
-	public static int getNum() {
+	public static int returntNum() {
 		return num;
 	}
 	

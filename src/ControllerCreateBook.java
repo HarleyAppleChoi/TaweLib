@@ -59,6 +59,10 @@ public class ControllerCreateBook {
 	Button  create_bookGenerateBook;
 	
 
+	/**
+	 * This button control skip to the last scene
+	 * @param e
+	 */
 	@FXML
 	private  void handleCancelEvent(ActionEvent e) {
 		
@@ -76,6 +80,14 @@ public class ControllerCreateBook {
 			
 		
 	}
+	
+	
+	/**
+	 * A new librarian account created after clicking.
+	 * @param e
+	 * @throws NumberFormatException
+	 * @throws SQLException
+	 */
 @FXML
 private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQLException {
 	SQLHandle c = new SQLHandle();
@@ -101,8 +113,15 @@ private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQL
 		
 	}
 	
+
+//store the path that the user choose
 private String path;
 @FXML
+
+/**
+ * This 
+ * @param e
+ */
 private  void handleDrawImage(ActionEvent e) {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Open Resource File");

@@ -195,7 +195,7 @@ public class DrawGUIContorllerUser {
 			
 			Storage.storeNum(number);
 			
-			String query = "UPDATE `user_` SET `image`='" +number+"';";
+			String query = "UPDATE `user_` SET `image`='" +Storage.returntNum()+"' where username = '"+Storage.returnUsername()+"';";
 			sql.set(query);
 			
 			drawCanvas.snapshot(null, wim);
