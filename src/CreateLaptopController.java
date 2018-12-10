@@ -1,6 +1,9 @@
 /**
-@author Iestyn Price
-*/
+ * Class to control the functioning of the create laptop gui
+ * and all the functions they can perform.
+ * @author Iestyn Price modified  by James Hogg
+ * @version 2.1
+ */
 
 
 import java.io.File;
@@ -20,43 +23,48 @@ import javafx.stage.Stage;
 
 public class CreateLaptopController {
 
+	private String path;
+	
+	//enter input 
+	@FXML
+	private TextField numberOfCopiesLaptop;
+	
+	@FXML
+	private TextField createLaptopTitle;
+	
+	@FXML
+	private TextField createLaptopYear;
+	
+	@FXML
+	private TextField durationLaptop;
+	
+	@FXML
+	private TextField createLaptopManufacturer;
+	
+	@FXML
+	private TextField createLaptopModel;
+	
+	@FXML
+	private TextField createLaptopOS;
+	
+	@FXML
+	private Button laptopCancelButton;
+	
+	@FXML
+	private Button laptopCreateButton;
 
-	@FXML
-	TextField numberOfCopiesLaptop;
 	
 	@FXML
-	TextField createLaptopTitle;
+	private Button laptopDrawImage;
 	
-	@FXML
-	TextField createLaptopYear;
-	
-	@FXML
-	TextField durationLaptop;
-	
-	@FXML
-	TextField createLaptopManufacturer;
-	
-	@FXML
-	TextField createLaptopModel;
-	
-	@FXML
-	TextField createLaptopOS;
-	
-	@FXML
-	Button laptopCancelButton;
-	
-	@FXML
-	Button laptopCreateButton;
-
-	
-	@FXML
-	Button laptopDrawImage;
-	
-	
+	/**
+	 * Method to cancel create event based on action 
+	 * @param e
+	 */
 	@FXML
 	private void handleCancelButtonEvent(ActionEvent e) {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("libgui-3.fxml"));//load librarion gui
 			 Parent root = (Parent)fxmlLoader.load();
 			 Scene scene= new Scene(root); 
 			 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -66,7 +74,12 @@ public class CreateLaptopController {
 		}
 	}
 
-
+	/**
+	 * Method to create a laptop based on action 
+	 * @param e
+	 * @throws NumberException
+	 * @throws SQLException
+	 */
 	@FXML
 	private void handleCreateButtonEvent(ActionEvent e) throws NumberFormatException, SQLException {
 		SQLHandle c = new SQLHandle();
@@ -87,7 +100,10 @@ public class CreateLaptopController {
 	
 	}
 	
-	private String path;
+	/**
+	 * Method to handle draw event based on action 
+	 * @param e
+	 */
 	@FXML
 	private void handleDrawEvent(ActionEvent e) {
 		FileChooser fileChooser = new FileChooser();
