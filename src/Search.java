@@ -12,6 +12,7 @@ public class Search {
 	
 	private String statement;
 	
+	
 	/**
 	 * This method returns all the resources in the library for browsing.
 	 * @return result The search results converted into string.
@@ -65,9 +66,9 @@ public class Search {
         
         //results into string
         while(r.next()) {
-        	result = result + String.format("%s %20s  %20s %20s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
+        	result = result + String.format("%s %20s  %20s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
         			r.getString("author"), r.getString("publisher"), r.getString("genre"), r.getString("ISBN"),
-        			r.getString("language"), r.getInt("year"), r.getInt("numAvCopies"), r.getString("image"));
+        			r.getString("language"), r.getInt("year"), r.getInt("numAvCopies"));
         }
         return result;
     }
@@ -175,11 +176,14 @@ public class Search {
     	}	
     }
     public String overdueSearch() throws SQLException {
+    	SQLHandle sql = new SQLHandle();
+    	
     	String result = "resourceID     Title           Year     Username     Days Overdue\n";
     	statement = "SELECT distinct resource.resourceID, title, year, username, dueDate FROM borrowing, resource, "
     			+ "current_borrowing WHERE borrowing.resourceID = resource.resourceID "
     			+ "and borrowing.borrowingID = current_borrowing.borrowingID";
-    	ResultSet r = SQLHandle.get(statement);
+    	
+    	ResultSet r = sql.nonStaticGet(statement);
     	while(r.next() ) {
     		System.out.println("while cycle");
     		if (!r.getDate("dueDate").equals(null)) {
