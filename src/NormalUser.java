@@ -182,6 +182,7 @@ public class NormalUser extends User implements Storable {
 	/**
 	 * Method to display the user's transaction history,
 	 * including date, amount, resourceID and days overdue if overdue.
+	 * 
 	 * @return The borrowing history.
 	 * @throws Exception
 	 */
@@ -220,6 +221,7 @@ public class NormalUser extends User implements Storable {
 
 	/**
 	 * Method to get the currently borrowed items.
+	 * 
 	 * @return The currently borrowed items.
 	 */
 	public String getBorrowedList() {
@@ -233,6 +235,7 @@ public class NormalUser extends User implements Storable {
 	
 	/**
 	 * Method to get the requested items.
+	 * 
 	 * @return The requested items.
 	 */
 	public String getRequestedItem() {
@@ -245,6 +248,7 @@ public class NormalUser extends User implements Storable {
 	
 	/**
 	 * Method to get the reserved items.
+	 * 
 	 * @return The reserved items.
 	 */
 	public String getReservedItem() {
@@ -257,6 +261,7 @@ public class NormalUser extends User implements Storable {
 
 	/**
 	 * Method to get the username.
+	 * 
 	 * @return the username
 	 */
 	public String getUsername() {

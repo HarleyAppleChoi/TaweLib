@@ -11,13 +11,13 @@ import com.sun.prism.Image;
 
 /**
  * This class creates a Resource, checks if a resource is available to borrow,
- * allows a user to borrow a resource, allows a user to request a resource where
- * they cannot borrow it, adds an item to a users reserved queue when the
+ * allows a user to borrow a resource, allows a user to request a resource when
+ * they cannot borrow it, adds an item to a user's reserved queue when the
  * resource they requested becomes available,
- * 
  * 
  * @author Emily Studley
  * @modified by Hau Yi Choi
+ * @modified by Eniko Debreczeny
  * @version 2.1
  */
 public class Resource implements Storable {
@@ -37,12 +37,12 @@ public class Resource implements Storable {
 	/**
 	 * Constructor to construct a Resource using these parameters.
 	 * 
-	 * @param ID
-	 * @param title
-	 * @param year
-	 * @param thumbNailImage
-	 * @param numCopies
-	 * @param numAvailableCopies
+	 * @param ID The ID of the resource.
+	 * @param title The title of the resource.
+	 * @param year The year the resource was released.
+	 * @param thumbNailImage An image of the resource.
+	 * @param numCopies The number of copies of the resource owned by the library.
+	 * @param numAvailableCopies The number of copies available to borrow.
 	 */
 	protected Resource(int ID, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies) {
 		this.ID = ID;
@@ -54,11 +54,11 @@ public class Resource implements Storable {
 	}
 
 	/**
-	 * Selects the resourceId, title, year, image and numAvailableCopies. Checks if
-	 * the user is currently borrowing the resource, has it in its resource
+	 * Selects the resourceId, title, year, image and number of available copies.
+	 * Checks if the user is currently borrowing the resource, has it in their resource
 	 * requesting queue or has it in their reserved resources queue.
 	 * 
-	 * @param resourceId
+	 * @param resourceId The ID of the resource.
 	 * @throws Exception
 	 */
 	public Resource(int resourceId) throws Exception {
@@ -82,20 +82,20 @@ public class Resource implements Storable {
 				Borrowing e = new Borrowing(r.getInt("borrowingID"));
 				currentBorrow.add(e);
 			}
-			// requesting queue
+			//Requesting queue of the resource.
 			statement = "select username from requested where resourceID = '" + ID + "';";
 			r = SQLHandle.get(statement);
 			while (r.next()) {
 				request.add((r.getString("username")));
 			}
-			// reserved queue
+			//Reserved queue.
 			statement = "select username from reserved where resourceID = '" + ID + "';";
 			r = SQLHandle.get(statement);
 			while (r.next()) {
 				reserve.add((r.getString("username")));
 			}
 
-			// current borrowing
+			//Currently borrowing.
 			statement = "select borrowingID from current_borrow_his where resourceID = '" + ID + "';";
 			r = SQLHandle.get(statement);
 			while (r.next()) {
@@ -103,27 +103,35 @@ public class Resource implements Storable {
 			}
 
 		} catch (SQLSyntaxErrorException e) {
-			// it can be do nothing when Table 'cw230.reserved_item' doesn't exist because
-			// sometime
-			// the user doesn't have any requesting or current borrow or request
-
+			// It might do nothing when Table 'cw230.reserved_item' doesn't exist because
+			// the user hasn't requested or borrowed anything.
 		}
 	}
 
 	/**
-	 * If someone reserved resources, that is not able to borrow.
+	 * Method to check if the resource is available to borrow.
 	 * 
-	 * @return true if user can borrow a resource, false otherwise.
+	 * @return b True if it can be borrowed, false otherwise.
 	 */
 	private boolean canBorrow() {
 		boolean b = true;
+		//If all the copies are either borrowed, reserved or requested
+		//then the resource is not available to borrow.
 		if ((currentBorrow.size() + reserve.size() + request.size()) > numCopies) {
 			b = false;
 		}
 		return b;
 	}
 	
+	
+	/**
+	 * Method to get the number of available copies.
+	 * 
+	 * @return b The number of available copies.
+	 */
 	public int getAvCopies() {
+		//Number of copies owned by the library minus number of
+		//currently borrowed, reserved or requested items.
 		int b=numCopies-(currentBorrow.size() + reserve.size() + request.size()); 
 		if (b<0) {
 			b=0;
@@ -131,6 +139,11 @@ public class Resource implements Storable {
 		return b;
 	}
 
+	/**
+	 * Method to reserve a resource.
+	 * 
+	 * @throws SQLException
+	 */
 	public void reserve() throws SQLException {
 		if (request.isEmpty()) {
 			System.out.println("the resource is available now");
@@ -154,8 +167,8 @@ public class Resource implements Storable {
 	 * has reserved this resource, then their username is removed from the reserved
 	 * queue and they borrow the book.
 	 * 
-	 * @param userName
-	 * @return The Borrowing object of that specific borrow.
+	 * @param userName The name of the user borrowing the item.
+	 * @return b The Borrowing object of that specific borrow event.
 	 * @throws IllegalArgumentException
 	 * @throws SQLException
 	 */
@@ -167,6 +180,7 @@ public class Resource implements Storable {
 		}
 		Borrowing b = new Borrowing(String.valueOf(ID));
 		currentBorrow.add(b);
+		//Add it to the currently borrowed items in the database.
 		statement = "insert into current_borrow_his values (" + this.ID + "," + b.getBorrowNo() + ");";
 		SQLHandle.set(statement);
 		System.out.println("Borrowing added");
@@ -174,12 +188,11 @@ public class Resource implements Storable {
 	}
 
 	/**
-	 * This method finds if the user has already reserved this resource.
+	 * This method checks if the user has already reserved this resource.
 	 * 
-	 * @param user
-	 * @return Index of the reserve. -1 if the user do not reserve the item.
+	 * @param user The user.
+	 * @return i Index of the reserve. -1 if the user did not reserve the item.
 	 */
-
 	private int isReserved(String user) {
 		int i = 0;
 		for (i = 0; i <= reserve.size(); i++) {
@@ -194,15 +207,15 @@ public class Resource implements Storable {
 	}
 
 	/**
-	 * Set due date for someone who is the first to borrow the item. if there is no other resource is added
+	 * Set due date for a currently borrowed copy if a user requests it.
 	 * 
-	 * @param username
+	 * @param username The user.
 	 * @throws SQLException
 	 */
 	public void request(String username) throws SQLException {
 		request.add(username);
 		if (!canBorrow()) {
-			// if there is copy left,dont need to ask people to return
+			//If there are still available copies, there's no need to ask users to return their borrowed copies.
 			statement = "select min(borrowingID),borrowDate from borrowing where dueDate is null and onLoan = 'y' and resourceID = '"
 					+ this.ID + "';";
 
@@ -210,7 +223,7 @@ public class Resource implements Storable {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 			
 			while (r.next()) {
-				// set duration date
+				//Set duration date.
 				Date borrowDate = r.getDate("borrowDate");
 				Calendar c = Calendar.getInstance();
 				c.setTime(borrowDate);
@@ -243,7 +256,11 @@ public class Resource implements Storable {
 	}
 
 
-
+	/**
+	 * Method to return the items currently being borrowed.
+	 * 
+	 * @return The currently borrowed items.
+	 */
 	public LinkedList<Borrowing> getBorrrowingList() {
 		return currentBorrow;
 	}
@@ -251,7 +268,6 @@ public class Resource implements Storable {
 	/**
 	 * @Override
 	 */
-
 	public void store1() throws SQLException {
 
 	}
@@ -259,7 +275,7 @@ public class Resource implements Storable {
 	/**
 	 * Get method to get the Id.
 	 * 
-	 * @return Id
+	 * @return Id The ID of the resource.
 	 */
 	public int getId() {
 		return ID;
@@ -268,7 +284,6 @@ public class Resource implements Storable {
 	/**
 	 * @Override
 	 */
-
 	public void store() throws SQLException {
 
 	}
@@ -276,7 +291,7 @@ public class Resource implements Storable {
 	/**
 	 * Get method to get the title.
 	 * 
-	 * @return title
+	 * @return title The title of the resource.
 	 */
 	public String getTitle() {
 		return title;
@@ -285,7 +300,7 @@ public class Resource implements Storable {
 	/**
 	 * Set method to set the title.
 	 * 
-	 * @param title
+	 * @param title The title of the resource.
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -294,7 +309,7 @@ public class Resource implements Storable {
 	/**
 	 * Get method to get the year.
 	 * 
-	 * @return year
+	 * @return year The year the resource was released.
 	 */
 	public int getYear() {
 		return year;
@@ -303,7 +318,7 @@ public class Resource implements Storable {
 	/**
 	 * Set method to set the year.
 	 * 
-	 * @param year
+	 * @param year The year the resource was released.
 	 */
 	public void setYear(int year) {
 		this.year = year;
@@ -312,7 +327,7 @@ public class Resource implements Storable {
 	/**
 	 * Get method to get the thumbnail image.
 	 * 
-	 * @return thumbNailImage
+	 * @return thumbNailImage The image.
 	 */
 	public Image getThumbNailImage() {
 		return thumbNailImage;
@@ -321,7 +336,7 @@ public class Resource implements Storable {
 	/**
 	 * Set method to set the thumbnail image.
 	 * 
-	 * @param thumbNailImage
+	 * @param thumbNailImage The image.
 	 */
 	public void setThumbNailImage(Image thumbNailImage) {
 		this.thumbNailImage = thumbNailImage;
@@ -330,7 +345,7 @@ public class Resource implements Storable {
 	/**
 	 * Get method to get the number of copies.
 	 * 
-	 * @return numCopies
+	 * @return numCopies The number of copies owned by the library.
 	 */
 	public int getNumCopies() {
 		return numCopies;
@@ -339,7 +354,7 @@ public class Resource implements Storable {
 	/**
 	 * Set method to set the number of copies.
 	 * 
-	 * @param numCopies
+	 * @param numCopies The number of copies owned by the library.
 	 */
 	public void setNumCopies(int numCopies) {
 		this.numCopies = numCopies;
