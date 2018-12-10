@@ -36,7 +36,7 @@ public class Librarian extends User {
 	 */
 	public Librarian(int staffNo, int employmentDate, String username, String password, String firstName, String lastName, int mobileNo,
 			String address, int userImage) {
-		super(username, password, firstName, lastName, mobileNo, address, userImage);
+		//super(username, password, firstName, lastName, mobileNo, address, userImage);
 		this.staffNo = staffNo;
 		this.employmentDate = employmentDate;
 		super.sql = new SQLHandle();
