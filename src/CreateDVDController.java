@@ -33,39 +33,39 @@ import javafx.stage.Window;
 public class CreateDVDController {
 	
 	@FXML
-	TextField dvdID;
+	private TextField dvdID;
 	@FXML
-	TextField numberOfCopiesDVD;
+	private TextField numberOfCopiesDVD;
 	
 	@FXML
-	TextField durationDVD;
+	private TextField durationDVD;
 	
 	@FXML
-	TextField dvdTitle;
+	private TextField dvdTitle;
 	
 	@FXML
-	TextField dvdYear;
+	private TextField dvdYear;
 	
 	@FXML
-	TextField dvdDirector;
+	private TextField dvdDirector;
 	
 	@FXML
-	TextField dvdRuntime;
+	private TextField dvdRuntime;
 	
 	@FXML
-	TextField dvdLanguage;
+	private TextField dvdLanguage;
 	
 	@FXML
-	TextField dvdSubtitle;
+	private TextField dvdSubtitle;
 	
 	@FXML
-	Button dvdCancel;
+	private Button dvdCancel;
 	
 	@FXML
-	Button dvdCreate;
+	private Button dvdCreate;
 	
 	@FXML
-	Button dvdImage;
+	private Button dvdImage;
 	
 	
 	

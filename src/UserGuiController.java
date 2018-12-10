@@ -1,8 +1,8 @@
 /**
-@author Iestyn Price
+ * This class control the user interface GUI.
+@author Iestyn Price, Hau Yi Choi
 @version 2.2
  * UserGuiController.java
- * @author Iestyn Price
  */
 
 //import javax.swing.text.TableView;
@@ -36,94 +36,93 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class UserGuiController {
+	
+	//Default search setting
 	private boolean bookButton = false;
 	private boolean dvdButton = false;
 	private boolean laptopButton = false;
 
 	@FXML
-	Tab searchTab;
+	private Tab searchTab;
 
 	@FXML
-	Tab editImageTab;
+	private Tab editImageTab;
 	@FXML
-	Button drawProfileImage;
+	private Button drawProfileImage;
 
 	@FXML
-	Button changeProfileImageButton;
+	private Button changeProfileImageButton;
 
 	@FXML
-	TextField searchQuery;
+	private TextField searchQuery;
 
 	@FXML
-	Button searchButton;
+	private Button searchButton;
 
 	@FXML
-	Button searchBook;
+	private Button searchBook;
 
 	@FXML
-	Button searchDvd;
+	private Button searchDvd;
 
 	@FXML
-	Button searchlaptop;
+	private Button searchlaptop;
 
 	@FXML
-	TextField searchResource;
+	private TextField searchResource;
 
 	@FXML
 	TextArea userSearch;
 
 	// resrve tab
 	@FXML
-	Tab reserveTab;
+	private Tab reserveTab;
 
 	@FXML
-	TextField reserveField;
+	private TextField reserveField;
 
 	@FXML
-	Button reserveButton;
+	private Button reserveButton;
 
 	// Transaction Tab
 
 	@FXML
-	Tab dashboardTab;
+	private Tab dashboardTab;
 
 	@FXML
-	TextArea transaction;
+	private TextArea transaction;
 
 	@FXML
-	TextArea borrowItem;
+	private TextArea borrowItem;
 
 	@FXML
-	TextArea reserved;
+	private TextArea reserved;
 
 	@FXML
-	TextArea requested;
+	private TextArea requested;
 
 	@FXML
-	TextField balance;
+	private TextField balance;
 
+	@FXML
+	private Button avatar1;
+	@FXML
+	private Button showImage;
 
-	
 	@FXML
-	Button avatar1;
+	private Button avatar2;
+
 	@FXML
-	Button showImage;
-	
+	private Button avatar3;
+
 	@FXML
-	Button avatar2;
-	
+	private Button avatar4;
+
 	@FXML
-	Button avatar3;
-	
+	private Button avatar5;
+
 	@FXML
-	Button avatar4;
-	
-	@FXML
-	Button avatar5;
-	
-	@FXML
-	Button avatar6;
-	
+	private Button avatar6;
 
 	// UserData
 	@FXML
@@ -145,156 +144,197 @@ public class UserGuiController {
 	private TextField userDataAddress;
 
 	@FXML
-	ImageView profileImageView;
+	private ImageView profileImageView;
 
 	// detailscarchtab
 	@FXML
 	private Tab resourceDetail;
 
-	@FXML // fx:id="resultText"
-	private TextArea resultText; // Value injected by FXMLLoader
+	@FXML
+	private TextArea resultText;
 
-	@FXML // fx:id="thumbnIlImage"
-	private ImageView thumbnIlImage; // Value injected by FXMLLoader
+	@FXML
+	private ImageView thumbnIlImage;
 
-	@FXML // fx:id="resourceID"
-	private TextField resourceID; // Value injected by FXMLLoader
+	@FXML
+	private TextField resourceID;
 
-	@FXML // fx:id="searchButton"
-	private Button searchingButton; // Value injected by FXMLLoader
+	@FXML
+	private Button searchingButton;
 
-	@FXML // fx:id="searchButton"
-	private Button backButton; // Value injected by FXMLLoader
+	@FXML
+	private Button backButton;
 
-	
-    
-    @FXML
-    void handleAvatar1(ActionEvent event) {
-    		
-    	profileImageView.setImage(getImage(1));
-    		Storage.storeImagenum(1);
-    }
+	/**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
+	@FXML
+	private void handleAvatar1(ActionEvent event) {
 
-    @FXML
-    void handleAvatar2(ActionEvent event) {
-    	profileImageView.setImage(getImage(2));
-    		Storage.storeImagenum(2);
-    }
+		profileImageView.setImage(getImage(1));
+		Storage.storeImagenum(1);
+	}
 
-    @FXML
-    void handleAvatar3(ActionEvent event) {
-    	profileImageView.setImage(getImage(3));
+	/**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
+	@FXML
+	private void handleAvatar2(ActionEvent event) {
+		profileImageView.setImage(getImage(2));
+		Storage.storeImagenum(2);
+	}
+
+	/**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
+	@FXML
+	private void handleAvatar3(ActionEvent event) {
+		profileImageView.setImage(getImage(3));
 		Storage.storeImagenum(3);
-    }
+	}
 
-    @FXML
-    void handleAvatar4(ActionEvent event) {
-    	profileImageView.setImage(getImage(4));
-     	Storage.storeImagenum(4);
-    }
+	/**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
+	@FXML
+	private void handleAvatar4(ActionEvent event) {
+		profileImageView.setImage(getImage(4));
+		Storage.storeImagenum(4);
+	}
 
-    @FXML
-    void handleAvatar5(ActionEvent event) {
-    	profileImageView.setImage(getImage(5));
+	/**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
+	@FXML
+	private void handleAvatar5(ActionEvent event) {
+		profileImageView.setImage(getImage(5));
 		Storage.storeImagenum(5);
-    }
+	}
 
-    @FXML
-    void handleAvatar6(ActionEvent event) {
-    	profileImageView.setImage(getImage(6));
+	/**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
+	@FXML
+	private void handleAvatar6(ActionEvent event) {
+		profileImageView.setImage(getImage(6));
 		Storage.storeImagenum(6);
-    }
-    
-    @FXML
-    void imageDrawnAction(ActionEvent e) {
-    	profileImageView.setImage(getImage(Storage.returntNum()));
+	}
+
+	/**
+	 * Show and select a custom draw image.  .
+	 * @param e when the button is clicked
+	 */
+	@FXML
+	private void imageDrawnAction(ActionEvent e) {
+		profileImageView.setImage(getImage(Storage.returntNum()));
 		Storage.storeImagenum(Storage.returntNum());
-    }
-   
-    
-    private Image getImage(int i) {
-    		String location = "userPhoto/"+String.valueOf(i)+".png";
-		File file = new File(location);
-        Image image = new Image(file.toURI().toString());
-        return image;
-    }
+	}
+
 	
+	/**
+	 * get the image from location
+	 * @param i number of photo that is created
+	 * @return an Image instance that is the user custom image
+	 */
+	private Image getImage(int i) {
+		String location = "userPhoto/" + String.valueOf(i) + ".png";
+		File file = new File(location);
+		Image image = new Image(file.toURI().toString());
+		return image;
+	}
 
-    @FXML
-    private void userDataAction(ActionEvent e) throws Exception {
-    		NormalUser u = new NormalUser(Storage.returnUsername());
-    		userDataUsername.setText(u.getUsername());
-    		userDataFirstName.setText(u.getFirstName());
-    		userDataLastName.setText(u.getLastName());
-    		userDataMobileNumber.setText(String.valueOf(u.getMobileNo()));
-    		userDataAddress.setText(u.getAddress());
-    		
-    		//Image
-    		profileImageView.setImage(u.getUserImage());
-    		
-    }
+	/**
+	 * get the user info
+	 * @param e when the button pressed
+	 * @throws Exception when complicated exception occur
+	 */
+	@FXML
+	private void userDataAction(ActionEvent e) throws Exception {
+		NormalUser u = new NormalUser(Storage.returnUsername());
+		userDataUsername.setText(u.getUsername());
+		userDataFirstName.setText(u.getFirstName());
+		userDataLastName.setText(u.getLastName());
+		userDataMobileNumber.setText(String.valueOf(u.getMobileNo()));
+		userDataAddress.setText(u.getAddress());
 
-     /**
+		// Image
+		profileImageView.setImage(u.getUserImage());
+
+	}
+
+	/**
 	 * initialise dashboard for normal user with information about transaction,
-	 * borrowedItem,reserved , requested  Item abd balance of normalUser
+	 * borrowedItem,reserved , requested Item abd balance of normalUser
 	 *
 	 */
 	@FXML
 	private void dashBoard(ActionEvent e) throws Exception {
 		SQLHandle sql = new SQLHandle();
-		
+
 		String username = Storage.returnUsername();
 		NormalUser u = new NormalUser(username);
 		String statement = "SELECT * FROM `request_item` WHERE username = '" + username + "';";
 		ResultSet r = sql.nonStaticGet(statement);
-		String request = "ResourceID:"; 
-		while(r.next()) {
-			request +=   String.valueOf(r.getInt("resourceID"))+ "\n";
+		String request = "ResourceID:";
+		while (r.next()) {
+			request += String.valueOf(r.getInt("resourceID")) + "\n";
 		}
-		
+
 		requested.setText(request);
-		
+
 		statement = "SELECT * FROM `reserved_item` where username = '" + username + "';";
 		r = sql.nonStaticGet(statement);
-		String reserve = "ResourceID:"; 
-		while(r.next()) {
-			reserve +=   String.valueOf(r.getInt("resourceID")) + "\n";
+		String reserve = "ResourceID:";
+		while (r.next()) {
+			reserve += String.valueOf(r.getInt("resourceID")) + "\n";
 		}
 		reserved.setText(reserve);
-		
+
 		/*
-		statement = "select borrowingID from current_borrowing where username = '" + username + "';";
-		r = sql.nonStaticGet(statement);
-		String borrow = "ResourceID:"; 
-		while(r.next()) {
-			b += String.valueOf(r.getInt("resourceID")) + "\n";
-		}
-		reserved.setText(reserve);
-		*/
-		
+		 * statement = "select borrowingID from current_borrowing where username = '" +
+		 * username + "';"; r = sql.nonStaticGet(statement); String borrow =
+		 * "ResourceID:"; while(r.next()) { b += String.valueOf(r.getInt("resourceID"))
+		 * + "\n"; } reserved.setText(reserve);
+		 */
+
 		balance.setText(String.valueOf(u.getBalance()));
 		transaction.setText(u.transactionHistory());
 		borrowItem.setText(u.getBorrowedList());
 		/*
-		
-		reserved.setText(u.getReservedItem());
-		
-		
-	
-		
-		
-*/
+		 * 
+		 * reserved.setText(u.getReservedItem());
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 	}
 
-	
-
-
 	/**
-	 * display box where user can enter dvd query. Query is then
-	 * sent to searchdvd method. 
+	 * display box where user can enter dvd query. Query is then sent to searchdvd
+	 * method.
 	 * 
 	 */
-@FXML
+	@FXML
 	private void buttonSearchDvd(ActionEvent e) {
 		dvdButton = !dvdButton;
 		laptopButton = false;
@@ -309,9 +349,10 @@ public class UserGuiController {
 			ex.printStackTrace();
 		}
 	}
+
 	/**
-	 * display box where user can enter laptop query. Query is then
-	 * sent to searchLaptop method. 
+	 * display box where user can enter laptop query. Query is then sent to
+	 * searchLaptop method.
 	 * 
 	 */
 	@FXML
@@ -330,10 +371,10 @@ public class UserGuiController {
 			ex.printStackTrace();
 		}
 	}
-	
-   	/**
-	 * display box where user can enter book query. Query is then
-	 * sent to searchBook method. 
+
+	/**
+	 * display box where user can enter book query. Query is then sent to searchBook
+	 * method.
 	 * 
 	 */
 	@FXML
@@ -353,15 +394,16 @@ public class UserGuiController {
 		}
 	}
 
-	
 	/**
-	 * gwt information from database about resorces ,
-	 * and check if the resource  book , dvd ,or laptop.
-	 * if the resources none  of the above retuen to search box.
+	 * awt information from database about resorces , and check if the resource book
+	 * , dvd ,or laptop. if the resources none of the above retuen to search box.
+	 * @param e when button are pressed
 	 */
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
-
+		
+		//ask button is in which state and then show the result base on that
+		
 		if (bookButton == true) {
 			bookButton = false;
 			dvdButton = false;
@@ -410,9 +452,14 @@ public class UserGuiController {
 		}
 	}
 
+	/**
+	 * Direct user to drawing program
+	 * @param e when button are pressed
+	 * @throws SQLException When SQLExpection occur
+	 */
 	@FXML
 	private void handleDrawImage(ActionEvent e) throws SQLException {
-		
+
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DrawGUIUser.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
@@ -424,16 +471,16 @@ public class UserGuiController {
 		}
 	}
 
-
 	LogInGuiController login;
 
-
 	
-	/**
-	 *  loads window for user to drow an image.
-	 * 
-	 */
 
+	/**
+	 * That allow user to reserve a resource base on resourceID.
+	 * @param e when button are pressed
+	 * @throws NumberFormatException
+	 * @throws Exception
+	 */
 	@FXML
 	public void reserveAction(ActionEvent e) throws NumberFormatException, Exception {
 
@@ -441,6 +488,11 @@ public class UserGuiController {
 		l.request(Integer.parseInt(reserveField.getText()), Storage.returnUsername());
 	}
 
+	/**
+	 * That return an image that the user drawn.
+	 * @param s
+	 * @return
+	 */
 	private Image getImage(String s) {
 		String location = s;
 		File file = new File(location);
@@ -448,6 +500,11 @@ public class UserGuiController {
 		return image;
 	}
 
+	/**
+	 * That is the button that show a info of that particular resource.
+	 * @param event
+	 * @throws Exception
+	 */
 	@SuppressWarnings("resource")
 	@FXML
 	void search(ActionEvent event) throws Exception {
@@ -479,24 +536,23 @@ public class UserGuiController {
 
 			} else {
 				statement = "select resourceID from DVD where resourceID ='" + resourceID.getText() + "';";
-				
+
 				r = sql.nonStaticGet(statement);
-				
+
 				if (r.next()) {
 					// this is a DVD
-					
 
-					statement = "SELECT distinct resource.resourceID,title, director, _language,image," + 
-							"    GROUP_CONCAT(distinct subtitle SEPARATOR ',') as subs, " + 
-							"    		runtime,year,numAvCopies" + 
-							"    		FROM resource, dvd, dvd_subtitle where resource.resourceID = dvd.resourceID and" + 
-							"    		dvd.resourceID = dvd_subtitle.resourceID and " + 
-							"    	 DVD.resourceID ='" +  resourceID.getText() + "';";
-					
+					statement = "SELECT distinct resource.resourceID,title, director, _language,image,"
+							+ "    GROUP_CONCAT(distinct subtitle SEPARATOR ',') as subs, "
+							+ "    		runtime,year,numAvCopies"
+							+ "    		FROM resource, dvd, dvd_subtitle where resource.resourceID = dvd.resourceID and"
+							+ "    		dvd.resourceID = dvd_subtitle.resourceID and " + "    	 DVD.resourceID ='"
+							+ resourceID.getText() + "';";
+
 					r = sql.nonStaticGet(statement);
 					r.next();
 					Resource re = new Resource(r.getInt("resource.resourceID"));
-					
+
 					String s = "ResourceID      Title       Director       Language          Subtitle      Runtime    Year    AvailableCopies\n";
 
 					s += String.format("%s %20s %10s %18s (%20s) %16s %18s %s20\n", r.getInt("resource.resourceID"),
@@ -512,31 +568,30 @@ public class UserGuiController {
 					r = sql.nonStaticGet(statement);
 					if (r.next()) {
 						// this is a laptop
-						
-					 	String s = "ResourceID            Title              Manufacturer              Model             OPSystem             Year              AvailableCopies\n";
-					 	
-					 	statement = "SELECT distinct resource.resourceID,image,title,manufacturer, model, operatingSystem,year,numAvCopies "
-				    			+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and laptop.resourceID='" +resourceID.getText() + "';";
-					 	r = sql.nonStaticGet(statement);
-					 	
-					 	while(r.next()) {
-					 		Resource re = new Resource(r.getInt("resource.resourceID"));
-					        	s +=String.format("%9s %22s %19s %20s %21s %22s %26s\n", r.getInt("resource.resourceID"), r.getString("title"),
-					        			r.getString("manufacturer"), r.getString("model"), r.getString("operatingSystem"), r.getInt("year"),
-					        			re.getAvCopies());
-					        
-					 	
-					 	resultText.setText(s);
-					        
-					 	thumbnIlImage.setImage(getImage(r.getString("image")));
-					 	}
+
+						String s = "ResourceID            Title              Manufacturer              Model             OPSystem             Year              AvailableCopies\n";
+
+						statement = "SELECT distinct resource.resourceID,image,title,manufacturer, model, operatingSystem,year,numAvCopies "
+								+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and laptop.resourceID='"
+								+ resourceID.getText() + "';";
+						r = sql.nonStaticGet(statement);
+
+						while (r.next()) {
+							Resource re = new Resource(r.getInt("resource.resourceID"));
+							s += String.format("%9s %22s %19s %20s %21s %22s %26s\n", r.getInt("resource.resourceID"),
+									r.getString("title"), r.getString("manufacturer"), r.getString("model"),
+									r.getString("operatingSystem"), r.getInt("year"), re.getAvCopies());
+
+							resultText.setText(s);
+
+							thumbnIlImage.setImage(getImage(r.getString("image")));
+						}
 					} else {
 						System.out.println("This resourceID is not in the database");
 					}
 				}
 			}
 
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -545,14 +600,18 @@ public class UserGuiController {
 	}
 
 	SQLHandle sql = new SQLHandle();
+
 	
-	
-	
+	/**
+	 * Store the avatar image that the user choose.
+	 * @param event
+	 * @throws SQLException
+	 */
 	@FXML
 	void storeAction(ActionEvent event) throws SQLException {
-		
-		
-		String query = "UPDATE `user_` SET `image`='" +Storage.returnImagenum()+"' where username = '"+Storage.returnUsername()+"';";
+
+		String query = "UPDATE `user_` SET `image`='" + Storage.returnImagenum() + "' where username = '"
+				+ Storage.returnUsername() + "';";
 		sql.set(query);
 	}
 

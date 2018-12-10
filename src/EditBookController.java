@@ -20,44 +20,50 @@ import javafx.stage.Stage;
 public class EditBookController {
 
 	@FXML
-	TextField enterID;
+	private TextField enterID;
 	
 	@FXML
-	TextField enterTitle;
+	private TextField enterTitle;
 	
 	@FXML
-	TextField enterYear;
+	private TextField enterYear;
 	
 	@FXML
-	TextField enterAuthor;
+	private TextField enterAuthor;
 	
 	@FXML
-	TextField enterPublisher;
+	private TextField enterPublisher;
 	
 	@FXML
-	TextField enterGenre;
+	private TextField enterGenre;
 	
 	@FXML
-	TextField  enterISBN;
+	private TextField  enterISBN;
 	
 	@FXML 
-	TextField enterLanguage;
+	private TextField enterLanguage;
 
 	@FXML
-	TextField enterNumCopies;
+	private TextField enterNumCopies;
 	
 	@FXML
-	TextField editDuration;
+	private TextField editDuration;
 	
 	@FXML
-	Button cancelButton;
+	private Button cancelButton;
 	
 	@FXML
-	Button editDetails;
+	private Button editDetails;
 	
 	@FXML
-	Button imageButton;
+	private Button imageButton;
 
+	/**
+	 * Edit book base of info given
+	 * @param e
+	 * @throws NumberFormatException
+	 * @throws SQLException
+	 */
 	@FXML
 	public void editBookEvent(ActionEvent e) throws NumberFormatException, SQLException {
 		Librarian l = new Librarian();
@@ -66,6 +72,11 @@ public class EditBookController {
 				,enterAuthor.getText(), enterPublisher.getText(), enterGenre.getText(), enterISBN.getText(), enterLanguage.getText());
 		
 	}
+	
+	/**
+	 * Direct it to the previous scene.
+	 * @param e
+	 */
 	@FXML
 	private void cancelEvent(ActionEvent e) {
 		try {
@@ -79,7 +90,9 @@ public class EditBookController {
 		}
 		
 	
-	
+	/**
+	 * Emptu
+	 */
 	}
 	@FXML
 	private void handleImageEvent(ActionEvent e) {

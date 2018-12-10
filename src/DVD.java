@@ -31,7 +31,8 @@ public class DVD extends Resource {
 	 * @param language The language of the DVD.
 	 * @param subLanguages The subtitles available on the DVD.
 	 */
-	public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
+	public DVD(int id, String title, int year, Image thumbNailImage
+			, int numCopies, int numAvailableCopies,
 			String director, int runtime, String language, ArrayList<String> subLanguages) {
 
 		super(id, title, year, thumbNailImage, numCopies);

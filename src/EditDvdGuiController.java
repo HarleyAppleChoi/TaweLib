@@ -21,58 +21,58 @@ import javafx.stage.Stage;
 public class EditDvdGuiController {
   //TextField tabs
 	@FXML
-	TextField enterID;
+	private TextField enterID;
 	
 	@FXML
-	TextField enterTitle;
+	private TextField enterTitle;
 	
 	@FXML
-	TextField enterYear;
+	private TextField enterYear;
 	
 	@FXML
-	TextField enterDirector;
+	private TextField enterDirector;
 
 	
 	@FXML
-	TextField enterRunTime;
+	private TextField enterRunTime;
 	
 	@FXML
-	TextField enterLanguage;
+	private TextField enterLanguage;
 	
 	@FXML
-	TextField enterNumCopies;
+	private TextField enterNumCopies;
 	
 	@FXML
-	TextField editDuration;
+	private TextField editDuration;
 	
 	// button tabs
 	@FXML
-	Button cancelButton;
+	private Button cancelButton;
 	
 	@FXML
-	Button editDvdDetails;
+	private Button editDvdDetails;
 	
 	//checkBox tabs
 	@FXML
-	CheckBox selectEnglish;
+	private CheckBox selectEnglish;
 	
 	@FXML
-	CheckBox selectSpanish;
+	private CheckBox selectSpanish;
 	
 	@FXML
-	CheckBox selectGerman;
+	private CheckBox selectGerman;
 	
 	@FXML
-	CheckBox selectFrench;
+	private CheckBox selectFrench;
 	
 	@FXML
-	CheckBox selectJapanese;
+	private CheckBox selectJapanese;
 	
 	@FXML
-	TextField otherSubtitle;
+	private TextField otherSubtitle;
 	
 	@FXML
-	ImageView dvdImage;
+	private ImageView dvdImage;
     
     
     /**
@@ -83,6 +83,8 @@ public class EditDvdGuiController {
 	 */
 	@FXML
 	public void editDVDEvent(ActionEvent e) throws NumberFormatException, SQLException {
+		
+		//see the subtitle selected state and add it to subtitle string.
 		String subtitle="";
 		Librarian l = new Librarian();
 		if(selectJapanese.isSelected()) {
@@ -95,6 +97,8 @@ public class EditDvdGuiController {
 			subtitle += "French,";
 		}
 		subtitle += otherSubtitle.getText();
+		
+		
 		l.editDVD(Integer.parseInt(enterID.getText()), enterTitle.getText(), enterYear.getText(),"", Integer.parseInt(enterNumCopies.getText()), 
 				Integer.parseInt(editDuration.getText()), enterDirector.getText(), enterLanguage.getText(), enterRunTime.getText(), subtitle);
 	}

@@ -1,6 +1,6 @@
 
 /**
-@author Iestyn Price
+@author Iestyn Price,Hau Yi Choi
 */
 
 import java.sql.ResultSet;
@@ -20,17 +20,23 @@ import javafx.stage.Stage;
 
 public class LogInGuiController {
 
+	//Text 
 	@FXML
-	TextField enterUserName;
+	private TextField enterUserName;
 	
 	@FXML
-	PasswordField enterUserPassword;
+	private PasswordField enterUserPassword;
 	
 	@FXML
-	Button logInButton;
+	private Button logInButton;
 	
+	/**
+	 * This do the login algorithm and identify the username is a librarian or normal user and direct them to different scene
+	 * @param e Action Event when click on button
+	 * @throws Exception when some complicated exception is shown
+	 */
 	@FXML
-	private  void handleLogInEvent(ActionEvent e) throws NumberFormatException, Exception {
+	private  void handleLogInEvent(ActionEvent e) throws Exception {
 		SQLHandle sql = new SQLHandle();
 		String username = enterUserName.getText();
 		String query="Select * from user_ where username = '"+username
@@ -38,18 +44,14 @@ public class LogInGuiController {
 		ResultSet r = SQLHandle.get(query);
 		
 		
-		if(!r.next()) {
+		if (!r.next()) {
 			//password and username is not in the database
 			System.out.println("password and username is not in the database");
-		}else {
+		} else {
 			query="Select * from normal_user where username = '"+username+"';";
 			r = SQLHandle.get(query);
-			if(r.next()) {
-				/*
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("logingui.fxml"));
-				UserGuiController userGui = loader.getController();
-				userGui.reserveAction(username);
-				*/
+			if (r.next()) {
+				
 				Storage.storeUsername(username);
 				//that is a user and direct it to user dashboard
 				try {

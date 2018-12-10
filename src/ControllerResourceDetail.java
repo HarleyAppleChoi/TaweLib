@@ -56,12 +56,12 @@ public class ControllerResourceDetail {
 				Resource re = new Resource(r.getInt("book.resourceID"));
 
 				String s = "ID      Title              Author   Publisher  Genre   ISBN  Language Year NumAvCopies Image\n";
-				
+
 				statement = "select * from book,resource where book.resourceID = resource.resourceID and book.resourceID ='"
 						+ resourceID.getText() + "';";
-				
-				r=sql.nonStaticGet(statement);
-				
+
+				r = sql.nonStaticGet(statement);
+				r.next();
 				s += String.format("%s %30s %10s %15s %10s %7s %7s %10s %7s %22s\n", r.getInt("book.resourceID"),
 						r.getString("resource.title"), r.getString("author"), r.getString("publisher"),
 						r.getString("genre"), r.getString("ISBN"), r.getString("language"), r.getInt("year"),
@@ -77,15 +77,17 @@ public class ControllerResourceDetail {
 				if (r.next()) {
 					// this is a DVD
 					Resource re = new Resource(r.getInt("DVD.resourceID"));
-					
+
 					statement = "select * from DVD,resource where DVD.resourceID = resource.resourceID and DVD.resourceID ='"
 							+ resourceID.getText() + "';";
-					
-					r=sql.nonStaticGet(statement);
-			    	String s = "ResourceID      Title       Director       Language          Subtitle      Runtime    Year    AvailableCopies\n";
 
-					s += String.format("%s %20s %10s %18s (%20s) %16s %18s %s20\n",r.getInt("resourceID"), r.getString("title"), r.getString("director"), r.getString("_language"), r.getString("subs"),
-		        			r.getInt("runtime"), r.getInt("year"), re.getAvCopies());
+					r = sql.nonStaticGet(statement);
+					r.next();
+					String s = "ResourceID      Title       Director       Language          Subtitle      Runtime    Year    AvailableCopies\n";
+
+					s += String.format("%s %20s %10s %18s (%20s) %16s %18s %s20\n", r.getInt("resourceID"),
+							r.getString("title"), r.getString("director"), r.getString("_language"),
+							r.getString("subs"), r.getInt("runtime"), r.getInt("year"), re.getAvCopies());
 
 					resultText.setText(s);
 
@@ -98,17 +100,30 @@ public class ControllerResourceDetail {
 					if (r.next()) {
 						// this is a laptop
 						
+						Resource re = new Resource(r.getInt("laptop.resourceID"));
+
+						String s = "ID               Title               Manufacturer              Model               OPSystem               Year               AvailableCopies\n";
+						statement = "SELECT distinct resource.resourceID,title,manufacturer, model, operatingSystem,year,numAvCopies "
+								+ "FROM resource, laptop where resource.resourceID = laptop.resourceID laptop.resourceID =' "
+								+ resourceID.getText() + "';";
+						r = SQLHandle.get(statement);
+
+						// results to string
+						while (r.next()) {
+							s = s + String.format("%s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"),
+									r.getString("title"), r.getString("manufacturer"), r.getString("model"),
+									r.getString("operatingSystem"), r.getInt("year"), re.getAvCopies());
+							
+							thumbnIlImage.setImage(getImage(r.getString("image")));
+							resultText.setText(s);
+						}
 						
-				}else {
-					System.out.println("This resourceID is not in the database");
-			}
 
-			
-				
-				
-				
+					} else {
+						System.out.println("This resourceID is not in the database");
+					}
 
-			} 
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

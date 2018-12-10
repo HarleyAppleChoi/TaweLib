@@ -25,110 +25,151 @@ import sun.security.util.Password;
 public class CreateLibrianController {
 
 	@FXML
-	TextField usernameTextField;
-	@FXML
-	TextField usernamePassword;
+	private TextField usernameTextField;
 	
 	@FXML
-	TextField firstNameTextField;
+	private TextField usernamePassword;
 	
 	@FXML
-	TextField lastNameTextField;
+	private TextField firstNameTextField;
 	
 	@FXML
-	TextField mobileNumberTextField;
+	private TextField lastNameTextField;
 	
 	@FXML
-	TextField line1AddressTextField;
+	private TextField mobileNumberTextField;
 	
 	@FXML
-	TextField line2AdressTextField;
+	private TextField line1AddressTextField;
 	
 	@FXML
-	TextField cityAdressTextField;
+	private TextField line2AdressTextField;
 	
 	@FXML
-	TextField postcodeAdressTextField;
+	private TextField cityAdressTextField;
 	
 	@FXML
-	TextField staffNoTextField;
+	private TextField postcodeAdressTextField;
 	
 	@FXML
-	TextField employDateTextField;
+	private TextField staffNoTextField;
 	
 	@FXML
-	Button avator1button;
+	private TextField employDateTextField;
 	
 	@FXML
-	Button avator2button;
+	private Button avator1button;
+	
+	@FXML
+	private Button avator2button;
 	
 	
 	@FXML
-	Button avator3button;
+	private Button avator3button;
 	
 	@FXML
-	Button avator4button;
+	private Button avator4button;
 	
 	@FXML
-	Button avator5button;
+	private Button avator5button;
 	
 	@FXML
-	Button avator6button;
+	private Button avator6button;
 	
 	@FXML
-	Button imageDrawnButton;
+	private Button imageDrawnButton;
 	
 	@FXML
-	Button createLibrianianCancelButton;
+	private Button createLibrianianCancelButton;
 	
 	@FXML
-	ImageView librianImage;
+	private ImageView librianImage;
 
 
 
+	/**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
     @FXML
-    void avator1Button(ActionEvent event) {
+    private void avator1Button(ActionEvent event) {
     		
     	librianImage.setImage(getImage(1));
     		Storage.storeImagenum(1);
     }
-
+    /**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
     @FXML
-    void avator2Button(ActionEvent event) {
+    private void avator2Button(ActionEvent event) {
     	librianImage.setImage(getImage(2));
     		Storage.storeImagenum(2);
     }
-
+    /**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
     @FXML
-    void avator3Button(ActionEvent event) {
+    private void avator3Button(ActionEvent event) {
     	librianImage.setImage(getImage(3));
 		Storage.storeImagenum(3);
     }
-
+    /**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
     @FXML
-    void avator4Button(ActionEvent event) {
+    private void avator4Button(ActionEvent event) {
     	librianImage.setImage(getImage(4));
      	Storage.storeImagenum(4);
     }
-
+    /**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
     @FXML
-    void avator5Button(ActionEvent event) {
+    private void avator5Button(ActionEvent event) {
     	librianImage.setImage(getImage(5));
 		Storage.storeImagenum(5);
     }
-
+    /**
+	 * That let the user choose one of the avatar image.
+	 * 
+	 * @param event
+	 *            when the button is clicked
+	 */
     @FXML
-    void avator6Button(ActionEvent event) {
+    private void avator6Button(ActionEvent event) {
     	librianImage.setImage(getImage(6));
 		Storage.storeImagenum(6);
     }
     
+    /**
+	 * Show and select a custom draw image.  .
+	 * @param e when the button is clicked
+	 */
     @FXML
-    void imageDrawnAction(ActionEvent e) {
+    private void imageDrawnAction(ActionEvent e) {
     	librianImage.setImage(getImage(Storage.returntNum()));
 		Storage.storeImagenum(Storage.returntNum());
     }
     
+    /**
+	 * get the image from location
+	 * @param i number of photo that is created
+	 * @return an Image instance that is the user custom image
+	 */
     private Image getImage(int i) {
     		String location = "userPhoto/"+String.valueOf(i)+".png";
 		File file = new File(location);
@@ -138,6 +179,7 @@ public class CreateLibrianController {
 
     
     /**
+     * Change the scene to the previous one.
      * @param 
      */
 
@@ -161,7 +203,8 @@ public class CreateLibrianController {
 		
 	}
 	/**
-	 * @param e
+	 * Read the field and write a new librarian into database.
+	 * @param e when the button pressed
 	 * @throws NumberFormatException if user entered wrong number format
 	 * @throws SQLException
 	 */
@@ -189,6 +232,10 @@ public class CreateLibrianController {
 	}	
 
 
+	/**
+	 * Button that bring the user to draw program.
+	 * @param e when the button pressed
+	 */
 	@FXML
 	private void handleDrawImageEvent(ActionEvent e) {
 	

@@ -14,38 +14,44 @@ import javafx.stage.Stage;
 
 public class EditLaptopController {
 
+	
 	@FXML
-	TextField enterID;
+	private TextField enterID;
 	
 	
 	@FXML
-	TextField laptopTitle;
+	private TextField laptopTitle;
 	
 	@FXML
-	TextField laptopYear;
+	private TextField laptopYear;
 	
 	@FXML
-	TextField laptopManufactuer;
+	private TextField laptopManufactuer;
 	
 	@FXML
-	TextField laptopModel;
+	private TextField laptopModel;
 	
 	@FXML
-	TextField laptopOS;
+	private TextField laptopOS;
 	@FXML
-	TextField loanDuration;
+	private TextField loanDuration;
 	
 	@FXML
-	Button laptopCancelButton;
+	private Button laptopCancelButton;
 	@FXML
-	Button laptopEditButton;
+	private Button laptopEditButton;
 	
 	@FXML
-	ImageView laptopImage;
+	private ImageView laptopImage;
 	
 	@FXML
-	TextField NumberOfCopies;
+	private TextField NumberOfCopies;
 	
+	/**
+	 * Direct it to the previous scene;
+	 * @param e when button pressed
+	 * @throws SQLException when SQL Query go wrong.
+	 */
 	@FXML
 	private  void HandleCancelEvent(ActionEvent e) throws SQLException {
 		
@@ -65,6 +71,11 @@ public class EditLaptopController {
 		
 	}
 	
+	/**
+	 * Edit a laptop.
+	 * @param e when button pressed
+	 * @throws SQLException SQL Query go wrong.
+	 */
 	@FXML
 	private  void handleEditLaptopEvent(ActionEvent e) throws SQLException {
 		SQLHandle c = new SQLHandle();
