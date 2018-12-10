@@ -122,7 +122,10 @@ public class Search {
         return result;
     }
 
+//method for returning a string of borrowed books with the id, username and date borrowed
+    
     /**
+     * this a borrow search that search for the current borrowing thing
      * @param searchString
      * @return
      * @throws SQLException
@@ -149,8 +152,11 @@ public class Search {
     	}
     	
     }
+
+    //method for returning string of returned copies, with id, username and date returns
     
     /**
+     * This is the method that return that returned borrowing.
      * @param searchString
      * @return
      * @throws SQLException
@@ -175,6 +181,12 @@ public class Search {
 	    	 return result;
     	}	
     }
+
+    /**
+     * method for returning a string of overdue copies, with id, title, year, username, and overdue days
+     * @return
+     * @throws SQLException
+     */
     public String overdueSearch() throws SQLException {
     	SQLHandle sql = new SQLHandle();
     	
@@ -186,7 +198,7 @@ public class Search {
     	ResultSet r = sql.nonStaticGet(statement);
     	while(r.next() ) {
     		System.out.println("while cycle");
-    		if (!r.getDate("dueDate").equals(null)) {
+    		if (r.getDate("dueDate")!=null) {
     			System.out.println("gets to date field not null");
     			if ((r.getDate("dueDate").getTime() - System.currentTimeMillis() < 0)) {
     				System.out.println("gets to overdue add to rs");
@@ -200,6 +212,8 @@ public class Search {
     	}
     	return result;
     	}
+    
+    
     
     
 }
