@@ -1,6 +1,8 @@
 /**
-@author Iestyn Price
-*/
+ * FXML Create DVD Controller
+ * This class creats controller of dvd table.
+ * @author Iestyn Price
+ */
 
 
 import java.awt.Graphics2D;
@@ -69,7 +71,13 @@ public class CreateDVDController {
 	
 	
 	
-
+    
+	/**
+	 * handle to ctreate dvd window
+	 * @param e
+	 * @throws NumberFormatException
+	 * @throws SQLException
+	 */
 	@FXML
 	private void handleCreateDVDEvent(ActionEvent e) throws NumberFormatException, SQLException {
 		SQLHandle c = new SQLHandle();
@@ -89,7 +97,10 @@ public class CreateDVDController {
 			ex.printStackTrace();
 		}
 	}
-	
+	/**
+	 * creats cancel window.
+	 * @param e
+	 */
 	@FXML
 	private void handleCancelDVDEvent(ActionEvent e) {
 		try {
@@ -105,6 +116,10 @@ public class CreateDVDController {
 
 	
 	private String path;
+    
+    /**
+	 * @param e
+	 */
 	@FXML
 	private void handleCreateDVDImage(ActionEvent e) throws IOException, SQLException {
 		FileChooser fileChooser = new FileChooser();

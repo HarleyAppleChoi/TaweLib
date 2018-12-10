@@ -1,6 +1,8 @@
 /**
-@author Iestyn Price
-*/
+ * EditDvdGuiController  class creates checkbox to select diffrent subtitle of dvd.
+ * @author Iestyn Price
+ * @ version 3.1
+ */
 
 import java.sql.SQLException;
 
@@ -17,7 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class EditDvdGuiController {
-
+  //TextField tabs
 	@FXML
 	TextField enterID;
 	
@@ -43,12 +45,14 @@ public class EditDvdGuiController {
 	@FXML
 	TextField editDuration;
 	
+	// button tabs
 	@FXML
 	Button cancelButton;
 	
 	@FXML
 	Button editDvdDetails;
 	
+	//checkBox tabs
 	@FXML
 	CheckBox selectEnglish;
 	
@@ -69,7 +73,14 @@ public class EditDvdGuiController {
 	
 	@FXML
 	ImageView dvdImage;
-
+    
+    
+    /**
+     * create a checkbox to select subtitle 
+	 * @param e
+	 * @throws NumberFormatException
+	 * @throws SQLException
+	 */
 	@FXML
 	public void editDVDEvent(ActionEvent e) throws NumberFormatException, SQLException {
 		String subtitle="";
@@ -87,6 +98,11 @@ public class EditDvdGuiController {
 		l.editDVD(Integer.parseInt(enterID.getText()), enterTitle.getText(), enterYear.getText(),"", Integer.parseInt(enterNumCopies.getText()), 
 				Integer.parseInt(editDuration.getText()), enterDirector.getText(), enterLanguage.getText(), enterRunTime.getText(), subtitle);
 	}
+
+    /**
+     * cancel the event and go back to main window
+	 * @param e
+	 */
 	@FXML
 	private void cancelEvent(ActionEvent e) {
 		try {
