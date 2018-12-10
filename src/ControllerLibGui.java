@@ -1,9 +1,8 @@
-
 /**
-@author Iestyn Price
-@modified James Hogg
-@version 2.2
-*/
+ * ControllerLibGui.java
+ * @author Iestyn Price modified  by James Hogg
+ * @version 2.1
+ */
 
 
 import java.io.File;
@@ -26,7 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ControllerLibGui {
-	// search tab
+	
 	private boolean dvdButton = false;
 	private boolean bookButton = false;
 	private boolean laptopButton = false;
@@ -38,6 +37,9 @@ public class ControllerLibGui {
 		return image;
 	}
 	
+
+
+    // creat search tab
 	@FXML
 	private Button searchBook;
 
@@ -286,10 +288,9 @@ public class ControllerLibGui {
 			ex.printStackTrace();;
 		}
 	}
+	
+	
 	//overdue tab
-	
-	
-	
 	@FXML
 	//method for displaying overdue copies
 	public void overdue(ActionEvent e) {
@@ -405,7 +406,6 @@ public class ControllerLibGui {
 	ImageView thumbnailImage;
 	
 	//unorganised methods:
-
 	@FXML
 	public void handleCreateBookEvent(ActionEvent e) {
 		try {
