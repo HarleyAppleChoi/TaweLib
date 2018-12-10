@@ -1,9 +1,6 @@
 /**
- * The  main class that start the program. The class creates a window and display all the information about library system mangemnet. 
- * 
- * @author Iestyn Price
- * @version 3.0
- */
+@author Iestyn Price
+*/
 
 
 import javafx.application.Application;

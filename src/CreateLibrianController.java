@@ -1,8 +1,6 @@
 /**
- * CreateLibrianController displays the librarian window
- * @author Iestyn Price
- * @ version 3.0
- */
+@author Iestyn Price
+*/
 
 
 
@@ -85,7 +83,6 @@ public class CreateLibrianController {
 	ImageView librianImage;
 
 
-
     @FXML
     void avator1Button(ActionEvent event) {
     		
@@ -135,12 +132,6 @@ public class CreateLibrianController {
         Image image = new Image(file.toURI().toString());
         return image;
     }
-
-    
-    /**
-     * @param 
-     */
-
 	@FXML
 	private  void handleCancelLibrarianButtonEvent(ActionEvent e) {
 		
@@ -159,12 +150,7 @@ public class CreateLibrianController {
 
 			
 		
-	}
-	/**
-	 * @param e
-	 * @throws NumberFormatException if user entered wrong number format
-	 * @throws SQLException
-	 */
+	}	
 	@FXML
 	private  void handleCreateLibrianEvent(ActionEvent e) throws NumberFormatException, SQLException {
 			Librarian l = new Librarian();

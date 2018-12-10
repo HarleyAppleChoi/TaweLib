@@ -1,8 +1,6 @@
 /**
- * ControllerCreatBook.java
- * @author Iestyn Price
- * @ version 2.1
- */
+@author Iestyn Price
+*/
 
 
 import java.io.File;
@@ -62,7 +60,7 @@ public class ControllerCreateBook {
 	
 
 	/**
-	 * councel event and return to homescreen
+	 * This button control skip to the last scene
 	 * @param e
 	 */
 	@FXML
@@ -83,16 +81,15 @@ public class ControllerCreateBook {
 		
 	}
 	
-
-	 /**
-      * creat window for librarian to add book to the library.
-      * @param e
-      * @throws NumberFormatException
-      * @throws SQLExceptio
-      */
+	
+	/**
+	 * A new librarian account created after clicking.
+	 * @param e
+	 * @throws NumberFormatException
+	 * @throws SQLException
+	 */
 @FXML
 private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQLException {
-
 	SQLHandle c = new SQLHandle();
 	Librarian l = new Librarian();
 	l.addBook(create_bookEnterTitle.getText(), create_bookEnterYear.getText(), path ,Integer.parseInt(numbOfCopies.getText())
@@ -115,15 +112,16 @@ private  void handleCreateEvent(ActionEvent e) throws NumberFormatException, SQL
 			
 		
 	}
-
 	
 
 //store the path that the user choose
 private String path;
+@FXML
 
 /**
- * loads Gui file to drow Image
- */	
+ * This 
+ * @param e
+ */
 private  void handleDrawImage(ActionEvent e) {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Open Resource File");
