@@ -45,7 +45,7 @@ public class Resource implements Storable {
 	 * @param numCopies
 	 * @param numAvailableCopies
 	 */
-	protected Resource(int ID, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies) {
+	protected Resource(int ID, String title, int year, Image thumbNailImage,int numAvailableCopies) {
 		this.ID = ID;
 		this.title = title;
 		this.year = year;

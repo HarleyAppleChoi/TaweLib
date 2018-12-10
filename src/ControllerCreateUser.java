@@ -120,8 +120,8 @@ public class ControllerCreateUser {
     
     @FXML
     void imageDrawnAction(ActionEvent e) {
-     	normalUserImage.setImage(getImage(Storage.getNum()));
-		Storage.storeImagenum(Storage.getNum());
+     	normalUserImage.setImage(getImage(Storage.returntNum()));
+		Storage.storeImagenum(Storage.returntNum());
     }
     
     private Image getImage(int i) {

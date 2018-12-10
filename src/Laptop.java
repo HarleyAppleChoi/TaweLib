@@ -32,7 +32,7 @@ public class Laptop extends Resource {
 	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String manufacturer, String model, String operatingSystem) {
 
-		super(id, title, year, thumbNailImage, numCopies, numAvailableCopies);
+		super(id, title, year, thumbNailImage, numCopies);
 		this.manufacturer = manufacturer;
 		this.model = model;
 		this.operatingSystem=operatingSystem;

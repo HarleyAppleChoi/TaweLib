@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
  * @version 2.1
  * 
  */
-class Book extends Resource {
+public class Book extends Resource {
 
 	private String author;
 	private String publisher;
@@ -34,8 +34,7 @@ class Book extends Resource {
 	 */
 	public Book(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String author, String publisher, String genre, String isbn, String langauge) {
-
-		super(id, title, year, thumbNailImage, numCopies, numAvailableCopies);
+		super(id, title, year, thumbNailImage, numCopies);
 		this.author = author;
 		this.publisher = publisher;
 		this.genre = genre;

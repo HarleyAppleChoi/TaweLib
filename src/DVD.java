@@ -13,7 +13,7 @@ public class DVD extends Resource {
 	private String director;
 	private int runtime;
 	private String language;
-	ArrayList<String> subLanguages = new ArrayList<String>();
+	private ArrayList<String> subLanguages = new ArrayList<String>();
 	
 
 	/**
@@ -34,7 +34,7 @@ public class DVD extends Resource {
 	public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String director, int runtime, String language, ArrayList<String> subLanguages) {
 
-		super(id, title, year, thumbNailImage, numCopies, numAvailableCopies);
+		super(id, title, year, thumbNailImage, numCopies);
 		this.director = director;
 		this.runtime = runtime;
 		this.language = language;
