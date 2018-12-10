@@ -69,20 +69,20 @@ public class NormalUser extends User implements Storable {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				currentBorrowHistory.add(b);
 			}
-			statement = "select * from reserved_item where username = '" + username + "';";
+			statement = "SELECT * FROM `reserved_item` where username = '" + username + "';";
 
 			//Add a resource to the reserved list.
 			r = sql.nonStaticGet(statement);
 
 			while (r.next()) {
-				reserved.add(r.getInt("ResourceID"));
+				reserved.add(r.getInt("resourceID"));
 			}
 
 			//Add a resource to the requested list.
-			statement = "select * from requesting  where username = '" + username + "';";
+			statement = "SELECT * FROM `request_item` WHERE username = '" + username + "';";
 			r = sql.nonStaticGet(statement);
 			while (r.next()) {
-				requesting.add(r.getInt("ResourceID"));
+				requesting.add(r.getInt("resourceID"));
 			}
 		} catch (SQLSyntaxErrorException e) {
 			/*
@@ -146,26 +146,6 @@ public class NormalUser extends User implements Storable {
 		sql.set(statement);
 
 	}
-
-
-	/**
-	 * Method to get all the information about the user.
-	 * 
-	 * @param username The username of the user.
-	 * @param firstName The first name of the user.
-	 * @param lastName The last name of the user.
-	 * @param mobileNo The mobile number of the user.
-	 * @param userImage The user's image.
-	 */
-	public void getUserinfo(String username, String firstName, String lastName, int mobileNo, String address, Image userImage) {
-		super.username = username;
-		super.firstName = firstName;
-		super.lastName = lastName;
-		super.mobileNo = mobileNo;
-		super.address = address;
-		super.userImage = userImage;
-	}
-
 
 	/**
 	 * Method to reduce the user's balance

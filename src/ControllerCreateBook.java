@@ -124,6 +124,7 @@ private String path;
 /**
  * loads Gui file to drow Image
  */	
+@FXML
 private  void handleDrawImage(ActionEvent e) {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Open Resource File");

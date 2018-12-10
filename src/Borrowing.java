@@ -113,7 +113,7 @@ public class Borrowing implements Storable {
 	 */
 	public String getOverdueDate() {
 		String value = "No due Date";
-		if(returnDate!=null) {
+		if(endDate!=null) {
 			value = dateFormat.format(endDate);
 		}
 		return value;

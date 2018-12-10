@@ -174,7 +174,7 @@ public class Resource implements Storable {
 	 * @throws SQLException
 	 */
 	public Borrowing borrow(String userName) throws IllegalArgumentException, SQLException {
-		if (!canBorrow()) {
+		if (getAvCopies()==0) {
 			throw new IllegalArgumentException("You cannot borrow. Try request it.");
 		} else if (isReserved(userName) != -1) {
 			reserve.remove(isReserved(userName));

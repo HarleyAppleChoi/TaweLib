@@ -435,26 +435,11 @@ public class Librarian extends User {
 	 */
 	public void borrow(int resourceId, String username) throws Exception {
 		NormalUser user = new NormalUser(username);
-
-		/**
 		SQLHandle s = new SQLHandle();
-		String statement = "";
-		statement = "Select numAvCopies from resource where resourceID = '" + resourceId + "';";
-		ResultSet r = sql.nonStaticGet(statement);
-		int numAvCopies = 0;
-		while (r.next()) {
-			numAvCopies = r.getInt(numAvCopies);
-		}
-		if (numAvCopies >= 1) {
-		*/
-
 		user.borrow(resourceId);
 		System.out.println("Successfully Borrowed Resource.");
-		//} else {
-		
-			//System.out.println("No more copies, please request");
-		//}
 	}
+	
 
 	/**
 	 * This method allows a NormalUser to return a Resource through the librarian
@@ -562,31 +547,28 @@ public class Librarian extends User {
 	 */	
 	public void payFine(int amount, String username) throws Exception {
 		NormalUser u = new NormalUser(username);
-		if(amount > u.getBalance()&&amount<0.01) {
-			throw new IllegalArgumentException("The fine number is not a vaild number(0.01~full fine)");
-		}
-		
-		
-		int newBalance = u.getBalance() + amount;
-		
-		// SQL query to update the normal_user table with the new balance amount
-		String statement = "Update normal_user set balance = " + newBalance + " where username = '"+username+"';";
-		sql.set(statement);
+			int newBalance = u.getBalance() + amount;
+			
+			// SQL query to update the normal_user table with the new balance amount
+			String statement = "Update normal_user set balance = " + newBalance + " where username = '"+username+"';";
+			sql.set(statement);
 
-		statement = "select count(*) from transaction;";
-		ResultSet r = sql.nonStaticGet(statement);
-		r.next();
-		int sNo = r.getInt("count(*)") + 1;
-		//SQL query to update the transaction table with ID, amount and date.
-		statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES " + "('" + sNo + "','" + amount
-				+ "','" + getCurrentTime() + "'); ";
+			statement = "select count(*) from transaction;";
+			ResultSet r = sql.nonStaticGet(statement);
+			r.next();
+			int sNo = r.getInt("count(*)") + 1;
+			//SQL query to update the transaction table with ID, amount and date.
+			statement = "INSERT INTO `transaction`(`transID`, `amount`, `date`) VALUES " + "('" + sNo + "','" + amount
+					+ "','" + getCurrentTime() + "'); ";
 
-		sql.set(statement);
-		//SQL query to update transaction_his table with username and transID.
+			sql.set(statement);
+			//SQL query to update transaction_his table with username and transID.
 
-		statement = "INSERT INTO `transaction_his`(`username`, `transID`) VALUES ('" + username + "','" + sNo + "')";
-		sql.set(statement);
-		System.out.println("fine paid");
+			statement = "INSERT INTO `transaction_his`(`username`, `transID`) VALUES ('" + username + "','" + sNo + "')";
+			sql.set(statement);
+			System.out.println("fine paid");
+				
+		
 	}
 
 	/**

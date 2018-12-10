@@ -563,7 +563,7 @@ public class ControllerLibGui {
 	@FXML
 	public void handlePayEvent(ActionEvent e)  {
 		try {
-		SQLHandle c = new SQLHandle();
+		//SQLHandle c = new SQLHandle();
 		Librarian l = new Librarian();
 		l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
 		

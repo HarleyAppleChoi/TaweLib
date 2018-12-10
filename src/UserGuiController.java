@@ -241,13 +241,49 @@ public class UserGuiController {
 	 */
 	@FXML
 	private void dashBoard(ActionEvent e) throws Exception {
-		NormalUser u = new NormalUser(Storage.returnUsername());
+		SQLHandle sql = new SQLHandle();
+		
+		String username = Storage.returnUsername();
+		NormalUser u = new NormalUser(username);
+		String statement = "SELECT * FROM `request_item` WHERE username = '" + username + "';";
+		ResultSet r = sql.nonStaticGet(statement);
+		String request = "ResourceID:"; 
+		while(r.next()) {
+			request +=   String.valueOf(r.getInt("resourceID"))+ "\n";
+		}
+		
+		requested.setText(request);
+		
+		statement = "SELECT * FROM `reserved_item` where username = '" + username + "';";
+		r = sql.nonStaticGet(statement);
+		String reserve = "ResourceID:"; 
+		while(r.next()) {
+			reserve +=   String.valueOf(r.getInt("resourceID")) + "\n";
+		}
+		reserved.setText(reserve);
+		
+		/*
+		statement = "select borrowingID from current_borrowing where username = '" + username + "';";
+		r = sql.nonStaticGet(statement);
+		String borrow = "ResourceID:"; 
+		while(r.next()) {
+			b += String.valueOf(r.getInt("resourceID")) + "\n";
+		}
+		reserved.setText(reserve);
+		*/
+		
+		balance.setText(String.valueOf(u.getBalance()));
 		transaction.setText(u.transactionHistory());
 		borrowItem.setText(u.getBorrowedList());
+		/*
+		
 		reserved.setText(u.getReservedItem());
-		requested.setText(u.getRequestedItem());
-		balance.setText(String.valueOf(u.getBalance()));
-
+		
+		
+	
+		
+		
+*/
 	}
 
 	
