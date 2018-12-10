@@ -2,19 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="799.0" style="-fx-background-color: #6f7893;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLibGui">
+<VBox prefHeight="400.0" prefWidth="799.0" style="-fx-background-color: #6f7893;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLibGui">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #6f7893;" VBox.vgrow="ALWAYS">
          <children>
@@ -29,10 +27,10 @@
                                     <Font size="15.0" />
                                  </font></Label>
                               <TextField fx:id="searchQuery" layoutX="307.0" layoutY="10.0" prefHeight="25.0" prefWidth="172.0" />
-                              <Button fx:id="buttonSearch" layoutX="491.0" layoutY="10.0" mnemonicParsing="false" onAction="#search" text="Search" />
-                              <Button fx:id="buttonBook" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchBook" text="Book" />
-                              <Button fx:id="buttonDvd" layoutX="77.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchDvd" text="DVD" />
-                              <Button fx:id="buttonLaptop" layoutX="138.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchLaptop" text="Laptop" />
+                              <Button fx:id="buttonSearch" layoutX="491.0" layoutY="10.0" mnemonicParsing="false" onAction="#search" style="-fx-background-color: #100000;" text="Search" textFill="WHITE" />
+                              <Button fx:id="buttonBook" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="27.0" prefWidth="57.0" style="-fx-background-color: #100000;" text="Book" textFill="WHITE" />
+                              <Button fx:id="buttonDvd" layoutX="84.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchDvd" prefHeight="27.0" prefWidth="66.0" style="-fx-background-color: #100000;" text="DVD" textFill="WHITE" />
+                              <Button fx:id="buttonLaptop" layoutX="161.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchLaptop" prefHeight="27.0" prefWidth="82.0" style="-fx-background-color: #100000;" text="Laptop" textFill="WHITE" />
                               <TextArea fx:id="basicInfo" editable="false" layoutX="18.0" layoutY="49.0" prefHeight="287.0" prefWidth="729.0" />
                            </children>
                         </AnchorPane>
@@ -42,18 +40,28 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="13.0" text="Borrower:">
+                              <Label layoutX="22.0" layoutY="36.0" text="Borrower:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="borrowingEnterBorrowerUsername" layoutX="86.0" layoutY="11.0" prefHeight="25.0" prefWidth="154.0" />
-                              <Label fx:id="borrowingEnterSearchQueryborrowingEnterSearchQuery" layoutX="392.0" layoutY="13.0" text="ResourceID">
+                              <TextField fx:id="borrowingEnterBorrowerUsername" layoutX="114.0" layoutY="32.0" prefHeight="25.0" prefWidth="154.0" promptText="Enter UserName" />
+                              <Label fx:id="borrowingEnterSearchQueryborrowingEnterSearchQuery" layoutX="378.0" layoutY="36.0" text="ResourceID">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="borrowingEnterSearchQuery" layoutX="469.0" layoutY="9.0" />
+                              <TextField fx:id="borrowingEnterSearchQuery" layoutX="468.0" layoutY="32.0" promptText="enter Resource ID" />
                               <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
-                              <Button fx:id="borrowingGenerateBorrow" layoutX="388.0" layoutY="290.0" mnemonicParsing="false" onAction="#borrowEvent" text="Borrow" />
+                              <Button fx:id="borrowingGenerateBorrow" layoutX="345.0" layoutY="267.0" mnemonicParsing="false" onAction="#borrowEvent" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: #100000;" text="Borrow" textFill="WHITE" />
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="577.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                   </content>
@@ -62,21 +70,24 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="create_resourceCreateBook" layoutX="230.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleCreateBookEvent" text="Create" />
-                              <Button fx:id="handleCreateDVDResourceEvent" layoutX="295.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleCreateDVDResourceEvent" text="Create" />
-                              <Button fx:id="create_resourceCreateLaptop" layoutX="358.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleCreateLaptopEvent" text="Create" />
-                              <Label layoutX="239.0" layoutY="127.0" text="Book">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></Label>
-                              <Label layoutX="305.0" layoutY="127.0" text="DVD">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></Label>
-                              <Label layoutX="360.0" layoutY="127.0" text="Laptop">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></Label>
+                              <Button fx:id="create_resourceCreateBook" layoutX="82.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleCreateBookEvent" prefHeight="32.0" prefWidth="97.0" style="-fx-background-color: #100000;" text="Create" textFill="WHITE" />
+                              <Button fx:id="handleCreateDVDResourceEvent" layoutX="290.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleCreateDVDResourceEvent" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #100000;" text="Create" textFill="WHITE" />
+                              <Button fx:id="create_resourceCreateLaptop" layoutX="514.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleCreateLaptopEvent" prefHeight="35.0" prefWidth="105.0" style="-fx-background-color: #100000;" text="Create" textFill="WHITE" />
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Book%20icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="491.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Laptop.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="263.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@DVD%20icon.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -85,12 +96,22 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="22.0" text="Enter resource ID:">
+                              <Label layoutX="14.0" layoutY="32.0" text="Enter resource ID:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="edit_resourceEnterResourceId" layoutX="150.0" layoutY="20.0" prefHeight="25.0" prefWidth="194.0" />
-                              <Button fx:id="edit_resourceBeginEdit" layoutX="365.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleResourceIDInput" text="Edit" />
+                              <TextField fx:id="edit_resourceEnterResourceId" layoutX="153.0" layoutY="28.0" prefHeight="25.0" prefWidth="194.0" />
+                              <Button fx:id="edit_resourceBeginEdit" layoutX="371.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleResourceIDInput" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #100000;" text="Edit" textFill="WHITE" />
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="27.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="564.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -99,30 +120,16 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="237.0" layoutY="123.0" text="Normal">
+                              <Label layoutX="208.0" layoutY="64.0" text="Normal">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="Serif Regular" size="45.0" />
                                  </font></Label>
-                              <Label layoutX="348.0" layoutY="123.0" text="Librarian">
+                              <Label layoutX="418.0" layoutY="64.0" text="Librarian">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="Serif Regular" size="45.0" />
                                  </font></Label>
-                              <Button fx:id="create_userCreateNormal" layoutX="236.0" layoutY="161.0" mnemonicParsing="false" onAction="#createNormalUserEvent" text="Create" />
-                              <Button fx:id="create_userCreateLibrarian" layoutX="351.0" layoutY="161.0" mnemonicParsing="false" onAction="#createLibrianUserEvent" text="Create" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
-                  <Tab closable="false" text="Edit User">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="35.0" layoutY="29.0" text="Enter username:">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font></Label>
-                              <TextField fx:id="edit_userEnterUsername" layoutX="153.0" layoutY="25.0" prefHeight="25.0" prefWidth="183.0" />
-                              <Button fx:id="edit_userBeginEdit" layoutX="352.0" layoutY="25.0" mnemonicParsing="false" text="Edit" />
+                              <Button fx:id="create_userCreateNormal" layoutX="221.0" layoutY="161.0" mnemonicParsing="false" onAction="#createNormalUserEvent" prefHeight="27.0" prefWidth="111.0" text="Create" />
+                              <Button fx:id="create_userCreateLibrarian" layoutX="443.0" layoutY="161.0" mnemonicParsing="false" onAction="#createLibrianUserEvent" prefHeight="27.0" prefWidth="118.0" text="Create" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -131,18 +138,30 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="30.0" layoutY="14.0" text="Enter resource ID:">
+                              <Label layoutX="30.0" layoutY="57.0" text="Enter resource ID:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="returnEnterResourceId" layoutX="155.0" layoutY="10.0" prefHeight="25.0" prefWidth="177.0" />
-                              <Button fx:id="returnGenerateReturn" layoutX="347.0" layoutY="10.0" mnemonicParsing="false" onAction="#returnEvent" text="Return" />
-                              <Label layoutX="155.0" layoutY="255.0" text="Fine applied:">
+                              <TextField fx:id="returnEnterResourceId" layoutX="167.0" layoutY="48.0" prefHeight="38.0" prefWidth="195.0" />
+                              <Button fx:id="returnGenerateReturn" layoutX="440.0" layoutY="44.0" mnemonicParsing="false" onAction="#returnEvent" prefHeight="39.0" prefWidth="75.0" style="-fx-background-color: #100000;" text="Return" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="Serif Regular" size="15.0" />
+                                 </font></Button>
+                              <Label layoutX="219.0" layoutY="255.0" text="Fine applied:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="returnShowFineAdded" editable="false" layoutX="272.0" layoutY="251.0" />
-                              <Label fx:id="statusReturn" layoutX="339.0" layoutY="154.0" text="Label" />
+                              <TextField fx:id="returnShowFineAdded" editable="false" layoutX="332.0" layoutY="251.0" />
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="593.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -151,23 +170,32 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="pay_fineEnterUsername" layoutX="156.0" layoutY="16.0" />
+                              <TextField fx:id="pay_fineEnterUsername" layoutX="156.0" layoutY="16.0" prefHeight="27.0" prefWidth="274.0" />
                               <Label layoutX="27.0" layoutY="20.0" text="Enter username:">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="Songti TC Bold" size="17.0" />
                                  </font></Label>
-                              <Label layoutX="27.0" layoutY="49.0" text="Enter payment:">
+                              <Label layoutX="27.0" layoutY="86.0" text="Enter payment:">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="Songti TC Regular" size="18.0" />
                                  </font></Label>
-                              <TextField fx:id="pay_fineEnterPaymentAmount" layoutX="156.0" layoutY="45.0" />
-                              <Label layoutX="27.0" layoutY="78.0" text="Balance now:">
+                              <TextField fx:id="pay_fineEnterPaymentAmount" layoutX="156.0" layoutY="82.0" prefHeight="27.0" prefWidth="275.0" />
+                              <Label layoutX="33.0" layoutY="138.0" text="Balance now:">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="Songti TC Regular" size="19.0" />
                                  </font></Label>
-                              <TextField fx:id="pay_fineShowFineRemaining" editable="false" layoutX="156.0" layoutY="74.0" />
-                              <Button fx:id="pay_fineGeneratePayment" layoutX="195.0" layoutY="126.0" mnemonicParsing="false" onAction="#handlePayEvent" text="Pay" />
-                              <Label fx:id="statusPayFine" layoutX="303.0" layoutY="131.0" text="Label" />
+                              <TextField fx:id="pay_fineShowFineRemaining" editable="false" layoutX="156.0" layoutY="138.0" prefHeight="27.0" prefWidth="276.0" />
+                              <Button fx:id="pay_fineGeneratePayment" layoutX="320.0" layoutY="233.0" mnemonicParsing="false" onAction="#handlePayEvent" prefHeight="72.0" prefWidth="136.0" style="-fx-background-color: #100000;" text="Pay" textFill="WHITE" />
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="585.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -176,17 +204,27 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="31.0" layoutY="14.0" text="Enter username:">
+                              <Label layoutX="86.0" layoutY="22.0" text="Enter username:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField layoutX="152.0" layoutY="10.0" />
-                              <Label layoutX="26.0" layoutY="45.0" text="Enter resource ID:">
+                              <TextField layoutX="236.0" layoutY="10.0" prefHeight="43.0" prefWidth="294.0" />
+                              <Label layoutX="80.0" layoutY="107.0" text="Enter resource ID:">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField layoutX="152.0" layoutY="43.0" />
-                              <Button layoutX="197.0" layoutY="81.0" mnemonicParsing="false" text="Request" />
+                              <TextField layoutX="236.0" layoutY="96.0" prefHeight="41.0" prefWidth="291.0" />
+                              <Button layoutX="285.0" layoutY="180.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: #100000;" text="Request" textFill="WHITE" />
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="585.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@swansealogo.jpg" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </content>
@@ -199,9 +237,15 @@
                               <TextArea fx:id="textReturn" editable="false" layoutX="413.0" layoutY="64.0" prefHeight="270.0" prefWidth="372.0" />
                               <Label layoutX="62.0" layoutY="14.0" text="Search:" />
                               <TextField fx:id="searchQueryCopy" layoutX="109.0" layoutY="10.0" promptText="Resource ID" />
-                              <Button fx:id="buttonSearchCopy" layoutX="265.0" layoutY="10.0" mnemonicParsing="false" onAction="#searchAdd" text="Search" />
-                              <Label fx:id="labelBorrow" layoutX="156.0" layoutY="47.0" text="Borrow History" />
-                              <Label fx:id="labelReturn" layoutX="561.0" layoutY="47.0" text="Return History" />
+                              <Button fx:id="buttonSearchCopy" layoutX="265.0" layoutY="10.0" mnemonicParsing="false" onAction="#searchAdd" style="-fx-background-color: #100000;" text="Search" textFill="WHITE" />
+                              <Label fx:id="labelBorrow" layoutX="150.0" layoutY="36.0" text="Borrow History">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="labelReturn" layoutX="561.0" layoutY="35.0" prefHeight="17.0" prefWidth="143.0" text="Return History">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
                     </content>
@@ -211,7 +255,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextArea fx:id="textOverdue" editable="false" layoutX="14.0" layoutY="45.0" prefHeight="296.0" prefWidth="773.0" />
-                              <Button fx:id="buttonOverdue" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onAction="#overdue" text="Show overdue copies" />
+                              <Button fx:id="buttonOverdue" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onAction="#overdue" style="-fx-background-color: #100000;" text="Show overdue copies" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                     </content>

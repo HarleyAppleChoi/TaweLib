@@ -240,6 +240,9 @@ public class UserGuiController {
 		reserved.setText(u.getReservedItem());
 		requested.setText(u.getRequestedItem());
 		balance.setText(String.valueOf(u.getBalance()));
+	
+	
+	
 	}
 
 	@FXML
