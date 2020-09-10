@@ -36,8 +36,8 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class UserGuiController {
-	
-	//Default search setting
+
+	// Default search setting
 	private boolean bookButton = false;
 	private boolean dvdButton = false;
 	private boolean laptopButton = false;
@@ -239,8 +239,10 @@ public class UserGuiController {
 	}
 
 	/**
-	 * Show and select a custom draw image.  .
-	 * @param e when the button is clicked
+	 * Show and select a custom draw image. .
+	 * 
+	 * @param e
+	 *            when the button is clicked
 	 */
 	@FXML
 	private void imageDrawnAction(ActionEvent e) {
@@ -248,10 +250,11 @@ public class UserGuiController {
 		Storage.storeImagenum(Storage.returntNum());
 	}
 
-	
 	/**
 	 * get the image from location
-	 * @param i number of photo that is created
+	 * 
+	 * @param i
+	 *            number of photo that is created
 	 * @return an Image instance that is the user custom image
 	 */
 	private Image getImage(int i) {
@@ -263,8 +266,11 @@ public class UserGuiController {
 
 	/**
 	 * get the user info
-	 * @param e when the button pressed
-	 * @throws Exception when complicated exception occur
+	 * 
+	 * @param e
+	 *            when the button pressed
+	 * @throws Exception
+	 *             when complicated exception occur
 	 */
 	@FXML
 	private void userDataAction(ActionEvent e) throws Exception {
@@ -397,13 +403,15 @@ public class UserGuiController {
 	/**
 	 * awt information from database about resorces , and check if the resource book
 	 * , dvd ,or laptop. if the resources none of the above retuen to search box.
-	 * @param e when button are pressed
+	 * 
+	 * @param e
+	 *            when button are pressed
 	 */
 	@FXML
 	private void loadDataFromDb(ActionEvent e) {
-		
-		//ask button is in which state and then show the result base on that
-		
+
+		// ask button is in which state and then show the result base on that
+
 		if (bookButton == true) {
 			bookButton = false;
 			dvdButton = false;
@@ -454,8 +462,11 @@ public class UserGuiController {
 
 	/**
 	 * Direct user to drawing program
-	 * @param e when button are pressed
-	 * @throws SQLException When SQLExpection occur
+	 * 
+	 * @param e
+	 *            when button are pressed
+	 * @throws SQLException
+	 *             When SQLExpection occur
 	 */
 	@FXML
 	private void handleDrawImage(ActionEvent e) throws SQLException {
@@ -473,11 +484,11 @@ public class UserGuiController {
 
 	LogInGuiController login;
 
-	
-
 	/**
 	 * That allow user to reserve a resource base on resourceID.
-	 * @param e when button are pressed
+	 * 
+	 * @param e
+	 *            when button are pressed
 	 * @throws NumberFormatException
 	 * @throws Exception
 	 */
@@ -490,6 +501,7 @@ public class UserGuiController {
 
 	/**
 	 * That return an image that the user drawn.
+	 * 
 	 * @param s
 	 * @return
 	 */
@@ -502,6 +514,7 @@ public class UserGuiController {
 
 	/**
 	 * That is the button that show a info of that particular resource.
+	 * 
 	 * @param event
 	 * @throws Exception
 	 */
@@ -601,9 +614,9 @@ public class UserGuiController {
 
 	SQLHandle sql = new SQLHandle();
 
-	
 	/**
 	 * Store the avatar image that the user choose.
+	 * 
 	 * @param event
 	 * @throws SQLException
 	 */

@@ -1,3 +1,4 @@
+
 /**
  * Class to control the functioning of the resource details gui
  * and all the functions they can perform.
@@ -23,36 +24,39 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ControllerResourceDetail {
-	//input resource details 
-	@FXML 
-	private TextArea resultText; 
+	// input resource details
+	@FXML
+	private TextArea resultText;
 
-	@FXML 
-	private ImageView thumbnIlImage; 
+	@FXML
+	private ImageView thumbnIlImage;
 
-	@FXML 
-	private TextField resourceID; 
+	@FXML
+	private TextField resourceID;
 
-	@FXML 
-	private Button searchButton; 
+	@FXML
+	private Button searchButton;
 
-	@FXML 
-	private Button backButton; 
+	@FXML
+	private Button backButton;
 
 	/**
 	 * Method to locate image in path and return the image
+	 * 
 	 * @param s
-	 * @return image 
+	 * @return image
 	 */
-	
+
 	private Image getImage(String s) {
 		String location = s;
 		File file = new File(location);
 		Image image = new Image(file.toURI().toString());
 		return image;
 	}
+
 	/**
 	 * Method to search through all resources and particular resources
+	 * 
 	 * @param e
 	 * 
 	 */
@@ -112,7 +116,7 @@ public class ControllerResourceDetail {
 					r = sql.nonStaticGet(statement);
 					if (r.next()) {
 						// this is a laptop
-						
+
 						Resource re = new Resource(r.getInt("laptop.resourceID"));
 
 						String s = "ID               Title               Manufacturer              Model               OPSystem               Year               AvailableCopies\n";
@@ -126,11 +130,10 @@ public class ControllerResourceDetail {
 							s = s + String.format("%s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"),
 									r.getString("title"), r.getString("manufacturer"), r.getString("model"),
 									r.getString("operatingSystem"), r.getInt("year"), re.getAvCopies());
-							
+
 							thumbnIlImage.setImage(getImage(r.getString("image")));
 							resultText.setText(s);
 						}
-						
 
 					} else {
 						System.out.println("This resourceID is not in the database");
@@ -145,5 +148,4 @@ public class ControllerResourceDetail {
 
 	}
 
-	
 }

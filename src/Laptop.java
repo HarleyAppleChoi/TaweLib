@@ -19,15 +19,24 @@ public class Laptop extends Resource {
 	 * Constructor to construct a Laptop using the paramaters from this class and
 	 * the parameters from the superclass Resource.
 	 * 
-	 * @param id The unique identifier of the laptop.
-	 * @param title The title of the laptop.
-	 * @param year The year the laptop was produced.
-	 * @param thumbNailImage Image of the laptop.
-	 * @param numCopies Number of copies owned by the library.
-	 * @param numAvailableCopies Number of copies available to borrow from the library.
-	 * @param manufacturer The manufacturer of the laptop.
-	 * @param model The model of the laptop.
-	 * @param operatingSystem The operating system running on the laptop.
+	 * @param id
+	 *            The unique identifier of the laptop.
+	 * @param title
+	 *            The title of the laptop.
+	 * @param year
+	 *            The year the laptop was produced.
+	 * @param thumbNailImage
+	 *            Image of the laptop.
+	 * @param numCopies
+	 *            Number of copies owned by the library.
+	 * @param numAvailableCopies
+	 *            Number of copies available to borrow from the library.
+	 * @param manufacturer
+	 *            The manufacturer of the laptop.
+	 * @param model
+	 *            The model of the laptop.
+	 * @param operatingSystem
+	 *            The operating system running on the laptop.
 	 */
 	public Laptop(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String manufacturer, String model, String operatingSystem) {
@@ -35,7 +44,7 @@ public class Laptop extends Resource {
 		super(id, title, year, thumbNailImage, numCopies);
 		this.manufacturer = manufacturer;
 		this.model = model;
-		this.operatingSystem=operatingSystem;
+		this.operatingSystem = operatingSystem;
 	}
 
 	/**
@@ -50,7 +59,8 @@ public class Laptop extends Resource {
 	/**
 	 * Set method to set the manufacturer.
 	 * 
-	 * @param manufacturer The manufacturer of the laptop.
+	 * @param manufacturer
+	 *            The manufacturer of the laptop.
 	 */
 	public void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
@@ -68,7 +78,8 @@ public class Laptop extends Resource {
 	/**
 	 * Set method to set the model.
 	 * 
-	 * @param model The model of the laptop.
+	 * @param model
+	 *            The model of the laptop.
 	 */
 	public void setModel(String model) {
 		this.model = model;
@@ -86,7 +97,8 @@ public class Laptop extends Resource {
 	/**
 	 * Set method to set the operating system.
 	 * 
-	 * @param operatingSystem The operating system running on the laptop.
+	 * @param operatingSystem
+	 *            The operating system running on the laptop.
 	 */
 	public void setOperatingSystem(String operatingSystem) {
 		this.operatingSystem = operatingSystem;

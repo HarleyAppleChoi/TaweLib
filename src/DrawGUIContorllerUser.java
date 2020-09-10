@@ -20,7 +20,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
 public class DrawGUIContorllerUser {
 
 	@FXML
@@ -83,22 +82,20 @@ public class DrawGUIContorllerUser {
 	 *            when button pressed
 	 */
 	@FXML
-		private void handleSaveEventUser(ActionEvent e) throws SQLException {
-			save();
-			
-		
-				try {
-					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("usergui.fxml"));
-					 Parent root = (Parent)fxmlLoader.load();
-					 Scene scene= new Scene(root); 
-					 Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-					 window.setScene(scene);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-		
+	private void handleSaveEventUser(ActionEvent e) throws SQLException {
+		save();
+
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("usergui.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+			Scene scene = new Scene(root);
+			Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			window.setScene(scene);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-		
+
+	}
 
 	/**
 	 * This allow user to clear a canvas
@@ -119,6 +116,7 @@ public class DrawGUIContorllerUser {
 
 	/**
 	 * change the colour of the trace.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -185,7 +183,7 @@ public class DrawGUIContorllerUser {
 	}
 
 	/**
-	 * draw  circle on the press point.
+	 * draw circle on the press point.
 	 */
 	private void drawCircle() {
 		GraphicsContext g = drawCanvas.getGraphicsContext2D();
@@ -213,11 +211,12 @@ public class DrawGUIContorllerUser {
 
 	/**
 	 * this store the image in the system with unique path
+	 * 
 	 * @throws SQLException
 	 */
 	private void save() throws SQLException {
 
-		//generate the unique number(name)
+		// generate the unique number(name)
 		SQLHandle sql = new SQLHandle();
 		ResultSet r = sql.nonStaticGet("Select max(image) from user_;");
 		int number = 0;
@@ -227,7 +226,7 @@ public class DrawGUIContorllerUser {
 
 		Storage.storeNum(number);
 
-		//store pic from drawing sub program.
+		// store pic from drawing sub program.
 		drawCanvas.snapshot(null, wim);
 		String filePath = "userPhoto/" + String.valueOf(number) + ".png";
 		System.out.println(filePath);
@@ -241,7 +240,3 @@ public class DrawGUIContorllerUser {
 
 	}
 }
-
-
-
-

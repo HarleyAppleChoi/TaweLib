@@ -6,14 +6,12 @@ import java.util.LinkedList;
 import javafx.scene.image.Image;
 
 /**
-
+ * 
  * NormalUser.java This class contain all the methods that allowing normalUser
- * tp borrow resource, also check their balance to know if they can borrow
- * resource.
- * This class contains all the methods used by normal users.
- * They can borrow, request and reserve resources,
- * check their balance and view their reserved items, requested items 
- * and borrowing and transaction history.
+ * to borrow resource, also check their balance to know if they can borrow
+ * resource. This class contains all the methods used by normal users. They can
+ * borrow, request and reserve resources, check their balance and view their
+ * reserved items, requested items and borrowing and transaction history.
  * 
  * @author Hau Yi Choi
  * @version 2.1
@@ -27,16 +25,15 @@ public class NormalUser extends User implements Storable {
 	protected LinkedList<Integer> reserved = new LinkedList<>();
 	private LinkedList<Borrowing> currentBorrowHistory = new LinkedList<>();
 
-	//SQL statement.
+	// SQL statement.
 	private String statement;
-	
-	
-	
+
 	/**
-	 * Method for checking borrow history, reserved and requested items
-	 * when the user is already in the database.
+	 * Method for checking borrow history, reserved and requested items when the
+	 * user is already in the database.
 	 * 
-	 * @param username The username.
+	 * @param username
+	 *            The username.
 	 * @throws Exception
 	 */
 	public NormalUser(String username) throws Exception {
@@ -45,24 +42,21 @@ public class NormalUser extends User implements Storable {
 		statement = "select * from normal_user,user_ where normal_user.username =user_.username "
 				+ "and normal_user.username = '" + username + "';";
 
-
 		ResultSet r = sql.nonStaticGet(statement);
 		while (r.next()) {
 			super.password = r.getString("Password");
-			super.firstName=r.getString("firstname");
-			super.lastName=r.getString("lastname");
-			super.mobileNo=r.getInt("mobileNo");
-			super.address=r.getString("address");
-			super.userImage=r.getInt("image");
+			super.firstName = r.getString("firstname");
+			super.lastName = r.getString("lastname");
+			super.mobileNo = r.getInt("mobileNo");
+			super.address = r.getString("address");
+			super.userImage = r.getInt("image");
 			super.username = r.getString("normal_user.username");
 			balance = r.getInt("balance");
-			
+
 		}
-		
-		
 
 		try {
-			//Add the borrowing to the current borrow history.
+			// Add the borrowing to the current borrow history.
 			statement = "select borrowingID from current_borrowing where username = '" + username + "';";
 			r = sql.nonStaticGet(statement);
 			while (r.next()) {
@@ -71,14 +65,14 @@ public class NormalUser extends User implements Storable {
 			}
 			statement = "SELECT * FROM `reserved_item` where username = '" + username + "';";
 
-			//Add a resource to the reserved list.
+			// Add a resource to the reserved list.
 			r = sql.nonStaticGet(statement);
 
 			while (r.next()) {
 				reserved.add(r.getInt("resourceID"));
 			}
 
-			//Add a resource to the requested list.
+			// Add a resource to the requested list.
 			statement = "SELECT * FROM `request_item` WHERE username = '" + username + "';";
 			r = sql.nonStaticGet(statement);
 			while (r.next()) {
@@ -86,30 +80,30 @@ public class NormalUser extends User implements Storable {
 			}
 		} catch (SQLSyntaxErrorException e) {
 			/*
-			 * It might do nothing when Table 'cw230.resered_item' doesn't exist because
-			 * the user have not reserved, requested or currently borrowing anything.
+			 * It might do nothing when Table 'cw230.resered_item' doesn't exist because the
+			 * user have not reserved, requested or currently borrowing anything.
 			 */
 		} catch (SQLException ex) {
 			/*
-			 * It might do nothing when Table 'cw230.resered_item' doesn't exist because
-			 * the user have not reserved, requested or currently borrowing anything.
+			 * It might do nothing when Table 'cw230.resered_item' doesn't exist because the
+			 * user have not reserved, requested or currently borrowing anything.
 			 */
 		}
 	}
 
 	/**
-	 * Function to check if the user can borrow any resource. 
-	 * If they have outstanding fines or hasn't returned a book 
-	 * beyond its return date they can't borrow.
+	 * Function to check if the user can borrow any resource. If they have
+	 * outstanding fines or hasn't returned a book beyond its return date they can't
+	 * borrow.
 	 * 
 	 * @return b True if they can borrow, false when can't.
 	 */
 	private boolean canBorrow() {
 		boolean b = true;
-		//Check if they have outstanding fines.
+		// Check if they have outstanding fines.
 		if (balance < 0) {
 			b = false;
-		//Check if they have books beyond their return date.
+			// Check if they have books beyond their return date.
 		} else if (!currentBorrowHistory.isEmpty()) {
 			for (int i = 0; i < currentBorrowHistory.size(); i++) {
 				if (currentBorrowHistory.get(i).isOverdue()) {
@@ -124,23 +118,25 @@ public class NormalUser extends User implements Storable {
 	/**
 	 * Function to borrow a resource and add it to curentBorrowHistory.
 	 * 
-	 * @param resourceID The ID of the resource being borrowed.
-	 * @throws Exception When the user has outstanding fines or 
-	 * still borrowing books beyond their return date. 
+	 * @param resourceID
+	 *            The ID of the resource being borrowed.
+	 * @throws Exception
+	 *             When the user has outstanding fines or still borrowing books
+	 *             beyond their return date.
 	 */
 	public void borrow(int resourceID) throws Exception {
 		Resource r = new Resource(resourceID);
-		//Display message for user if they can't borrow.
+		// Display message for user if they can't borrow.
 		if (!canBorrow()) {
 			throw new IllegalArgumentException("You cannot borrow either you get fine or have something overdue");
-		//Otherwise add it to their currently borrowed items.
+			// Otherwise add it to their currently borrowed items.
 		} else {
-			
+
 			Borrowing b = r.borrow(super.username);
 			currentBorrowHistory.add(b);
 		}
 
-		//Add it to the database.
+		// Add it to the database.
 		statement = "insert into current_borrowing values ('" + this.username + "','"
 				+ currentBorrowHistory.getLast().getBorrowNo() + "');";
 		sql.set(statement);
@@ -150,7 +146,8 @@ public class NormalUser extends User implements Storable {
 	/**
 	 * Method to reduce the user's balance
 	 * 
-	 * @param fine The amount of the fine to reduce the user's balance with.
+	 * @param fine
+	 *            The amount of the fine to reduce the user's balance with.
 	 */
 	public void reduceBalance(int fine) {
 		balance -= fine;
@@ -166,31 +163,33 @@ public class NormalUser extends User implements Storable {
 	}
 
 	/**
-	 * This method allows the user to request a resource 
-	 * and adds it to the database.
+	 * This method allows the user to request a resource and adds it to the
+	 * database.
 	 * 
-	 * @param resourceID The ID of the resource.
+	 * @param resourceID
+	 *            The ID of the resource.
 	 * @throws Exception
 	 */
 	public void request(int resourceID) throws Exception {
 		Resource r = new Resource(resourceID);
-		//Add the user to the requesting list of the resource.
+		// Add the user to the requesting list of the resource.
 		statement = "insert into request_item value('" + this.username + "','" + r.getId() + "');";
 		sql.set(statement);
 		r.request(this.username);
 	}
 
 	/**
-	 * Method to display the user's transaction history,
-	 * including date, amount, resourceID and days overdue if overdue.
+	 * Method to display the user's transaction history, including date, amount,
+	 * resourceID and days overdue if overdue.
 	 * 
 	 * @return The borrowing history.
 	 * @throws Exception
 	 */
 	public String transactionHistory() throws Exception {
 		SQLHandle a = new SQLHandle();
-		String history = String.format("%20s %20s %20s %20s \n", "Date" , "Amount", "resourceID(ifOverdue)", "days(if Overdue)");
-		//SQL statement to get date, amount and resourceID.
+		String history = String.format("%20s %20s %20s %20s \n", "Date", "Amount", "resourceID(ifOverdue)",
+				"days(if Overdue)");
+		// SQL statement to get date, amount and resourceID.
 		String statement = "select T.transID, T.amount, T.date,W.resourceID, W.borrowingID  from \n"
 				+ "(select transaction.transID,amount,date,username from transaction,transaction_his \n"
 				+ " where transaction.transID=transaction_his.transID) as T \n" + "left outer join \n"
@@ -206,18 +205,16 @@ public class NormalUser extends User implements Storable {
 			if (r.getString("borrowingID") != null) {
 				Borrowing b = new Borrowing(r.getInt("borrowingID"));
 				int days = b.getOverdueDay();
-				history = history + String.format("%20s %20o %20s %20o\n",
-						r.getDate("date").toString(), r.getInt("amount"), r.getString("resourceID"), days);
+				history = history + String.format("%20s %20o %20s %20o\n", r.getDate("date").toString(),
+						r.getInt("amount"), r.getString("resourceID"), days);
 			} else {
-				//If transaction is not a fine.
-				history = history 
-						+ String.format("%20s %20o\n", r.getDate("date"), r.getInt("amount"));
+				// If transaction is not a fine.
+				history = history + String.format("%20s %20o\n", r.getDate("date"), r.getInt("amount"));
 			}
 		}
 		r.close();
 
 		return history;
-
 	}
 
 	/**
@@ -226,14 +223,14 @@ public class NormalUser extends User implements Storable {
 	 * @return The currently borrowed items.
 	 */
 	public String getBorrowedList() {
-		String history = String.format("%20s %20s \n", "ResourceID","Duedate");
+		String history = String.format("%20s %20s \n", "ResourceID", "Duedate");
 		for (int i = 0; i < currentBorrowHistory.size(); i++) {
 			history = history + currentBorrowHistory.get(i).getResourceID()
-					+ currentBorrowHistory.get(i).getOverdueDate()+"\n";
+					+ currentBorrowHistory.get(i).getOverdueDate() + "\n";
 		}
 		return history;
 	}
-	
+
 	/**
 	 * Method to get the requested items.
 	 * 
@@ -242,11 +239,11 @@ public class NormalUser extends User implements Storable {
 	public String getRequestedItem() {
 		String history = "ResourceID	\n";
 		for (int i = 0; i < requesting.size(); i++) {
-			history = history + requesting.get(i)+"\n";
+			history = history + requesting.get(i) + "\n";
 		}
 		return history;
 	}
-	
+
 	/**
 	 * Method to get the reserved items.
 	 * 
@@ -255,7 +252,7 @@ public class NormalUser extends User implements Storable {
 	public String getReservedItem() {
 		String history = "ResourceID	\n";
 		for (int i = 0; i < requesting.size(); i++) {
-			history = history + reserved.get(i)+"\n";
+			history = history + reserved.get(i) + "\n";
 		}
 		return history;
 	}

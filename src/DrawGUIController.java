@@ -121,6 +121,7 @@ public class DrawGUIController {
 
 	/**
 	 * change the colour of the trace.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -187,7 +188,7 @@ public class DrawGUIController {
 	}
 
 	/**
-	 * draw  circle on the press point.
+	 * draw circle on the press point.
 	 */
 	private void drawCircle() {
 		GraphicsContext g = drawCanvas.getGraphicsContext2D();
@@ -215,11 +216,12 @@ public class DrawGUIController {
 
 	/**
 	 * this store the image in the system with unique path
+	 * 
 	 * @throws SQLException
 	 */
 	private void save() throws SQLException {
 
-		//generate the unique number(name)
+		// generate the unique number(name)
 		SQLHandle sql = new SQLHandle();
 		ResultSet r = sql.nonStaticGet("Select max(image) from user_;");
 		int number = 0;
@@ -229,7 +231,7 @@ public class DrawGUIController {
 
 		Storage.storeNum(number);
 
-		//store pic from drawing sub program.
+		// store pic from drawing sub program.
 		drawCanvas.snapshot(null, wim);
 		String filePath = "userPhoto/" + String.valueOf(number) + ".png";
 		System.out.println(filePath);

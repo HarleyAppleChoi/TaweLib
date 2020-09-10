@@ -5,7 +5,6 @@
  * @version 2.1
  */
 
-
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,37 +25,37 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ControllerLibGui {
-	
+
 	private boolean dvdButton = false;
 	private boolean bookButton = false;
 	private boolean laptopButton = false;
-    
+
 	private Image getImage(String s) {
 		String location = s;
 		File file = new File(location);
 		Image image = new Image(file.toURI().toString());
 		return image;
 	}
-	
+
 	@FXML
 	private TextField searchQueryMore;
-	
+
 	@FXML
 	private TextArea resultText;
-	
+
 	@FXML
 	private ImageView thumbnailImage;
 
-    // buttons to search resources 
+	// buttons to search resources
 	@FXML
 	private Button searchBook;
 
 	@FXML
 	private Button buttonOverdue;
-	
+
 	@FXML
 	private TextArea textOverdue;
-	
+
 	@FXML
 	private Button searchDvd;
 
@@ -68,13 +67,13 @@ public class ControllerLibGui {
 
 	@FXML
 	private Button buttonSearch;
-	
+
 	@FXML
 	private Button buttonInfo;
-	
+
 	@FXML
 	private TextArea basicInfo;
-	
+
 	@FXML
 	private TextArea borrowReturn;
 	@FXML
@@ -94,7 +93,6 @@ public class ControllerLibGui {
 
 	@FXML
 	private Button borrowingGenerateBorrow;
-
 
 	@FXML
 	private Button create_resourceCreateBook;
@@ -121,10 +119,9 @@ public class ControllerLibGui {
 	@FXML
 	private Button create_userCreateLibrarian;
 
-
 	@FXML
 	private Button buttonSearchMore;
-	
+
 	@FXML
 	private TextField edit_userEnterUsername;
 
@@ -158,7 +155,7 @@ public class ControllerLibGui {
 
 	@FXML
 	private Button pay_fineGeneratePayment;
-	
+
 	@FXML
 	private Label statusPayFine;
 
@@ -172,44 +169,45 @@ public class ControllerLibGui {
 
 	@FXML
 	private Button requestGenerateRequest;
-	
-	//copy details tab
-	
+
+	// copy details tab
+
 	@FXML
 	private Button buttonSearchCopy;
-	
+
 	@FXML
 	private TextField searchQueryCopy;
-	
+
 	@FXML
 	private TextArea textBorrow;
-	
+
 	@FXML
 	private TextArea textReturn;
-	
+
 	@FXML
 	private Label labelBorrow;
-	
+
 	@FXML
 	private Label labelReturn;
-	
+
 	/**
-	 * Method to handle a search event and search each resources
-	 * depending on what button is selected 
+	 * Method to handle a search event and search each resources depending on what
+	 * button is selected
+	 * 
 	 * @param e
 	 */
 	@FXML
 	private void search(ActionEvent e) {
-		//if the book flag is true, search is limited to books
+		// if the book flag is true, search is limited to books
 		if (bookButton == true) {
 			try {
 				SQLHandle c = new SQLHandle();
 				Search s = new Search();
-				basicInfo.setText(s.searchBook(searchQuery.getText()));//searchers books 
+				basicInfo.setText(s.searchBook(searchQuery.getText()));// searchers books
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-		//similarly this detects the dvd flag
+			// similarly this detects the dvd flag
 		} else if (dvdButton == true) {
 			try {
 				SQLHandle c = new SQLHandle();
@@ -226,22 +224,23 @@ public class ControllerLibGui {
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-			//this checks for all flags off, and searches the 
-			//linked general attributes of every resource
+			// this checks for all flags off, and searches the
+			// linked general attributes of every resource
 		} else if (bookButton == false || dvdButton == false || laptopButton == false) {
-		try { // search everything 
-			SQLHandle c = new SQLHandle();
-			Search p = new Search();
-			basicInfo.setText(p.searchResources(searchQuery.getText()));
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+			try { // search everything
+				SQLHandle c = new SQLHandle();
+				Search p = new Search();
+				basicInfo.setText(p.searchResources(searchQuery.getText()));
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
-	}	
-	
+
 	/**
-	 * Method to handle a search book event to search books and
-	 * provide extra information.
+	 * Method to handle a search book event to search books and provide extra
+	 * information.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -259,12 +258,14 @@ public class ControllerLibGui {
 			ex.printStackTrace();
 		}
 	}
+
 	/**
-	 * Method to handle a search dvd event to search dvd's and
-	 * provide extra information.
+	 * Method to handle a search dvd event to search dvd's and provide extra
+	 * information.
+	 * 
 	 * @param e
 	 */
-	
+
 	@FXML
 	private void searchDvd(ActionEvent e) {
 		dvdButton = !dvdButton;
@@ -280,36 +281,36 @@ public class ControllerLibGui {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * Method to handle a search laptop event to search books and
-	 * provide extra information.
+	 * Method to handle a search laptop event to search books and provide extra
+	 * information.
+	 * 
 	 * @param e
 	 */
-	
+
 	@FXML
 	private void searchLaptop(ActionEvent e) {
-			laptopButton = !laptopButton;
-			dvdButton = false;
-			bookButton = false;
-			try {
-				SQLHandle c = new SQLHandle();
-				Search s = new Search();
-				basicInfo.setText(s.searchLaptop(searchQuery.getText()));
-				laptopButton = false;
-				
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
+		laptopButton = !laptopButton;
+		dvdButton = false;
+		bookButton = false;
+		try {
+			SQLHandle c = new SQLHandle();
+			Search s = new Search();
+			basicInfo.setText(s.searchLaptop(searchQuery.getText()));
+			laptopButton = false;
 
-	
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	/**
-	 * Method to handle a search event to display 
-	 * borrow and return history.
+	 * Method to handle a search event to display borrow and return history.
+	 * 
 	 * @param e
 	 */
-	
+
 	@FXML
 	private void searchAdd(ActionEvent e) {
 		try {
@@ -318,13 +319,14 @@ public class ControllerLibGui {
 			textBorrow.setText(s.borrowSearch(searchQueryCopy.getText()));
 			textReturn.setText(s.returnSearch(searchQueryCopy.getText()));
 		} catch (Exception ex) {
-			ex.printStackTrace();;
+			ex.printStackTrace();
+			;
 		}
 	}
-	
-	
+
 	/**
 	 * Method to display overdue history based on action event.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -337,9 +339,10 @@ public class ControllerLibGui {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Method to display information about a particular resource.
+	 * 
 	 * @param e
 	 * @throws Exception
 	 */
@@ -373,24 +376,23 @@ public class ControllerLibGui {
 
 			} else {
 				statement = "select resourceID from DVD where resourceID ='" + searchQueryMore.getText() + "';";
-				
+
 				r = sql.nonStaticGet(statement);
-				
+
 				if (r.next()) {
 					// this is a DVD
-					
 
-					statement = "SELECT distinct resource.resourceID,title, director, _language,image," + 
-							"    GROUP_CONCAT(distinct subtitle SEPARATOR ',') as subs, " + 
-							"    		runtime,year,numAvCopies" + 
-							"    		FROM resource, dvd, dvd_subtitle where resource.resourceID = dvd.resourceID and" + 
-							"    		dvd.resourceID = dvd_subtitle.resourceID and " + 
-							"    	 DVD.resourceID ='" +  searchQueryMore.getText() + "';";
-					
+					statement = "SELECT distinct resource.resourceID,title, director, _language,image,"
+							+ "    GROUP_CONCAT(distinct subtitle SEPARATOR ',') as subs, "
+							+ "    		runtime,year,numAvCopies"
+							+ "    		FROM resource, dvd, dvd_subtitle where resource.resourceID = dvd.resourceID and"
+							+ "    		dvd.resourceID = dvd_subtitle.resourceID and " + "    	 DVD.resourceID ='"
+							+ searchQueryMore.getText() + "';";
+
 					r = sql.nonStaticGet(statement);
 					r.next();
 					Resource re = new Resource(r.getInt("resource.resourceID"));
-					
+
 					String s = "ResourceID    Title    Director    Language   Subtitle      Runtime    Year    AvailableCopies\n";
 
 					s += String.format("%s %20s %10s %18s (%20s) %16s %18s %s20\n", r.getInt("resource.resourceID"),
@@ -406,21 +408,22 @@ public class ControllerLibGui {
 					r = sql.nonStaticGet(statement);
 					if (r.next()) {
 						// this is a laptop
-						
-					 	String s = "ResourceID            Title              Manufacturer              Model             OPSystem             Year              AvailableCopies\n";
-					 	
-					 	statement = "SELECT distinct resource.resourceID,image,title,manufacturer, model, operatingSystem,year,numAvCopies "
-				    			+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and laptop.resourceID='" +searchQueryMore.getText() + "';";
-					 	r = sql.nonStaticGet(statement);
-					 	
-					 	while(r.next()) {
-					 		Resource re = new Resource(r.getInt("resource.resourceID"));
-					        	s +=String.format("%9s %22s %19s %20s %21s %22s %26s\n", r.getInt("resource.resourceID"), r.getString("title"),
-					        			r.getString("manufacturer"), r.getString("model"), r.getString("operatingSystem"), r.getInt("year"),
-					        			re.getAvCopies());
-					 	resultText.setText(s);				        
-					 	thumbnailImage.setImage(getImage(r.getString("image")));
-					 	}
+
+						String s = "ResourceID            Title              Manufacturer              Model             OPSystem             Year              AvailableCopies\n";
+
+						statement = "SELECT distinct resource.resourceID,image,title,manufacturer, model, operatingSystem,year,numAvCopies "
+								+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and laptop.resourceID='"
+								+ searchQueryMore.getText() + "';";
+						r = sql.nonStaticGet(statement);
+
+						while (r.next()) {
+							Resource re = new Resource(r.getInt("resource.resourceID"));
+							s += String.format("%9s %22s %19s %20s %21s %22s %26s\n", r.getInt("resource.resourceID"),
+									r.getString("title"), r.getString("manufacturer"), r.getString("model"),
+									r.getString("operatingSystem"), r.getInt("year"), re.getAvCopies());
+							resultText.setText(s);
+							thumbnailImage.setImage(getImage(r.getString("image")));
+						}
 					} else {
 						System.out.println("This resourceID is not in the database");
 					}
@@ -430,11 +433,11 @@ public class ControllerLibGui {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
 		}
-	}	
+	}
 
-	
 	/**
 	 * Method to create a book based on action event.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -451,11 +454,13 @@ public class ControllerLibGui {
 		}
 
 	}
+
 	/**
 	 * Method to create a dvd based on action event.
+	 * 
 	 * @param e
 	 */
-	
+
 	@FXML
 	public void handleCreateDVDResourceEvent(ActionEvent e) {
 		try {
@@ -470,8 +475,10 @@ public class ControllerLibGui {
 		}
 
 	}
+
 	/**
 	 * Method to create a laptop based on action event.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -488,8 +495,10 @@ public class ControllerLibGui {
 		}
 
 	}
+
 	/**
 	 * Method to create a normal user based on action event.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -506,8 +515,10 @@ public class ControllerLibGui {
 		}
 
 	}
+
 	/**
 	 * Method to create a librarian user based on action event.
+	 * 
 	 * @param e
 	 */
 	@FXML
@@ -524,8 +535,10 @@ public class ControllerLibGui {
 		}
 
 	}
+
 	/**
 	 * Method to select resource based on its ID.
+	 * 
 	 * @param e
 	 * @throws SQLException
 	 */
@@ -584,8 +597,10 @@ public class ControllerLibGui {
 			}
 		}
 	}
+
 	/**
 	 * Method to allow the user to borrow a resource
+	 * 
 	 * @throws NumberFormatException
 	 * @throws Exception
 	 */
@@ -598,13 +613,13 @@ public class ControllerLibGui {
 			System.out.println("You cannot borrow!");
 		}
 	}
+
 	/**
-	 * Method to allow the user to return a resource and 
-	 * show a fine if present 
-	 
+	 * Method to allow the user to return a resource and show a fine if present
+	 * 
 	 */
 	@FXML
-	public void returnEvent()  {
+	public void returnEvent() {
 		try {
 			Librarian l = new Librarian();
 			int borrowID = Integer.parseInt(returnEnterResourceId.getText());
@@ -615,25 +630,27 @@ public class ControllerLibGui {
 			statusReturn.setText("Please fill in the fills!");
 		}
 	}
+
 	/**
-	 * Method to allow the user to pay fine  
-	 * and show balance based on event.
+	 * Method to allow the user to pay fine and show balance based on event.
+	 * 
 	 * @param e
 	 */
 
 	@FXML
-	public void handlePayEvent(ActionEvent e)  {
+	public void handlePayEvent(ActionEvent e) {
 		try {
-		//SQLHandle c = new SQLHandle();
-		Librarian l = new Librarian();
-		l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
-		
-		NormalUser u = new NormalUser(pay_fineEnterUsername.getText());
-		pay_fineShowFineRemaining.setText(String.valueOf(u.getBalance()));
-		}catch(IllegalArgumentException rt){
-			//statusPayFine.setText("The fine number is not a vaild number(0.01~full fine)");
-		}catch(Exception r) {
-			//statusPayFine.setText("Please fill in the fills!");
+			// SQLHandle c = new SQLHandle();
+			Librarian l = new Librarian();
+			l.payFine(Integer.parseInt(pay_fineEnterPaymentAmount.getText()), pay_fineEnterUsername.getText());
+
+			NormalUser u = new NormalUser(pay_fineEnterUsername.getText());
+			pay_fineShowFineRemaining.setText(String.valueOf(u.getBalance()));
+		} catch (IllegalArgumentException rt) {
+			// statusPayFine.setText("The fine number is not a vaild number(0.01~full
+			// fine)");
+		} catch (Exception r) {
+			// statusPayFine.setText("Please fill in the fills!");
 		}
 	}
 }

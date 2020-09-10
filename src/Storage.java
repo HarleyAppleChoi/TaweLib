@@ -11,7 +11,9 @@ public class Storage {
 
 	/**
 	 * This class store String in a memory call userName
-	 * @param username the string you want to store
+	 * 
+	 * @param username
+	 *            the string you want to store
 	 */
 	public static void storeUsername(String username) {
 		usernamee = username;
@@ -19,24 +21,25 @@ public class Storage {
 
 	/**
 	 * This class take out the string you store using storeUsername().
+	 * 
 	 * @return take out the string you store using storeUsername().
 	 */
 	public static String returnUsername() {
 		return usernamee;
 	}
-	
+
 	public static void storeNum(int number) {
 		num = number;
 	}
-	
+
 	public static int returntNum() {
 		return num;
 	}
-	
-	public static void  storeImagenum(int i) {
+
+	public static void storeImagenum(int i) {
 		imagenum = i;
 	}
-	
+
 	public static int returnImagenum() {
 		return imagenum;
 	}

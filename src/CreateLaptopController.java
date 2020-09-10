@@ -24,26 +24,26 @@ import javafx.stage.Stage;
 public class CreateLaptopController {
 
 	private String path;
-	
-	//enter input 
+
+	// enter input
 	@FXML
 	private TextField numberOfCopiesLaptop;
-	
+
 	@FXML
 	private TextField createLaptopTitle;
-	
+
 	@FXML
 	private TextField createLaptopYear;
-	
+
 	@FXML
 	private TextField durationLaptop;
-	
+
 	@FXML
 	private TextField createLaptopManufacturer;
-	
+
 	@FXML
 	private TextField createLaptopModel;
-	
+
 	@FXML
 	private TextField createLaptopOS;
 	

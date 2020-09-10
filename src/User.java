@@ -3,8 +3,7 @@ import java.io.File;
 import javafx.scene.image.Image;
 
 /**
- * User.java
- * this class creates all the instance of the user class .
+ * User.java this class creates all the instance of the user class .
  * 
  * @author Jwana Abdalah
  * @modified by James Hogg
@@ -19,9 +18,11 @@ public abstract class User implements Storable {
 	protected int mobileNo;
 	protected String address;
 	protected int userImage;
-	protected SQLHandle sql ;
+	protected SQLHandle sql;
+
 	/**
 	 * Constructor to construct a User's instance.
+	 * 
 	 * @param username
 	 * @param password
 	 * @param firstName
@@ -29,9 +30,10 @@ public abstract class User implements Storable {
 	 * @param mobileNo
 	 * @param address
 	 * @param userImage
-	 
+	 * 
 	 */
-	protected User(String username, String password, String firstName, String lastName, int mobileNo, String address, int userImage) {
+	protected User(String username, String password, String firstName, String lastName, int mobileNo, String address,
+			int userImage) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -40,9 +42,9 @@ public abstract class User implements Storable {
 		this.address = address;
 		this.userImage = userImage;
 	}
-	
+
 	protected User() {
-		
+
 	}
 
 	/**
@@ -62,10 +64,10 @@ public abstract class User implements Storable {
 	protected void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
+
 	/**
 	 * Get method to get the password.
+	 * 
 	 * @return password
 	 */
 	public String getPassword() {
@@ -73,7 +75,8 @@ public abstract class User implements Storable {
 	}
 
 	/**
-	 *  Set method to set the password.
+	 * Set method to set the password.
+	 * 
 	 * @param password
 	 */
 	public void setPassword(String password) {
@@ -133,10 +136,10 @@ public abstract class User implements Storable {
 	protected void setMobileNo(int mobileNo) {
 		this.mobileNo = mobileNo;
 	}
-	
-	
+
 	/**
 	 * Set method to set the address.
+	 * 
 	 * @return address
 	 */
 	public String getAddress() {
@@ -145,6 +148,7 @@ public abstract class User implements Storable {
 
 	/**
 	 * Get method to get the address.
+	 * 
 	 * @param address
 	 */
 	public void setAddress(String address) {
@@ -157,9 +161,9 @@ public abstract class User implements Storable {
 	 * @return userImage
 	 */
 	protected Image getUserImage() {
-		String location = "userPhoto/"+String.valueOf(userImage)+".png";
+		String location = "userPhoto/" + String.valueOf(userImage) + ".png";
 		File file = new File(location);
-        Image image = new Image(file.toURI().toString());
+		Image image = new Image(file.toURI().toString());
 		return image;
 	}
 

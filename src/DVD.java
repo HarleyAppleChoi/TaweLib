@@ -14,25 +14,33 @@ public class DVD extends Resource {
 	private int runtime;
 	private String language;
 	private ArrayList<String> subLanguages = new ArrayList<String>();
-	
 
 	/**
 	 * Constructor to construct a DVD using the parameters from this class and the
 	 * parameters from the superclass Resource.
 	 * 
-	 * @param id The unique identifier of the DVD.
-	 * @param title The title of the DVD.
-	 * @param year The year the DVD was released.
-	 * @param thumbNailImage Image of the DVD cover.
-	 * @param numCopies Number of copies owned by the library.
-	 * @param numAvailableCopies Number of copies available to borrow from the library.
-	 * @param director The director of the contents of the DVD.
-	 * @param runtime The runtime of the content of the DVD.
-	 * @param language The language of the DVD.
-	 * @param subLanguages The subtitles available on the DVD.
+	 * @param id
+	 *            The unique identifier of the DVD.
+	 * @param title
+	 *            The title of the DVD.
+	 * @param year
+	 *            The year the DVD was released.
+	 * @param thumbNailImage
+	 *            Image of the DVD cover.
+	 * @param numCopies
+	 *            Number of copies owned by the library.
+	 * @param numAvailableCopies
+	 *            Number of copies available to borrow from the library.
+	 * @param director
+	 *            The director of the contents of the DVD.
+	 * @param runtime
+	 *            The runtime of the content of the DVD.
+	 * @param language
+	 *            The language of the DVD.
+	 * @param subLanguages
+	 *            The subtitles available on the DVD.
 	 */
-	public DVD(int id, String title, int year, Image thumbNailImage
-			, int numCopies, int numAvailableCopies,
+	public DVD(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String director, int runtime, String language, ArrayList<String> subLanguages) {
 
 		super(id, title, year, thumbNailImage, numCopies);
@@ -54,7 +62,8 @@ public class DVD extends Resource {
 	/**
 	 * Set method to set the director.
 	 * 
-	 * @param director The director of the contents of the DVD.
+	 * @param director
+	 *            The director of the contents of the DVD.
 	 */
 	public void setDirector(String director) {
 		this.director = director;
@@ -72,7 +81,8 @@ public class DVD extends Resource {
 	/**
 	 * Set method to set the runtime.
 	 * 
-	 * @param runtime The runtime of the contents of the DVD.
+	 * @param runtime
+	 *            The runtime of the contents of the DVD.
 	 */
 	public void setRuntime(int runtime) {
 		this.runtime = runtime;
@@ -90,7 +100,8 @@ public class DVD extends Resource {
 	/**
 	 * Set method to set the language.
 	 * 
-	 * @param language The language of the contents of the DVD.
+	 * @param language
+	 *            The language of the contents of the DVD.
 	 */
 	public void setLanguage(String language) {
 		this.language = language;

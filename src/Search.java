@@ -107,18 +107,18 @@ public class Search {
 	 * @throws SQLException
 	 */
     public String searchLaptop(String searchString) throws SQLException{
-    	String result = "ID               Title               Manufacturer              Model               OPSystem               Year               AvailableCopies\n";
-    	statement = "SELECT distinct resource.resourceID,title,manufacturer, model, operatingSystem,year,numAvCopies "
-    			+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and"
-    	+ " CONCAT(`title`, `year`,`manufacturer`,`model`,`operatingSystem`) LIKE '%"+searchString+"%'";
-        ResultSet r = SQLHandle.get(statement);
-        
-        //results to string
-        while(r.next()) {
-        	result = result + String.format("%s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"), r.getString("title"),
-        			r.getString("manufacturer"), r.getString("model"), r.getString("operatingSystem"), r.getInt("year"),
-        			r.getInt("numAvCopies"));
-        }
+		String result = "ID               Title               Manufacturer              Model               OPSystem               Year               AvailableCopies\n";
+		statement = "SELECT distinct resource.resourceID,title,manufacturer, model, operatingSystem,year,numAvCopies "
+				+ "FROM resource, laptop where resource.resourceID = laptop.resourceID and"
+				+ " CONCAT(`title`, `year`,`manufacturer`,`model`,`operatingSystem`) LIKE '%" + searchString + "%'";
+		ResultSet r = SQLHandle.get(statement);
+
+		// results to string
+		while (r.next()) {
+			result = result + String.format("%s %20s %20s %20s %20s %20s %20s\n", r.getInt("resourceID"),
+					r.getString("title"), r.getString("manufacturer"), r.getString("model"),
+					r.getString("operatingSystem"), r.getInt("year"), r.getInt("numAvCopies"));
+		}
         return result;
     }
 

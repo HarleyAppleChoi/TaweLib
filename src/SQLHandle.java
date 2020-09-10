@@ -37,7 +37,7 @@ public class SQLHandle {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -62,9 +62,10 @@ public class SQLHandle {
 	public void set(String query) throws SQLException {
 		statement.executeUpdate(query);
 	}
-	
+
 	/**
 	 * non static method of get
+	 * 
 	 * @param query
 	 * @return
 	 * @throws SQLException

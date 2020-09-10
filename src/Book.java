@@ -15,22 +15,32 @@ public class Book extends Resource {
 	private String isbn;
 	private String language;
 
-
 	/**
 	 * Constructor to construct a Book using the parameters from this class and the
 	 * parameter from the superclass Resource.
 	 * 
-	 * @param id The unique identifier of the book.
-	 * @param title The title of the book.
-	 * @param year The year the book was published.
-	 * @param thumbNailImage Image of the book cover.
-	 * @param numCopies Number of copies owned by the library.
-	 * @param numAvailableCopies Number of copies available to borrow in the library.
-	 * @param author The author of the book.
-	 * @param publisher The publisher of the book.
-	 * @param genre The genre of the book.
-	 * @param isbn the ISBN number of the book.
-	 * @param langauge The language of the book.
+	 * @param id
+	 *            The unique identifier of the book.
+	 * @param title
+	 *            The title of the book.
+	 * @param year
+	 *            The year the book was published.
+	 * @param thumbNailImage
+	 *            Image of the book cover.
+	 * @param numCopies
+	 *            Number of copies owned by the library.
+	 * @param numAvailableCopies
+	 *            Number of copies available to borrow in the library.
+	 * @param author
+	 *            The author of the book.
+	 * @param publisher
+	 *            The publisher of the book.
+	 * @param genre
+	 *            The genre of the book.
+	 * @param isbn
+	 *            the ISBN number of the book.
+	 * @param langauge
+	 *            The language of the book.
 	 */
 	public Book(int id, String title, int year, Image thumbNailImage, int numCopies, int numAvailableCopies,
 			String author, String publisher, String genre, String isbn, String langauge) {
@@ -40,7 +50,7 @@ public class Book extends Resource {
 		this.genre = genre;
 		this.isbn = isbn;
 		this.language = langauge;
-		
+
 	}
 
 	/**
@@ -55,7 +65,8 @@ public class Book extends Resource {
 	/**
 	 * Set method to set the author.
 	 * 
-	 * @param author The author of the book.
+	 * @param author
+	 *            The author of the book.
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
@@ -73,7 +84,8 @@ public class Book extends Resource {
 	/**
 	 * Set method to set the publisher.
 	 * 
-	 * @param publisher The publisher of the book.
+	 * @param publisher
+	 *            The publisher of the book.
 	 */
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
@@ -91,7 +103,8 @@ public class Book extends Resource {
 	/**
 	 * Set method to set the genre.
 	 * 
-	 * @param genre The genre of the book.
+	 * @param genre
+	 *            The genre of the book.
 	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
@@ -109,7 +122,8 @@ public class Book extends Resource {
 	/**
 	 * Set method to set the ISBN.
 	 * 
-	 * @param isbn The ISBN number of the book.
+	 * @param isbn
+	 *            The ISBN number of the book.
 	 */
 	public void setISBN(String isbn) {
 		this.isbn = isbn;
@@ -127,7 +141,8 @@ public class Book extends Resource {
 	/**
 	 * Set method to set the language.
 	 * 
-	 * @param language The language of the book.
+	 * @param language
+	 *            The language of the book.
 	 */
 	public void setLanguage(String language) {
 		this.language = language;

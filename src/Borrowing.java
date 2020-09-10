@@ -23,17 +23,19 @@ public class Borrowing implements Storable {
 	DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 	String statement = "";
 	SQLHandle sql = new SQLHandle();
-	
 
 	/**
-	 * Selects all the information about a specific borrowing event from the database. 
-	 * @param id The unique identifier of the borrowing event.
+	 * Selects all the information about a specific borrowing event from the
+	 * database.
+	 * 
+	 * @param id
+	 *            The unique identifier of the borrowing event.
 	 * @throws Exception
 	 */
 	public Borrowing(int id) throws Exception {
 		statement = "select * from Borrowing where BorrowingID ='" + id + "';";
 		ResultSet r = sql.nonStaticGet(statement);
-		//Get all the data associated with the borrowing event from the database.
+		// Get all the data associated with the borrowing event from the database.
 		BORROW_NO = id;
 		while (r.next()) {
 			INITIAL_DATE = r.getDate("borrowDate");
@@ -44,17 +46,20 @@ public class Borrowing implements Storable {
 	}
 
 	/**
-	 * Creates a new borrowing event.
-	 * Finds the maximum BorrowingID from the borrowing table, and increases it by 1 to ensure unique borrowing ID.
-	 * Sets the initial date to the date it is created, and adds the information to the borrowing table.
-	 * @param rID ID of the resource being borrowed.
+	 * Creates a new borrowing event. Finds the maximum BorrowingID from the
+	 * borrowing table, and increases it by 1 to ensure unique borrowing ID. Sets
+	 * the initial date to the date it is created, and adds the information to the
+	 * borrowing table.
+	 * 
+	 * @param rID
+	 *            ID of the resource being borrowed.
 	 * @throws SQLException
 	 */
 	public Borrowing(String rID) throws SQLException {
 		String statement = "select max(borrowingID) from Borrowing";
 		ResultSet r = sql.nonStaticGet(statement);
 		int i = 0;
-		//Increase borrowingID by 1 to ensure unique ID
+		// Increase borrowingID by 1 to ensure unique ID
 		while (r.next()) {
 			i = r.getInt("max(borrowingID)");
 		}
@@ -85,9 +90,9 @@ public class Borrowing implements Storable {
 		return o;
 	}
 
-	
 	/**
 	 * Method to set the date.
+	 * 
 	 * @return The current date.
 	 */
 	public void setReturnDate() {
@@ -96,64 +101,68 @@ public class Borrowing implements Storable {
 
 	/**
 	 * Method to get the date.
+	 * 
 	 * @return value The date the item was returned.
 	 */
 	public String getReturnDate() {
 		String value = "No return Date";
-		if(returnDate!=null) {
+		if (returnDate != null) {
 			value = dateFormat.format(returnDate);
 		}
 		return value;
 
 	}
-	
+
 	/**
 	 * Method to get the date when the item is due to be returned.
+	 * 
 	 * @return value The date when the item is due to be returned.
 	 */
 	public String getOverdueDate() {
 		String value = "No due Date";
-		if(endDate!=null) {
+		if (endDate != null) {
 			value = dateFormat.format(endDate);
 		}
 		return value;
 	}
 
 	/**
-	 * This method calculates the amount of fine to be paid for returning an item late.
-	 * If the item is overdue, it finds the type of resource that has been borrowed,
-	 * calculates the fine amount by finding the difference between the end date and the returned date and
-	 * converts it into days.
-	 * The fine is the number of days multiplied by fine per day.
+	 * This method calculates the amount of fine to be paid for returning an item
+	 * late. If the item is overdue, it finds the type of resource that has been
+	 * borrowed, calculates the fine amount by finding the difference between the
+	 * end date and the returned date and converts it into days. The fine is the
+	 * number of days multiplied by fine per day.
 	 * 
-	 * @return fine The amount of fine to be paid, or if it's greater than the maximum fine, it returns the maximum fine.
+	 * @return fine The amount of fine to be paid, or if it's greater than the
+	 *         maximum fine, it returns the maximum fine.
 	 * @throws SQLException
 	 */
 	public int fine() throws SQLException {
 		int fine = 0;
 		if (isOverdue()) {
-			//Find fine per day and identify the type of the resource. 
-			//If the SQL return an empty set on the table, it is not that kind of resource.
+			// Find fine per day and identify the type of the resource.
+			// If the SQL return an empty set on the table, it is not that kind of resource.
 			int finePerDay = 0;
 			int maxFine = 0;
 			statement = "select resourceID from (select resourceID from book union all select resourceID from DVD)as T where resourceID ='"
-					+ this.RESOURCE_ID+"';";
+					+ this.RESOURCE_ID + "';";
 			ResultSet r = sql.nonStaticGet(statement);
 			if (r.next()) {
-				//This is book/DVD
+				// This is book/DVD
 				finePerDay = 2;
 				maxFine = 25;
 			} else {
-				//If not Book/DVD then must be a Laptop
+				// If not Book/DVD then must be a Laptop
 				finePerDay = 10;
 				maxFine = 100;
 			}
-			//If the date when the resource was returned is after the due date.
+			// If the date when the resource was returned is after the due date.
 			if (endDate != null) {
 				if (returnDate.compareTo(endDate) > 0) {
-					//Calculate the fine by multiplying the days passed after the due date by the daily fine 
-					//associated with that certain type of resource.
-					//Use maximum fine if calculated fine is greater than maximum fine.
+					// Calculate the fine by multiplying the days passed after the due date by the
+					// daily fine
+					// associated with that certain type of resource.
+					// Use maximum fine if calculated fine is greater than maximum fine.
 					fine = (int) (getOverdueDay() * finePerDay);
 					if (fine > maxFine) {
 						fine = maxFine;
@@ -163,21 +172,23 @@ public class Borrowing implements Storable {
 		}
 		return fine;
 	}
-	
+
 	/**
 	 * Method to get the days passed since the item was due to be returned.
+	 * 
 	 * @return days The number of days passed since the item was due to be returned.
 	 */
 	public int getOverdueDay() {
-		//The day the item was returned minus the date it was due.
+		// The day the item was returned minus the date it was due.
 		long diff = returnDate.getTime() - endDate.getTime();
-		//Converted from milliseconds to days.
+		// Converted from milliseconds to days.
 		long days = diff / (1000 * 60 * 60 * 24);
-		return (int)days;
+		return (int) days;
 	}
 
 	/**
 	 * Method to get the initial date.
+	 * 
 	 * @return INITIAL_DATE The initial date.
 	 */
 	public Date getInitialDate() {
@@ -186,6 +197,7 @@ public class Borrowing implements Storable {
 
 	/**
 	 * Method to get the date the item is due to be returned.
+	 * 
 	 * @return endDate The date the item is due to be returned.
 	 */
 	public Date getEndDate() {
@@ -194,15 +206,20 @@ public class Borrowing implements Storable {
 
 	/**
 	 * Method to set the date the item is due to be returned.
-	 * @param endDate The date the item is due to be returned.
+	 * 
+	 * @param endDate
+	 *            The date the item is due to be returned.
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
 	/**
-	 * Method to set the date the item was returned. Automatically sets this date to the day when the method is called.
-	 * @param returnDate The date the item was returned.
+	 * Method to set the date the item was returned. Automatically sets this date to
+	 * the day when the method is called.
+	 * 
+	 * @param returnDate
+	 *            The date the item was returned.
 	 */
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = new Date();
@@ -210,6 +227,7 @@ public class Borrowing implements Storable {
 
 	/**
 	 * Method to get the date the item was returned.
+	 * 
 	 * @return returnDate The date the item was returned converted into string.
 	 */
 	public String getReturnDateString() {
@@ -219,6 +237,7 @@ public class Borrowing implements Storable {
 
 	/**
 	 * Method to get the borrowing event's unique identifier.
+	 * 
 	 * @return BORROW_NO The borrowing event's unique identifier.
 	 */
 	public int getBorrowNo() {
@@ -232,12 +251,13 @@ public class Borrowing implements Storable {
 	 */
 	@Override
 	public void store() throws SQLException {
-		sql.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + ","
-				+ "null," + this.RESOURCE_ID + "," + this.returnDate.toString() + "y");
+		sql.set("insert into borrowing values(" + this.BORROW_NO + "," + this.INITIAL_DATE.toString() + "," + "null,"
+				+ this.RESOURCE_ID + "," + this.returnDate.toString() + "y");
 	}
-	
+
 	/**
 	 * Method to get the unique identifier of the resource.
+	 * 
 	 * @return RESOURCE_ID The unique identifier of the resource.
 	 */
 	public String getResourceID() {
