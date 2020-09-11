@@ -1,4 +1,4 @@
-# CS230TaweLib
+# TaweLib
 
 ## A group coursework done in my second year of uni
 TO COMPILE:
